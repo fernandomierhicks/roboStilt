@@ -1,0 +1,2 @@
+robostilt_node
+-DCMAKE_BUILD_TYPE=Debug -DCATKIN_DEVEL_PREFIX=/home/fernandomierhicks/roboStilt/devel -DCMAKE_INSTALL_PREFIX=/home/fernandomierhicks/roboStilt/install -G Unix Makefiles
