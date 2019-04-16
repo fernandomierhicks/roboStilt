@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot name="robostilt">
+
+<!-- LINKS -->
+<!-- The x pointing truss of the even frame, baselink origin at its center -->
+  <link name="base_link">    
+    <visual>
+      <geometry>
+        <box size="1 0.1 0.1"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <link name="even_y_link">
+    <visual>
+      <geometry>
+        <box size="1 0.1 0.1"/>
+      </geometry>
+      <origin rpy="0 0 1.57075" xyz="0.0 0 0"/>
+      <material name="white"/>
+    </visual>
+  </link>
+
+
+
+    <link name="leg_2">
+    <visual>
+      <geometry>
+        <cylinder length="1" radius="0.1"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <material name="yellow"/>
+    </visual>
+  </link>
+
+
+
+<!-- JOINTS -->
+  <joint name="base_to_even_y" type="fixed">
+    <parent link="base_link"/>
+    <child link="even_y_link"/>
+    <origin xyz="-0.5 0.0 0.0"/>
+  </joint>
+
+    <joint name="base_to_leg_2" type="fixed">
+      <parent link="base_link"/>
+      <child link="leg_2"/>
+      <origin xyz="0.5 0.0 0.0"/>
+    </joint>
+
+    
+
+
+  
+
+</robot>
