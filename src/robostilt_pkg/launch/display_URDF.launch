@@ -1,16 +1,19 @@
 <launch>
 
 <!-- ARGUMENTS -->
+<arg name="model" />
+<arg name="gui" default="true" />  <!-- To get joint GUI -->
 
 <!-- PARAMETERS -->
-  <param name="robot_description" textfile="$(find robostilt_pkg)/urdf/robostilt.urdf" />  <!-- Set urdf model of the robot -->
+ <param name="robot_description"
+  command="xacro --inorder '$(find robostilt_pkg)/urdf/robostilt.urdf.xacro'" />
 
 <!-- Launch files -->
 <include file="$(find robostilt_pkg)/launch/tf.launch"/> <!-- Launch TF publishers -->
 
 
 <!-- NODES -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="_use_gui:=true" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robostilt_pkg)/rviz/urdf.rviz" /> <!-- Launch rviz with config -->
 

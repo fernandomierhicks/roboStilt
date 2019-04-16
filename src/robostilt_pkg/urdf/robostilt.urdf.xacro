@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<robot name="roboStilt" xmlns:xacro="http://www.ros.org/wiki/xacro" >  <!-- ROBOT NAME -->
+
+<!-- PROPERTIES -->
+<xacro:property name="leg_length" value="1.0" />
+<xacro:property name="frame_length_x" value="1.5" />
+<xacro:property name="frame_length_y" value="1.0" />
+<xacro:property name="frame_thickness" value="0.09" />
+
+
+<xacro:property name="limit_leg_lower" value="-0.9" />
+<xacro:property name="limit_leg_upper" value="-0.1" />
+<xacro:property name="limit_leg_velocity" value="0.5" />
+<xacro:property name="limit_leg_effort" value="1000.0" />
+
+<xacro:property name="limit_third_frame_prismatic_lower" value="${-1*frame_thickness}" />
+<xacro:property name="limit_third_frame_prismatic_upper" value="${-1*frame_length_x/3.0}" />
+<xacro:property name="limit_third_frame_prismatic_velocity" value="0.5" />
+<xacro:property name="limit_third_frame_prismatic_effort" value="1000.0" />
+
+<xacro:property name="limit_third_frame_revolute_lower" value="-0.5" />
+<xacro:property name="limit_third_frame_revolute_upper" value="0.5" />
+<xacro:property name="limit_third_frame_revolute_velocity" value="0.5" />
+<xacro:property name="limit_third_frame_revolute_effort" value="1000.0" />
+
+
+<!-- COLORS -->
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+
+      <material name="black">
+        <color rgba="0 0 0.0 1"/>
+      </material>
+
+      <material name="grey">
+        <color rgba="0.7 0.7 0.7 1"/>
+      </material>
+
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+
+      <material name="orange">
+        <color rgba="1 0.5 0.5 1"/>
+      </material>-0.5
+
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+
+      <material name="yellow">
+        <color rgba="1 1 0 1"/>
+      </material>
+
+      <material name="cyan">
+        <color rgba="0 1 1 1"/>
+      </material>
+
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+
+      <material name="sky_blue">
+        <color rgba="0.35 0.75 0.9 1"/>
+      </material>
+
+      <material name="magenta">
+        <color rgba="1 0 1 1"/>
+      </material>
+
+      <material name="pink">
+        <color rgba="1 0.75 0.79 1"/>
+      </material>
+<!-- LINKS -->
+
+<!-- EVEN FRAME AND LEGS -->
+
+  <link name="base_link">   <!-- The x pointing truss of the even frame, baselink origin at its center --> 
+    <visual>
+      <geometry>
+        <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+      </geometry>
+      <material name="cyan"/>
+    </visual>
+  </link>
+
+  <link name="even_y_link">
+    <visual>
+      <geometry>
+        <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} 0 0"/>
+      <material name="cyan"/>
+    </visual>
+  </link>
+
+  <link name="leg_2">
+    <visual>
+      <geometry>
+        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
+      <material name="sky_blue"/>
+    </visual>
+  </link>
+
+    <link name="leg_4">
+    <visual>
+      <geometry>
+        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${leg_length/2.0}"/>
+      <material name="sky_blue"/>
+    </visual>
+  </link>
+
+    <link name="leg_6">
+    <visual>
+      <geometry>
+        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${leg_length/2.0}"/>
+      <material name="sky_blue"/>
+    </visual>
+  </link>
+
+
+<!-- ODD FRAME AND LEGS -->
+
+  <link name="odd_x_link">   <!-- The x pointing truss of the even frame, baselink origin at its center --> 
+      <visual>
+        <geometry>
+          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+        </geometry>
+        <material name="magenta"/>
+      </visual>
+    </link>
+
+    <link name="odd_y_link">
+      <visual>
+        <geometry>
+          <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0 0"/>
+        <material name="magenta"/>
+      </visual>
+    </link>
+
+    <link name="leg_1">
+      <visual>
+        <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
+        <material name="pink"/>
+      </visual>
+    </link>
+
+      <link name="leg_3">
+      <visual>
+        <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
+        <material name="pink"/>
+      </visual>
+    </link>
+
+      <link name="leg_5">
+      <visual>
+        <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
+        <material name="pink"/>
+      </visual>
+    </link>
+
+<!-- ODD FRAME AND LEGS -->
+    <link name="third_frame">
+      <visual>
+        <geometry>
+          <cylinder length="${frame_thickness}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+        <material name="pink"/>
+      </visual>
+    </link>
+
+<!-- JOINTS -->
+
+<!-- EVEN -->
+
+  <joint name="base_to_even_y" type="fixed">
+    <parent link="base_link"/>
+    <child link="even_y_link"/>
+    <origin xyz="0.0 0.0 0.0"/>
+  </joint>
+
+    <joint name="base_to_leg_2" type="prismatic">
+      <parent link="base_link"/>
+      <child link="leg_2"/>
+      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+      <axis xyz="0 0 1"/>
+      <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0.0 0.0"/>
+    </joint>
+
+    <joint name="base_to_leg_4" type="prismatic">
+      <parent link="base_link"/>
+      <child link="leg_4"/>
+      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+      <axis xyz="0 0 1"/>
+      <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} ${frame_length_y/2.0} 0.0"/>
+    </joint>
+
+    <joint name="base_to_leg_6" type="prismatic">
+      <parent link="base_link"/>
+      <child link="leg_6"/>
+      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+      <axis xyz="0 0 1"/>
+      <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} ${-1*frame_length_y/2.0} 0.0"/>
+    </joint>
+
+<!-- THIRD FRAME -->
+  <joint name="base_to_third_frame" type="prismatic">
+      <parent link="base_link"/>
+      <child link="third_frame"/>
+      <origin xyz="0.0 0.0 ${frame_thickness}"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="${limit_third_frame_prismatic_effort}" lower="${limit_third_frame_prismatic_lower}" upper="${limit_third_frame_prismatic_upper}" velocity="${limit_third_frame_prismatic_velocity}"/>
+  </joint>
+
+<!-- ODD -->
+  <joint name="third_frame_to_odd_x" type="revolute">
+      <parent link="third_frame"/>
+      <child link="odd_x_link"/>
+      <origin xyz="0.0 0.0 ${frame_thickness}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="${limit_third_frame_revolute_effort}" lower="${limit_third_frame_revolute_lower}" upper="${limit_third_frame_revolute_upper}" velocity="${limit_third_frame_revolute_velocity}"/>
+  </joint>
+
+  <joint name="odd_x_to_odd_y" type="fixed">
+      <parent link="odd_x_link"/>
+      <child link="odd_y_link"/>
+      <origin xyz="0.0 0.0 0.0"/>
+  </joint>
+
+  <joint name="odd_x_to_leg_1" type="prismatic">
+        <parent link="odd_x_link"/>
+        <child link="leg_1"/>
+        <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+        <axis xyz="0 0 1"/>
+        <origin rpy="0 0 0" xyz="${frame_length_x/2.0} ${frame_length_y/2.0} 0.0"/>
+  </joint>
+
+  <joint name="odd_x_to_leg_3" type="prismatic">
+        <parent link="odd_x_link"/>
+        <child link="leg_3"/>
+        <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+        <axis xyz="0 0 1"/>
+        <origin rpy="0 0 0" xyz="${frame_length_x/2.0} ${-1*frame_length_y/2.0} 0.0"/>
+  </joint>
+
+  <joint name="odd_x_to_leg_5" type="prismatic">
+        <parent link="odd_x_link"/>
+        <child link="leg_5"/>
+        <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+        <axis xyz="0 0 1"/>
+        <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} 0.0 0.0"/>
+  </joint>
+
+</robot>

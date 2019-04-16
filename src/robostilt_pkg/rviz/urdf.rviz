@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /base_link1
+        - /leg_21
+        - /odd_frame1
       Splitter Ratio: 0.5
     Tree Height: 775
   - Class: rviz/Selection
@@ -28,8 +30,6 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: ""
-Toolbars:
-  toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
@@ -53,10 +53,24 @@ Visualization Manager:
       Value: true
     - Class: rviz/Axes
       Enabled: true
-      Length: 1
+      Length: 0.300000012
       Name: base_link
-      Radius: 0.100000001
+      Radius: 0.0500000007
       Reference Frame: base_link
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.200000003
+      Name: leg_2
+      Radius: 0.0500000007
+      Reference Frame: leg_2
+      Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.300000012
+      Name: odd_frame
+      Radius: 0.0500000007
+      Reference Frame: odd_x_link
       Value: true
     - Alpha: 1
       Class: rviz/RobotModel
@@ -69,6 +83,56 @@ Visualization Manager:
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
         base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        even_y_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        leg_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        leg_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        leg_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        leg_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        leg_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        leg_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        odd_x_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        odd_y_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        third_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -104,25 +168,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 22.1068153
+      Distance: 15.065176
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 4.25545168
+        Y: -1.25690472
+        Z: -1.05252731
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.785398006
+      Pitch: 0.240398526
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.785398006
+      Yaw: 1.4253974
     Saved: ~
 Window Geometry:
   Displays:
@@ -140,5 +204,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1855
-  X: 1985
+  X: 65
   Y: 24
