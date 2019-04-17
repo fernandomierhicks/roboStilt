@@ -1,4 +1,9 @@
 #!/usr/bin/env python  
+
+## This node gets the keyboard input from terminal as arrow presses and broadcasts that as a TF transform to "base_link" with respect to "world"
+
+
+
 import roslib
 roslib.load_manifest('robostilt_pkg')
 import rospy
