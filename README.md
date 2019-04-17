@@ -2,9 +2,7 @@
 
 This is the main ROS workspace for the RoboStilt robot. 
 
-RosControl joints
-
-Topics for leg displacement
-
-Actions to move legs
+1. Do Gazebo tutorials
+2. Setup ros_control
+3. Use ros_control in gazebo
 
