@@ -1,0 +1,15 @@
+<launch>
+
+<!-- ARGUMENTS -->
+
+
+<!-- PARAMETERS -->
+
+<!-- LAUNCH FILES -->
+
+<!-- NODES -->
+
+  <!-- Launch rviz with config -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robostilt_rviz)/config/urdf.rviz" /> 
+
+</launch>

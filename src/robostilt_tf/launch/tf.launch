@@ -1,6 +1,5 @@
  <launch>
 
-
     <!-- Runs turtlesim and uses the turtle pose to publish "base_link"" tf -->
 
 

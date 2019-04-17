@@ -23,6 +23,13 @@
 <xacro:property name="limit_third_frame_revolute_velocity" value="0.5" />
 <xacro:property name="limit_third_frame_revolute_effort" value="1000.0" />
 
+<!-- MACROS -->
+  <xacro:macro name="default_inertial" params="mass">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </xacro:macro>
 
 <!-- COLORS -->
       <material name="white">
@@ -80,9 +87,15 @@
     <visual>
       <geometry>
         <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
-      </geometry>
-      <material name="cyan"/>
+      </geometry>      
+      <material name="red"/>
     </visual>
+    <collision>
+     <geometry>
+        <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+      </geometry>      
+    </collision>
+    <xacro:default_inertial mass="1"/>
   </link>
 
   <link name="even_y_link">
@@ -93,6 +106,12 @@
       <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} 0 0"/>
       <material name="cyan"/>
     </visual>
+    <collision>
+ <geometry>
+        <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
+      </geometry>
+    </collision>
+        <xacro:default_inertial mass="1"/>
   </link>
 
   <link name="leg_2">
@@ -103,6 +122,12 @@
       <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
       <material name="sky_blue"/>
     </visual>
+        <collision>
+    <geometry>
+        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+      </geometry>
+    </collision>
+        <xacro:default_inertial mass="1"/>
   </link>
 
     <link name="leg_4">
@@ -113,6 +138,12 @@
       <origin rpy="0 0 0" xyz="0 0 ${leg_length/2.0}"/>
       <material name="sky_blue"/>
     </visual>
+        <collision>
+    <geometry>
+        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+      </geometry>
+    </collision>
+        <xacro:default_inertial mass="1"/>
   </link>
 
     <link name="leg_6">
@@ -123,6 +154,12 @@
       <origin rpy="0 0 0" xyz="0 0 ${leg_length/2.0}"/>
       <material name="sky_blue"/>
     </visual>
+        <collision>
+     <geometry>
+        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+      </geometry>
+    </collision>
+        <xacro:default_inertial mass="1"/>
   </link>
 
 
@@ -135,6 +172,12 @@
         </geometry>
         <material name="magenta"/>
       </visual>
+          <collision>
+    <geometry>
+          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+        </geometry>
+    </collision>
+          <xacro:default_inertial mass="1"/>
     </link>
 
     <link name="odd_y_link">
@@ -145,6 +188,12 @@
         <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0 0"/>
         <material name="magenta"/>
       </visual>
+          <collision>
+    <geometry>
+          <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
+        </geometry>
+    </collision>
+          <xacro:default_inertial mass="1"/>
     </link>
 
     <link name="leg_1">
@@ -155,6 +204,12 @@
         <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
         <material name="pink"/>
       </visual>
+          <collision>
+     <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+    </collision>
+          <xacro:default_inertial mass="1"/>
     </link>
 
       <link name="leg_3">
@@ -165,6 +220,12 @@
         <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
         <material name="pink"/>
       </visual>
+          <collision>
+     <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+    </collision>
+          <xacro:default_inertial mass="1"/>
     </link>
 
       <link name="leg_5">
@@ -175,6 +236,12 @@
         <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
         <material name="pink"/>
       </visual>
+          <collision>
+     <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+    </collision>
+          <xacro:default_inertial mass="1"/>
     </link>
 
 <!-- ODD FRAME AND LEGS -->
@@ -186,6 +253,12 @@
         <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
         <material name="pink"/>
       </visual>
+          <collision>
+     <geometry>
+          <cylinder length="${frame_thickness}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+    </collision>
+          <xacro:default_inertial mass="1"/>
     </link>
 
 <!-- JOINTS -->

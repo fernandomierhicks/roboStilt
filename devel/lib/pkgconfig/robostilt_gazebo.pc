@@ -1,0 +1,8 @@
+prefix=/home/fernandomierhicks/roboStilt/devel
+
+Name: robostilt_gazebo
+Description: Description of robostilt_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fernandomierhicks/roboStilt/devel/lib 
+Requires: 

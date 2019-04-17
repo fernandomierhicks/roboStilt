@@ -363,6 +363,18 @@ roboStilt_node_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/roboSil
 roboStilt_node_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/roboSilt_node
 
 //Value Computed by CMake
+robostilt_description_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_description
+
+//Value Computed by CMake
+robostilt_description_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_description
+
+//Value Computed by CMake
+robostilt_gazebo_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_gazebo
+
+//Value Computed by CMake
+robostilt_gazebo_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_gazebo
+
+//Value Computed by CMake
 robostilt_node_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_node
 
 //Value Computed by CMake
@@ -373,6 +385,18 @@ robostilt_pkg_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostil
 
 //Value Computed by CMake
 robostilt_pkg_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_pkg
+
+//Value Computed by CMake
+robostilt_rviz_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_rviz
+
+//Value Computed by CMake
+robostilt_rviz_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_rviz
+
+//Value Computed by CMake
+robostilt_tf_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_tf
+
+//Value Computed by CMake
+robostilt_tf_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_tf
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/kinetic/share/rosconsole/cmake
@@ -530,7 +554,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

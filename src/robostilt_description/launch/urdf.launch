@@ -7,29 +7,22 @@
 
 <!-- Load URDF file to parameter server -->
  <param name="robot_description"
-  command="xacro --inorder '$(find robostilt_pkg)/urdf/robostilt.urdf.xacro'" />   
-
-<!-- Publish TFs at 100 Hz -->
- <param name="publish_frequency" type="double" value="0.01" />
-
+  command="xacro --inorder '$(find robostilt_description)/urdf/robostilt.urdf.xacro'" />   
 
 
 <!-- Launch files -->
-<include file="$(find robostilt_pkg)/launch/tf.launch"/> <!-- Launch TF publishers -->
 
+<!-- Launch TF publishers -->
+<include file="$(find robostilt_tf)/launch/tf.launch"/> 
 
 <!-- NODES -->
 
-
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="_use_gui:=true" />
-
 
   <!-- Robot state publisher updates all TFs. Needs URDF loaded on parameter server and sensor_msgs/JointState to work-->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
 
-  <!-- Launch rviz with config -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robostilt_pkg)/rviz/urdf.rviz" /> 
 
 </launch>
 
