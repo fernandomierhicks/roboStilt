@@ -3,15 +3,19 @@
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
 <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="gui" value="true" />
-    <arg name="paused" value="true"/>
+    <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="headless" value="false"/>
+    <arg name="debug" value="false" />
 </include>
     
 
+      <node name="robostilt_controller_spawner" pkg="controller_manager" type="spawner"
+    args="robostilt_joint_state_controller
+          --shutdown-timeout 3"/>
 
 <!-- Spawn a robot into Gazebo. Load URDF from parameter server-->
-
 <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-        args=" -urdf -model roboStilt -param robot_description" respawn="false" output="screen" />
+      respawn="false" output="screen"
+        args=" -urdf  -param robot_description -model roboStilt"  />
 </launch>

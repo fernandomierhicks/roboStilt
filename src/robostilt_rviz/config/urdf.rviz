@@ -30,6 +30,8 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: ""
+Toolbars:
+  toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
@@ -70,7 +72,7 @@ Visualization Manager:
       Length: 0.300000012
       Name: odd_frame
       Radius: 0.0500000007
-      Reference Frame: odd_x_link
+      Reference Frame: odd_frame
       Value: true
     - Alpha: 1
       Class: rviz/RobotModel
@@ -83,11 +85,6 @@ Visualization Manager:
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
         base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        even_y_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -122,12 +119,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        odd_x_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        odd_y_link:
+        odd_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false

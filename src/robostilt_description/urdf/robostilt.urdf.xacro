@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <robot name="roboStilt" xmlns:xacro="http://www.ros.org/wiki/xacro" >  <!-- ROBOT NAME -->
-
 <!-- PROPERTIES -->
   <xacro:property name="leg_length" value="1.0" />
   <xacro:property name="frame_length_x" value="1.5" />
@@ -25,261 +24,183 @@
 
 
 <!-- MACROS -->
-
-  <!-- Inertial-->
-  <xacro:macro name="default_inertial" params="mass">
-    <inertial>
-      <mass value="${mass}" />
-      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
-    </inertial>
-  </xacro:macro>
-
   <!-- Frames -->
-   <xacro:macro name="frame_link" params="material">
+   <xacro:macro name="frame_link" params="link_name material reflect" >
+      <link name="${link_name}">      
+        <visual> <!-- X beam -->
+          <geometry>
+            <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+          </geometry>        
+          <material name="${material}"/>
+        </visual>
+        <visual>   <!-- Y beam -->
+          <geometry>
+            <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
+          </geometry>
+          <origin rpy="0 0 0" xyz="${-1*reflect*frame_length_x/2.0} 0 0"/>        
+          <material name="${material}"/>
+        </visual>
 
-      <visual> <!-- X beam -->
+        <collision>
         <geometry>
-          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
-        </geometry>        
-        <material name="${material}"/>
-      </visual>
-
-      <visual>   <!-- Y beam -->
+            <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+          </geometry>       
+        </collision>
+        <collision><!-- Y beam -->
         <geometry>
-          <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} 0 0"/>        
-        <material name="${material}"/>
-      </visual>
+            <box size="${frame_thickness} ${-1*reflect*frame_length_y} ${frame_thickness}"/>
+          </geometry>
+          <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0 0"/>        
+        </collision>
 
-       <collision>
-       <geometry>
-          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
-        </geometry>       
-      </collision>
+        <inertial>
+          <mass value="1.0" />
+          <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
+        </inertial>
+      </link>
 
-      <inertial>
-        <mass value="1.0" />
-        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
-      </inertial>
-    
-  </xacro:macro>
+      <gazebo reference="${link_name}">
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+          <xacro:gazebo_color material="${material}"/>
+      </gazebo> 
+    </xacro:macro>
 
+  <!-- Legs -->
+    <xacro:macro name="leg" params="suffix material parent x y">
 
+      <link name="leg_${suffix}">
 
-  <!-- Leg -->
-  <xacro:macro name="leg" params="suffix material parent x y">
+        <visual>
+          <geometry>
+            <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+          </geometry>
+          <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
+          <material name="${material}"/>
+        </visual>
 
-    <link name="leg_${suffix}">
+        <collision>
+          <geometry>
+            <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+          </geometry>
+        </collision>
 
-      <visual>
-        <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
-        <material name="${material}"/>
-      </visual>
+        <inertial>
+          <mass value="1.0" />
+          <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
+        </inertial>
+      </link>
 
-       <collision>
-        <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-      </collision>
+      <joint name="${parent}_to_leg_${suffix}" type="prismatic">
+        <parent link="${parent}"/>
+        <child link="leg_${suffix}"/>
+        <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+        <axis xyz="0 0 1"/>
+        <origin rpy="0 0 0" xyz="${x} ${y} 0.0"/>
+        <dynamics damping="0.7"/>
+      </joint>
 
-      <inertial>
-        <mass value="1.0" />
-        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
-      </inertial>
-    </link>
-    <joint name="${parent}_to_leg_${suffix}" type="prismatic">
-      <parent link="${parent}"/>
-      <child link="leg_${suffix}"/>
-      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
-      <axis xyz="0 0 1"/>
-      <origin rpy="0 0 0" xyz="${x} ${y} 0.0"/>
-    </joint>
-  </xacro:macro>
+      
+      <gazebo reference="leg_${suffix}">
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+          <xacro:gazebo_color material="${material}"/>
+      </gazebo> 
+      
+
+    </xacro:macro>
 
 <!-- COLORS -->
-      <material name="white">
-        <color rgba="1 1 1 1"/>
-      </material>
+<xacro:include filename="$(find robostilt_description)/urdf/materials.xacro"/>
 
-      <material name="black">
-        <color rgba="0 0 0.0 1"/>
-      </material>
-
-      <material name="grey">
-        <color rgba="0.7 0.7 0.7 1"/>
-      </material>
-
-      <material name="red">
-        <color rgba="1 0 0 1"/>
-      </material>
-
-      <material name="orange">
-        <color rgba="1 0.5 0.5 1"/>
-      </material>-0.5
-
-      <material name="green">
-        <color rgba="0 1 0 1"/>
-      </material>
-
-      <material name="yellow">
-        <color rgba="1 1 0 1"/>
-      </material>
-
-      <material name="cyan">
-        <color rgba="0 1 1 1"/>
-      </material>
-
-      <material name="blue">
-        <color rgba="0 0 1 1"/>
-      </material>
-
-      <material name="sky_blue">
-        <color rgba="0.35 0.75 0.9 1"/>
-      </material>
-
-      <material name="magenta">
-        <color rgba="1 0 1 1"/>
-      </material>
-
-      <material name="pink">
-        <color rgba="1 0.75 0.79 1"/>
-      </material>
-<!-- LINKS -->
-
-<!-- EVEN FRAME AND LEGS -->
-
-  <link name="base_link">   <!-- The x pointing truss of the even frame, baselink origin at its center --> 
-   <xacro:frame_link material="cyan"/>
-  </link>
-
-  <link name="even_y_link">
-    <visual>
-      <geometry>
-        <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} 0 0"/>
-      <material name="cyan"/>
-    </visual>
-    <collision>
- <geometry>
-        <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
-      </geometry>
-    </collision>
-        <xacro:default_inertial mass="1"/>
-  </link>
+<xacro:macro name="gazebo_color" params="material" >
+  <xacro:if value="${material=='Orange'}">
+    <material>Gazebo/Orange</material>
+  </xacro:if>
+  <xacro:if value="${material=='Yellow'}">
+    <material>Gazebo/Yellow</material>
+  </xacro:if>
+</xacro:macro>
 
 
-<!-- ODD FRAME AND LEGS -->
+<!-- FRAMES -->
 
-  <link name="odd_x_link">   <!-- The x pointing truss of the even frame, baselink origin at its center --> 
-      <visual>
-        <geometry>
-          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
-        </geometry>
-        <material name="magenta"/>
-      </visual>
-          <collision>
-    <geometry>
-          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
-        </geometry>
-    </collision>
-          <xacro:default_inertial mass="1"/>
-    </link>
+     <!-- Even frame --> 
+  <xacro:frame_link link_name="base_link" material="Orange" reflect="1"/>
+  
 
-    <link name="odd_y_link">
-      <visual>
-        <geometry>
-          <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0 0"/>
-        <material name="magenta"/>
-      </visual>
-          <collision>
-    <geometry>
-          <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
-        </geometry>
-    </collision>
-          <xacro:default_inertial mass="1"/>
-    </link>
 
-   
-
-<!-- ODD FRAME AND LEGS -->
-    <link name="third_frame">
+  <link name="third_frame"> <!-- Revolute joint --> 
       <visual>
         <geometry>
           <cylinder length="${frame_thickness}" radius="${frame_thickness/2.0}"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-        <material name="pink"/>
+        <material name="Yellow"/>
       </visual>
-          <collision>
-     <geometry>
+      <collision>
+        <geometry>
           <cylinder length="${frame_thickness}" radius="${frame_thickness/2.0}"/>
         </geometry>
-    </collision>
-          <xacro:default_inertial mass="1"/>
-    </link>
-
-<!-- JOINTS -->
-
-<!-- EVEN -->
-
-
-<joint name="base_to_even_y" type="fixed">
-    <parent link="base_link"/>
-    <child link="even_y_link"/>
-    <origin xyz="0.0 0.0 0.0"/>
-  </joint>
+      </collision>
+      <inertial>
+        <mass value="1.0" />
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+      </inertial>
+  </link>
+  <gazebo reference="third_frame">
+        <mu1>0.1</mu1>
+        <mu2>0.1</mu2>
+        <xacro:gazebo_color material="Yellow"/>
+  </gazebo> 
 
 
 
-
-
-<!-- THIRD FRAME -->
-  <joint name="base_to_third_frame" type="prismatic">
+  <joint name="base_link_to_third_frame" type="prismatic">
       <parent link="base_link"/>
       <child link="third_frame"/>
       <origin xyz="0.0 0.0 ${frame_thickness}"/>
       <axis xyz="1 0 0"/>
       <limit effort="${limit_third_frame_prismatic_effort}" lower="${limit_third_frame_prismatic_lower}" upper="${limit_third_frame_prismatic_upper}" velocity="${limit_third_frame_prismatic_velocity}"/>
   </joint>
+ 
+   <!-- Odd frame --> 
+   <xacro:frame_link link_name="odd_frame" material="Yellow" reflect="-1"/>
 
-<!-- ODD -->
-  <joint name="third_frame_to_odd_x" type="revolute">
-      <parent link="third_frame"/>
-      <child link="odd_x_link"/>
-      <origin xyz="0.0 0.0 ${frame_thickness}"/>
-      <axis xyz="0 0 1"/>
-      <limit effort="${limit_third_frame_revolute_effort}" lower="${limit_third_frame_revolute_lower}" upper="${limit_third_frame_revolute_upper}" velocity="${limit_third_frame_revolute_velocity}"/>
+
+  <joint name="third_frame_to_odd_frame" type="revolute">
+        <parent link="third_frame"/>
+        <child link="odd_frame"/>
+        <origin xyz="0.0 0.0 ${frame_thickness}"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="${limit_third_frame_revolute_effort}" lower="${limit_third_frame_revolute_lower}" upper="${limit_third_frame_revolute_upper}" velocity="${limit_third_frame_revolute_velocity}"/>
   </joint>
-
-  <joint name="odd_x_to_odd_y" type="fixed">
-      <parent link="odd_x_link"/>
-      <child link="odd_y_link"/>
-      <origin xyz="0.0 0.0 0.0"/>
-  </joint>
+ 
 
 
 
 
 
-    <xacro:leg suffix="1" material="pink" parent="odd_x_link" x="${frame_length_x/2.0}" y="${frame_length_y/2.0}"/>
 
-    <xacro:leg suffix="3" material="pink" parent="odd_x_link" x="${frame_length_x/2.0}" y="${-1*frame_length_y/2.0}"/>
+<!-- LEGS -->
 
-    <xacro:leg suffix="5" material="pink" parent="odd_x_link" x="${-1*frame_length_x/2.0}" y="0"/>
+ <xacro:leg suffix="1" material="Yellow" parent="odd_frame" x="${frame_length_x/2.0}" y="${frame_length_y/2.0}"/>
+
+  <xacro:leg suffix="3" material="Yellow" parent="odd_frame" x="${frame_length_x/2.0}" y="${-1*frame_length_y/2.0}"/>
+
+  <xacro:leg suffix="5" material="Yellow" parent="odd_frame" x="${-1*frame_length_x/2.0}" y="0"/>
 
 
 
-    <xacro:leg suffix="2" material="sky_blue" parent="base_link" x="${frame_length_x/2.0}" y="0"/>
+  <xacro:leg suffix="2" material="Orange" parent="base_link" x="${frame_length_x/2.0}" y="0"/>
 
-    <xacro:leg suffix="4" material="sky_blue" parent="base_link" x="${-1*frame_length_x/2.0}" y="${frame_length_y/2.0}"/>
+  <xacro:leg suffix="4" material="Orange" parent="base_link" x="${-1*frame_length_x/2.0}" y="${frame_length_y/2.0}"/>
 
-    <xacro:leg suffix="6" material="sky_blue" parent="base_link" x="${-1*frame_length_x/2.0} " y="${-1*frame_length_y/2.0}"/>
+  <xacro:leg suffix="6" material="Orange" parent="base_link" x="${-1*frame_length_x/2.0} " y="${-1*frame_length_y/2.0}"/>
+   
+
+<!-- GAZEBO -->
+<xacro:include filename="$(find robostilt_description)/urdf/robostilt.gazebo" />
+
 
 </robot>

@@ -1,2 +1,2 @@
-robostilt_description:robostilt_gazebo:robostilt_pkg:robostilt_rviz:robostilt_tf
+gazebo_ros_demos/custom_plugin_tutorial:gazebo_ros_demos/rrbot_control:gazebo_ros_demos/rrbot_description:gazebo_ros_demos/rrbot_gazebo:robostilt_description:robostilt_gazebo:robostilt_pkg:robostilt_rviz:robostilt_tf
 -DCATKIN_DEVEL_PREFIX=/home/fernandomierhicks/roboStilt/devel -DCMAKE_INSTALL_PREFIX=/home/fernandomierhicks/roboStilt/install -G Unix Makefiles
