@@ -1,20 +1,11 @@
  <launch>
 
-    <!-- Runs turtlesim and uses the turtle pose to publish "base_link"" tf -->
-
 
     <!-- NODES -->
 
-     <!-- Needed to publish the world frame. TODO -->
-    <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
 
-
-
-    <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="screen"/>
-
-    <node name="tf_broadcaster" pkg="robostilt_pkg" type="tf_broadcaster.py" respawn="false" output="screen" >
-      <param name="turtle" type="string" value="turtle1" />
-    </node>
-
-
+   <!-- # Publihses a cosntant transform at ten hertz -->
+   <node name="tf_broadcaster" pkg="robostilt_pkg" type="tf_broadcaster.py" respawn="false" output="screen">
+   </node> 
+    
   </launch>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="roboStilt" xmlns:xacro="http://www.ros.org/wiki/xacro" >  <!-- ROBOT NAME -->
+<robot name="robostilt" xmlns:xacro="http://www.ros.org/wiki/xacro" >  <!-- ROBOT NAME -->
 <!-- PROPERTIES -->
   <xacro:property name="leg_length" value="1.0" />
   <xacro:property name="frame_length_x" value="1.5" />
@@ -105,8 +105,19 @@
         <mu1>0.1</mu1>
         <mu2>0.1</mu2>
           <xacro:gazebo_color material="${material}"/>
-      </gazebo> 
-      
+      </gazebo>     
+
+      <transmission name="leg_${suffix}_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="${parent}_to_leg_${suffix}">
+          <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="leg_${suffix}_motor">
+          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+      </transmission>
+
 
     </xacro:macro>
 
@@ -163,6 +174,17 @@
       <axis xyz="1 0 0"/>
       <limit effort="${limit_third_frame_prismatic_effort}" lower="${limit_third_frame_prismatic_lower}" upper="${limit_third_frame_prismatic_upper}" velocity="${limit_third_frame_prismatic_velocity}"/>
   </joint>
+
+  <transmission name="base_link_to_third_frame_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="base_link_to_third_frame">
+          <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="third_frame_prismatic_motor">
+          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+      </transmission>
  
    <!-- Odd frame --> 
    <xacro:frame_link link_name="odd_frame" material="Yellow" reflect="-1"/>
@@ -175,7 +197,16 @@
         <axis xyz="0 0 1"/>
         <limit effort="${limit_third_frame_revolute_effort}" lower="${limit_third_frame_revolute_lower}" upper="${limit_third_frame_revolute_upper}" velocity="${limit_third_frame_revolute_velocity}"/>
   </joint>
- 
+   <transmission name="third_frame_to_odd_frame_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="third_frame_to_odd_frame">
+          <hardwareInterface>EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="third_frame_revolute_motor">
+          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+      </transmission>
 
 
 
@@ -194,13 +225,19 @@
 
   <xacro:leg suffix="2" material="Orange" parent="base_link" x="${frame_length_x/2.0}" y="0"/>
 
+
   <xacro:leg suffix="4" material="Orange" parent="base_link" x="${-1*frame_length_x/2.0}" y="${frame_length_y/2.0}"/>
 
   <xacro:leg suffix="6" material="Orange" parent="base_link" x="${-1*frame_length_x/2.0} " y="${-1*frame_length_y/2.0}"/>
    
 
 <!-- GAZEBO -->
-<xacro:include filename="$(find robostilt_description)/urdf/robostilt.gazebo" />
+
+
+<xacro:include filename="$(find robostilt_description)/urdf/robostilt.gazebo"/>
+
+
+
 
 
 </robot>

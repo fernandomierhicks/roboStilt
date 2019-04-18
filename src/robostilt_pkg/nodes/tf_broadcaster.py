@@ -9,26 +9,38 @@ roslib.load_manifest('robostilt_pkg')
 import rospy
 
 import tf
-import turtlesim.msg
+from gazebo_msgs.msg import ModelStates
+from geometry_msgs.msg import Pose
+from geometry_msgs.msg import PoseWithCovarianceStamped
 
-def handle_turtle_pose(msg):
-   # The handler function for the turtle pose message broadcasts this turtle's translation and rotation, 
-   # and publishes it as a transform from frame "world" to frame "base_link".
+def handle_robostilt_pose(msg):   
+   # Publishes gazebo pose to the  "world" to frame "base_link" tf.
+
+    global x
+    global y
+    global z
+    global theta
+
+    x = msg.pose[1].position.x
+    y = msg.pose[1].position.y
+    z = msg.pose[1].position.z
+    rot_q = msg.pose[1].orientation
+
+    str = "Published tf with x value %s" % x
+    rospy.loginfo(str)
+
     br = tf.TransformBroadcaster()
-    br.sendTransform((msg.x, msg.y, 0),
-                     tf.transformations.quaternion_from_euler(0, 0, msg.theta),
-                     rospy.Time.now(),
-                     "base_link",
-                     "world")
+    br.sendTransform((x, y, z),
+                    tf.transformations.euler_from_quaternion([rot_q.x,rot_q.y,rot_q.z,rot_q.w]),
+                   rospy.Time.now(),
+                  "base_link",
+                 "world")
+
+
 
 if __name__ == '__main__':
     rospy.init_node('tf_broadcaster')
-
-    # This node takes a single parameter "turtle", which specifies a turtle name, e.g. "turtle1" or "turtle2".
-    turtlename = rospy.get_param('~turtle')
-
-    #The node subscribes to topic "turtleX/pose" and runs function handle_turtle_pose on every incoming message.
-    rospy.Subscriber('/%s/pose' % turtlename,
-                     turtlesim.msg.Pose,
-                     handle_turtle_pose)
+    rospy.loginfo("********************************STARTED****************************")
+    #Subscribe to link_states coming from Gazebo.
+    rospy.Subscriber("/gazebo/model_states",ModelStates,handle_robostilt_pose)
     rospy.spin()

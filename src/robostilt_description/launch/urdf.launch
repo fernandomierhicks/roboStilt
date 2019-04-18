@@ -13,14 +13,15 @@
 <!-- Launch files -->
 
 <!-- Launch TF publishers -->
-<include file="$(find robostilt_tf)/launch/tf.launch"/> 
+
 
 <!-- NODES -->
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="_use_gui:=true" />
+  <!-- Joint state publisher reads URDF and publishes all the non-fixed joints as JointState messages to sensor/JointState-->
+  <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" args="_use_gui:=false publish_default_positions:=true" /> -->
 
-  <!-- Robot state publisher updates all TFs. Needs URDF loaded on parameter server and sensor_msgs/JointState to work-->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <!-- Robot state publisher updates reads join state message and updates the TF tree-->
+  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />  -->
 
 
 

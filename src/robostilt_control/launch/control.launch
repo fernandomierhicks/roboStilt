@@ -1,0 +1,24 @@
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find robostilt_control)/config/control.yaml" command="load"/>
+
+
+
+  <!-- load the controllers. Publishes joint state on robostilt/joint_states topic -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/robostilt" args="joint_state_controller"/>
+
+  <!-- Publish world-base_link transform -->
+   <node name="tf_broadcasterFixed" pkg="robostilt_pkg" type="tf_broadcasterFixedPosition.py" respawn="false" output="screen">
+     <param name="turtle" type="string" value="turtle1" />
+   </node> 
+
+
+ <!-- Listen to robostilt/joint_states topic abd publish transforms to /tf-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/robostilt/joint_states" />
+  </node>
+
+</launch>
