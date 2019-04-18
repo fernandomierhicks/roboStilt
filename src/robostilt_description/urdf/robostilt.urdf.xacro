@@ -2,33 +2,102 @@
 <robot name="roboStilt" xmlns:xacro="http://www.ros.org/wiki/xacro" >  <!-- ROBOT NAME -->
 
 <!-- PROPERTIES -->
-<xacro:property name="leg_length" value="1.0" />
-<xacro:property name="frame_length_x" value="1.5" />
-<xacro:property name="frame_length_y" value="1.0" />
-<xacro:property name="frame_thickness" value="0.09" />
+  <xacro:property name="leg_length" value="1.0" />
+  <xacro:property name="frame_length_x" value="1.5" />
+  <xacro:property name="frame_length_y" value="1.0" />
+  <xacro:property name="frame_thickness" value="0.09" />
 
 
-<xacro:property name="limit_leg_lower" value="-0.9" />
-<xacro:property name="limit_leg_upper" value="-0.1" />
-<xacro:property name="limit_leg_velocity" value="0.5" />
-<xacro:property name="limit_leg_effort" value="1000.0" />
+  <xacro:property name="limit_leg_lower" value="-0.9" />
+  <xacro:property name="limit_leg_upper" value="-0.1" />
+  <xacro:property name="limit_leg_velocity" value="0.5" />
+  <xacro:property name="limit_leg_effort" value="1000.0" />
 
-<xacro:property name="limit_third_frame_prismatic_lower" value="${-1*frame_thickness}" />
-<xacro:property name="limit_third_frame_prismatic_upper" value="${-1*frame_length_x/3.0}" />
-<xacro:property name="limit_third_frame_prismatic_velocity" value="0.5" />
-<xacro:property name="limit_third_frame_prismatic_effort" value="1000.0" />
+  <xacro:property name="limit_third_frame_prismatic_lower" value="${-1*frame_thickness}" />
+  <xacro:property name="limit_third_frame_prismatic_upper" value="${-1*frame_length_x/3.0}" />
+  <xacro:property name="limit_third_frame_prismatic_velocity" value="0.5" />
+  <xacro:property name="limit_third_frame_prismatic_effort" value="1000.0" />
 
-<xacro:property name="limit_third_frame_revolute_lower" value="-0.5" />
-<xacro:property name="limit_third_frame_revolute_upper" value="0.5" />
-<xacro:property name="limit_third_frame_revolute_velocity" value="0.5" />
-<xacro:property name="limit_third_frame_revolute_effort" value="1000.0" />
+  <xacro:property name="limit_third_frame_revolute_lower" value="-0.5" />
+  <xacro:property name="limit_third_frame_revolute_upper" value="0.5" />
+  <xacro:property name="limit_third_frame_revolute_velocity" value="0.5" />
+  <xacro:property name="limit_third_frame_revolute_effort" value="1000.0" />
+
 
 <!-- MACROS -->
+
+  <!-- Inertial-->
   <xacro:macro name="default_inertial" params="mass">
     <inertial>
       <mass value="${mass}" />
       <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
     </inertial>
+  </xacro:macro>
+
+  <!-- Frames -->
+   <xacro:macro name="frame_link" params="material">
+
+      <visual> <!-- X beam -->
+        <geometry>
+          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+        </geometry>        
+        <material name="${material}"/>
+      </visual>
+
+      <visual>   <!-- Y beam -->
+        <geometry>
+          <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} 0 0"/>        
+        <material name="${material}"/>
+      </visual>
+
+       <collision>
+       <geometry>
+          <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+        </geometry>       
+      </collision>
+
+      <inertial>
+        <mass value="1.0" />
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
+      </inertial>
+    
+  </xacro:macro>
+
+
+
+  <!-- Leg -->
+  <xacro:macro name="leg" params="suffix material parent x y">
+
+    <link name="leg_${suffix}">
+
+      <visual>
+        <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
+        <material name="${material}"/>
+      </visual>
+
+       <collision>
+        <geometry>
+          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="1.0" />
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
+      </inertial>
+    </link>
+    <joint name="${parent}_to_leg_${suffix}" type="prismatic">
+      <parent link="${parent}"/>
+      <child link="leg_${suffix}"/>
+      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
+      <axis xyz="0 0 1"/>
+      <origin rpy="0 0 0" xyz="${x} ${y} 0.0"/>
+    </joint>
   </xacro:macro>
 
 <!-- COLORS -->
@@ -84,18 +153,7 @@
 <!-- EVEN FRAME AND LEGS -->
 
   <link name="base_link">   <!-- The x pointing truss of the even frame, baselink origin at its center --> 
-    <visual>
-      <geometry>
-        <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
-      </geometry>      
-      <material name="red"/>
-    </visual>
-    <collision>
-     <geometry>
-        <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
-      </geometry>      
-    </collision>
-    <xacro:default_inertial mass="1"/>
+   <xacro:frame_link material="cyan"/>
   </link>
 
   <link name="even_y_link">
@@ -109,54 +167,6 @@
     <collision>
  <geometry>
         <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
-      </geometry>
-    </collision>
-        <xacro:default_inertial mass="1"/>
-  </link>
-
-  <link name="leg_2">
-    <visual>
-      <geometry>
-        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
-      <material name="sky_blue"/>
-    </visual>
-        <collision>
-    <geometry>
-        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-      </geometry>
-    </collision>
-        <xacro:default_inertial mass="1"/>
-  </link>
-
-    <link name="leg_4">
-    <visual>
-      <geometry>
-        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 ${leg_length/2.0}"/>
-      <material name="sky_blue"/>
-    </visual>
-        <collision>
-    <geometry>
-        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-      </geometry>
-    </collision>
-        <xacro:default_inertial mass="1"/>
-  </link>
-
-    <link name="leg_6">
-    <visual>
-      <geometry>
-        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 ${leg_length/2.0}"/>
-      <material name="sky_blue"/>
-    </visual>
-        <collision>
-     <geometry>
-        <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
       </geometry>
     </collision>
         <xacro:default_inertial mass="1"/>
@@ -196,53 +206,7 @@
           <xacro:default_inertial mass="1"/>
     </link>
 
-    <link name="leg_1">
-      <visual>
-        <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
-        <material name="pink"/>
-      </visual>
-          <collision>
-     <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-    </collision>
-          <xacro:default_inertial mass="1"/>
-    </link>
-
-      <link name="leg_3">
-      <visual>
-        <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
-        <material name="pink"/>
-      </visual>
-          <collision>
-     <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-    </collision>
-          <xacro:default_inertial mass="1"/>
-    </link>
-
-      <link name="leg_5">
-      <visual>
-        <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-        <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
-        <material name="pink"/>
-      </visual>
-          <collision>
-     <geometry>
-          <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
-        </geometry>
-    </collision>
-          <xacro:default_inertial mass="1"/>
-    </link>
+   
 
 <!-- ODD FRAME AND LEGS -->
     <link name="third_frame">
@@ -265,35 +229,16 @@
 
 <!-- EVEN -->
 
-  <joint name="base_to_even_y" type="fixed">
+
+<joint name="base_to_even_y" type="fixed">
     <parent link="base_link"/>
     <child link="even_y_link"/>
     <origin xyz="0.0 0.0 0.0"/>
   </joint>
 
-    <joint name="base_to_leg_2" type="prismatic">
-      <parent link="base_link"/>
-      <child link="leg_2"/>
-      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
-      <axis xyz="0 0 1"/>
-      <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0.0 0.0"/>
-    </joint>
 
-    <joint name="base_to_leg_4" type="prismatic">
-      <parent link="base_link"/>
-      <child link="leg_4"/>
-      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
-      <axis xyz="0 0 1"/>
-      <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} ${frame_length_y/2.0} 0.0"/>
-    </joint>
 
-    <joint name="base_to_leg_6" type="prismatic">
-      <parent link="base_link"/>
-      <child link="leg_6"/>
-      <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
-      <axis xyz="0 0 1"/>
-      <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} ${-1*frame_length_y/2.0} 0.0"/>
-    </joint>
+
 
 <!-- THIRD FRAME -->
   <joint name="base_to_third_frame" type="prismatic">
@@ -319,28 +264,22 @@
       <origin xyz="0.0 0.0 0.0"/>
   </joint>
 
-  <joint name="odd_x_to_leg_1" type="prismatic">
-        <parent link="odd_x_link"/>
-        <child link="leg_1"/>
-        <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
-        <axis xyz="0 0 1"/>
-        <origin rpy="0 0 0" xyz="${frame_length_x/2.0} ${frame_length_y/2.0} 0.0"/>
-  </joint>
 
-  <joint name="odd_x_to_leg_3" type="prismatic">
-        <parent link="odd_x_link"/>
-        <child link="leg_3"/>
-        <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
-        <axis xyz="0 0 1"/>
-        <origin rpy="0 0 0" xyz="${frame_length_x/2.0} ${-1*frame_length_y/2.0} 0.0"/>
-  </joint>
 
-  <joint name="odd_x_to_leg_5" type="prismatic">
-        <parent link="odd_x_link"/>
-        <child link="leg_5"/>
-        <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
-        <axis xyz="0 0 1"/>
-        <origin rpy="0 0 0" xyz="${-1*frame_length_x/2.0} 0.0 0.0"/>
-  </joint>
+
+
+    <xacro:leg suffix="1" material="pink" parent="odd_x_link" x="${frame_length_x/2.0}" y="${frame_length_y/2.0}"/>
+
+    <xacro:leg suffix="3" material="pink" parent="odd_x_link" x="${frame_length_x/2.0}" y="${-1*frame_length_y/2.0}"/>
+
+    <xacro:leg suffix="5" material="pink" parent="odd_x_link" x="${-1*frame_length_x/2.0}" y="0"/>
+
+
+
+    <xacro:leg suffix="2" material="sky_blue" parent="base_link" x="${frame_length_x/2.0}" y="0"/>
+
+    <xacro:leg suffix="4" material="sky_blue" parent="base_link" x="${-1*frame_length_x/2.0}" y="${frame_length_y/2.0}"/>
+
+    <xacro:leg suffix="6" material="sky_blue" parent="base_link" x="${-1*frame_length_x/2.0} " y="${-1*frame_length_y/2.0}"/>
 
 </robot>

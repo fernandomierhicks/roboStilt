@@ -1,0 +1,17 @@
+<launch>
+
+<!-- ARGUMENTS -->
+
+
+<!-- PARAMETERS -->
+
+
+<!-- Launch files -->
+
+<include file="$(find robostilt_description)/launch/urdf.launch"/> 
+
+<include file="$(find robostilt_rviz)/launch/rviz.launch"/> 
+
+
+</launch>
+
