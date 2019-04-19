@@ -11,8 +11,7 @@
 
   <!-- Publish world-base_link transform -->
    <node name="tf_broadcasterFixed" pkg="robostilt_pkg" type="tf_broadcasterFixedPosition.py" respawn="false" output="screen">
-     <param name="turtle" type="string" value="turtle1" />
-   </node> 
+  </node> 
 
 
  <!-- Listen to robostilt/joint_states topic abd publish transforms to /tf-->

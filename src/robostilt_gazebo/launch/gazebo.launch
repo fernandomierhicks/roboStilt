@@ -3,7 +3,7 @@
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
 <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="gui" value="true" />
-    <arg name="paused" value="false"/>
+    <arg name="paused" value="true"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="headless" value="false"/>
     <arg name="debug" value="false" />
@@ -14,5 +14,10 @@
 <!-- Spawn a robot into Gazebo. Load URDF from parameter server-->
 <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
-        args=" -urdf  -param robot_description -model robostilt"  />
+        args=" -urdf  -param robot_description -model robostilt -z 1.0"  />
+
+<!-- Updates the base to world TF from gazebo->rviz -->
+<node name="tf_base_link_broadcaster_gazebo_to_rviz" pkg="robostilt_gazebo" type="tf_broadcasterGazebo.py" respawn="false" output="screen"/>
+
+
 </launch>
