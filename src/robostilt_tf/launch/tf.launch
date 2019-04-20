@@ -4,8 +4,12 @@
     <!-- NODES -->
 
 
-   <!-- # Publihses a cosntant transform at ten hertz -->
-   <node name="tf_broadcaster" pkg="robostilt_pkg" type="tf_broadcasterFixed.py" respawn="false" output="screen">
-   </node> 
+<!-- Publish fixed world-base_link transform and load joint state publishers-->
+  <node name="tf_broadcasterFixedPosition" pkg="robostilt_tf" type="tf_broadcasterFixedPosition.py"/> 
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="True"/>
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
     
   </launch>

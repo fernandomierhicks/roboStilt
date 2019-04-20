@@ -1,0 +1,23 @@
+<launch>
+
+<!-- ARGUMENTS -->
+
+
+<!-- PARAMETERS -->
+
+
+<!-- Launch files -->
+
+
+<!--Load URDF model into parameter server-->
+<include file="$(find robostilt_description)/launch/urdf.launch"/> 
+
+<!-- Publish fixed world-base_link transform and load joint state publishers-->
+
+<include file="$(find robostilt_tf)/launch/tf.launch"/> 
+
+<!--Opens rviz and loads config-->
+<include file="$(find robostilt_rviz)/launch/rviz.launch"/> 
+
+</launch>
+

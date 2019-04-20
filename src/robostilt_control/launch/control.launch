@@ -9,10 +9,6 @@
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/robostilt" args="joint_state_controller"/>
 
-  <!-- Publish world-base_link transform -->
-   <node name="tf_broadcasterFixed" pkg="robostilt_pkg" type="tf_broadcasterFixedPosition.py" respawn="false" output="screen">
-  </node> 
-
 
  <!-- Listen to robostilt/joint_states topic abd publish transforms to /tf-->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

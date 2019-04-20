@@ -7,17 +7,31 @@
     <arg name="use_sim_time" value="true"/>
     <arg name="headless" value="false"/>
     <arg name="debug" value="false" />
-</include>   
-
-
+</include> 
 
 <!-- Spawn a robot into Gazebo. Load URDF from parameter server-->
 <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
-        args=" -urdf  -param robot_description -model robostilt -z 1.0"  />
+        args=" -urdf  -param robot_description 
+        -model robostilt 
+        -x 0
+        -y 0
+        -z 1
+        -J base_link_to_leg_2 -0.8
+        -J base_link_to_leg_4 -0.8
+        -J base_link_to_leg_6 -0.8
+        -J base_link_to_third_frame -0.5
+        "/>
+
 
 <!-- Updates the base to world TF from gazebo->rviz -->
 <node name="tf_base_link_broadcaster_gazebo_to_rviz" pkg="robostilt_gazebo" type="tf_broadcasterGazebo.py" respawn="false" output="screen"/>
 
 
 </launch>
+<!--
+        -J base_link_to_leg_2 -0.8
+        -J base_link_to_leg_4 -0.8
+        -J base_link_to_leg_6 -0.8
+        -J base_link_to_third_frame -0.5
+-->

@@ -29,13 +29,13 @@
       <link name="${link_name}">      
         <visual> <!-- X beam -->
           <geometry>
-            <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+            <box size="${frame_length_x-frame_thickness*1.1} ${frame_thickness} ${frame_thickness}"/>
           </geometry>        
           <material name="${material}"/>
         </visual>
         <visual>   <!-- Y beam -->
           <geometry>
-            <box size="${frame_thickness} ${frame_length_y} ${frame_thickness}"/>
+            <box size="${frame_thickness} ${frame_length_y-frame_thickness*1.1} ${frame_thickness}"/>
           </geometry>
           <origin rpy="0 0 0" xyz="${-1*reflect*frame_length_x/2.0} 0 0"/>        
           <material name="${material}"/>
@@ -43,12 +43,12 @@
 
         <collision>
         <geometry>
-            <box size="${frame_length_x} ${frame_thickness} ${frame_thickness}"/>
+            <box size="${frame_length_x-frame_thickness*1.1} ${frame_thickness} ${frame_thickness}"/>
           </geometry>       
         </collision>
         <collision><!-- Y beam -->
         <geometry>
-            <box size="${frame_thickness} ${-1*reflect*frame_length_y} ${frame_thickness}"/>
+            <box size="${frame_thickness} ${frame_length_y-frame_thickness*1.1} ${frame_thickness}"/>
           </geometry>
           <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0 0"/>        
         </collision>
@@ -102,18 +102,18 @@
 
       
       <gazebo reference="leg_${suffix}">
-        <mu1>0.1</mu1>
-        <mu2>0.1</mu2>
+        <mu1>0.9</mu1>
+        <mu2>0.9</mu2>
           <xacro:gazebo_color material="${material}"/>
       </gazebo>     
 
       <transmission name="leg_${suffix}_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="${parent}_to_leg_${suffix}">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="leg_${suffix}_motor">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
           <mechanicalReduction>1</mechanicalReduction>
         </actuator>
       </transmission>
@@ -178,10 +178,10 @@
   <transmission name="base_link_to_third_frame_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="base_link_to_third_frame">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="third_frame_prismatic_motor">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
           <mechanicalReduction>1</mechanicalReduction>
         </actuator>
       </transmission>
@@ -200,10 +200,10 @@
    <transmission name="third_frame_to_odd_frame_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="third_frame_to_odd_frame">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="third_frame_revolute_motor">
-          <hardwareInterface>EffortJointInterface</hardwareInterface>
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
           <mechanicalReduction>1</mechanicalReduction>
         </actuator>
       </transmission>
