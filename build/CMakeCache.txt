@@ -607,6 +607,18 @@ actionlib_msgs_DIR:PATH=/opt/ros/kinetic/share/actionlib_msgs/cmake
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/kinetic/share/catkin/cmake
 
+//The directory containing a CMake configuration file for class_loader.
+class_loader_DIR:PATH=/opt/ros/kinetic/share/class_loader/cmake
+
+//The directory containing a CMake configuration file for controller_interface.
+controller_interface_DIR:PATH=/opt/ros/kinetic/share/controller_interface/cmake
+
+//The directory containing a CMake configuration file for controller_manager.
+controller_manager_DIR:PATH=/opt/ros/kinetic/share/controller_manager/cmake
+
+//The directory containing a CMake configuration file for controller_manager_msgs.
+controller_manager_msgs_DIR:PATH=/opt/ros/kinetic/share/controller_manager_msgs/cmake
+
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/kinetic/share/cpp_common/cmake
 
@@ -701,8 +713,17 @@ gtest_force_shared_crt:BOOL=OFF
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
+//The directory containing a CMake configuration file for hardware_interface.
+hardware_interface_DIR:PATH=/opt/ros/kinetic/share/hardware_interface/cmake
+
 //The directory containing a CMake configuration file for ignition-math2.
 ignition-math2_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/ignition-math2
+
+//The directory containing a CMake configuration file for joint_state_controller.
+joint_state_controller_DIR:PATH=/opt/ros/kinetic/share/joint_state_controller/cmake
+
+//The directory containing a CMake configuration file for kdl_parser.
+kdl_parser_DIR:PATH=/opt/ros/kinetic/share/kdl_parser/cmake
 
 //Value Computed by CMake
 learning_tf_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/learning_tf
@@ -711,7 +732,7 @@ learning_tf_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/learning_t
 learning_tf_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/learning_tf
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/kinetic/lib/libtf2.so
+lib:FILEPATH=/opt/ros/kinetic/lib/librosconsole_bridge.so
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/kinetic/share/message_filters/cmake
@@ -725,11 +746,23 @@ message_runtime_DIR:PATH=/opt/ros/kinetic/share/message_runtime/cmake
 //Path to a library.
 onelib:FILEPATH=/usr/lib/x86_64-linux-gnu/libignition-math2.so
 
+//The directory containing a CMake configuration file for pluginlib.
+pluginlib_DIR:PATH=/opt/ros/kinetic/share/pluginlib/cmake
+
+//The directory containing a CMake configuration file for realtime_tools.
+realtime_tools_DIR:PATH=/opt/ros/kinetic/share/realtime_tools/cmake
+
 //Value Computed by CMake
 roboStilt_node_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/roboSilt_node
 
 //Value Computed by CMake
 roboStilt_node_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/roboSilt_node
+
+//Value Computed by CMake
+robostilt_control_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_control
+
+//Value Computed by CMake
+robostilt_control_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_control
 
 //Value Computed by CMake
 robostilt_description_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_description
@@ -756,6 +789,12 @@ robostilt_pkg_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostil
 robostilt_pkg_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_pkg
 
 //Value Computed by CMake
+robostilt_rqt_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_rqt
+
+//Value Computed by CMake
+robostilt_rqt_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_rqt
+
+//Value Computed by CMake
 robostilt_rviz_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt_rviz
 
 //Value Computed by CMake
@@ -767,8 +806,14 @@ robostilt_tf_BINARY_DIR:STATIC=/home/fernandomierhicks/roboStilt/build/robostilt
 //Value Computed by CMake
 robostilt_tf_SOURCE_DIR:STATIC=/home/fernandomierhicks/roboStilt/src/robostilt_tf
 
+//The directory containing a CMake configuration file for robot_state_publisher.
+robot_state_publisher_DIR:PATH=/opt/ros/kinetic/share/robot_state_publisher/cmake
+
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/kinetic/share/rosconsole/cmake
+
+//The directory containing a CMake configuration file for rosconsole_bridge.
+rosconsole_bridge_DIR:PATH=/opt/ros/kinetic/share/rosconsole_bridge/cmake
 
 //The directory containing a CMake configuration file for roscpp.
 roscpp_DIR:PATH=/opt/ros/kinetic/share/roscpp/cmake
@@ -827,6 +872,9 @@ std_srvs_DIR:PATH=/opt/ros/kinetic/share/std_srvs/cmake
 //The directory containing a CMake configuration file for tf2.
 tf2_DIR:PATH=/opt/ros/kinetic/share/tf2/cmake
 
+//The directory containing a CMake configuration file for tf2_kdl.
+tf2_kdl_DIR:PATH=/opt/ros/kinetic/share/tf2_kdl/cmake
+
 //The directory containing a CMake configuration file for tf2_msgs.
 tf2_msgs_DIR:PATH=/opt/ros/kinetic/share/tf2_msgs/cmake
 
@@ -844,6 +892,9 @@ trajectory_msgs_DIR:PATH=/opt/ros/kinetic/share/trajectory_msgs/cmake
 
 //The directory containing a CMake configuration file for turtlesim.
 turtlesim_DIR:PATH=/opt/ros/kinetic/share/turtlesim/cmake
+
+//The directory containing a CMake configuration file for urdf.
+urdf_DIR:PATH=/opt/ros/kinetic/share/urdf/cmake
 
 //The directory containing a CMake configuration file for xmlrpcpp.
 xmlrpcpp_DIR:PATH=/opt/ros/kinetic/share/xmlrpcpp/cmake
@@ -998,7 +1049,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=12
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=14
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

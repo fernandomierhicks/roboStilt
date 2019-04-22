@@ -7,8 +7,19 @@
 
   <!-- load the controllers. Publishes joint state on robostilt/joint_states topic -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/robostilt" args="joint_state_controller"/>
+    output="screen" ns="/robostilt" args="
+    leg_2_position_controller 
+    leg_4_position_controller 
+    leg_6_position_controller 
+    leg_1_position_controller 
+    leg_3_position_controller 
+    leg_5_position_controller 
+    third_frame_revolute_position_controller
+    third_frame_prismatic_position_controller
+    joint_state_controller"/>
 
+<!-- Initializes PID gains for all controllers -->
+<node name="initialize_controllers" pkg="robostilt_control" type="initialize_controllers.py" respawn="false" output="screen"/>
 
  <!-- Listen to robostilt/joint_states topic abd publish transforms to /tf-->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
