@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import rospy
 import dynamic_reconfigure.client
+from std_msgs.msg import Float64
 
 # Since PID gains of controllers are dynamic reconfigure type, we need this script to update all controller gains to whatever is on the param server. 
+
 
 rospy.init_node('initialize_controllers', anonymous=True)
 
@@ -18,6 +20,8 @@ for i in range (1, 6):
     client.update_configuration({"p":leg_p })
     client.update_configuration({"i":leg_i })
     client.update_configuration({"d":leg_d })
+    #set initial setpoints
+
 
 # Third frame
 words= ['revolute','prismatic']
@@ -32,4 +36,8 @@ for i in words:
     client.update_configuration({"i":third_frame_i })
     client.update_configuration({"d":third_frame_d })
 
-rospy.loginfo("Initialized all PID controllers with gains")
+
+
+
+
+rospy.loginfo("Initialized all PID controllers with gains and initial setpoints")

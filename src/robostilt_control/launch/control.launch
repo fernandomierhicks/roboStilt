@@ -18,13 +18,13 @@
     third_frame_prismatic_position_controller
     joint_state_controller"/>
 
-<!-- Initializes PID gains for all controllers -->
-<node name="initialize_controllers" pkg="robostilt_control" type="initialize_controllers.py" respawn="false" output="screen"/>
-
  <!-- Listen to robostilt/joint_states topic abd publish transforms to /tf-->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
     <remap from="/joint_states" to="/robostilt/joint_states" />
   </node>
+
+  <!-- Initializes PID gains for all controllers -->
+<node name="initialize_controllers" pkg="robostilt_control" type="initialize_controllers.py" respawn="false" output="screen"/>
 
 </launch>
