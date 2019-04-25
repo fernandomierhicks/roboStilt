@@ -8,7 +8,7 @@
   <!-- load the controllers. Publishes joint state on robostilt/joint_states topic -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/robostilt" args="
-    leg_2_position_controller 
+    joint_trajectory_controller 
     leg_4_position_controller 
     leg_6_position_controller 
     leg_1_position_controller 
@@ -25,6 +25,7 @@
   </node>
 
   <!-- Initializes PID gains for all controllers -->
+    <!--
 <node name="initialize_controllers" pkg="robostilt_control" type="initialize_controllers.py" respawn="false" output="screen"/>
-
+-->
 </launch>

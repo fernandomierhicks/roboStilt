@@ -16,8 +16,7 @@
         -model robostilt 
         -x 0
         -y 0
-        -z 1
-        -J base_link_to_leg_2 -0.2
+        -z 1        
         -J base_link_to_leg_4 -0.2
         -J base_link_to_leg_6 -0.2
         -J odd_frame_to_leg_1 -0.2

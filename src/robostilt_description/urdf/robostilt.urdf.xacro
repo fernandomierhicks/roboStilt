@@ -10,7 +10,7 @@
   <xacro:property name="limit_leg_lower" value="-0.9" />
   <xacro:property name="limit_leg_upper" value="-0.1" />
   <xacro:property name="limit_leg_velocity" value="0.5" />
-  <xacro:property name="limit_leg_effort" value="2000.0" />
+  <xacro:property name="limit_leg_effort" value="1000.0" />
 
   <xacro:property name="limit_third_frame_prismatic_lower" value="${-1*frame_thickness}" />
   <xacro:property name="limit_third_frame_prismatic_upper" value="${-1*frame_length_x/3.0}" />
