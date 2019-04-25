@@ -41,15 +41,15 @@
                 },
                 "topics": {
                   "type": "repr",
-                  "repr": "[u'/robostilt/leg_2_position_controller/state/process_value', u'/robostilt/leg_2_position_controller/state/set_point', u'/robostilt/leg_2_position_controller/command/data']"
+                  "repr": "[u'/robostilt/leg_2_position_controller/command/data', u'/robostilt/leg_2_position_controller/state/process_value', u'/robostilt/leg_2_position_controller/state/set_point', u'/robostilt/leg_2_position_controller/state/command']"
                 },
                 "y_limits": {
                   "type": "repr",
-                  "repr": "[-1.0, 0.0]"
+                  "repr": "[-18.07876481163595, 0.0]"
                 },
                 "x_limits": {
                   "type": "repr",
-                  "repr": "[29.940000000000005, 39.279]"
+                  "repr": "[15.093, 24.432]"
                 }
               },
               "groups": {}
@@ -80,7 +80,7 @@
               "keys": {
                 "publishers": {
                   "type": "repr",
-                  "repr": "u\"[{'type_name': 'std_msgs/Float64', 'topic_name': '/robostilt/leg_2_position_controller/command', 'enabled': False, 'rate': 50.0, 'expressions': {u'/robostilt/leg_2_position_controller/command/data': 'sin(i/100*5)*-0.1-0.4'}, 'publisher_id': 0, 'counter': 2965}]\""
+                  "repr": "u\"[{'topic_name': '/robostilt/leg_2_position_controller/command', 'type_name': 'std_msgs/Float64', 'enabled': False, 'rate': 50.0, 'expressions': {u'/robostilt/leg_2_position_controller/command/data': 'sin(i/100*5)*-0.1-0.4'}, 'publisher_id': 0, 'counter': 0}]\""
                 }
               },
               "groups": {}

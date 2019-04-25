@@ -20,7 +20,12 @@ for i in range (1, 6):
     client.update_configuration({"p":leg_p })
     client.update_configuration({"i":leg_i })
     client.update_configuration({"d":leg_d })
+
+    
     #set initial setpoints
+
+    # update iclamps
+
 
 
 # Third frame

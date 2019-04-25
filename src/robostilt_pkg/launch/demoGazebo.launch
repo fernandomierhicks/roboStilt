@@ -11,12 +11,12 @@
 
 <!--Load URDF model into parameter server-->
 <include file="$(find robostilt_description)/launch/urdf.launch"/> 
-
 <!-- 
 Publish joint states from gazebo into robostilt/joint_states topic
 
 Listen to robostilt/joint_states topic abd publish transforms to /tf
 -->
+
 <include file="$(find robostilt_control)/launch/control.launch"/> 
 
 <!--Opens rviz and loads config-->
@@ -25,30 +25,10 @@ Listen to robostilt/joint_states topic abd publish transforms to /tf
 
 <!-- Opens gazebo world and spawns robot-->
 <!-- Updates the base to world TF from gazebo->rviz -->
-
-
 <include file="$(find robostilt_gazebo)/launch/gazebo.launch"/>
 
 <!-- PID tuning RQT gui -->
   <node name = "rqt_pid_tuning" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" args = "--perspective-file $(find robostilt_rqt)/config/PID_tuning.perspective"/>
-
-
-<!-- Spawn a robot into Gazebo. Load URDF from parameter server-->
-<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-      respawn="false" output="screen"
-        args=" -urdf  -param robot_description 
-        -model robostilt 
-        -x 0
-        -y 0
-        -z 1
-        -J base_link_to_leg_2 -0.8
-        -J base_link_to_leg_4 -0.8
-        -J base_link_to_leg_6 -0.8
-        -J odd_frame_to_leg_1 -0.8
-        -J odd_frame_to_leg_3 -0.8
-        -J odd_frame_to_leg_5 -0.8
-        -J base_link_to_third_frame -0.5
-        "/>
 
 
 
