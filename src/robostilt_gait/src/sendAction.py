@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 
 import roslib
-import rospy
-import actionlib
+import rospy 
+import actionlib 
 
 
 from control_msgs.msg import FollowJointTrajectoryGoal
@@ -54,9 +54,10 @@ if __name__ == '__main__':
     joint_trajectory_msg.points.append(joint_trajectory_point2)
     joint_trajectory_msg.points.append(joint_trajectory_point3)
 
+
     joint_trajectory_msg.points[0].time_from_start=rospy.Duration(1.0)  #  10 seconds to reach goal
-    joint_trajectory_msg.points[1].time_from_start=rospy.Duration(3.0)  #  10 seconds to reach goal
-    joint_trajectory_msg.points[2].time_from_start=rospy.Duration(6.0)  #  10 seconds to reach goal
+    joint_trajectory_msg.points[1].time_from_start=rospy.Duration(10.0)  #  10 seconds to reach goal
+    joint_trajectory_msg.points[2].time_from_start=rospy.Duration(20.0)  #  10 seconds to reach goal
 
     print 'Created trajectory'
     #  goal
@@ -65,7 +66,7 @@ if __name__ == '__main__':
     print 'Created goal'
     #  client
     
-    client = actionlib.SimpleActionClient('/robostilt/joint_trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+    client = actionlib.SimpleActionClient('/robostilt/leg_2_trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
     print 'Waiting for server...'
     client.wait_for_server()
     print 'Client listening'
