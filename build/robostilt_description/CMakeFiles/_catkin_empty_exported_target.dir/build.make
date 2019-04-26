@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fernandomierhicks/roboStilt/src
+CMAKE_SOURCE_DIR = /home/fernandomierhicks/robostilt/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fernandomierhicks/roboStilt/build
+CMAKE_BINARY_DIR = /home/fernandomierhicks/robostilt/build
 
 # Utility rule file for _catkin_empty_exported_target.
 
@@ -63,10 +63,10 @@ robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/build: _catki
 .PHONY : robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/build
 
 robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/clean:
-	cd /home/fernandomierhicks/roboStilt/build/robostilt_description && $(CMAKE_COMMAND) -P CMakeFiles/_catkin_empty_exported_target.dir/cmake_clean.cmake
+	cd /home/fernandomierhicks/robostilt/build/robostilt_description && $(CMAKE_COMMAND) -P CMakeFiles/_catkin_empty_exported_target.dir/cmake_clean.cmake
 .PHONY : robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/clean
 
 robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/depend:
-	cd /home/fernandomierhicks/roboStilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/src/robostilt_description /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build/robostilt_description /home/fernandomierhicks/roboStilt/build/robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/fernandomierhicks/robostilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/src/robostilt_description /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build/robostilt_description /home/fernandomierhicks/robostilt/build/robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : robostilt_description/CMakeFiles/_catkin_empty_exported_target.dir/depend
 

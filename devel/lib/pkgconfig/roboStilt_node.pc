@@ -1,8 +1,0 @@
-prefix=/home/fernandomierhicks/roboStilt/devel
-
-Name: roboStilt_node
-Description: Description of roboStilt_node
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/fernandomierhicks/roboStilt/devel/lib 
-Requires: 

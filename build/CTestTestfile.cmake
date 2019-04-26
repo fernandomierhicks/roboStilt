@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/fernandomierhicks/roboStilt/src
-# Build directory: /home/fernandomierhicks/roboStilt/build
+# Source directory: /home/fernandomierhicks/robostilt/src
+# Build directory: /home/fernandomierhicks/robostilt/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
@@ -11,6 +11,5 @@ subdirs(robostilt_gazebo)
 subdirs(robostilt_rqt)
 subdirs(robostilt_rviz)
 subdirs(robostilt_tf)
-subdirs(actionlib_tutorials)
 subdirs(robostilt_pkg)
 subdirs(robostilt_control)

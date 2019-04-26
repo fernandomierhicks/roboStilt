@@ -8,5 +8,4 @@
 
 # modified environment variables
 export PATH="/opt/ros/kinetic/bin:/home/fernandomierhicks/bin:/home/fernandomierhicks/.local/bin:/home/fernandomierhicks/bin:/home/fernandomierhicks/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-export PWD="/home/fernandomierhicks/roboStilt/build"
-export PYTHONPATH="/home/fernandomierhicks/roboStilt/devel/lib/python2.7/dist-packages:$PYTHONPATH"
+export PWD="/home/fernandomierhicks/robostilt/build"

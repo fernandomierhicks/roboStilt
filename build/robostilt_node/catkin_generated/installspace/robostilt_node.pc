@@ -1,8 +1,0 @@
-prefix=/home/fernandomierhicks/roboStilt/install
-
-Name: robostilt_node
-Description: Description of robostilt_node
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/fernandomierhicks/roboStilt/install/lib 
-Requires: 

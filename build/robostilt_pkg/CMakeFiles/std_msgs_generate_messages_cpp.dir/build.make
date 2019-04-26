@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fernandomierhicks/roboStilt/src
+CMAKE_SOURCE_DIR = /home/fernandomierhicks/robostilt/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fernandomierhicks/roboStilt/build
+CMAKE_BINARY_DIR = /home/fernandomierhicks/robostilt/build
 
 # Utility rule file for std_msgs_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/build: std_msgs_gene
 .PHONY : robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 
 robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean:
-	cd /home/fernandomierhicks/roboStilt/build/robostilt_pkg && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/fernandomierhicks/robostilt/build/robostilt_pkg && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/clean
 
 robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/depend:
-	cd /home/fernandomierhicks/roboStilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/src/robostilt_pkg /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build/robostilt_pkg /home/fernandomierhicks/roboStilt/build/robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/fernandomierhicks/robostilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/src/robostilt_pkg /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build/robostilt_pkg /home/fernandomierhicks/robostilt/build/robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : robostilt_pkg/CMakeFiles/std_msgs_generate_messages_cpp.dir/depend
 

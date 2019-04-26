@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fernandomierhicks/roboStilt/src
+CMAKE_SOURCE_DIR = /home/fernandomierhicks/robostilt/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fernandomierhicks/roboStilt/build
+CMAKE_BINARY_DIR = /home/fernandomierhicks/robostilt/build
 
 # Utility rule file for clean_test_results.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/fernandomierhicks/roboStilt/build
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /home/fernandomierhicks/roboStilt/build/test_results
+	/usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /home/fernandomierhicks/robostilt/build/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /home/fernandomierhicks/roboStilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/fernandomierhicks/robostilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 

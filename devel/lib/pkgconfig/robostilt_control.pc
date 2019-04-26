@@ -1,8 +1,8 @@
-prefix=/home/fernandomierhicks/roboStilt/devel
+prefix=/home/fernandomierhicks/robostilt/devel
 
 Name: robostilt_control
 Description: Description of robostilt_control
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/fernandomierhicks/roboStilt/devel/lib 
+Libs: -L/home/fernandomierhicks/robostilt/devel/lib 
 Requires: 

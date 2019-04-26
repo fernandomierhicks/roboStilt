@@ -1,8 +1,8 @@
-# Install script for directory: /home/fernandomierhicks/roboStilt/src
+# Install script for directory: /home/fernandomierhicks/robostilt/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/roboStilt/install")
+  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/robostilt/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,88 +44,87 @@ endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/fernandomierhicks/roboStilt/install/_setup_util.py")
+   "/home/fernandomierhicks/robostilt/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/fernandomierhicks/roboStilt/install" TYPE PROGRAM FILES "/home/fernandomierhicks/roboStilt/build/catkin_generated/installspace/_setup_util.py")
+file(INSTALL DESTINATION "/home/fernandomierhicks/robostilt/install" TYPE PROGRAM FILES "/home/fernandomierhicks/robostilt/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/fernandomierhicks/roboStilt/install/env.sh")
+   "/home/fernandomierhicks/robostilt/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/fernandomierhicks/roboStilt/install" TYPE PROGRAM FILES "/home/fernandomierhicks/roboStilt/build/catkin_generated/installspace/env.sh")
+file(INSTALL DESTINATION "/home/fernandomierhicks/robostilt/install" TYPE PROGRAM FILES "/home/fernandomierhicks/robostilt/build/catkin_generated/installspace/env.sh")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/fernandomierhicks/roboStilt/install/setup.bash")
+   "/home/fernandomierhicks/robostilt/install/setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/fernandomierhicks/roboStilt/install" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/build/catkin_generated/installspace/setup.bash")
+file(INSTALL DESTINATION "/home/fernandomierhicks/robostilt/install" TYPE FILE FILES "/home/fernandomierhicks/robostilt/build/catkin_generated/installspace/setup.bash")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/fernandomierhicks/roboStilt/install/setup.sh")
+   "/home/fernandomierhicks/robostilt/install/setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/fernandomierhicks/roboStilt/install" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/build/catkin_generated/installspace/setup.sh")
+file(INSTALL DESTINATION "/home/fernandomierhicks/robostilt/install" TYPE FILE FILES "/home/fernandomierhicks/robostilt/build/catkin_generated/installspace/setup.sh")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/fernandomierhicks/roboStilt/install/setup.zsh")
+   "/home/fernandomierhicks/robostilt/install/setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/fernandomierhicks/roboStilt/install" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/build/catkin_generated/installspace/setup.zsh")
+file(INSTALL DESTINATION "/home/fernandomierhicks/robostilt/install" TYPE FILE FILES "/home/fernandomierhicks/robostilt/build/catkin_generated/installspace/setup.zsh")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/fernandomierhicks/roboStilt/install/.rosinstall")
+   "/home/fernandomierhicks/robostilt/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/fernandomierhicks/roboStilt/install" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/build/catkin_generated/installspace/.rosinstall")
+file(INSTALL DESTINATION "/home/fernandomierhicks/robostilt/install" TYPE FILE FILES "/home/fernandomierhicks/robostilt/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/fernandomierhicks/roboStilt/build/gtest/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_description/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_gait/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_gazebo/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_rqt/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_rviz/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_tf/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/actionlib_tutorials/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_pkg/cmake_install.cmake")
-  include("/home/fernandomierhicks/roboStilt/build/robostilt_control/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/gtest/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_description/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_gait/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_gazebo/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_rqt/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_rviz/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_tf/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_pkg/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_control/cmake_install.cmake")
 
 endif()
 
@@ -137,5 +136,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/fernandomierhicks/roboStilt/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/fernandomierhicks/robostilt/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

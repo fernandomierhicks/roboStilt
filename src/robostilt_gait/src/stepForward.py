@@ -33,46 +33,53 @@ def getErrorInHumanReadableStr(error_code):
     return dictionary.get(error_code, "Invalid error code")
 
 
-def moveLegsDownOnFrame(frame):
+def move_legs_down_on_frame(frame):
 
-    joint_trajectory_point = JointTrajectoryPoint()
-    joint_trajectory_point.positions = [-0.8,-0.8,-0.8]
-    joint_trajectory_msg = JointTrajectory()
-    
+    trajectory = JointTrajectory()
+    point = JointTrajectoryPoint()
+
+    #Final position
+    point.positions = [-0.8,-0.8,-0.8]
+    trajectory.points.append(point)
+
+    #How long to get there
+    trajectory.points[0].time_from_start=rospy.Duration(5.0)
+
+    #which frame to move
     if(frame==FRAME_EVEN):
-        joint_trajectory_msg.joint_names.append("base_link_to_leg_2")
-        joint_trajectory_msg.joint_names.append("base_link_to_leg_4")     
-        joint_trajectory_msg.joint_names.append("base_link_to_leg_6")
-    else if(frame==FRAME_ODD):
-        joint_trajectory_msg.joint_names.append("odd_frame_to_leg_1")
-        joint_trajectory_msg.joint_names.append("odd_frame_to_leg_3")     
-        joint_trajectory_msg.joint_names.append("odd_frame_to_leg_5")
+        trajectory.joint_names.append("base_link_to_leg_2")
+        trajectory.joint_names.append("base_link_to_leg_4")     
+        trajectory.joint_names.append("base_link_to_leg_6")
+    elif(frame==FRAME_ODD):
+        trajectory.joint_names.append("odd_frame_to_leg_1")
+        trajectory.joint_names.append("odd_frame_to_leg_3")     
+        trajectory.joint_names.append("odd_frame_to_leg_5")
     else:
         print 'INVALID FRAME SELECTED'
         return
-
-    joint_trajectory_msg.points.append(joint_trajectory_point)
-    joint_trajectory_msg.points[0].time_from_start=rospy.Duration(10.0)  #  How long to reach that position
-
+    #return
     follow_trajectory_goal = FollowJointTrajectoryGoal()
-    follow_trajectory_goal.trajectory = joint_trajectory_msg
+    follow_trajectory_goal.trajectory = trajectory
 
     return follow_trajectory_goal
 
 if __name__ == '__main__':
-
+    #initialize node
     rospy.init_node('sendActionClient')
     print 'Created node  sendActionClient'
 
-       
+    #initialize action client       
     client = actionlib.SimpleActionClient('/robostilt/trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
     print 'Waiting for server...'
     client.wait_for_server()
     print 'Client listening'
+
     # Send goal
-    goal=moveLegsDownOnFrame(FRAME_EVEN)
+    goal=move_legs_down_on_frame(FRAME_ODD)
     client.send_goal(goal)
     print 'Goal sent'
+
+    #wait for result
     client.wait_for_result()
     result = client.get_result()
     print(getErrorInHumanReadableStr(result.error_code))

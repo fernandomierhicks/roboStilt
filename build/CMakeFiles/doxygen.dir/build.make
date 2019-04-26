@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fernandomierhicks/roboStilt/src
+CMAKE_SOURCE_DIR = /home/fernandomierhicks/robostilt/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fernandomierhicks/roboStilt/build
+CMAKE_BINARY_DIR = /home/fernandomierhicks/robostilt/build
 
 # Utility rule file for doxygen.
 
@@ -67,6 +67,6 @@ CMakeFiles/doxygen.dir/clean:
 .PHONY : CMakeFiles/doxygen.dir/clean
 
 CMakeFiles/doxygen.dir/depend:
-	cd /home/fernandomierhicks/roboStilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/fernandomierhicks/robostilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build/CMakeFiles/doxygen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/doxygen.dir/depend
 

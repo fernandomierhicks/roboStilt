@@ -1,8 +1,8 @@
-# Install script for directory: /home/fernandomierhicks/roboStilt/src/robostilt_rviz
+# Install script for directory: /home/fernandomierhicks/robostilt/src/robostilt_rviz
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/roboStilt/install")
+  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/robostilt/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/build/robostilt_rviz/catkin_generated/installspace/robostilt_rviz.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/fernandomierhicks/robostilt/build/robostilt_rviz/catkin_generated/installspace/robostilt_rviz.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_rviz/cmake" TYPE FILE FILES
-    "/home/fernandomierhicks/roboStilt/build/robostilt_rviz/catkin_generated/installspace/robostilt_rvizConfig.cmake"
-    "/home/fernandomierhicks/roboStilt/build/robostilt_rviz/catkin_generated/installspace/robostilt_rvizConfig-version.cmake"
+    "/home/fernandomierhicks/robostilt/build/robostilt_rviz/catkin_generated/installspace/robostilt_rvizConfig.cmake"
+    "/home/fernandomierhicks/robostilt/build/robostilt_rviz/catkin_generated/installspace/robostilt_rvizConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_rviz" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/src/robostilt_rviz/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_rviz" TYPE FILE FILES "/home/fernandomierhicks/robostilt/src/robostilt_rviz/package.xml")
 endif()
 

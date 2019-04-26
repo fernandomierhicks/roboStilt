@@ -28,7 +28,8 @@ Listen to robostilt/joint_states topic abd publish transforms to /tf
 <include file="$(find robostilt_gazebo)/launch/gazebo.launch"/>
 
 <!-- PID tuning RQT gui -->
- <!-- <node name = "rqt_pid_tuning" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" args = "--perspective-file $(find robostilt_rqt)/config/PID_tuning.perspective"/> -->
+
+  <node name = "rqt_pid_tuning" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" args = "--perspective-file $(find robostilt_rqt)/config/PID_tuning.perspective"/> 
 
 
 

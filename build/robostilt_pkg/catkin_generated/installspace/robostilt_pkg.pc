@@ -1,8 +1,8 @@
-prefix=/home/fernandomierhicks/roboStilt/install
+prefix=/home/fernandomierhicks/robostilt/install
 
 Name: robostilt_pkg
 Description: Description of robostilt_pkg
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/fernandomierhicks/roboStilt/install/lib 
+Libs: -L/home/fernandomierhicks/robostilt/install/lib 
 Requires: 

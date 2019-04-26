@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fernandomierhicks/roboStilt/src
+CMAKE_SOURCE_DIR = /home/fernandomierhicks/robostilt/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fernandomierhicks/roboStilt/build
+CMAKE_BINARY_DIR = /home/fernandomierhicks/robostilt/build
 
 # Utility rule file for download_extra_data.
 
@@ -67,6 +67,6 @@ CMakeFiles/download_extra_data.dir/clean:
 .PHONY : CMakeFiles/download_extra_data.dir/clean
 
 CMakeFiles/download_extra_data.dir/depend:
-	cd /home/fernandomierhicks/roboStilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/src /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build /home/fernandomierhicks/roboStilt/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/fernandomierhicks/robostilt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/src /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build /home/fernandomierhicks/robostilt/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/download_extra_data.dir/depend
 

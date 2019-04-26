@@ -1,8 +1,8 @@
-# Install script for directory: /home/fernandomierhicks/roboStilt/src/robostilt_rqt
+# Install script for directory: /home/fernandomierhicks/robostilt/src/robostilt_rqt
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/roboStilt/install")
+  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/robostilt/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/build/robostilt_rqt/catkin_generated/installspace/robostilt_rqt.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/fernandomierhicks/robostilt/build/robostilt_rqt/catkin_generated/installspace/robostilt_rqt.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_rqt/cmake" TYPE FILE FILES
-    "/home/fernandomierhicks/roboStilt/build/robostilt_rqt/catkin_generated/installspace/robostilt_rqtConfig.cmake"
-    "/home/fernandomierhicks/roboStilt/build/robostilt_rqt/catkin_generated/installspace/robostilt_rqtConfig-version.cmake"
+    "/home/fernandomierhicks/robostilt/build/robostilt_rqt/catkin_generated/installspace/robostilt_rqtConfig.cmake"
+    "/home/fernandomierhicks/robostilt/build/robostilt_rqt/catkin_generated/installspace/robostilt_rqtConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_rqt" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/src/robostilt_rqt/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_rqt" TYPE FILE FILES "/home/fernandomierhicks/robostilt/src/robostilt_rqt/package.xml")
 endif()
 

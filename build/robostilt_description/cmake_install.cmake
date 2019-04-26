@@ -1,8 +1,8 @@
-# Install script for directory: /home/fernandomierhicks/roboStilt/src/robostilt_description
+# Install script for directory: /home/fernandomierhicks/robostilt/src/robostilt_description
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/roboStilt/install")
+  set(CMAKE_INSTALL_PREFIX "/home/fernandomierhicks/robostilt/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/build/robostilt_description/catkin_generated/installspace/robostilt_description.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/fernandomierhicks/robostilt/build/robostilt_description/catkin_generated/installspace/robostilt_description.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_description/cmake" TYPE FILE FILES
-    "/home/fernandomierhicks/roboStilt/build/robostilt_description/catkin_generated/installspace/robostilt_descriptionConfig.cmake"
-    "/home/fernandomierhicks/roboStilt/build/robostilt_description/catkin_generated/installspace/robostilt_descriptionConfig-version.cmake"
+    "/home/fernandomierhicks/robostilt/build/robostilt_description/catkin_generated/installspace/robostilt_descriptionConfig.cmake"
+    "/home/fernandomierhicks/robostilt/build/robostilt_description/catkin_generated/installspace/robostilt_descriptionConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_description" TYPE FILE FILES "/home/fernandomierhicks/roboStilt/src/robostilt_description/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_description" TYPE FILE FILES "/home/fernandomierhicks/robostilt/src/robostilt_description/package.xml")
 endif()
 
