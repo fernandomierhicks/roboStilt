@@ -8,14 +8,7 @@
   <!-- load the controllers. Publishes joint state on robostilt/joint_states topic -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/robostilt" args="
-    leg_2_trajectory_controller 
-    leg_4_position_controller 
-    leg_6_position_controller 
-    leg_1_position_controller 
-    leg_3_position_controller 
-    leg_5_position_controller 
-    third_frame_revolute_position_controller
-    third_frame_prismatic_position_controller
+    trajectory_controller  
     joint_state_controller"/>
 
  <!-- Listen to robostilt/joint_states topic abd publish transforms to /tf-->

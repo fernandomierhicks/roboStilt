@@ -3,79 +3,79 @@ robostilt:
   joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: 50  
-
-
   
-  # Position Controllers ---------------------------------------
-# Loads zero PID constants for safety. PID gets updated on separate call. 
+  # Trajectory Controllers ---------------------------------------
 
-  leg_pid_gains: {p: &leg_p_default 300.0, i: &leg_i_default 300.0, d: &leg_d_default 50.0, i_clamp: &leg_i_clamp_default 100.0}
-  third_frame_revolute_pid_gains: {p: &revolute_p_default 500.0, i: &revolute_i_default 500.0, d: &revolute_d_default 10.0, i_clamp: &revolute_i_clamp_default 100.0}
-  third_frame_prismatic_pid_gains: {p: &prismatic_p_default 500.0, i: &prismatic_i_default 500.0, d: &prismatic_d_default 10.0, i_clamp: &prismatic_i_clamp_default 100.0}
+  # GAINS-------------------------------------------------------
+  leg_pid_gains: {p: &leg_p_default 1000.0, i: &leg_i_default 1000.0, d: &leg_d_default 30.0, i_clamp: &leg_i_clamp_default 100.0}
+  third_frame_revolute_pid_gains: {p: &revolute_p_default 1000.0, i: &revolute_i_default 1000.0, d: &revolute_d_default 30.0, i_clamp: &revolute_i_clamp_default 100.0}
+  third_frame_prismatic_pid_gains: {p: &prismatic_p_default 1000.0, i: &prismatic_i_default 1000.0, d: &prismatic_d_default 30.0, i_clamp: &prismatic_i_clamp_default 100.0}
 
 
-  leg_2_trajectory_controller:
+  trajectory_controller:
     type: "effort_controllers/JointTrajectoryController"
-    joints: 
-      - base_link_to_leg_2
-    gains:
-
-      base_link_to_leg_2: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
-
-    allow_partial_joints_goal: true
-
     constraints:
-       #If the timestamp of the goal trajectory point is t, then following the trajectory succeeds if it reaches the goal within t +/- goal_time, and aborts otherwise.
-       goal_time: &goal_time_constraint 10.0
-
-       # Velocity to be considered approximately equal to zero.
-       stopped_velocity_tolerance: 0.01
-
-       
-       base_link_to_leg_2:
-
-          #Position tolerance for a particular joint to reach the goal. When the joint is within goal_position +/- goal_tolerance, than the trajectory can succeed.
-          goal: &goal_pos_constraint 0.01
-
-          #Position tolerance for a particular joint throughout the trajectory. If the joint position ever falls outside trajectory_position +/- tolerance, then the trajectory aborts.
-          trajectory: &trajectory_pos_constraint 0.2
-
+      #CONSTRAINTS
+      #If the timestamp of the goal trajectory point is t, then following the trajectory succeeds if it reaches the goal within t +/- goal_time, and aborts otherwise.
+      goal_time:  5.0  #time tolerance
+      # Velocity to be considered approximately equal to zero.
+      stopped_velocity_tolerance:  0.01
       # When starting the controller or canceling a trajectory, position hold mode is entered. This parameter specifies the time it takes to bring the current state (position and velocity) to a stop. Its value can be greater or equal than zero.    
-       stop_trajectory_duration: 0.1
+      stop_trajectory_duration: 0.0
+      #Position tolerance for a particular joint to reach the goal. When the joint is within goal_position +/- goal_tolerance, than the trajectory can succeed.
+      goal: &goal_pos_constraint 0.01  #End goal Tolerance
+      #Position tolerance for a particular joint throughout the trajectory. If the joint position ever falls outside trajectory_position +/- tolerance, then the trajectory aborts.
+      trajectory: &trajectory_pos_constraint 0.5  #Tracking fault
 
-  leg_4_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: base_link_to_leg_4
-    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+    allow_partial_joints_goal: true 
 
-  leg_6_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: base_link_to_leg_6
-    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+    #JOINTS--------------------------------------------------------------------------------------------
+    joints: 
+      - base_link_to_third_frame  #prismatic=0
+      - odd_frame_to_leg_1
+      - base_link_to_leg_2
+      - odd_frame_to_leg_3
+      - base_link_to_leg_4
+      - odd_frame_to_leg_5
+      - base_link_to_leg_6
+      - third_frame_to_odd_frame  #revolute=7
+    gains:
+      base_link_to_leg_2: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+      base_link_to_leg_4: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+      base_link_to_leg_6: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
 
-  leg_1_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: odd_frame_to_leg_1
-    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+      odd_frame_to_leg_1: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+      odd_frame_to_leg_3: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+      odd_frame_to_leg_5: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
 
-  leg_3_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: odd_frame_to_leg_3
-    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+      base_link_to_third_frame: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+      third_frame_to_odd_frame: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
 
-  leg_5_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: odd_frame_to_leg_5
-    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+    #TOLERANCES  -------------------------------------------------------------------------      
+    base_link_to_leg_2:
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint
+    base_link_to_leg_4:          
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint
+    base_link_to_leg_6:          
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint
 
-  third_frame_revolute_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: third_frame_to_odd_frame
-    pid: {p: *revolute_p_default, i: *revolute_i_default, d: *revolute_d_default, i_clamp: *revolute_i_clamp_default}
+    odd_frame_to_leg_1:
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint
+    odd_frame_to_leg_3:          
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint
+    odd_frame_to_leg_5:          
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint
 
-  third_frame_prismatic_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: base_link_to_third_frame
-    pid: {p: *prismatic_p_default, i: *prismatic_i_default, d: *prismatic_d_default, i_clamp: *prismatic_i_clamp_default}
-
+    base_link_to_third_frame:
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint
+    third_frame_to_odd_frame:          
+      goal: *goal_pos_constraint
+      trajectory: *trajectory_pos_constraint  
 

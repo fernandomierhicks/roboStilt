@@ -25,11 +25,11 @@
 
 <!-- Friction and dynamics -->
 <xacro:macro name="friction" >
-      <mu1>0.3</mu1>
-      <mu2>0.3</mu2>
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
 </xacro:macro>
-  <xacro:property name="damping" value="0.7" />
-  <xacro:property name="damping_friction" value="0.3" />
+  <xacro:property name="damping" value="1.5" />
+  <xacro:property name="damping_friction" value="1.0" />
 
 
 <!-- MACROS -->

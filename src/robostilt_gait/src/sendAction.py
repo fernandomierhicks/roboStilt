@@ -33,31 +33,33 @@ if __name__ == '__main__':
 
     #  point
     joint_trajectory_point1 = JointTrajectoryPoint()
-    joint_trajectory_point1.positions = [-0.8]
+    joint_trajectory_point1.positions = [-0.8,-0.8,-0.8]
     # if no velocities are specified, the interpolation is linear
     # if  velocities are specified, the interpolation is a cubic spline
     #joint_trajectory_point1.velocities = [1.0]
 
     joint_trajectory_point2 = JointTrajectoryPoint()
-    joint_trajectory_point2.positions = [-0.5]
+    joint_trajectory_point2.positions = [-0.5,-0.5,-0.5]
     #joint_trajectory_point1.velocities = [1.0]
 
     joint_trajectory_point3 = JointTrajectoryPoint()
-    joint_trajectory_point3.positions = [-0.7]
+    joint_trajectory_point3.positions = [-0.7,-0.7, -0.7]
     #joint_trajectory_point3.velocities = [1.0]
     print 'Created points'
 
     #  trajectory
     joint_trajectory_msg = JointTrajectory()
-    joint_trajectory_msg.joint_names.append("base_link_to_leg_2")    
+    joint_trajectory_msg.joint_names.append("base_link_to_leg_2")
+    joint_trajectory_msg.joint_names.append("base_link_to_leg_4")     
+    joint_trajectory_msg.joint_names.append("base_link_to_leg_6")
     joint_trajectory_msg.points.append(joint_trajectory_point1)
     joint_trajectory_msg.points.append(joint_trajectory_point2)
     joint_trajectory_msg.points.append(joint_trajectory_point3)
 
 
-    joint_trajectory_msg.points[0].time_from_start=rospy.Duration(1.0)  #  10 seconds to reach goal
+    joint_trajectory_msg.points[0].time_from_start=rospy.Duration(5.0)  #  10 seconds to reach goal
     joint_trajectory_msg.points[1].time_from_start=rospy.Duration(10.0)  #  10 seconds to reach goal
-    joint_trajectory_msg.points[2].time_from_start=rospy.Duration(20.0)  #  10 seconds to reach goal
+    joint_trajectory_msg.points[2].time_from_start=rospy.Duration(15.0)  #  10 seconds to reach goal
 
     print 'Created trajectory'
     #  goal
@@ -66,7 +68,7 @@ if __name__ == '__main__':
     print 'Created goal'
     #  client
     
-    client = actionlib.SimpleActionClient('/robostilt/leg_2_trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+    client = actionlib.SimpleActionClient('/robostilt/trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
     print 'Waiting for server...'
     client.wait_for_server()
     print 'Client listening'
