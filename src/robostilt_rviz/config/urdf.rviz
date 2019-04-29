@@ -146,7 +146,7 @@ Visualization Manager:
       Show Axes: false
       Show Descriptions: false
       Show Visual Aids: false
-      Update Topic: /simple_marker/update
+      Update Topic: /markers/update
       Value: true
   Enabled: true
   Global Options:
@@ -173,7 +173,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 8.88972378
+      Distance: 8.84169388
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -188,10 +188,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.37039879
+      Pitch: 0.340398788
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz)
-      Yaw: 4.78357983
+      Yaw: 5.34358072
     Saved: ~
 Window Geometry:
   Displays:

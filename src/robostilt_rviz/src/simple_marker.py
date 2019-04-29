@@ -3,14 +3,16 @@ import rospy
 
 from interactive_markers.interactive_marker_server import *
 from visualization_msgs.msg import *
+from std_msgs.msg import Float64
 
 
 
 class myInteractivemarker:
 
     def __init__(self):
-        rospy.init_node("simple_marker")
-        self.server = InteractiveMarkerServer("simple_marker") 
+        rospy.init_node("markers")
+        self.publisher=rospy.Publisher("/robostilt/markers/leg_2", Float64, queue_size=10)
+        self.server = InteractiveMarkerServer("markers") 
         # create an interactive marker for our server
         int_marker = InteractiveMarker()
         int_marker.header.frame_id = "leg_2" 
@@ -20,7 +22,7 @@ class myInteractivemarker:
         # this control does not contain any markers,
         # which will cause RViz to insert two arrows
         control = InteractiveMarkerControl()
-        control.name = "move_x"
+        control.name = "move_leg_2"
         control.orientation.w = 1
         control.orientation.x = 0
         control.orientation.y = 1
@@ -38,15 +40,17 @@ class myInteractivemarker:
     def processFeedback(self, feedback):
 
         p = feedback.pose.position
-        print feedback.marker_name + " is now at " + str(p.x) + ", " + str(p.y) + ", " + str(p.z)    
+        print feedback.marker_name + " is now at " + str(p.x) + ", " + str(p.y) + ", " + str(p.z)            
+        #publish to topic
+        self.publisher.publish(feedback.pose.position.z)
 
-         # Make it return to its original position.
+        #Make marker return to its original position.
         if feedback.pose.position.z != 0:
              feedback.pose.position.z = 0.5    #leg lenght /2.0
         # Apply changes to the marker.
         self.server.setPose(feedback.marker_name, feedback.pose)
         self.server.applyChanges()   
-        # create an interactive marker server on the topic namespace simple_marker
+        
 
 
 if __name__=="__main__":    
