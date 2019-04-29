@@ -7,18 +7,18 @@
   <xacro:property name="frame_thickness" value="0.09" />
 
 
-  <xacro:property name="limit_leg_lower" value="-0.9" />
-  <xacro:property name="limit_leg_upper" value="-0.1" />
-  <xacro:property name="limit_leg_velocity" value="0.5" />
+  <xacro:property name="limit_leg_lower" value="-1.0" />
+  <xacro:property name="limit_leg_upper" value="0.0" />
+  <xacro:property name="limit_leg_velocity" value="1.0" />
   <xacro:property name="limit_leg_effort" value="1000.0" />
 
-  <xacro:property name="limit_third_frame_prismatic_lower" value="${-1*frame_thickness}" />
-  <xacro:property name="limit_third_frame_prismatic_upper" value="${-1*frame_length_x/3.0}" />
-  <xacro:property name="limit_third_frame_prismatic_velocity" value="0.5" />
-  <xacro:property name="limit_third_frame_prismatic_effort" value="1000.0" />
+  <xacro:property name="limit_third_frame_prismatic_lower" value="-0.6" />
+  <xacro:property name="limit_third_frame_prismatic_upper" value="-0.2" />
+  <xacro:property name="limit_third_frame_prismatic_velocity" value="1.0" />
+  <xacro:property name="limit_third_frame_prismatic_effort" value="10000.0" />
 
-  <xacro:property name="limit_third_frame_revolute_lower" value="-0.5" />
-  <xacro:property name="limit_third_frame_revolute_upper" value="0.5" />
+  <xacro:property name="limit_third_frame_revolute_lower" value="-0.3" />
+  <xacro:property name="limit_third_frame_revolute_upper" value="0.3" />
   <xacro:property name="limit_third_frame_revolute_velocity" value="0.5" />
   <xacro:property name="limit_third_frame_revolute_effort" value="1000.0" />
 
@@ -164,8 +164,8 @@
         </geometry>
       </collision>
       <inertial>
-        <mass value="1.0" />
-        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001" />
+        <mass value="0.1" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
       </inertial>
   </link>
   <gazebo reference="third_frame">

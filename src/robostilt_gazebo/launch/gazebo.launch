@@ -13,10 +13,18 @@
 <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
         args=" -urdf  -param robot_description 
-        -model robostilt 
+        -model robostilt
         -x 0
         -y 0
         -z 1         
+        -J base_link_to_leg_2 -0.2
+        -J base_link_to_leg_4 -0.2
+        -J base_link_to_leg_6 -0.2
+        -J odd_frame_to_leg_1 -0.2
+        -J odd_frame_to_leg_3 -0.2
+        -J odd_frame_to_leg_5 -0.2
+        -J base_link_to_third_frame -0.6
+        -J third_frame_to_odd_frame 0.0
         "/>
 
 

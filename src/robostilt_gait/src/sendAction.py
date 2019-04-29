@@ -43,7 +43,7 @@ if __name__ == '__main__':
     #joint_trajectory_point1.velocities = [1.0]
 
     joint_trajectory_point3 = JointTrajectoryPoint()
-    joint_trajectory_point3.positions = [-0.7,-0.7, -0.7]
+    joint_trajectory_point3.positions = [-5.7,-5.7, -5.7]
     #joint_trajectory_point3.velocities = [1.0]
     print 'Created points'
 
@@ -58,8 +58,8 @@ if __name__ == '__main__':
 
 
     joint_trajectory_msg.points[0].time_from_start=rospy.Duration(5.0)  #  10 seconds to reach goal
-    joint_trajectory_msg.points[1].time_from_start=rospy.Duration(10.0)  #  10 seconds to reach goal
-    joint_trajectory_msg.points[2].time_from_start=rospy.Duration(15.0)  #  10 seconds to reach goal
+    joint_trajectory_msg.points[1].time_from_start=rospy.Duration(15.0)  #  10 seconds to reach goal
+    joint_trajectory_msg.points[2].time_from_start=rospy.Duration(25.0)  #  10 seconds to reach goal
 
     print 'Created trajectory'
     #  goal
