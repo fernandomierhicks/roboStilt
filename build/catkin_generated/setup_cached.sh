@@ -7,10 +7,9 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/fernandomierhicks/robostilt/devel:/opt/ros/kinetic"
-export LD_LIBRARY_PATH="/home/fernandomierhicks/robostilt/devel/lib:/opt/ros/kinetic/lib:/opt/ros/kinetic/lib/x86_64-linux-gnu"
-export PKG_CONFIG_PATH="/home/fernandomierhicks/robostilt/devel/lib/pkgconfig:/opt/ros/kinetic/lib/pkgconfig:/opt/ros/kinetic/lib/x86_64-linux-gnu/pkgconfig"
+export CMAKE_PREFIX_PATH="/home/fernandomierhicks/robostilt/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/fernandomierhicks/robostilt/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/fernandomierhicks/robostilt/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/fernandomierhicks/robostilt/build"
-export PYTHONPATH="/opt/ros/kinetic/lib/python2.7/dist-packages"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/fernandomierhicks/robostilt/devel/share/common-lisp"
-export ROS_PACKAGE_PATH="/home/fernandomierhicks/robostilt/src:/opt/ros/kinetic/share"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/fernandomierhicks/robostilt/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/fernandomierhicks/robostilt/src:$ROS_PACKAGE_PATH"
