@@ -21,13 +21,13 @@ robostilt:
       #If the timestamp of the goal trajectory point is t, then following the trajectory succeeds if it reaches the goal within t +/- goal_time, and aborts otherwise.
       goal_time:  1.0  #time tolerance
       # Velocity to be considered approximately equal to zero.
-      stopped_velocity_tolerance: 1.0
+      stopped_velocity_tolerance: 0.5
       # When starting the controller or canceling a trajectory, position hold mode is entered. This parameter specifies the time it takes to bring the current state (position and velocity) to a stop. Its value can be greater or equal than zero.    
-      stop_trajectory_duration: 0.1
+      stop_trajectory_duration: 0.0
       #Position tolerance for a particular joint to reach the goal. When the joint is within goal_position +/- goal_tolerance, than the trajectory can succeed.
-      goal: &goal_pos_constraint 1.0  #End goal Tolerance
+      goal: &goal_pos_constraint 0.5  #End goal Tolerance
       #Position tolerance for a particular joint throughout the trajectory. If the joint position ever falls outside trajectory_position +/- tolerance, then the trajectory aborts.
-      trajectory: &trajectory_pos_constraint 1.0  #Tracking fault
+      trajectory: &trajectory_pos_constraint 0.5  #Tracking fault
 
     allow_partial_joints_goal: true 
 
