@@ -6,13 +6,18 @@
 <!-- PARAMETERS -->
 
 <!--Loads parameters stores in YAML into the parameter server-->
-<rosparam command="load" file="$(find robostilt_description)/launch/example.yaml" />
-<node name="init_robot" pkg="robostilt_description" type="init_robot.py" respawn="false" output="screen"/>
+
+
 
 <!-- Load URDF file to parameter server -->
+  <arg name="leg_lenght" value="2.0" />
+
+ <param name="robot_description"
+  command="xacro --inorder '$(find robostilt_description)/urdf/robostilt.urdf.xacro' leg_lenght:=$(arg leg_lenght) " />
 
 
-
+  <!-- read value of arg -->
+  <param name="ReadFromArgumnet" value="$(arg leg_lenght)"/>
 
 <!-- Launch files -->
 
@@ -30,4 +35,3 @@
 
 
 </launch>
-

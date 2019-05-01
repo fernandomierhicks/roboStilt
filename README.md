@@ -24,6 +24,9 @@ This release has the following features
   * Loads **robot_state_publisher** to update TFs from joint position information
 * `robostilt_rviz/launch/rviz.launch`
   * Loads rviz with known config
+  * Launches simple_marker.py node
+    * Creates an interactive maker server
+    * The node takes in the data from the joint state topic uses it with the interactive marker location and publishes a new set point fort he joint so it moves in a intuitive fashion. 
 * `robostilt_gazebo/launch/gazebo.launch`
   * Launches gazebo with empty world
   * Spawns robot into gazebo with known joint positions and pose
