@@ -9,14 +9,14 @@
 <!-- Launch files -->
 
 
-<!--Load URDF model into parameter server-->
-<include file="$(find robostilt_description)/launch/urdf.launch"/> 
+<!--Load parameters and URDF model into parameter server-->
+<include file="$(find robostilt_description)/launch/init_robot.launch"/> 
+
 <!-- 
 Publish joint states from gazebo into robostilt/joint_states topic
 
 Listen to robostilt/joint_states topic abd publish transforms to /tf
 -->
-
 <include file="$(find robostilt_control)/launch/control.launch"/> 
 
 <!--Opens rviz and loads config-->

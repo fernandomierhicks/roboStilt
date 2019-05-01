@@ -1,0 +1,61 @@
+<launch>
+
+<!-- ARGUMENTS -->
+  <!--Dimensions-->
+  <arg name="leg_length"      value="2.0" />
+  <arg name="frame_length_x"  value="1.5" />
+  <arg name="frame_length_y"  value="1.0" />
+  <arg name="frame_thickness" value="0.09" />
+
+  <!--Limits-->
+  <arg name="limit_leg_lower"     value="-1.0" />
+  <arg name="limit_leg_upper"     value="0.0" />
+  <arg name="limit_leg_velocity"  value="1.0" />
+  <arg name="limit_leg_effort"  value="1000.0" />
+
+  <arg name="limit_third_frame_prismatic_lower"     value="-0.6" />
+  <arg name="limit_third_frame_prismatic_upper"     value="-0.2" />
+  <arg name="limit_third_frame_prismatic_velocity"    value="1.0" />
+  <arg name="limit_third_frame_prismatic_effort"    value="1000.0" />
+
+  <arg name="limit_third_frame_revolute_lower"    value="-0.3" />
+  <arg name="limit_third_frame_revolute_upper"    value="0.3" />
+  <arg name="limit_third_frame_revolute_velocity" value="0.5" />
+  <arg name="limit_third_frame_revolute_effort"   value="1000.0" />
+
+<!-- SAVE ARGUMENTS AS PARAMETERS. Only nessesary for some of them -->
+<param name="leg_length"        value="$(arg leg_length)"/>
+<param name="frame_length_x"    value="$(arg frame_length_x)"/>
+<param name="frame_length_y"    value="$(arg frame_length_y)"/>
+<param name="frame_thickness"   value="$(arg frame_thickness)"/>
+
+<!--Loads parameters stored in YAML into the parameter server-->
+<rosparam command="load" file="$(find robostilt_description)/config/parameters.yaml" />
+
+<!--Loads URDF model into parameter server using arguments above-->
+ <param name="robot_description"
+  command="xacro --inorder '$(find robostilt_description)/urdf/robostilt.urdf.xacro' 
+  leg_length:=$(arg leg_length)
+  frame_length_x:=$(arg frame_length_x)
+  frame_length_y:=$(arg frame_length_y)
+  frame_thickness:=$(arg frame_thickness)
+
+  limit_leg_lower:=$(arg limit_leg_lower)
+  limit_leg_upper:=$(arg limit_leg_upper)
+  limit_leg_velocity:=$(arg limit_leg_velocity)
+  limit_leg_effort:=$(arg limit_leg_effort)
+
+  limit_third_frame_prismatic_lower:=$(arg limit_third_frame_prismatic_lower)
+  limit_third_frame_prismatic_upper:=$(arg limit_third_frame_prismatic_upper)
+  limit_third_frame_prismatic_velocity:=$(arg limit_third_frame_prismatic_velocity)
+  limit_third_frame_prismatic_effort:=$(arg limit_third_frame_prismatic_effort)
+
+  limit_third_frame_revolute_lower:=$(arg limit_third_frame_revolute_lower)
+  limit_third_frame_revolute_upper:=$(arg limit_third_frame_revolute_upper)
+  limit_third_frame_revolute_velocity:=$(arg limit_third_frame_revolute_velocity)
+  limit_third_frame_revolute_effort:=$(arg limit_third_frame_revolute_effort)
+  "/>
+
+
+</launch>
+

@@ -3,26 +3,26 @@
 <!-- PROPERTIES -->
 
 
-  <xacro:property name="leg_length" value="1.0" />
-  <xacro:property name="frame_length_x" value="1.5" />
-  <xacro:property name="frame_length_y" value="1.0" />
-  <xacro:property name="frame_thickness" value="0.09" />
+  <xacro:property name="leg_length" value="$(arg leg_length)" />
+  <xacro:property name="frame_length_x" value="$(arg frame_length_x)" />
+  <xacro:property name="frame_length_y" value="$(arg frame_length_y)" />
+  <xacro:property name="frame_thickness" value="$(arg frame_thickness)" />
 
 
-  <xacro:property name="limit_leg_lower" value="-1.0" />
-  <xacro:property name="limit_leg_upper" value="0.0" />
-  <xacro:property name="limit_leg_velocity" value="1.0" />
-  <xacro:property name="limit_leg_effort" value="1000.0" />
+  <xacro:property name="limit_leg_lower" value="$(arg limit_leg_lower)" />
+  <xacro:property name="limit_leg_upper" value="$(arg limit_leg_upper)" />
+  <xacro:property name="limit_leg_velocity" value="$(arg limit_leg_velocity)" />
+  <xacro:property name="limit_leg_effort" value="$(arg limit_leg_effort)" />
 
-  <xacro:property name="limit_third_frame_prismatic_lower" value="-0.6" />
-  <xacro:property name="limit_third_frame_prismatic_upper" value="-0.2" />
-  <xacro:property name="limit_third_frame_prismatic_velocity" value="1.0" />
-  <xacro:property name="limit_third_frame_prismatic_effort" value="10000.0" />
+  <xacro:property name="limit_third_frame_prismatic_lower" value="$(arg limit_third_frame_prismatic_lower)" />
+  <xacro:property name="limit_third_frame_prismatic_upper" value="$(arg limit_third_frame_prismatic_upper)" />
+  <xacro:property name="limit_third_frame_prismatic_velocity" value="$(arg limit_third_frame_prismatic_velocity)" />
+  <xacro:property name="limit_third_frame_prismatic_effort" value="$(arg limit_third_frame_prismatic_effort)" />
 
-  <xacro:property name="limit_third_frame_revolute_lower" value="-0.3" />
-  <xacro:property name="limit_third_frame_revolute_upper" value="0.3" />
-  <xacro:property name="limit_third_frame_revolute_velocity" value="0.5" />
-  <xacro:property name="limit_third_frame_revolute_effort" value="1000.0" />
+  <xacro:property name="limit_third_frame_revolute_lower" value="$(arg limit_third_frame_revolute_lower)" />
+  <xacro:property name="limit_third_frame_revolute_upper" value="$(arg limit_third_frame_revolute_upper)" />
+  <xacro:property name="limit_third_frame_revolute_velocity" value="$(arg limit_third_frame_revolute_velocity)" />
+  <xacro:property name="limit_third_frame_revolute_effort" value="$(arg limit_third_frame_revolute_effort)" />
 
 
 <!-- Friction and dynamics -->
