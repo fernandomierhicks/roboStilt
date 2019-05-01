@@ -2,7 +2,7 @@
 
 <!-- ARGUMENTS -->
   <!--Dimensions-->
-  <arg name="leg_length"      value="2.0" />
+  <arg name="leg_length"      value="1.0" />
   <arg name="frame_length_x"  value="1.5" />
   <arg name="frame_length_y"  value="1.0" />
   <arg name="frame_thickness" value="0.09" />

@@ -15,8 +15,10 @@ This release has the following features
 
 # ROS Flow
 
-* `robostilt_description/launch/urdf.launch`
-  * Loads URDF model of robot into param server. 
+* `robostilt_description/launch/init_robot.launch`
+  * Sets common arguments and saves some of them on the parameter serve
+  * Loads URDF model of robot into param server using the previous arguments.
+    * Single spot for robot dimension, accessible to URDF and parameter server 
 * `robostilt_control/launch/controllaunch`
   * Loads joint controller configuration from `robostilt_control/config/control.yaml`
   * Loads controllers into controller spawner including the gazebo **joint_state_publisher**

@@ -60,8 +60,8 @@
         <collision><!-- Y beam -->
         <geometry>
             <box size="${frame_thickness} ${frame_length_y-frame_thickness*1.1} ${frame_thickness}"/>
-          </geometry>
-          <origin rpy="0 0 0" xyz="${frame_length_x/2.0} 0 0"/>        
+        </geometry>
+          <origin rpy="0 0 0" xyz="${-1*reflect*frame_length_x/2.0} 0 0"/>           
         </collision>
 
         <inertial>
@@ -91,8 +91,9 @@
 
         <collision>
           <geometry>
-            <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>
+            <cylinder length="${leg_length}" radius="${frame_thickness/2.0}"/>            
           </geometry>
+          <origin rpy="0 0 0" xyz="0.0 0.0 ${leg_length/2.0}"/>
         </collision>
 
         <inertial>
@@ -164,6 +165,7 @@
         <geometry>
           <cylinder length="${frame_thickness}" radius="${frame_thickness/2.0}"/>
         </geometry>
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
       </collision>
       <inertial>
         <mass value="0.1" />

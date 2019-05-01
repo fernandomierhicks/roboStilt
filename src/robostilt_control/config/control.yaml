@@ -53,6 +53,21 @@ robostilt:
       base_link_to_third_frame: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
       third_frame_to_odd_frame: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
 
+    gazebo_ros_control:
+      pid_gains:
+        base_link_to_third_frame: {p: 100.0, i: 0.01, d: 10.0}
+        odd_frame_to_leg_1: {p: 100.0, i: 0.01, d: 10.0}
+        base_link_to_leg_2: {p: 100.0, i: 0.01, d: 10.0}
+        odd_frame_to_leg_3: {p: 100.0, i: 0.01, d: 10.0}
+        base_link_to_leg_4: {p: 100.0, i: 0.01, d: 10.0}
+        odd_frame_to_leg_5: {p: 100.0, i: 0.01, d: 10.0}
+        base_link_to_leg_6: {p: 100.0, i: 0.01, d: 10.0}
+        third_frame_to_odd_frame: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+
+
     #TOLERANCES  -------------------------------------------------------------------------      
     base_link_to_leg_2:
       goal: *goal_pos_constraint
