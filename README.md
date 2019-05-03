@@ -20,9 +20,11 @@ This release has the following features
   * Loads URDF model of robot into param server using the previous arguments.
     * Single spot for robot dimension, accessible to URDF and parameter server 
 * `robostilt_control/launch/controllaunch`
-  * Loads joint controller configuration from `robostilt_control/config/control.yaml`
+  * Loads controller configuration from `robostilt_control/config/control.yaml`
   * Loads controllers into controller spawner including the gazebo **joint_state_publisher**
   * OPTIONAL Run python script that updates the dynamic reconfigurable parameters to each controller.  `initialize_controllers.py`
+  * ***in Gazebo the ouptut of the controller, the manipulation variable, limits are not visible on the respective topics. But they are  really applied. The controller might send XXX in /state/command and gazebo clamps it to what is on the URDF.*** 
+  * These limits are really enfored on a real robot on the write() read()function
   * Loads **robot_state_publisher** to update TFs from joint position information
 * `robostilt_rviz/launch/rviz.launch`
   * Loads rviz with known config

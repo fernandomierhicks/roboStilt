@@ -8,15 +8,18 @@
   <arg name="frame_thickness" value="0.09" />
 
   <!--Limits-->
+
+<!--Effort limits the physical effort on the joint. ROS_control is not part of this. This is comparable to slip or some other mechanical limit on torque, current.  -->
+
   <arg name="limit_leg_lower"     value="-1.0" />
   <arg name="limit_leg_upper"     value="0.0" />
   <arg name="limit_leg_velocity"  value="1.0" />
-  <arg name="limit_leg_effort"  value="1000.0" />
+  <arg name="limit_leg_effort"  value="10.0" />
 
   <arg name="limit_third_frame_prismatic_lower"     value="-0.6" />
   <arg name="limit_third_frame_prismatic_upper"     value="-0.2" />
   <arg name="limit_third_frame_prismatic_velocity"    value="1.0" />
-  <arg name="limit_third_frame_prismatic_effort"    value="1000.0" />
+  <arg name="limit_third_frame_prismatic_effort"    value="1000.0" />   
 
   <arg name="limit_third_frame_revolute_lower"    value="-0.3" />
   <arg name="limit_third_frame_revolute_upper"    value="0.3" />
