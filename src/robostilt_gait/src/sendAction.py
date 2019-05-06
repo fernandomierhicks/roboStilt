@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+# This node sends a single trajectory
+
 import roslib
 import rospy 
 import actionlib 
@@ -39,12 +41,9 @@ if __name__ == '__main__':
     #joint_trajectory_point1.velocities = [1.0]
 
     joint_trajectory_point2 = JointTrajectoryPoint()
-    joint_trajectory_point2.positions = [-0.5,-0.5,-0.5]
+    joint_trajectory_point2.positions = [-0.2,-0.2,-0.2]
     #joint_trajectory_point1.velocities = [1.0]
 
-    joint_trajectory_point3 = JointTrajectoryPoint()
-    joint_trajectory_point3.positions = [-5.7,-5.7, -5.7]
-    #joint_trajectory_point3.velocities = [1.0]
     print 'Created points'
 
     #  trajectory
@@ -54,12 +53,13 @@ if __name__ == '__main__':
     joint_trajectory_msg.joint_names.append("base_link_to_leg_6")
     joint_trajectory_msg.points.append(joint_trajectory_point1)
     joint_trajectory_msg.points.append(joint_trajectory_point2)
-    joint_trajectory_msg.points.append(joint_trajectory_point3)
 
+    speed=0.2
+    delta_pos=0.6
+    time=delta_pos/speed
 
-    joint_trajectory_msg.points[0].time_from_start=rospy.Duration(5.0)  #  10 seconds to reach goal
-    joint_trajectory_msg.points[1].time_from_start=rospy.Duration(15.0)  #  10 seconds to reach goal
-    joint_trajectory_msg.points[2].time_from_start=rospy.Duration(25.0)  #  10 seconds to reach goal
+    joint_trajectory_msg.points[0].time_from_start=rospy.Duration(time)  
+    joint_trajectory_msg.points[1].time_from_start=rospy.Duration(time*2)  
 
     print 'Created trajectory'
     #  goal

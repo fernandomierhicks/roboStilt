@@ -1,8 +1,11 @@
 #! /usr/bin/env python
 
+# This node updates the setpoint of the trajectory conbtroller to do one full forward sequence. 
+
 import roslib
 import rospy 
 import actionlib 
+import time
 
 
 from control_msgs.msg import FollowJointTrajectoryGoal
@@ -19,6 +22,7 @@ FRAME_ODD=1
 FRAME_EVEN=2
 FRAME_THIRD_REVOLUTE=3
 
+SPEED=0.4
 
 # HELPER FUNCTIONS
 def double_print(message):
@@ -64,7 +68,7 @@ def set_initial_position():
     follow_trajectory_goal.trajectory = trajectory
     return follow_trajectory_goal
 
-def move_third_frame(position,rotation):
+def move_third_frame(position,rotation, position_delta):
 
     trajectory = JointTrajectory()
     point = JointTrajectoryPoint()
@@ -74,7 +78,7 @@ def move_third_frame(position,rotation):
     trajectory.points.append(point)
 
     #How long to get there
-    trajectory.points[0].time_from_start=rospy.Duration(2.0)
+    trajectory.points[0].time_from_start=rospy.Duration(position_delta/SPEED)
 
     #which frame to move
     trajectory.joint_names.append("base_link_to_third_frame")
@@ -85,7 +89,7 @@ def move_third_frame(position,rotation):
     follow_trajectory_goal.trajectory = trajectory
     return follow_trajectory_goal
 
-def move_legs_on_frame(frame, position):
+def move_legs_on_frame(frame, position, position_delta):
 
     trajectory = JointTrajectory()
     point = JointTrajectoryPoint()
@@ -95,7 +99,7 @@ def move_legs_on_frame(frame, position):
     trajectory.points.append(point)
 
     #How long to get there
-    trajectory.points[0].time_from_start=rospy.Duration(2.0)
+    trajectory.points[0].time_from_start=rospy.Duration(position_delta/SPEED)
 
     #which frame to move
     if(frame==FRAME_EVEN):
@@ -151,36 +155,39 @@ if __name__ == '__main__':
 
     # Set controller in initial position
     send_goal_and_wait(set_initial_position(),"*Initializing positions...")
-    
-    
+    delay=0.1
+
+    #Move EVEN down
+    send_goal_and_wait(move_legs_on_frame(FRAME_EVEN,-0.55,0.35),"*Moving EVEN frame DOWN...")        
+    time.sleep(delay)
+
+    raw_input("Press Enter to continue...")
 
     while(1==1):
-        #Move EVEN down
-        send_goal_and_wait(move_legs_on_frame(FRAME_EVEN,-0.6),"*Moving EVEN frame DOWN...")
-        
+
 
         #Move PRISMATIC forward
-        send_goal_and_wait(move_third_frame(-0.2,0.0),"*Moving FORWARD...")
-        
+        send_goal_and_wait(move_third_frame(-0.2,0.0,0.4),"*Moving FORWARD...")
+        time.sleep(delay)
 
         #Move ODD down
-        send_goal_and_wait(move_legs_on_frame(FRAME_ODD,-0.8),"*Moving ODD frame DOWN...")
-        
+        send_goal_and_wait(move_legs_on_frame(FRAME_ODD,-0.8,0.6),"*Moving ODD frame DOWN...")        
+        time.sleep(delay)
 
         #Move EVEN up
-        send_goal_and_wait(move_legs_on_frame(FRAME_EVEN,-0.2),"*Moving EVEN frame UP...")
-        
+        send_goal_and_wait(move_legs_on_frame(FRAME_EVEN,-0.2,0.4),"*Moving EVEN frame UP...")
+        time.sleep(delay)
 
         #Move PRISMATIC forward
-        send_goal_and_wait(move_third_frame(-0.6,0.0),"*Moving BACKWARD...")
-        
+        send_goal_and_wait(move_third_frame(-0.6,0.0,0.4),"*Moving BACKWARD...")
+        time.sleep(delay)
 
         #Move EVEN down
-        send_goal_and_wait(move_legs_on_frame(FRAME_EVEN,-0.6),"*Moving EVEN frame DOWN...")
-        
+        send_goal_and_wait(move_legs_on_frame(FRAME_EVEN,-0.55,0.35),"*Moving EVEN frame DOWN...")        
+        time.sleep(delay)
 
         #Move EVEN up
-        send_goal_and_wait(move_legs_on_frame(FRAME_ODD,-0.2),"*Moving ODD frame UP...")
+        send_goal_and_wait(move_legs_on_frame(FRAME_ODD,-0.2, 0.4 ),"*Moving ODD frame UP...")
+        time.sleep(delay)
 
-        raw_input("Press ENTER to continue...")
 

@@ -3,19 +3,17 @@ robostilt:
   joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: &publish_rate 50  
-  
-
 
   # GAINS-------------------------------------------------------
-  leg_pid_gains: {p: &leg_p_default 1000.0, i: &leg_i_default 1000.0, d: &leg_d_default 30.0, i_clamp: &leg_i_clamp_default 100.0}
-  third_frame_revolute_pid_gains: {p: &revolute_p_default 1000.0, i: &revolute_i_default 1000.0, d: &revolute_d_default 30.0, i_clamp: &revolute_i_clamp_default 100.0}
-  third_frame_prismatic_pid_gains: {p: &prismatic_p_default 1000.0, i: &prismatic_i_default 1000.0, d: &prismatic_d_default 30.0, i_clamp: &prismatic_i_clamp_default 100.0}
+  # i_clamp should be close to the maximum effort possible by the joint, to avoid windup.
+  leg_pid_gains: {p: &leg_p_default 1000.0, i: &leg_i_default 15.0, d: &leg_d_default 50.0, i_clamp: &leg_i_clamp_default 50.0}
+  third_frame_revolute_pid_gains: {p: &revolute_p_default 1000.0, i: &revolute_i_default 15.0, d: &revolute_d_default 50.0, i_clamp: &revolute_i_clamp_default 50.0}
+  third_frame_prismatic_pid_gains: {p: &prismatic_p_default 1000.0, i: &prismatic_i_default 15.0, d: &prismatic_d_default 50.0, i_clamp: &prismatic_i_clamp_default 50.0}
 
 # Position Controller ---------------------------------------
-  # Position with velocity limits, no further trajectorization
+  # 1DOF Position. Velocity limit in Gazebo or on joint_limits_interface. No further trajectorization
   leg_2_position_controller:
-        # Manipulation does not get visible clamped on the topic /state/command, but gazebo does clamp it. 
-        
+        # Manipulation does not get visible clamped on the topic /state/command, but gazebo does clamp it.         
         #     Manipulation type   Controlled variable
         type: effort_controllers/JointPositionController
       # type: effort_controllers/JointVelocityController
@@ -26,7 +24,44 @@ robostilt:
           i: *leg_i_default
           d: *leg_d_default
           i_clamp: *leg_i_clamp_default
-  # Trajectory Controller. ---------------------------------------------------------------------------------
+
+
+  leg_4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_link_to_leg_4
+    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+
+  leg_6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_link_to_leg_6
+    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+
+  leg_1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: odd_frame_to_leg_1
+    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+
+  leg_3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: odd_frame_to_leg_3
+    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+
+  leg_5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: odd_frame_to_leg_5
+    pid: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default}
+
+  third_frame_revolute_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: third_frame_to_odd_frame
+    pid: {p: *revolute_p_default, i: *revolute_i_default, d: *revolute_d_default, i_clamp: *revolute_i_clamp_default}
+
+  third_frame_prismatic_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_link_to_third_frame
+    pid: {p: *prismatic_p_default, i: *prismatic_i_default, d: *prismatic_d_default, i_clamp: *prismatic_i_clamp_default}
+
+  # TRAJECTORY CONTROLLER---------------------------------------------------------------------------------
   # Fully trajectorized position over time, multiple joints and multiple positoins over time
   trajectory_controller:
 #       Manipulation type      Controlled variable
@@ -80,11 +115,6 @@ robostilt:
         odd_frame_to_leg_5: {p: 100.0, i: 0.01, d: 10.0}
         base_link_to_leg_6: {p: 100.0, i: 0.01, d: 10.0}
         third_frame_to_odd_frame: {p: 100.0, i: 0.01, d: 10.0}
-
-
-
-
-
     #TOLERANCES  -------------------------------------------------------------------------      
     base_link_to_leg_2:
       goal: *goal_pos_constraint

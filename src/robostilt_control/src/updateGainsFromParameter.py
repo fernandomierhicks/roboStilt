@@ -6,7 +6,7 @@ from std_msgs.msg import Float64
 # Since PID gains of controllers are dynamic reconfigure type, we need this script to update all controller gains to whatever is on the param server. 
 
 
-rospy.init_node('initialize_controllers', anonymous=True)
+rospy.init_node('update_gains', anonymous=True)
 
 
 ##LEGS

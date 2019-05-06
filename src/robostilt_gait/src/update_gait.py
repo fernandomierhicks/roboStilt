@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# This node updates the joint setpoint to implement a gait
+# This node updates the joint setpoint to implement a gait using a position_controller for each leg
 
 import rospy
 import math

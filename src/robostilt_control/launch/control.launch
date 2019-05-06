@@ -6,10 +6,26 @@
 
 
   <!-- load the controllers. Publishes joint state on robostilt/joint_states topic -->
+
+  <!--Controllers need to be started by service call since only one of them can be active if they share the same resources. -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/robostilt" args="
-    leg_2_position_controller  
+    output="screen" ns="/robostilt" args="     
+    trajectory_controller   
     joint_state_controller"/>
+
+
+  <!--STOPPED-->
+  <node name="controller_spawner_stopped" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/robostilt" args="--stopped
+    leg_2_position_controller 
+    "/>
+
+
+<!--Start controllers-->
+  <!--<node name="init_controllers" pkg="robostilt_control" type="init_controllers.py" respawn="false" output="screen"/>-->
+
+
+
 
  <!-- Listen to robostilt/joint_states topic abd publish transforms to /tf-->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

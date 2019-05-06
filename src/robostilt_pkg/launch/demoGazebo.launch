@@ -20,8 +20,9 @@ Listen to robostilt/joint_states topic abd publish transforms to /tf
 <include file="$(find robostilt_control)/launch/control.launch"/> 
 
 <!--Opens rviz and loads config-->
-
 <include file="$(find robostilt_rviz)/launch/rviz.launch"/> 
+
+
 
 <!-- Opens gazebo world and spawns robot-->
 <!-- Updates the base to world TF from gazebo->rviz -->
@@ -29,7 +30,7 @@ Listen to robostilt/joint_states topic abd publish transforms to /tf
 
 <!-- PID tuning RQT gui -->
 
-<node name = "rqt_pid_tuning" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" args = "--perspective-file $(find robostilt_rqt)/config/single_joint_position_controller.perspective"/> 
+<node name = "rqt_pid_tuning" pkg = "rqt_gui" type = "rqt_gui" respawn = "false" output = "screen" args = "--perspective-file $(find robostilt_rqt)/config/trajectory_controller.perspective"/> 
 
 
 </launch>

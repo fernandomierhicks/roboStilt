@@ -4,25 +4,25 @@ This is the main ROS workspace for the RoboStilt robot.
 
 This release has the following features
 
-* URDF model with XACRO and gazebo tags
+* URDF model with XACRO and gazebo tags loaded also into parameter server
 * ros_control/effort_controllers to read and control joints in simulation
+  * JointTrajecotry controller to move multiple actuators at the same time with trajectorized paths
   * YAML anchors
-* Dynamic reconfiguration publiser
+* Dynamic reconfiguration publisher
 * Gazebo simulation is stable, spawns in known position and with known joint positions
   * Gazebo crashes sometimes.
-* RVIZ connected to simulation via TF publisher
-* Command joint positions via python script
+* RVIZ connected to simulation via TF publisher with interactive markers
+* Stable forward gait using the JointTrajectoryController
 
 # ROS Flow
 
 * `robostilt_description/launch/init_robot.launch`
-  * Sets common arguments and saves some of them on the parameter serve
+  * Sets common arguments and saves some of them on the parameter server
   * Loads URDF model of robot into param server using the previous arguments.
     * Single spot for robot dimension, accessible to URDF and parameter server 
 * `robostilt_control/launch/controllaunch`
   * Loads controller configuration from `robostilt_control/config/control.yaml`
   * Loads controllers into controller spawner including the gazebo **joint_state_publisher**
-  * OPTIONAL Run python script that updates the dynamic reconfigurable parameters to each controller.  `initialize_controllers.py`
   * ***in Gazebo the ouptut of the controller, the manipulation variable, limits are not visible on the respective topics. But they are  really applied. The controller might send XXX in /state/command and gazebo clamps it to what is on the URDF.*** 
   * These limits are really enfored on a real robot on the write() read()function
   * Loads **robot_state_publisher** to update TFs from joint position information
@@ -54,15 +54,19 @@ Wait for all programs to load
 2. Publish joit positions using RQT_GUI message publisher or run python script:
 
    ```
-   rosrun robostilt_gait update_gait
+   rosrun robostilt_gait stepForward.py
    ```
 
    
 
 # TODO
 
-* JointTrajectory controller on all joints
-* Gait script
 * Sensors in simulation
-* Joint limits
-* Interactive markers
+
+* Individual JointTrajectoryControllers on all joints
+
+  * Move leg down, with effort limit
+
+* Gait based on sensor input
+
+  
