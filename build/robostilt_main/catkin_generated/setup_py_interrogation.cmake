@@ -1,0 +1,6 @@
+set(robostilt_main_SETUP_PY_VERSION "0.0.0")
+set(robostilt_main_SETUP_PY_SCRIPTS "")
+set(robostilt_main_SETUP_PY_PACKAGES "robostilt_main")
+set(robostilt_main_SETUP_PY_PACKAGE_DIRS "src/robostilt_main")
+set(robostilt_main_SETUP_PY_MODULES "")
+set(robostilt_main_SETUP_PY_MODULE_DIRS "")

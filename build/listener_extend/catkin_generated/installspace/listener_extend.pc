@@ -1,0 +1,8 @@
+prefix=/home/fernandomierhicks/robostilt/install
+
+Name: listener_extend
+Description: Description of listener_extend
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fernandomierhicks/robostilt/install/lib 
+Requires: 

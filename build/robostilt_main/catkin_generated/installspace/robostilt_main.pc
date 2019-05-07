@@ -1,0 +1,8 @@
+prefix=/home/fernandomierhicks/robostilt/install
+
+Name: robostilt_main
+Description: Description of robostilt_main
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fernandomierhicks/robostilt/install/lib 
+Requires: 

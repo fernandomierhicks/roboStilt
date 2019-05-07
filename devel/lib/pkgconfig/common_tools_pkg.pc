@@ -1,0 +1,8 @@
+prefix=/home/fernandomierhicks/robostilt/devel
+
+Name: common_tools_pkg
+Description: Description of common_tools_pkg
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fernandomierhicks/robostilt/devel/lib 
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/home/fernandomierhicks/robostilt/devel
+
+Name: robostilt_common
+Description: Description of robostilt_common
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fernandomierhicks/robostilt/devel/lib 
+Requires: 
