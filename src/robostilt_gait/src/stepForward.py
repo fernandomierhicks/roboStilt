@@ -10,7 +10,7 @@ import time
 
 from control_msgs.msg import FollowJointTrajectoryGoal
 from control_msgs.msg import FollowJointTrajectoryAction
- 
+from sensor_msgs.msg  import JointState 
 from trajectory_msgs.msg import (
     JointTrajectory,
     JointTrajectoryPoint
@@ -33,7 +33,29 @@ THIRD_FRAME_REVOLUTE=0
 
 SPEED=0.4
 
-# HELPER FUNCTIONS
+# ---------------------------------------------------------------------------------------NODE AND HELPER FUNCTIONS
+def init_node_and_action_clients():
+    #initialize node
+    rospy.init_node('trajectoryControllerActionClient')
+    rospy.Subscriber("/robostilt/joint_states", JointState, JoinstState_callback)
+    #initialize action clients     
+
+    client.append( actionlib.SimpleActionClient('/robostilt/third_frame_prismatic_trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction))
+    for i in range(1,7):
+        name="/robostilt/leg_"+str(i)+"_trajectory_controller/follow_joint_trajectory"        
+        client.append(actionlib.SimpleActionClient(name, FollowJointTrajectoryAction))
+    client.append( actionlib.SimpleActionClient('/robostilt/third_frame_revolute_trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction))
+    for i in range(0,7):         
+        client[i].wait_for_server()
+
+def JoinstState_callback(data):
+    #Maps positions from joint_states to current_position that has same indexes as controllers
+    #Joint_states publishes joints in alphabetical order leg1-6, prismatic, revolute
+    current_position[0] = data.position[6] #third frame prismatic
+    for i in range(0, 7): 
+        current_position[i+1] = data.position[i]#legs
+    current_position[7] = data.position[7]
+
 def double_print(message):
     #rospy.loginfo(message)
     print(message)
@@ -53,7 +75,7 @@ def getErrorInHumanReadableStr(error_code):
 
 
 # SET TRAJECTORIES
-def set_position_leg(index,position):
+def set_position(index,position,speed):
 
     trajectory = JointTrajectory()
     point = JointTrajectoryPoint()
@@ -63,30 +85,44 @@ def set_position_leg(index,position):
     trajectory.points.append(point)
 
     #How long to get there
-    trajectory.points[0].time_from_start=rospy.Duration(1)
-    trajectory.joint_names.append("leg_"+str(index))
+    time=abs(current_position[index]-position)/speed
+    trajectory.points[0].time_from_start=rospy.Duration(time)
+    if(index==0):
+        trajectory.joint_names.append("third_frame_prismatic")
+    elif (index==7):
+        trajectory.joint_names.append("third_frame_revolute")
+    else:        
+        trajectory.joint_names.append("leg_"+str(index))
     #return
     follow_trajectory_goal = FollowJointTrajectoryGoal()
     follow_trajectory_goal.trajectory = trajectory    
 
     client[index].send_goal(follow_trajectory_goal)
-    double_print('---Goal sent. Waiting for completion.')
+    double_print(trajectory.joint_names[0] + " position set to: " + str(position))
 
+def have_all_clients_completed():
+    result=True
+    for i in range (0,8):
+        if (has_client_completed(i)==False):
+            result=False
+            break
+    return result
+
+def has_client_completed(index):
     #wait for result
     client[index].wait_for_result()
     result = client[index].get_result()# Wait for result. Can put internal timeout if nessesary    
     if(result.error_code==0):
-            double_print("---Goal completed.")
+            double_print("--- leg_"+str(index) +" Goal completed.")
+            #reset client
+            client[index].cancel_all_goals()
+            client[index].stop_tracking_goal()
+            return True
     else:
-            double_print("---Goal FAILED.")
-
-    double_print(getErrorInHumanReadableStr(result.error_code))
-    double_print(result.error_string)
-
-    #reset client
-    client[index].cancel_all_goals()
-    client[index].stop_tracking_goal()
-
+            double_print("--- leg_"+str(index) +" Goal FAILED.")
+            #double_print(getErrorInHumanReadableStr(result.error_code))
+            #double_print(result.error_string)
+            return False
 
 def move_third_frame(position,rotation, position_delta):
 
@@ -167,30 +203,35 @@ def send_goal_and_wait(goal, message):
 
 
  # -----------------------------------------------------------------------------------------------------       MAIN
+
 if __name__ == '__main__':
-    #initialize node
-    rospy.init_node('trajectoryControllerActionClient')
-    double_print('Created node trajectoryControllerActionClient')
-
-    #initialize action clients     
     client=[]
-    client.append( actionlib.SimpleActionClient('/robostilt/third_frame_prismatic_trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction))
-    for i in range(1,7):
-        name="/robostilt/leg_"+str(i)+"_trajectory_controller/follow_joint_trajectory"
-        double_print(name)
-        client.append(actionlib.SimpleActionClient(name, FollowJointTrajectoryAction))
-    client.append( actionlib.SimpleActionClient('/robostilt/third_frame_revolute_trajectory_controller/follow_joint_trajectory', FollowJointTrajectoryAction))
-    
-    double_print('Waiting for action servers...')
-    for i in range(0,7): 
-        double_print( 'Waiting on: '+str(i))
-        client[i].wait_for_server()
+    #holds current position of all controllers    
+    current_position=[]
+    for i in range(0, 9):
+        current_position.append(0)
 
-    double_print( 'Action clients listening')
+    init_node_and_action_clients()
+   
+    double_print( 'Action clients READY')
 
-    # Set controller in initial position
-    set_position_leg(2,-0.8)
-    # delay=0.1
+    # Set controllers in initial position
+    speed=0.4
+    set_position(THIRD_FRAME_PRISMATIC,-0.5,speed)
+    set_position(1,-0.2,speed)
+    set_position(2,-0.2,speed)
+    set_position(3,-0.2,speed)
+    set_position(4,-0.2,speed)
+    set_position(5,-0.2,speed)
+    set_position(6,-0.2,speed)
+    set_position(7, 0.0,speed)
+
+    while(have_all_clients_completed()==False):
+        rospy.spin()
+
+    set_position(2,-0.8,0.4)
+    set_position(4,-0.8,0.4)
+    set_position(6,-0.8,0.4)
 
     # #Move EVEN down
     # send_goal_and_wait(move_legs_on_frame(FRAME_EVEN,-0.55,0.35),"*Moving EVEN frame DOWN...")        

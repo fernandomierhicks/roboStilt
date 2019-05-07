@@ -151,8 +151,6 @@
      <!-- Even frame --> 
   <xacro:frame link_name="base_link" material="Orange" reflect="1"/>
   
-
-
   <link name="third_frame"> <!-- Revolute joint --> 
       <visual>
         <geometry>
@@ -176,8 +174,6 @@
          <xacro:friction/>
         <xacro:gazebo_color material="Yellow"/>
   </gazebo> 
-
-
 
   <joint name="third_frame_prismatic" type="prismatic">
       <parent link="base_link"/>
