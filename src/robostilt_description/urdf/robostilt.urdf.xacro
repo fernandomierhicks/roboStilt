@@ -36,7 +36,7 @@
 
 <!-- MACROS -->
   <!-- Frames -->
-   <xacro:macro name="frame_link" params="link_name material reflect" >
+   <xacro:macro name="frame" params="link_name material reflect" >
       <link name="${link_name}">      
         <visual> <!-- X beam -->
           <geometry>
@@ -102,7 +102,7 @@
         </inertial>
       </link>
 
-      <joint name="${parent}_to_leg_${suffix}" type="prismatic">
+      <joint name="leg_${suffix}" type="prismatic">
         <parent link="${parent}"/>
         <child link="leg_${suffix}"/>
         <limit effort="${limit_leg_effort}" lower="${limit_leg_lower}" upper="${limit_leg_upper}" velocity="${limit_leg_velocity}"/>
@@ -117,12 +117,12 @@
         <xacro:gazebo_color material="${material}"/>
       </gazebo>     
 
-      <transmission name="leg_${suffix}_trans">
+      <transmission name="leg_${suffix}">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="${parent}_to_leg_${suffix}">
+        <joint name="leg_${suffix}">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="leg_${suffix}_motor">
+        <actuator name="leg_${suffix}">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
           <mechanicalReduction>1</mechanicalReduction>
         </actuator>
@@ -149,7 +149,7 @@
 <!-- FRAMES -->
 
      <!-- Even frame --> 
-  <xacro:frame_link link_name="base_link" material="Orange" reflect="1"/>
+  <xacro:frame link_name="base_link" material="Orange" reflect="1"/>
   
 
 
@@ -179,7 +179,7 @@
 
 
 
-  <joint name="base_link_to_third_frame" type="prismatic">
+  <joint name="third_frame_prismatic" type="prismatic">
       <parent link="base_link"/>
       <child link="third_frame"/>
       <origin xyz="0.0 0.0 ${frame_thickness}"/>
@@ -188,22 +188,22 @@
        <dynamics damping="${damping}" friction="${damping_friction}" />
   </joint>
 
-  <transmission name="base_link_to_third_frame_trans">
+  <transmission name="third_frame_prismatic">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="base_link_to_third_frame">
+        <joint name="third_frame_prismatic">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="third_frame_prismatic_motor">
+        <actuator name="third_frame_prismatic">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
           <mechanicalReduction>1</mechanicalReduction>
         </actuator>
       </transmission>
  
    <!-- Odd frame --> 
-   <xacro:frame_link link_name="odd_frame" material="Yellow" reflect="-1"/>
+   <xacro:frame link_name="odd_frame" material="Yellow" reflect="-1"/>
 
 
-  <joint name="third_frame_to_odd_frame" type="revolute">
+  <joint name="third_frame_revolute" type="revolute">
         <parent link="third_frame"/>
         <child link="odd_frame"/>
         <origin xyz="0.0 0.0 ${frame_thickness}"/>
@@ -211,12 +211,12 @@
         <limit effort="${limit_third_frame_revolute_effort}" lower="${limit_third_frame_revolute_lower}" upper="${limit_third_frame_revolute_upper}" velocity="${limit_third_frame_revolute_velocity}"/>
          <dynamics damping="${damping}" friction="${damping_friction}" />
   </joint>
-   <transmission name="third_frame_to_odd_frame_trans">
+   <transmission name="third_frame_revolute">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="third_frame_to_odd_frame">
+        <joint name="third_frame_revolute">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="third_frame_revolute_motor">
+        <actuator name="third_frame_revolute">
           <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
           <mechanicalReduction>1</mechanicalReduction>
         </actuator>

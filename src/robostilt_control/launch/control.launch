@@ -10,7 +10,17 @@
   <!--Controllers need to be started by service call since only one of them can be active if they share the same resources. -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/robostilt" args="     
-    trajectory_controller   
+    leg_2_trajectory_controller   
+    leg_4_trajectory_controller 
+    leg_6_trajectory_controller
+
+    leg_1_trajectory_controller   
+    leg_3_trajectory_controller 
+    leg_5_trajectory_controller 
+
+    third_frame_prismatic_trajectory_controller   
+    third_frame_revolute_trajectory_controller 
+
     joint_state_controller"/>
 
 
