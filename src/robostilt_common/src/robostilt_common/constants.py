@@ -28,3 +28,19 @@ JointName = {
     7: "third_frame_revolute"
 }
 
+def getActuatorIndexFromFrame(selectedFrame):
+    if(selectedFrame==frame.even):
+        return [2,4,6]
+    elif (selectedFrame==frame.odd):
+        return [1,3,5]
+    elif (selectedFrame==frame.third_prismatic):
+        return [0]
+    elif (selectedFrame==frame.third_revolute):
+        return [7]
+    elif (selectedFrame==frame.none):
+        return []
+    else:
+        return []
+
+
+

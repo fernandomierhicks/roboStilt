@@ -12,7 +12,7 @@ This release has the following features
 * Gazebo simulation is stable, spawns in known position and with known joint positions
   * Gazebo crashes sometimes.
 * RVIZ connected to simulation via TF publisher with interactive markers
-* Stable forward gait using the JointTrajectoryController
+* Stable forward with effor limit detection.
 
 # ROS Flow
 
@@ -54,10 +54,13 @@ Wait for all programs to load
 2. Publish joit positions using RQT_GUI message publisher or run python script:
 
    ```
-   rosrun robostilt_gait stepForward.py
+   rosrun robostilt_common stepForward.py
    ```
 
-   
+
+To reset simulation.
+
+`roslaunch robostilt_gazebo reset.launch`
 
 # TODO
 

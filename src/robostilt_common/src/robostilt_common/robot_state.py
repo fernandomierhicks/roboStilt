@@ -10,18 +10,20 @@ from sensor_msgs.msg  import JointState
 from trajectory_msgs.msg import JointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 from constants import JointName
+from constants import getActuatorIndexFromFrame
 from  common import print_ros
 
-
+max_effort=100
 
 class robot_state:
     #Global variables
     actuator=[]
     rate = None
+
       
 
     def __init__(self):
-        print_ros("__init of robot_state started")
+        #print_ros("__init of robot_state started")
         rospy.init_node('robostilt_master_node', anonymous=True) # allows multiple instances of the master_node        
         self.rate=rospy.Rate(100) # 100hz                
         #8 actuators
@@ -32,7 +34,7 @@ class robot_state:
         rospy.Subscriber("/robostilt/joint_states", JointState, self._JoinstState_callback)
         #send all motors to their current position to reset the actionClient
         self.init_motors()
-        print_ros("done with __init")
+        #print_ros("done with __init")
         
 
     def _JoinstState_callback(self, data):
@@ -51,9 +53,21 @@ class robot_state:
             
             #Stop if we exceed torque limit
             for i in range(0,8):
-                if(self.actuator[i].motor.effort_limit>0): #in case we havent initialized efort limit
-                    if(abs(self.actuator[i].motor.effort)>self.actuator[i].motor.effort_limit):                                        
-                        self.actuator[i].motor.stop()
+
+                if(self.actuator[i].motor.effort_limit_negative!=None): #in case we havent initialized efort limit
+                    if(self.actuator[i].motor.effort_limit_enabled==True):
+                        if(self.actuator[i].motor.effort>self.actuator[i].motor.effort_limit_positive):
+                            print_ros(JointName.get(i) + " +EFFORT LIMIT FAULT. tripped with=" +str(self.actuator[i].motor.effort)  +" +limit is= " +str(self.actuator[i].motor.effort_limit_positive))
+                            self.actuator[i].motor.stop()
+
+                        elif(self.actuator[i].motor.effort<self.actuator[i].motor.effort_limit_negative):      
+                            print_ros(JointName.get(i) + " -EFFORT LIMIT FAULT. tripped with=" +str(self.actuator[i].motor.effort)  +" -limit is= " +str(self.actuator[i].motor.effort_limit_negative))
+                            self.actuator[i].motor.stop()
+                    else:
+                        #Effort limit is not enabled, we are being temporarly overriden check since when and enable after timeout
+                        if(rospy.get_time()-self.actuator[i].motor.effort_limit_override_start_time>self.actuator[i].motor.effort_limit_override_duration):
+                            self.actuator[i].motor.effort_limit_enabled=True
+
 
 
 
@@ -81,7 +95,18 @@ class robot_state:
         for i in range(0 ,7):            
             self.actuator[i].motor.assert_position()
         self.wait_for_all_actuators_to_finish()
-        print_ros("Done initializing motors")
+        #print_ros("Done initializing motors")
+
+    def set_effort_limit_on_frame(self, frame,effort_negative,effort_positive):
+        indexes=getActuatorIndexFromFrame(frame)
+        for i in indexes:
+            self.actuator[i].motor.set_effort_limits(effort_negative,effort_positive)
+
+    def set_effort_limit_to_max_on_frame(self, frame):
+        indexes=getActuatorIndexFromFrame(frame)
+        for i in indexes:
+            self.actuator[i].motor.set_effort_limits(-1*max_effort,max_effort)
+        
             
 
 class Motor:    
@@ -90,20 +115,25 @@ class Motor:
     position = None
     velocity = None
     effort = None
-    effort_limit= None
+    effort_limit_negative= None
+    effort_limit_positive= None
     is_moving= None
     has_reached_goal=None
+    effort_limit_enabled=True
+    effort_limit_override_duration=None
+    effort_limit_override_start_time=None
 
     def __init__(self,name):
         self.name=name
         controller_name="/robostilt/"+self.name+"_trajectory_controller/follow_joint_trajectory"
-        print_ros("Setting Action client of " + self.name )
+        #print_ros("Setting Action client of " + self.name )
         self.actionClient=actionlib.SimpleActionClient(controller_name, FollowJointTrajectoryAction)
         self.actionClient.wait_for_server()
-        print_ros("Action client ready " + self.name )
+        #print_ros("Action client ready " + self.name )
 
-    def set_position(self, position_setpoint, speed_limit, effort_limit):
-        self.effort_limit=effort_limit
+    def set_position(self, position_setpoint, speed_limit):
+        #Increase effort limits at the beginning.
+        self.overide_effort_limits_for_time(0.5)
         #set up variables
         trajectory = JointTrajectory()
         point = JointTrajectoryPoint()
@@ -122,22 +152,43 @@ class Motor:
         self.actionClient.send_goal(follow_trajectory_goal,done_cb=self._goal_done)
 
         #log info
-        print_ros(trajectory.joint_names[0] + " new position set to: " + str(position_setpoint) +" old position is: " + str(self.position)+ " allowed time is is: " +str(time))
+        #print_ros(trajectory.joint_names[0] + " new position set to: " + str(position_setpoint) +" old position is: " + str(self.position)+ " allowed time is is: " +str(time))
         self.is_moving=True  
         self.has_reached_goal=False 
 
+    def set_effort_limits(self,effort_negative,effort_positive):
+        #in case user messed up, flip them
+        if(effort_negative>effort_positive):            
+            dummy_positive=effort_positive
+            effort_positive=effort_negative
+            effort_negative=dummy_positive
+            print_ros("Wrong limit order")
+
+        self.effort_limit_positive=effort_positive
+        self.effort_limit_negative=effort_negative
+
+    def set_effort_limits_to_max(self):
+        self.effort_limit_positive=max_effort
+        self.effort_limit_negative=-1*max_effort
+
+    def overide_effort_limits_for_time(self,duration):
+        #the joint state callback will renable limits once duration is up.
+        self.effort_limit_enabled=False
+        self.effort_limit_override_duration=duration
+        self.effort_limit_override_start_time=rospy.get_time()
+
     def stop(self):
-        #set up variables
-        self.effort_limit=100        
+        #Dont want to hame limited efforts to stop.
+        self.set_effort_limits_to_max()       
         self.actionClient.cancel_all_goals()        
         #log info
-        print_ros(self.name + " STOPPED")
+        #print_ros(self.name + " STOPPED")
         self.is_moving=False 
         self.has_reached_goal=True
 
     def assert_position(self):
-        #set limit
-        self.effort_limit=100
+        #Dont want to hame limited efforts to assert.
+        self.set_effort_limits_to_max()  
         #set up variables
         trajectory = JointTrajectory()
         point = JointTrajectoryPoint()
@@ -154,14 +205,14 @@ class Motor:
         #send goal and register callback when done 
         self.actionClient.send_goal(follow_trajectory_goal,done_cb=self._goal_done)
         #log info
-        print_ros(trajectory.joint_names[0] + " asserted...")
+        #print_ros(trajectory.joint_names[0] + " asserted...")
         self.is_moving=True  
         self.has_reached_goal=False
       
     def _goal_done(self,state, result):
         #Triggers when action is completed       
         if(result.error_code==0):
-                print_ros(self.name +" has reached goal. Pos= "+ str(self.position))
+                #print_ros(self.name +" has reached goal. Pos= "+ str(self.position))
                 #reset client
                 self.actionClient.cancel_all_goals()
                 self.actionClient.stop_tracking_goal()  
