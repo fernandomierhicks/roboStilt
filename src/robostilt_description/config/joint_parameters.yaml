@@ -1,0 +1,55 @@
+    joint_limits:
+      leg_1:                                     #LEG. Other legs are copied from leg_1 on python script
+        has_velocity_limits: true
+        max_velocity: 0.5
+        has_acceleration_limits: true
+        max_acceleration: 5.0
+        has_jerk_limits: true
+        max_jerk: 100.0
+        has_effort_limits: true
+        max_effort: 1.0
+      third_frame_prismatic:                      #PRISMATIC
+        has_position_limits: true
+        min_position: -1.0
+        max_position: 0.0
+        has_velocity_limits: true
+        max_velocity: 0.5
+        has_acceleration_limits: true
+        max_acceleration: 5.0
+        has_jerk_limits: true
+        max_jerk: 100.0
+        has_effort_limits: true
+        max_effort: 1.0
+      third_frame_revolute:                       #REVOLUTE
+        has_position_limits: true
+        min_position: -1.0
+        max_position: 0.0
+        has_velocity_limits: true
+        max_velocity: 0.5
+        has_acceleration_limits: true
+        max_acceleration: 5.0
+        has_jerk_limits: true
+        max_jerk: 100.0
+        has_effort_limits: true
+        max_effort: 1.0
+
+
+
+  <!--Limits-->
+
+<!--Effort and velocity limits the physical effort/velocity on the joint in Gazebo. ROS_control is not part of this, ros_command can get larger than this value. This is comparable to slip or some other mechanical limit on torque, current.  -->
+
+  <arg name="limit_leg_lower"     value="-1.0" />
+  <arg name="limit_leg_upper"     value="0.0" />
+  <arg name="limit_leg_velocity"  value="0.5" />
+  <arg name="limit_leg_effort"    value="50.0" />
+
+  <arg name="limit_third_frame_prismatic_lower"     value="-0.6" />
+  <arg name="limit_third_frame_prismatic_upper"     value="-0.2" />
+  <arg name="limit_third_frame_prismatic_velocity"    value="0.5" />
+  <arg name="limit_third_frame_prismatic_effort"    value="50.0" />   
+
+  <arg name="limit_third_frame_revolute_lower"    value="-0.3" />
+  <arg name="limit_third_frame_revolute_upper"    value="0.3" />
+  <arg name="limit_third_frame_revolute_velocity" value="0.5" />
+  <arg name="limit_third_frame_revolute_effort"   value="50.0" />
