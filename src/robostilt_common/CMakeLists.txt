@@ -195,20 +195,3 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-
-add_executable(setLimit_pub
-  src/setLimit_pub.cpp
-)
-add_dependencies(setLimit_pub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(setLimit_pub
-  ${catkin_LIBRARIES}
-)
-
-add_executable(setLimit_sub
-  src/setLimit_sub.cpp
-)
-add_dependencies(setLimit_sub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(setLimit_sub
-  ${catkin_LIBRARIES}
-)

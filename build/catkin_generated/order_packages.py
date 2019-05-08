@@ -2,4 +2,4 @@
 source_root_dir = "/home/fernandomierhicks/robostilt/src"
 whitelisted_packages = "".split(';') if "" != "" else []
 blacklisted_packages = "".split(';') if "" != "" else []
-underlay_workspaces = "/home/fernandomierhicks/robostilt/devel;/home/fernandomierhicks/catkin_ws/devel;/opt/ros/kinetic".split(';') if "/home/fernandomierhicks/robostilt/devel;/home/fernandomierhicks/catkin_ws/devel;/opt/ros/kinetic" != "" else []
+underlay_workspaces = "/home/fernandomierhicks/robostilt/devel;/opt/ros/kinetic".split(';') if "/home/fernandomierhicks/robostilt/devel;/opt/ros/kinetic" != "" else []

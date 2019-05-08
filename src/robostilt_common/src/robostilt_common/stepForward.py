@@ -1,15 +1,18 @@
 #! /usr/bin/env python
 import rospy
 
+from constants import frame
+from constants import actuator
+import robot_state 
+from  common import print_ros
 
-from robostilt_common.robot_state import robot_state
-import robostilt_common.constants as frame
+print_ros("STARTING CLASS")
+robostilt=robot_state.robot_state()
 
- 
-robostilt= robot_state()
+
 
 speed=0.2
-effort_limit=5
+effort_limit=20
 
 
 
@@ -42,33 +45,42 @@ def move_prismatic(position):
 
 def step_forward():
 
+    effort_limit=100
     move_prismatic(-0.2)
     robostilt.wait_for_all_actuators_to_finish()
 
+    effort_limit=1
     lower_legs_on_frame(frame.odd)
     robostilt.wait_for_all_actuators_to_finish()
 
+    effort_limit=100
     raise_legs_on_frame(frame.even)
     robostilt.wait_for_all_actuators_to_finish()
 
+    effort_limit=100
     move_prismatic(-0.5)
     robostilt.wait_for_all_actuators_to_finish()
 
+    effort_limit=1
     lower_legs_on_frame(frame.even)
     robostilt.wait_for_all_actuators_to_finish()
 
+    effort_limit=100
     raise_legs_on_frame(frame.odd)
     robostilt.wait_for_all_actuators_to_finish()
     
 
 if __name__ == '__main__':
-    try:
-        #lower_legs_on_frame(frame.even)
-        #robostilt.wait_for_all_actuators_to_finish()
+    try:        
+        print_ros("sep forward main")
+        effort_limit=100
+        lower_legs_on_frame(frame.even)
+        robostilt.wait_for_all_actuators_to_finish()
+        
 
-        #while(True):
-            #step_forward()
-        rospy.loginfo("done")
+        while(True):
+            step_forward()
+        print_ros("Done with stepForward")
     except rospy.ROSInterruptException:
         pass
 
