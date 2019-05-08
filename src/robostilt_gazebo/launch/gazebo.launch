@@ -27,6 +27,15 @@
         -J third_frame_to_odd_frame 0.0
         "/>
 
+<!-- Spawn an obstacle into Gazebo.-->
+<node name="urdf_spawner_obstacle" pkg="gazebo_ros" type="spawn_model"
+      respawn="false" output="screen"
+        args=" -database bookshelf -gazebo -model bookshelf 
+        -x 1.6 
+        -y 0.5 
+        -z 0.2 
+        -R 1.57        
+        "/>
 
 <!-- Updates the base to world TF from gazebo->rviz -->
 <node name="tf_base_link_broadcaster_gazebo_to_rviz" pkg="robostilt_gazebo" type="tf_broadcasterGazebo.py" respawn="false" output="screen"/>

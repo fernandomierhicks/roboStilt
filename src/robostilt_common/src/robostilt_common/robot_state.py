@@ -10,6 +10,8 @@ from sensor_msgs.msg  import JointState
 from trajectory_msgs.msg import JointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 
+
+
 # CONSTANTS
 FRAME_THIRD_PRISMATIC=0
 FRAME_ODD=1
@@ -39,7 +41,8 @@ class robot_state:
         self.rate=rospy.Rate(100) # 100hz                
         #8 actuators
         for i in range(0, 8): 
-            self.actuator.append(Actuator(actuatorName.get(i)))    
+            self.actuator.append(Actuator(actuatorName.get(i)))   
+            self.actuator[i].motor.effort_limit=-100 
         #initialize nodes
         rospy.Subscriber("/robostilt/joint_states", JointState, self._JoinstState_callback)
         #send all motors to their current position to reset the actionClient
@@ -51,9 +54,24 @@ class robot_state:
         #Joint_states publishes joints in alphabetical order leg1-6, prismatic, revolute
 
             self.actuator[0].motor.position= data.position[6] 
+            self.actuator[0].motor.effort= data.effort[6]
+
             for i in range(0, 7): 
-                self.actuator[i+1].motor.position = data.position[i]#legs
+                self.actuator[i+1].motor.effort = data.effort[i]#legs
+                self.actuator[i+1].motor.effort = data.effort[i]#legs
+
             self.actuator[7].motor.position = data.position[7]
+            self.actuator[7].motor.effort = data.effort[7]
+            
+            #Stop if we exceed torque limit
+            for i in range(0,8):
+                if(self.actuator[i].motor.effort_limit>0): #in case we havent initialized
+                    if(abs(self.actuator[i].motor.effort)>self.actuator[i].motor.effort_limit):
+                        i=5                    
+                        #self.actuator[i].motor.stop()
+
+
+
     
     def have_all_actuators_reached_goal(self):
         result=True
@@ -87,6 +105,7 @@ class Motor:
     position = None
     velocity = None
     effort = None
+    effort_limit= None
     is_moving= None
     has_reached_goal=None
 
@@ -99,7 +118,8 @@ class Motor:
         self.actionClient.wait_for_server()
         #rospy.loginfo("Action client ready " + self.name )
 
-    def set_position(self, position_setpoint, speed_limit):
+    def set_position(self, position_setpoint, speed_limit, effort_limit):
+        self.effort_limit=effort_limit
         #set up variables
         trajectory = JointTrajectory()
         point = JointTrajectoryPoint()
@@ -122,7 +142,18 @@ class Motor:
         self.is_moving=True  
         self.has_reached_goal=False 
 
+    def stop(self):
+        #set up variables
+        self.effort_limit=100        
+        self.actionClient.cancel_all_goals()        
+        #log info
+        rospy.loginfo(self.name + " STOPPED")
+        self.is_moving=False 
+        self.has_reached_goal=True
+
     def assert_position(self):
+        #set limit
+        self.effort_limit=100
         #set up variables
         trajectory = JointTrajectory()
         point = JointTrajectoryPoint()
