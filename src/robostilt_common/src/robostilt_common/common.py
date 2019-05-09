@@ -5,5 +5,5 @@ def print_ros(message):
     #print(message)
 
 def wait_for_user():
-    pass
-    #raw_input("Press Enter to continue...")
+    #pass
+    raw_input("Press Enter to continue...")

@@ -41,7 +41,7 @@ class robot_state:
         #Maps positions from joint_states to current_position that has same indexes as controllers
         #Joint_states publishes joints in alphabetical order leg1-6, prismatic, revolute
 
-            self.actuator[0].motor.position= data.position[6] 
+            self.actuator[0].motor.position= data.position[6]
             self.actuator[0].motor.effort= data.effort[6]
 
             for i in range(0, 7): 
@@ -50,6 +50,10 @@ class robot_state:
 
             self.actuator[7].motor.position = data.position[7]
             self.actuator[7].motor.effort = data.effort[7]
+
+            #take care of offsets
+            for i in range(0, 8):
+                self.actuator[i].motor.position = self.actuator[i].motor.position-self.actuator[i].motor.offset
             
             #Stop if we exceed torque limit
             for i in range(0,8):
@@ -112,19 +116,23 @@ class robot_state:
 class Motor:    
     name= None
     actionClient=None 
-    position = None
+    position = None    
     velocity = None
     effort = None
-    effort_limit_negative= None
-    effort_limit_positive= None
+    offset = None #Command zero position and get the expected zero position. From parameters.yaml
+    #status
     is_moving= None
     has_reached_goal=None
+    #effort limits
+    effort_limit_negative= None
+    effort_limit_positive= None
     effort_limit_enabled=True
     effort_limit_override_duration=None
     effort_limit_override_start_time=None
 
     def __init__(self,name):
         self.name=name
+        self.offset=rospy.get_param("robostilt/dimensions/"+self.name+"_offset")
         controller_name="/robostilt/"+self.name+"_trajectory_controller/follow_joint_trajectory"
         #print_ros("Setting Action client of " + self.name )
         self.actionClient=actionlib.SimpleActionClient(controller_name, FollowJointTrajectoryAction)
@@ -132,6 +140,7 @@ class Motor:
         #print_ros("Action client ready " + self.name )
 
     def set_position(self, position_setpoint, speed_limit):
+        position_setpoint=position_setpoint+self.offset
         #Increase effort limits at the beginning.
         self.overide_effort_limits_for_time(0.5)
         #set up variables
