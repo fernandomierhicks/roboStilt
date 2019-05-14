@@ -52,8 +52,8 @@ class robot_state:
             self.actuator[7].motor.effort = data.effort[7]
 
             #take care of offsets
-            for i in range(0, 8):
-                self.actuator[i].motor.position = self.actuator[i].motor.position-self.actuator[i].motor.offset
+           # for i in range(0, 8):
+            #    self.actuator[i].motor.position = self.actuator[i].motor.position-self.actuator[i].motor.offset
             
             #Stop if we exceed torque limit
             for i in range(0,8):
@@ -132,7 +132,7 @@ class Motor:
 
     def __init__(self,name):
         self.name=name
-        self.offset=rospy.get_param("robostilt/dimensions/"+self.name+"_offset")
+        #self.offset=rospy.get_param("robostilt/dimensions/"+self.name+"_offset")
         controller_name="/robostilt/"+self.name+"_trajectory_controller/follow_joint_trajectory"
         #print_ros("Setting Action client of " + self.name )
         self.actionClient=actionlib.SimpleActionClient(controller_name, FollowJointTrajectoryAction)
@@ -140,7 +140,7 @@ class Motor:
         #print_ros("Action client ready " + self.name )
 
     def set_position(self, position_setpoint, speed_limit):
-        position_setpoint=position_setpoint+self.offset
+        #position_setpoint=position_setpoint+self.offset
         #Increase effort limits at the beginning.
         self.overide_effort_limits_for_time(0.5)
         #set up variables

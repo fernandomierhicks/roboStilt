@@ -1,6 +1,6 @@
 #!/usr/bin/env python  
 
-## This node gets the keyboard input from terminal as arrow presses and broadcasts that as a TF transform to "base_link" with respect to "world"
+## This node broadcasts the TF transform to "base_link" with respect to "world" from Gazebo
 import roslib
 roslib.load_manifest('robostilt_gazebo')
 import rospy
@@ -19,20 +19,22 @@ def handle_robostilt_pose(msg):
     global z
     global theta
 
-    x = msg.pose[1].position.x
-    y = msg.pose[1].position.y
-    z = msg.pose[1].position.z
-    rot_q = msg.pose[1].orientation
 
-    #str = "Published tf with x value %s" % x
-    #rospy.loginfo(str)
-
-    br = tf.TransformBroadcaster()
-    br.sendTransform((x, y, z),
-                    ([rot_q.x,rot_q.y,rot_q.z,rot_q.w]),
-                   rospy.Time.now(),
-                  "base_link",
-                 "world")
+    #Cycle thorugh all the models and get transfrom from robostilt
+    for i in range(0, len(msg.name)):
+        if(msg.name[i]=='robostilt'):
+            x = msg.pose[i].position.x
+            y = msg.pose[i].position.y
+            z = msg.pose[i].position.z
+            rot_q = msg.pose[i].orientation
+            #str = "Published tf with x value %s" % x
+            #rospy.loginfo(str)
+            br = tf.TransformBroadcaster()
+            br.sendTransform((x, y, z),
+                        ([rot_q.x,rot_q.y,rot_q.z,rot_q.w]),
+                    rospy.Time.now(),
+                    "base_link",
+                    "world")
 
 
 

@@ -53,20 +53,6 @@ robostilt:
       - leg_2
     gains:
       leg_2: {p: *leg_p_default, i: *leg_i_default, d: *leg_d_default, i_clamp: *leg_i_clamp_default} 
-  #Overwrites URDF
-  # joint_limits:
-  #   leg_2:
-  #     has_position_limits: true
-  #     min_position: -1.0
-  #     max_position: 0.0
-  #     has_velocity_limits: true
-  #     max_velocity: 0.5
-  #     has_acceleration_limits: true
-  #     max_acceleration: 5.0
-  #     has_jerk_limits: true
-  #     max_jerk: 100.0
-  #     has_effort_limits: true
-  #     max_effort: 1.0
 
   leg_4_trajectory_controller:
     type: "effort_controllers/JointTrajectoryController"

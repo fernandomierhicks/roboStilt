@@ -3,10 +3,6 @@ import rospy
 
 leg_lenght=rospy.get_param("/dimensions/leg_length")
 
-
-
-
-
 #copy parameters to all legs
 suffix="/joint_limits/leg_"
 
@@ -25,7 +21,8 @@ param_list=[
 ]
 
 
+#cycle through legs 2-6 and all the parameters on param_list
 for i in range(2, 6):
     for param in param_list:
-        value=rospy.get_param(suffix+str(1)+"/"+param) #gets value from leg1 in joint_parameters.yaml
-        rospy.set_param(suffix+str(i)+"/"+param, value)
+        value=rospy.get_param(suffix+str(1)+"/"+param) #gets value from leg1 in joint_parameters.yaml which was loaded to the paramter server before this
+        rospy.set_param(suffix+str(i)+"/"+param, value) # set the parameter 

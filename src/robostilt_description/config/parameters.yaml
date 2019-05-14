@@ -1,11 +1,23 @@
 #example
 robostilt:
   dimensions:
+    #Offsets ensure that commanding a zero position puts the joint in the expected position:
+    #Foot at the same level as bottom frame
+    #Prismatic  ??
+    #Revolute straigth
+    #***Offsets can be implemented by changing the pysical location of the origin of each link. Currenlty implemented
+    #***Offsets can also be implemented on the motor control interface. Not as nice as doing it in the URDF
+
+
+
+    ##NOT USED...
     third_frame_prismatic_offset : 0.0
-    leg_1_offset: -0.4
-    leg_3_offset: -0.4
-    leg_5_offset: -0.4
-    leg_2_offset: -0.4
-    leg_4_offset: -0.4
-    leg_6_offset: -0.4
+    leg_1_offset: 0.0
+    leg_3_offset:  0.0
+    leg_5_offset:  0.0
+    leg_2_offset:  0.0
+    leg_4_offset:  0.00
+    leg_6_offset:  0.0
     third_frame_revolute_offset : 0.0
+    
+    nominal_walking_height: -1.5  #How much to extend legs from zero position when walking normally.

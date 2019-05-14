@@ -10,6 +10,8 @@ from  common import wait_for_user
 print_ros("STARTING CLASS")
 robostilt=robot_state.robot_state()
 
+nominal_walking_height=rospy.get_param("robostilt/dimensions/nominal_walking_height")
+
 
 
 speed=0.2
@@ -20,13 +22,13 @@ speed=0.2
 
 def lower_legs_on_frame(frame_name):
     if(frame_name==frame.even):
-        robostilt.actuator[2].motor.set_position(-0.8,speed)
-        robostilt.actuator[4].motor.set_position(-0.8,speed)
-        robostilt.actuator[6].motor.set_position(-0.8,speed)
+        robostilt.actuator[2].motor.set_position(nominal_walking_height,speed)
+        robostilt.actuator[4].motor.set_position(nominal_walking_height,speed)
+        robostilt.actuator[6].motor.set_position(nominal_walking_height,speed)
     elif(frame_name==frame.odd):
-        robostilt.actuator[1].motor.set_position(-0.8,speed)
-        robostilt.actuator[3].motor.set_position(-0.8,speed)
-        robostilt.actuator[5].motor.set_position(-0.8,speed)
+        robostilt.actuator[1].motor.set_position(nominal_walking_height,speed)
+        robostilt.actuator[3].motor.set_position(nominal_walking_height,speed)
+        robostilt.actuator[5].motor.set_position(nominal_walking_height,speed)
 
 def raise_legs_on_frame(frame_name):
     if(frame_name==frame.even):
@@ -92,8 +94,9 @@ def step_forward():
 def init_position():
         print_ros("Initializing position. Lower legs on even, raise legs on odd, prismatic to -0.5...")
         wait_for_user()
+
         robostilt.set_effort_limit_to_max_on_frame(frame.even)
-        raise_legs_on_frame(frame.even)
+        lower_legs_on_frame(frame.even)
 
         robostilt.set_effort_limit_to_max_on_frame(frame.odd)
         raise_legs_on_frame(frame.odd)
@@ -103,7 +106,7 @@ def init_position():
 
         robostilt.wait_for_all_actuators_to_finish()
         print_ros("Init COMPLETE")
-
+        wait_for_user()
 if __name__ == '__main__':
     try:        
         init_position()
