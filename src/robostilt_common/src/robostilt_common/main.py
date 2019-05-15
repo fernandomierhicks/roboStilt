@@ -10,7 +10,7 @@ robostilt=robot_state.robot_state()
 
 robostilt.init_position()
 
-#while(True):
-#    robostilt.step_forward()
+while(True):
+    robostilt.step_forward()
 #print_ros("Done with stepForward")
 

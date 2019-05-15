@@ -32,6 +32,24 @@ class dimension:
         print_ros("Parameters: dimensions updated")
 
 
+class effort:
+    leg_max= None  
+    lowering_leg_min=None
+    lowering_leg_max=None
+
+    @classmethod   
+    def read(self):
+        efforts=rospy.get_param("robostilt/efforts")
+        self.leg_max=efforts["leg_max"]
+        self.lowering_leg_min=efforts["lowering_leg_min"]
+        self.lowering_leg_max=efforts["lowering_leg_max"]
+
+
+
+        print_ros("Parameters: efforts updated")
+
+
 def read_from_parameter_server():
     speed.read()
     dimension.read()
+    effort.read()

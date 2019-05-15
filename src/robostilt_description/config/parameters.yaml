@@ -21,9 +21,18 @@ robostilt:
   speeds:
     lowering_legs: 0.5
     raising_legs: 1.0
+    prismatic: 0.5
+  
+  efforts:
+    leg_max: 50.0
+    lowering_leg_min: 0
+    lowering_leg_max: 100
+
+
   
 
 
     
     
+
 
