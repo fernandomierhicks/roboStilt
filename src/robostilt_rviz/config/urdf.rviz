@@ -6,6 +6,9 @@ Panels:
       Expanded:
         - /World1
         - /InteractiveMarkers1
+        - /COM_robot1
+        - /COM_projected1
+        - /Support Polygon1
       Splitter Ratio: 0.5
     Tree Height: 747
   - Class: rviz/Selection
@@ -148,6 +151,30 @@ Visualization Manager:
       Show Visual Aids: false
       Update Topic: /markers/update
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /com
+      Name: COM_robot
+      Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /com_ground
+      Name: COM_projected
+      Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /support_polygon
+      Name: Support Polygon
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -173,25 +200,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 8.84169388
+      Distance: 38.6066666
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.234400988
-        Y: -0.392830849
+        X: -0.00404787064
+        Y: 0.681907773
         Z: -9.18476985e-07
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.340398788
+      Pitch: 0.370203346
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz)
-      Yaw: 5.34358072
+      Yaw: 0.18859005
     Saved: ~
 Window Geometry:
   Displays:

@@ -5,6 +5,9 @@ class frame:
     even=2
     odd=3
     third_revolute=4
+    even_and_odd=5
+    all=6
+    
 
 class actuator:
     third_frame_prismatic=0
@@ -28,7 +31,7 @@ JointName = {
     7: "third_frame_revolute"
 }
 
-def getActuatorIndexFromFrame(selectedFrame):
+def getActuatorIndexesFromFrame(selectedFrame):
     if(selectedFrame==frame.even):
         return [2,4,6]
     elif (selectedFrame==frame.odd):

@@ -12,6 +12,9 @@
 <!-- Launch rviz with config -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robostilt_rviz)/config/urdf.rviz" /> 
 
+ <!--COM Markers node -->
+<node name="COM_marker" pkg="robostilt_rviz" type="centerOfMass.py" respawn="false" output="screen"/>
+
  <!--Interactrive Markers node 
 <node name="simple_marker" pkg="robostilt_rviz" type="simple_marker.py" respawn="false" output="screen"/>-->
 

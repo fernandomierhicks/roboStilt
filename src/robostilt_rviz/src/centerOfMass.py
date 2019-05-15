@@ -2,7 +2,7 @@
 import rospy
 import geometry_msgs.msg
 import tf2_ros
-import tf2_geometry_msgs as tf_geo
+import tf2_geometry_msgs as tf_msg
 from urdf_parser_py.urdf import URDF
 from visualization_msgs.msg import Marker
 
@@ -36,20 +36,36 @@ class CoMCalculator:
         tfBuffer = tf2_ros.Buffer()
         listener = tf2_ros.TransformListener(tfBuffer)
         link_origin = geometry_msgs.msg.PointStamped()
-        marker = Marker()
-        marker.header.frame_id = "base_link"
-        marker.header.stamp = rospy.Time()
-        marker.type = marker.SPHERE
-        marker.action = marker.ADD
-        marker.pose.orientation.w = 1.0
-        marker.color.a = 1.0
-        marker.color.r = 1.0
-        marker.color.g = 1.0
-        marker.color.b = 1.0
-        marker.scale.x = 0.3
-        marker.scale.y = 0.3
-        marker.scale.z = 0.3
-        pub = rospy.Publisher('/com', Marker, queue_size=1)
+        com_marker = Marker()
+        com_marker.header.frame_id = "base_link"
+        com_marker.header.stamp = rospy.Time()
+        com_marker.type = com_marker.SPHERE
+        com_marker.action = com_marker.ADD
+        com_marker.pose.orientation.w = 1.0
+        com_marker.color.a = 1.0
+        com_marker.color.r = 0.5
+        com_marker.color.g = 0.5
+        com_marker.color.b = 0.5
+        com_marker.scale.x = 0.2
+        com_marker.scale.y = 0.2
+        com_marker.scale.z = 0.2
+
+        com_projected_marker = Marker()
+        com_projected_marker.header.frame_id = "world"
+        com_projected_marker.header.stamp = rospy.Time()
+        com_projected_marker.type = com_projected_marker.SPHERE
+        com_projected_marker.action = com_projected_marker.ADD
+        com_projected_marker.pose.orientation.w = 1.0
+        com_projected_marker.color.a = 1.0
+        com_projected_marker.color.r = 1.0
+        com_projected_marker.color.g = 1.0
+        com_projected_marker.color.b = 1.0
+        com_projected_marker.scale.x = 0.2
+        com_projected_marker.scale.y = 0.2
+        com_projected_marker.scale.z = 0.2
+
+        pub_com = rospy.Publisher('/com', Marker, queue_size=1)
+        pub_projected = rospy.Publisher('/com_ground', Marker, queue_size=1)
         
         rate = rospy.Rate(30)
         rospy.sleep(1)
@@ -66,7 +82,7 @@ class CoMCalculator:
                 try:
                     #print (self.links[link])   #get structure of link
 
-                    #get transformation matrix of link with respect to base link
+                    #get transform of each link with respect to base link
                     tf_base_to_link = tfBuffer.lookup_transform("base_link", link, rospy.Time())
                     
                     link_origin.point.x = self.links[link].inertial.origin.xyz[0] 
@@ -75,28 +91,43 @@ class CoMCalculator:
                     link_origin.header.frame_id = link
                     link_origin.header.stamp = rospy.get_rostime()
 
-                    tf_base_to_origin = tf_geo.do_transform_point(link_origin, tf_base_to_link)
+                    tf_base_to_link_origin = tf_msg.do_transform_point(link_origin, tf_base_to_link)
+                   
 
                     #calculate part of CoM equation depending on link
-                    x += self.links[link].inertial.mass * tf_base_to_origin.point.x
-                    y += self.links[link].inertial.mass * tf_base_to_origin.point.y
-                    z += self.links[link].inertial.mass * tf_base_to_origin.point.z
+                    x += self.links[link].inertial.mass * tf_base_to_link_origin.point.x
+                    y += self.links[link].inertial.mass * tf_base_to_link_origin.point.y
+                    z += self.links[link].inertial.mass * tf_base_to_link_origin.point.z
                 except tf2_ros.TransformException as err:
                     rospy.logerr("TF error in COM computation %s", err)
 
                 
             #finish CoM calculation
-            x = x/self.Mass
-            y = y/self.Mass
-            z = z/self.Mass
-
-            rospy.loginfo("COM of robot is: "+ str(x) + " , " + str(y) +" , " + str(z))
+            com_location= geometry_msgs.msg.PointStamped()
+            com_location.point.x= x/self.Mass
+            com_location.point.y= y/self.Mass
+            com_location.point.z= z/self.Mass
 
             #send CoM position to RViZ. This positions are in reference to the base_link
-            marker.pose.position.x = x
-            marker.pose.position.y = y
-            marker.pose.position.z = z # always display marker at zero. 
-            pub.publish(marker)
+            com_marker.pose.position.x = com_location.point.x
+            com_marker.pose.position.y = com_location.point.y
+            com_marker.pose.position.z = com_location.point.z
+            pub_com.publish(com_marker)
+
+
+
+            #project COM into ground, z=0
+            tf_base_to_world = tfBuffer.lookup_transform("world", "base_link", rospy.Time())
+            tf_com_location_to_world = tf_msg.do_transform_point(com_location, tf_base_to_world)
+
+            #send CoM position to RViZ. This positions are in reference to the base_link
+            com_projected_marker.pose.position.x = tf_com_location_to_world.point.x
+            com_projected_marker.pose.position.y = tf_com_location_to_world.point.y
+            com_projected_marker.pose.position.z = 0 # always display marker at zero height with respect to world
+            pub_projected.publish(com_projected_marker)
+
+            #rospy.loginfo("COM of robot with respect to world is: "+ str(tf_com_location_to_world.point.x) + " , " + str(tf_com_location_to_world.point.y) +" , " + str(tf_com_location_to_world.point.z))
+
 
             try:
                 # catch exeption of moving backwarts in time, when restarting simulator
