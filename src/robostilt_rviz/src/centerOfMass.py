@@ -35,7 +35,7 @@ class CoMCalculator:
         #initialisations for tf and marker
         tfBuffer = tf2_ros.Buffer()
         listener = tf2_ros.TransformListener(tfBuffer)
-        zuTransformieren = geometry_msgs.msg.PointStamped()
+        link_origin = geometry_msgs.msg.PointStamped()
         marker = Marker()
         marker.header.frame_id = "base_link"
         marker.header.stamp = rospy.Time()
@@ -44,12 +44,14 @@ class CoMCalculator:
         marker.pose.orientation.w = 1.0
         marker.color.a = 1.0
         marker.color.r = 1.0
-        marker.scale.x = 0.03
-        marker.scale.y = 0.03
-        marker.scale.z = 0.03
+        marker.color.g = 1.0
+        marker.color.b = 1.0
+        marker.scale.x = 0.3
+        marker.scale.y = 0.3
+        marker.scale.z = 0.3
         pub = rospy.Publisher('/com', Marker, queue_size=1)
         
-        rate = rospy.Rate(1)
+        rate = rospy.Rate(30)
         rospy.sleep(1)
         
         #loop for calculating the CoM while robot is not shutdown
@@ -57,21 +59,28 @@ class CoMCalculator:
             x = 0
             y = 0
             z = 0
-            for link in self.links:
+
+
+            for link in self.links:                
+
                 try:
-                    #get transformation matrix of link
-                    trans = tfBuffer.lookup_transform("base_link", link, rospy.Time())
-                    #transform CoM of link
-                    zuTransformieren.point.x = self.links[link].visual.geometry.origin.xyz[0]
-                    zuTransformieren.point.y = 0#self.links[link].inertial.origin.y
-                    zuTransformieren.point.z = 0#self.links[link].inertial.origin.z
-                    zuTransformieren.header.frame_id = link
-                    zuTransformieren.header.stamp = rospy.get_rostime()
-                    transformiert = tf_geo.do_transform_point(zuTransformieren, trans)
+                    #print (self.links[link])   #get structure of link
+
+                    #get transformation matrix of link with respect to base link
+                    tf_base_to_link = tfBuffer.lookup_transform("base_link", link, rospy.Time())
+                    
+                    link_origin.point.x = self.links[link].inertial.origin.xyz[0] 
+                    link_origin.point.y = self.links[link].inertial.origin.xyz[1] 
+                    link_origin.point.z = self.links[link].inertial.origin.xyz[2] 
+                    link_origin.header.frame_id = link
+                    link_origin.header.stamp = rospy.get_rostime()
+
+                    tf_base_to_origin = tf_geo.do_transform_point(link_origin, tf_base_to_link)
+
                     #calculate part of CoM equation depending on link
-                    x += self.links[link].inertial.mass * transformiert.point.x
-                    y += self.links[link].inertial.mass * transformiert.point.y
-                    z += self.links[link].inertial.mass * transformiert.point.z
+                    x += self.links[link].inertial.mass * tf_base_to_origin.point.x
+                    y += self.links[link].inertial.mass * tf_base_to_origin.point.y
+                    z += self.links[link].inertial.mass * tf_base_to_origin.point.z
                 except tf2_ros.TransformException as err:
                     rospy.logerr("TF error in COM computation %s", err)
 
@@ -81,10 +90,12 @@ class CoMCalculator:
             y = y/self.Mass
             z = z/self.Mass
 
-            #send CoM position to RViZ
+            rospy.loginfo("COM of robot is: "+ str(x) + " , " + str(y) +" , " + str(z))
+
+            #send CoM position to RViZ. This positions are in reference to the base_link
             marker.pose.position.x = x
             marker.pose.position.y = y
-            marker.pose.position.z = z
+            marker.pose.position.z = z # always display marker at zero. 
             pub.publish(marker)
 
             try:
