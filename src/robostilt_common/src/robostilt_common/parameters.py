@@ -18,7 +18,7 @@ class speed:
         speeds=rospy.get_param("robostilt/speeds")
         self.lowering_legs=speeds["lowering_legs"]
         self.raising_legs=speeds["raising_legs"]
-        self.prismatic=speeds["raising_legs"]
+        self.prismatic=speeds["prismatic"]
         print_ros("Parameters: speeds updated")
 
 

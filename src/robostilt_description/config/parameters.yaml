@@ -16,12 +16,13 @@ robostilt:
     leg_4_offset:  0.00
     leg_6_offset:  0.0
     third_frame_revolute_offset : 0.0
-    nominal_walking_height: -1.5  #How much to extend legs from zero position when walking normally.
+
+    nominal_walking_height: -1.0  #How much to extend legs from zero position when walking normally.
 
   speeds:
     lowering_legs: 0.5
-    raising_legs: 1.0
-    prismatic: 0.5
+    raising_legs: 0.75
+    prismatic: 0.1
   
   efforts:
     leg_max: 50.0

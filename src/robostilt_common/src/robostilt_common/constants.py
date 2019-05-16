@@ -34,7 +34,8 @@ class frame_list:
     THIRD_FRAME_REVOLUTE=single_frame("third_frame_revolute",[7])
     NONE=single_frame("none",[])
 
-class actuator_list:  
+class actuator_list:
+    count=8  
     third_frame_prismatic=single_actuator("third_frame_prismatic",0)
     leg_1=single_actuator("leg_1",1)
     leg_2=single_actuator("leg_2",2)

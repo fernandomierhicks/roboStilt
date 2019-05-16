@@ -23,14 +23,6 @@
 
     joint_state_controller"/>
 
-
-  <!--STOPPED-->
-  <node name="controller_spawner_stopped" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/robostilt" args="--stopped
-    leg_2_position_controller 
-    "/>
-
-
 <!--Start controllers-->
   <!--<node name="init_controllers" pkg="robostilt_control" type="init_controllers.py" respawn="false" output="screen"/>-->
 

@@ -64,9 +64,8 @@ class Motor:
         follow_trajectory_goal.trajectory = trajectory   
         #send goal and register callback when done 
         self.actionClient.send_goal(follow_trajectory_goal,done_cb=self._goal_done)
-
         #log info
-        #print_ros(trajectory.joint_names[0] + " new position set to: " + str(position_setpoint) +" old position is: " + str(self.position)+ " allowed time is is: " +str(time))
+        print_ros(trajectory.joint_names[0] + " new position set to: " + str(position_setpoint) +" old position is: " + str(self.position)+ " allowed time is is: " +str(time))
         self.is_moving=True  
         self.has_reached_goal=False 
 
@@ -82,8 +81,8 @@ class Motor:
         self.effort_limit_negative=effort_negative
 
     def set_effort_limits_to_max(self):
-        self.effort_limit_positive=p.effort.max_leg
-        self.effort_limit_negative=-1*p.effort.max_leg
+        self.effort_limit_positive= p.effort.leg_max
+        self.effort_limit_negative=-1*p.effort.leg_max
 
     def overide_effort_limits_for_time(self,duration):
         #the joint state callback will renable limits once duration is up.
@@ -126,24 +125,32 @@ class Motor:
     def _goal_done(self,state, result):
         #Triggers when action is completed       
         if(result.error_code==0):
-                #print_ros(self.name +" has reached goal. Pos= "+ str(self.position))
+                print_ros(self.name +" has reached goal. Pos= "+ str(self.position))
                 #reset client
                 self.actionClient.cancel_all_goals()
                 self.actionClient.stop_tracking_goal()  
                 self.is_moving=False  
                 self.has_reached_goal=True              
         else:
-                print_ros(self.name +" FAILED to reach goal.")
-                #double_print(getErrorInHumanReadableStr(result.error_code))
-                #double_print(result.error_string)        
-        
+                error_code_to_string =	{
+                    0: "SUCCESS",
+                    -1: "INVALID_GOAL",
+                    -2: "INVALID_JOINTS",
+                    -3: "OLDER_HEADER_TIMESTAMP",
+                    -4: "PATH_TOLERANCE_VIOLATED. Position error exceeded limit during move. Tracking fault",
+                    -5: "GOAL_TOLERANCE_VIOLATED. Move did not reach goal position with the tolerance needed in the allowed time",
+                    }
+                print_ros(self.name +" FAILED to reach goal." + error_code_to_string.get(result.error_code))
+                #print_ros(result.error_code)
+                #print_ros(result.error_string)        
+                self.has_reached_goal=False
 
 
 class Actuator:
     name= None
     motor = None
-    has_been_homed=None
-    is_supporting=None
+    has_been_homed=False
+    is_supporting=False
 
     def __init__(self,name):
          self.name=name
@@ -166,11 +173,11 @@ class actuators_state:
         self.rate=rospy.Rate(100) # 100hz     
         
         #8 actuators, actuator zero is defined above to enable autocomplete
-        for i in range(1, 8):
+        for i in range(1, C.ACTUATOR.count):
             newActuator=Actuator(C.ACTUATOR.getNameFromIndex(i))
             self.actuator.append(newActuator)  
 
-        for i in range(0, 8):
+        for i in range(0, C.ACTUATOR.count):
             self.actuator[i].motor.effort_limit=-100 
             self.actuator[i].motor.startActionServer()
 
@@ -191,28 +198,28 @@ class actuators_state:
             self.actuator[0].motor.position= data.position[6]
             self.actuator[0].motor.effort= data.effort[6]
 
-            for i in range(0, 7): 
+            for i in range(0, C.ACTUATOR.count-1): 
                 self.actuator[i+1].motor.position = data.position[i]#legs
                 self.actuator[i+1].motor.effort = data.effort[i]#legs
 
-            self.actuator[7].motor.position = data.position[7]
-            self.actuator[7].motor.effort = data.effort[7]
+            self.actuator[C.ACTUATOR.count-1].motor.position = data.position[7]
+            self.actuator[C.ACTUATOR.count-1].motor.effort = data.effort[7]
 
             #take care of offsets
            # for i in range(0, 8):
             #    self.actuator[i].motor.position = self.actuator[i].motor.position-self.actuator[i].motor.offset
             
             #Stop if we exceed torque limit
-            for i in range(0,8):
+            for i in range(0,C.ACTUATOR.count):
 
                 if(self.actuator[i].motor.effort_limit_negative!=None): #in case we havent initialized efort limit
                     if(self.actuator[i].motor.effort_limit_enabled==True):
                         if(self.actuator[i].motor.effort>self.actuator[i].motor.effort_limit_positive):
-                            print_ros(JointName.get(i) + " +EFFORT LIMIT FAULT. tripped with=" +str(self.actuator[i].motor.effort)  +" +limit is= " +str(self.actuator[i].motor.effort_limit_positive))
+                            print_ros(C.ACTUATOR.getNameFromIndex(i) + " +EFFORT LIMIT FAULT. tripped with=" +str(self.actuator[i].motor.effort)  +" +limit is= " +str(self.actuator[i].motor.effort_limit_positive))
                             self.actuator[i].motor.stop()
 
                         elif(self.actuator[i].motor.effort<self.actuator[i].motor.effort_limit_negative):      
-                            print_ros(JointName.get(i) + " -EFFORT LIMIT FAULT. tripped with=" +str(self.actuator[i].motor.effort)  +" -limit is= " +str(self.actuator[i].motor.effort_limit_negative))
+                            print_ros(C.ACTUATOR.getNameFromIndex(i) + " -EFFORT LIMIT FAULT. tripped with=" +str(self.actuator[i].motor.effort)  +" -limit is= " +str(self.actuator[i].motor.effort_limit_negative))
                             self.actuator[i].motor.stop()
                     else:
                         #Effort limit is not enabled, we are being temporarly overriden check since when and enable after timeout
@@ -225,14 +232,13 @@ class actuators_state:
     
     def have_all_actuators_reached_goal(self):
         result=True
-        for i in range(0 ,7):
+        for i in range(0 ,C.ACTUATOR.count):
             if(self.actuator[i].motor.has_reached_goal==False):
                 result=False
                 break
         return result
 
-    def wait_for_all_actuators_to_finish(self):
-       
+    def wait_for_all_actuators_to_finish(self):       
         while(self.have_all_actuators_reached_goal()==False):
             self.rate.sleep()
 
@@ -243,7 +249,7 @@ class actuators_state:
         while(self.actuator[0].motor.position==None):
             self.rate.sleep()
         #send all motors to their current position to reset the actionClient
-        for i in range(0 ,7):            
+        for i in range(0 ,C.ACTUATOR.count):            
             self.actuator[i].motor.assert_position()
         self.wait_for_all_actuators_to_finish()
         #print_ros("Done initializing motors")
