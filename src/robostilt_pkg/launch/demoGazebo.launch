@@ -19,10 +19,14 @@ Listen to robostilt/joint_states topic abd publish transforms to /tf
 -->
 <include file="$(find robostilt_control)/launch/control.launch"/> 
 
+
+
+<!--Safety-->
+<include file="$(find robostilt_safety)/launch/safety.launch"/> 
+
+
 <!--Opens rviz and loads config-->
 <include file="$(find robostilt_rviz)/launch/rviz.launch"/> 
-
-
 
 <!-- Opens gazebo world and spawns robot-->
 <!-- Updates the base to world TF from gazebo->rviz -->

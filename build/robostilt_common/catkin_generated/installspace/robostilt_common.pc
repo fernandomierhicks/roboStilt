@@ -3,6 +3,6 @@ prefix=/home/fernandomierhicks/robostilt/install
 Name: robostilt_common
 Description: Description of robostilt_common
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/fernandomierhicks/robostilt/install/include
 Libs: -L/home/fernandomierhicks/robostilt/install/lib 
-Requires: 
+Requires: message_runtime

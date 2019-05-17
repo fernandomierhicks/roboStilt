@@ -1,17 +1,27 @@
 # Parameters are retrieved from the ROS parameter server and exposed as an object. This enabled autocomplete while coding and avoid harcoding names on other files.
 #! /usr/bin/env python
 import rospy
-from  common import print_ros
+import functions as f
 
 
+class constraints:
+    #For some reason ros_control does not use these constriants ont he control.yaml
+    goal_pos= None     
+    goal_time= None
+    trajectory= None
 
+    @classmethod
+    def read(self):
+        constraints=rospy.get_param("robostilt/constraints")
+        self.goal_pos=constraints["goal_pos"]
+        self.goal_time=constraints["goal_time"]
+        self.trajectory=constraints["trajectory"]
+        f.print_ros("Parameters: constraints updated")
 
 class speed:
     lowering_legs= None     
     raising_legs= None
     prismatic= None
-
-    print_ros("went in")
 
     @classmethod
     def read(self):
@@ -19,7 +29,7 @@ class speed:
         self.lowering_legs=speeds["lowering_legs"]
         self.raising_legs=speeds["raising_legs"]
         self.prismatic=speeds["prismatic"]
-        print_ros("Parameters: speeds updated")
+        f.print_ros("Parameters: speeds updated")
 
 
 class dimension:
@@ -29,7 +39,7 @@ class dimension:
     def read(self):
         dimensions=rospy.get_param("robostilt/dimensions")
         self.nominal_walking_height=dimensions["nominal_walking_height"]
-        print_ros("Parameters: dimensions updated")
+        f.print_ros("Parameters: dimensions updated")
 
 
 class effort:
@@ -46,10 +56,11 @@ class effort:
 
 
 
-        print_ros("Parameters: efforts updated")
+        f.print_ros("Parameters: efforts updated")
 
 
 def read_from_parameter_server():
     speed.read()
     dimension.read()
     effort.read()
+    constraints.read()
