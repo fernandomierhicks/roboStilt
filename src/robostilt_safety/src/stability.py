@@ -9,6 +9,8 @@ from geometry_msgs.msg import Point
 from geometry_msgs.msg import PolygonStamped
 from robostilt_common.msg import RoboStiltStateMessage
 
+
+
 #Calculates robots center of mass and supporting polygon and publishes to topic
 
 class Calculator: 
@@ -24,6 +26,9 @@ class Calculator:
     pub_com = None
     mass=None
     links=None
+    #from robostilt message
+    supportingLegs=[False]*8
+    jointNames=[" "]*8
     
     def __init__(self):
         rospy.loginfo("Stability caluclations started")
@@ -33,7 +38,7 @@ class Calculator:
         #publishers
         self.pub_com = rospy.Publisher('/robostilt/safety/center_of_mass', PointStamped, queue_size=10)
         self.pub_projected = rospy.Publisher('/robostilt/safety/center_of_mass_projected', PointStamped, queue_size=10)
-        self.pub_suport_polygon = rospy.Publisher('/robostilt/safety/support_polygon_projected', PolygonStamped, queue_size=10)  
+        self.pub_suport_polygon = rospy.Publisher('/robostilt/safety/support_polygon', PolygonStamped, queue_size=10)  
                 
         #initialize calculation variables
         self.center_of_mass=PointStamped()
@@ -70,7 +75,8 @@ class Calculator:
 
     def _supporting_legs_callback(self, data):
         #Populate currently supporting legs
-        supportingLegs=data.is_supporting
+        self.jointNames=data.name
+        self.supportingLegs=data.is_supporting
 
     
     def start(self):        
@@ -79,21 +85,49 @@ class Calculator:
         rospy.sleep(1)
         rospy.loginfo("Started COM and support polygon calculations...")
         #loop for calculating the CoM while robot is not shutdown
-        while not rospy.is_shutdown():   
-            
-            self.calculateCenterOfMass()
-
-            
-
+        while not rospy.is_shutdown():               
+            self.calculateCenterOfMass()   
+            self.calculateSupportPolygon()
             #rospy.loginfo("COM of robot with respect to world is: "+ str(tf_com_location_to_world.point.x) + " , " + str(tf_com_location_to_world.point.y) +" , " + str(tf_com_location_to_world.point.z))
-
-
             try:
                 # catch exeption of moving backwarts in time, when restarting simulator
                 rate.sleep()
             except rospy.exceptions.ROSTimeMovedBackwardsException:
                 rospy.logwarn("We moved backwards in time. I hope you just resetted the simulation. If not there is something wrong")
+    
+    def calculateSupportPolygon(self):
+            point=[Point(),Point(),Point()]
+            support_area=PolygonStamped()
             
+
+            j=0
+            for i in range(0, 8):
+
+                if(self.supportingLegs[i]==True):                
+                    #processing a leg that is currently supporting robot                
+                    try:                        
+                        #get transform of each link with respect to base link
+                        self.tf_world_to_link = self.tfBuffer.lookup_transform("world", self.jointNames[i], rospy.Time())    
+                        #rospy.loginfo(self.tf_world_to_link)   #get structure of link
+                        point[j].x=self.tf_world_to_link.transform.translation.x
+                        point[j].y=self.tf_world_to_link.transform.translation.y
+                        point[j].z=0  
+                        support_area.polygon.points.append(point[j])
+                        j+=1
+
+                    except tf2_ros.TransformException as err:
+                        rospy.logerr("TF error in COM computation %s", err)
+            #rospy.loginfo(point)
+            #rospy.loginfo(support_area)
+
+            support_area.header.stamp=rospy.Time.now()
+            support_area.header.frame_id="world"
+            self.pub_suport_polygon.publish(support_area)
+
+                
+            
+                        
+           
     def calculateCenterOfMass(self):
             x = 0
             y = 0

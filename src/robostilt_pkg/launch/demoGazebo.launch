@@ -22,7 +22,7 @@ Listen to robostilt/joint_states topic abd publish transforms to /tf
 
 
 <!--Safety-->
-<include file="$(find robostilt_safety)/launch/safety.launch"/> 
+<!--<include file="$(find robostilt_safety)/launch/safety.launch"/> -->
 
 
 <!--Opens rviz and loads config-->

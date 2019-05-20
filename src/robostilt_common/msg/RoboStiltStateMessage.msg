@@ -16,4 +16,4 @@
 Header header
 
 string[] name
-bool[] is_supporting
+bool[] is_supporting  #legs are in indexes 1-6

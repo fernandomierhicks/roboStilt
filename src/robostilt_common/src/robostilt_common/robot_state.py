@@ -77,7 +77,7 @@ class robot_state:
         msg.header.stamp=rospy.Time.now()
         msg.name=[]
         msg.is_supporting=[]
-        for i in range (1, 7):
+        for i in range (0, C.ACTUATOR.count):
             msg.name.append(C.ACTUATOR.getNameFromIndex(i))
             msg.is_supporting.append(self.actuators.actuator[i].is_supporting) 
         self.publisher.publish(msg)
