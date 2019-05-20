@@ -18,7 +18,7 @@ class robot_state:
     def __init__(self):        
         f.print_ros("Robot_state setup started")
         #start robot_state node and topic publisher
-        self.publisher = rospy.Publisher('/robostilt/general_state_topic', RoboStiltStateMessage,queue_size=10)
+        self.publisher = rospy.Publisher('/robostilt/general_state_topic', RoboStiltStateMessage,queue_size=1, latch=True)
         rospy.init_node('robostilt_state_publisher', anonymous=True)
         
         self.actuators=actuators_state.actuators_state()  
@@ -41,7 +41,8 @@ class robot_state:
         #We are now supported by this frame
         self.supportingFrame=frame
         for i in indexes:
-            self.actuators.actuator[i].is_supporting=True
+            self.actuators.actuator[i].is_supporting=True       
+
         #update supporting legs topic
         self.update_robot_state_topic()
 
@@ -71,6 +72,14 @@ class robot_state:
             self.actuators.actuator[i].motor.set_position(position,p.speed.prismatic)
             self.actuators.wait_for_all_actuators_to_finish()
             f.print_ros("Moving third frame Prismatic to " + str(position) + " COMPLETED")
+
+    def move_actuator(self,actuator_index,position):
+            f.print_ros("Moving "+str(C.ACTUATOR.getNameFromIndex(actuator_index))+"  to " + str(position) + "...")
+            i=actuator_index            
+            self.actuators.actuator[i].motor.set_effort_limits_to_max() 
+            self.actuators.actuator[i].motor.set_position(position,p.speed.lowering_legs)
+            self.actuators.wait_for_all_actuators_to_finish()
+            f.print_ros("Moving "+str(C.ACTUATOR.getNameFromIndex(actuator_index))+"  to " + str(position) + "COMPLETED")
     
     def update_robot_state_topic(self):
         msg = RoboStiltStateMessage()

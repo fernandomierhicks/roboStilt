@@ -8,6 +8,8 @@ from geometry_msgs.msg import PointStamped
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import PolygonStamped
 from robostilt_common.msg import RoboStiltStateMessage
+import numpy as np
+import matplotlib.path as mpltPath
 
 
 
@@ -18,6 +20,7 @@ class Calculator:
     supportingLegs=None
     center_of_mass=None
     center_of_mass_projected=None
+    support_polygon=None
     tfBuffer=None
     listener = None
     link_origin = None
@@ -50,6 +53,44 @@ class Calculator:
         self.calculateTotalMass()
         #start continous calculations
         self.start()
+
+    def checkCGinsideSupportPolygon(self):
+        if(self.support_polygon!=None and len(self.support_polygon.points)>=3):
+            vertices=[]
+            codes=[]
+            x=0
+            y=0
+            numberOfPoints=len(self.support_polygon.points)
+            
+            #first point
+           
+            x=self.support_polygon.points[0].x
+            y=self.support_polygon.points[0].y
+            codes.append(mpltPath.Path.MOVETO)
+            vertices.append((x,y))
+
+            for i in range (1,(numberOfPoints)):
+                x=self.support_polygon.points[i].x
+                y=self.support_polygon.points[i].y
+                codes.append(mpltPath.Path.LINETO)
+                vertices.append((x,y))
+
+            #last point is same as first but with CLOSEPOLY code
+            x=self.support_polygon.points[0].x
+            y=self.support_polygon.points[0].y
+            codes.append(mpltPath.Path.CLOSEPOLY)
+            vertices.append((x,y))
+            
+            path = mpltPath.Path(vertices,codes)       
+
+            x=self.center_of_mass_projected.point.x
+            y=self.center_of_mass_projected.point.y     
+
+            if(path.contains_point((x,y))==False):       
+                rospy.logerr("ROBOT IS UNSTABLE, FALLING!!")
+                #do something else!!
+        else:
+            rospy.loginfo("Waiting for valid support polygon")
 
     def calculateTotalMass(self):
         
@@ -96,31 +137,40 @@ class Calculator:
                 rospy.logwarn("We moved backwards in time. I hope you just resetted the simulation. If not there is something wrong")
     
     def calculateSupportPolygon(self):
-            point=[Point(),Point(),Point()]
+            point=[]
             support_area=PolygonStamped()     
             j=0
             for i in range(0, 8):
+
+
+                if(self.supportingLegs[4]==True and self.supportingLegs[6]==True):
+                    #to publish polygon with correct order on vertices, need to swap legs 4 and 6 in case both are present
+                    if(i==4):
+                        i=6
+                    elif(i==6):
+                        i=4
+
                 if(self.supportingLegs[i]==True):                
                     #processing a leg that is currently supporting robot                
                     try:                        
                         #get transform of each link with respect to base link
                         self.tf_world_to_link = self.tfBuffer.lookup_transform("world", self.jointNames[i], rospy.Time())    
                         #rospy.loginfo(self.tf_world_to_link)   #get structure of link
+                        point.append(Point())
                         point[j].x=self.tf_world_to_link.transform.translation.x
                         point[j].y=self.tf_world_to_link.transform.translation.y
                         point[j].z=0  
-                        support_area.polygon.points.append(point[j])
-                        rospy.loginfo(str(j))
+                        support_area.polygon.points.append(point[j])                        
                         j+=1
 
                     except tf2_ros.TransformException as err:
                         rospy.logerr("TF error in COM computation %s", err)
             #rospy.loginfo(point)
-            #rospy.loginfo(support_area)
-
+            #rospy.loginfo(support_area.polygon)
             support_area.header.stamp=rospy.Time.now()
             support_area.header.frame_id="world"
             self.pub_suport_polygon.publish(support_area)
+            self.support_polygon=support_area.polygon
 
                 
             
@@ -177,6 +227,8 @@ class Calculator:
             self.center_of_mass_projected.point.z = 0 # zero height
 
             self.pub_projected.publish(self.center_of_mass_projected)
+
+            self.checkCGinsideSupportPolygon()
 
 
 if __name__ == '__main__':

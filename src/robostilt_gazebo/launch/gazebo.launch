@@ -31,8 +31,8 @@
 <node name="urdf_spawner_obstacle" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
         args=" -database bookshelf -gazebo -model bookshelf 
-        -x 1.6 
-        -y 0.5 
+        -x 1.5 
+        -y 0.3 
         -z 0.2 
         -R 1.57        
         "/>
