@@ -36,9 +36,9 @@ class Calculator:
         rospy.init_node('stability_calculations', anonymous=True)
         rospy.Subscriber("robostilt/general_state_topic", RoboStiltStateMessage, self._supporting_legs_callback)
         #publishers
-        self.pub_com = rospy.Publisher('/robostilt/safety/center_of_mass', PointStamped, queue_size=10)
-        self.pub_projected = rospy.Publisher('/robostilt/safety/center_of_mass_projected', PointStamped, queue_size=10)
-        self.pub_suport_polygon = rospy.Publisher('/robostilt/safety/support_polygon', PolygonStamped, queue_size=10)  
+        self.pub_com = rospy.Publisher('/robostilt/safety/center_of_mass', PointStamped, queue_size=1,latch=True)
+        self.pub_projected = rospy.Publisher('/robostilt/safety/center_of_mass_projected', PointStamped, queue_size=1,latch=True)
+        self.pub_suport_polygon = rospy.Publisher('/robostilt/safety/support_polygon', PolygonStamped, queue_size=1,latch=True)  
                 
         #initialize calculation variables
         self.center_of_mass=PointStamped()
@@ -97,12 +97,9 @@ class Calculator:
     
     def calculateSupportPolygon(self):
             point=[Point(),Point(),Point()]
-            support_area=PolygonStamped()
-            
-
+            support_area=PolygonStamped()     
             j=0
             for i in range(0, 8):
-
                 if(self.supportingLegs[i]==True):                
                     #processing a leg that is currently supporting robot                
                     try:                        
@@ -113,6 +110,7 @@ class Calculator:
                         point[j].y=self.tf_world_to_link.transform.translation.y
                         point[j].z=0  
                         support_area.polygon.points.append(point[j])
+                        rospy.loginfo(str(j))
                         j+=1
 
                     except tf2_ros.TransformException as err:
