@@ -1021,6 +1021,24 @@ robostilt_rviz/preinstall:
 .PHONY : robostilt_rviz/preinstall
 
 #=============================================================================
+# Directory level rules for directory robostilt_safety
+
+# Convenience name for "all" pass in the directory.
+robostilt_safety/all:
+
+.PHONY : robostilt_safety/all
+
+# Convenience name for "clean" pass in the directory.
+robostilt_safety/clean:
+
+.PHONY : robostilt_safety/clean
+
+# Convenience name for "preinstall" pass in the directory.
+robostilt_safety/preinstall:
+
+.PHONY : robostilt_safety/preinstall
+
+#=============================================================================
 # Directory level rules for directory robostilt_tf
 
 # Convenience name for "all" pass in the directory.

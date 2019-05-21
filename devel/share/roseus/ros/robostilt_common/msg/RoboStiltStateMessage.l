@@ -114,7 +114,7 @@
 Header header
 
 string[] name
-bool[] is_supporting
+bool[] is_supporting  #legs are in indexes 1-6
 ================================================================================
 MSG: std_msgs/Header
 # Standard metadata for higher-level stamped data types.

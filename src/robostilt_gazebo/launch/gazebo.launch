@@ -28,14 +28,47 @@
         "/>
 
 <!-- Spawn an obstacle into Gazebo.-->
-<node name="urdf_spawner_obstacle" pkg="gazebo_ros" type="spawn_model"
+<!--<node name="urdf_spawner_obstacle" pkg="gazebo_ros" type="spawn_model"
       respawn="false" output="screen"
         args=" -database bookshelf -gazebo -model bookshelf 
         -x 1.5 
         -y 0.3 
         -z 0.2 
         -R 1.57        
+        "/>-->
+
+<node name="urdf_spawner_obstacle" pkg="gazebo_ros" type="spawn_model"
+      respawn="false" output="screen"
+        args=" -file $(find robostilt_gazebo)/urdf/box.urdf -urdf -model my_box 
+        -x 2.2
+        -y 0.5 
+        -z 0.25                
+        "/>        
+
+<node name="urdf_spawner_obstacle2" pkg="gazebo_ros" type="spawn_model"
+      respawn="false" output="screen"
+        args=" -file $(find robostilt_gazebo)/urdf/box.urdf -urdf -model my_box2 
+        -x 1.5 
+        -y -0.3 
+        -z 0.25              
         "/>
+
+<node name="urdf_spawner_obstacle3" pkg="gazebo_ros" type="spawn_model"
+      respawn="false" output="screen"
+        args=" -file $(find robostilt_gazebo)/urdf/box.urdf -urdf -model my_box3 
+        -x 3.5 
+        -y 0 
+        -z 0.25              
+        "/>
+
+<node name="urdf_spawner_obstacle4" pkg="gazebo_ros" type="spawn_model"
+      respawn="false" output="screen"
+        args=" -file $(find robostilt_gazebo)/urdf/box.urdf -urdf -model my_box4 
+        -x 3.5 
+        -y 0 
+        -z 1.0              
+        "/>
+
 
 <!-- Updates the base to world TF from gazebo->rviz -->
 <node name="tf_base_link_broadcaster_gazebo_to_rviz" pkg="robostilt_gazebo" type="tf_broadcasterGazebo.py" respawn="false" output="screen"/>

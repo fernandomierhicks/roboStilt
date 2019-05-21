@@ -167,7 +167,7 @@ struct Definition< ::robostilt_common::RoboStiltStateMessage_<ContainerAllocator
 Header header\n\
 \n\
 string[] name\n\
-bool[] is_supporting\n\
+bool[] is_supporting  #legs are in indexes 1-6\n\
 ================================================================================\n\
 MSG: std_msgs/Header\n\
 # Standard metadata for higher-level stamped data types.\n\

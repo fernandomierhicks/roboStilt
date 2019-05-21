@@ -248,7 +248,32 @@
 
 <xacro:include filename="$(find robostilt_description)/urdf/robostilt.gazebo"/>
 
+ <!--  Hokuyo Laser Sensor-->
 
+<link name="hokuyo_link">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <cylinder length="0.1" radius="0.05"/>
+    </geometry>
+  </collision>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <cylinder length="0.1" radius="0.05"/>
+    </geometry>
+  </visual>
+  <inertial>
+    <mass value="1e-5" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+  </inertial>
+</link>
+<joint name="hokuyo_joint" type="fixed">  
+  <origin xyz="${frame_length_x/2.0+0.1} 0.0 0.0" rpy="0 0 -0.0"/>
+  <parent link="base_link"/>
+  <child link="hokuyo_link"/>
+</joint>
 
 
 

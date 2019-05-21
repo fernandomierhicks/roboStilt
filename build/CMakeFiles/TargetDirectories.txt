@@ -86,6 +86,13 @@
 /home/fernandomierhicks/robostilt/build/robostilt_rviz/CMakeFiles/install/local.dir
 /home/fernandomierhicks/robostilt/build/robostilt_rviz/CMakeFiles/test.dir
 /home/fernandomierhicks/robostilt/build/robostilt_rviz/CMakeFiles/edit_cache.dir
+/home/fernandomierhicks/robostilt/build/robostilt_safety/CMakeFiles/list_install_components.dir
+/home/fernandomierhicks/robostilt/build/robostilt_safety/CMakeFiles/install.dir
+/home/fernandomierhicks/robostilt/build/robostilt_safety/CMakeFiles/rebuild_cache.dir
+/home/fernandomierhicks/robostilt/build/robostilt_safety/CMakeFiles/install/strip.dir
+/home/fernandomierhicks/robostilt/build/robostilt_safety/CMakeFiles/install/local.dir
+/home/fernandomierhicks/robostilt/build/robostilt_safety/CMakeFiles/test.dir
+/home/fernandomierhicks/robostilt/build/robostilt_safety/CMakeFiles/edit_cache.dir
 /home/fernandomierhicks/robostilt/build/robostilt_tf/CMakeFiles/list_install_components.dir
 /home/fernandomierhicks/robostilt/build/robostilt_tf/CMakeFiles/install.dir
 /home/fernandomierhicks/robostilt/build/robostilt_tf/CMakeFiles/rebuild_cache.dir

@@ -15,6 +15,8 @@
  <!--COM Markers node -->
 <node name="stability_markers" pkg="robostilt_rviz" type="markers_stability.py" respawn="false" output="screen"/>
 
+<node name="obstacle_markers" pkg="robostilt_rviz" type="markers_obstacle.py" respawn="false" output="screen"/>
+
  <!--Interactrive Markers node 
 <node name="simple_marker" pkg="robostilt_rviz" type="simple_marker.py" respawn="false" output="screen"/>-->
 

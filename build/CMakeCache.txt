@@ -441,6 +441,12 @@ robostilt_rviz_BINARY_DIR:STATIC=/home/fernandomierhicks/robostilt/build/robosti
 robostilt_rviz_SOURCE_DIR:STATIC=/home/fernandomierhicks/robostilt/src/robostilt_rviz
 
 //Value Computed by CMake
+robostilt_safety_BINARY_DIR:STATIC=/home/fernandomierhicks/robostilt/build/robostilt_safety
+
+//Value Computed by CMake
+robostilt_safety_SOURCE_DIR:STATIC=/home/fernandomierhicks/robostilt/src/robostilt_safety
+
+//Value Computed by CMake
 robostilt_tf_BINARY_DIR:STATIC=/home/fernandomierhicks/robostilt/build/robostilt_tf
 
 //Value Computed by CMake
@@ -620,7 +626,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=13
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=14
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
