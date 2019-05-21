@@ -36,7 +36,7 @@ class Calculator:
     def __init__(self):
         rospy.loginfo("Stability caluclations started")
         #node
-        rospy.init_node('stability_calculations', anonymous=True)
+        rospy.init_node('safety_stability', anonymous=True)
         rospy.Subscriber("robostilt/general_state_topic", RoboStiltStateMessage, self._supporting_legs_callback)
         #publishers
         self.pub_com = rospy.Publisher('/robostilt/safety/center_of_mass', PointStamped, queue_size=1,latch=True)
@@ -72,7 +72,7 @@ class Calculator:
             for i in range (1,(numberOfPoints)):
                 x=self.support_polygon.points[i].x
                 y=self.support_polygon.points[i].y
-                codes.append(mpltPath.Path.LINETO)
+                codes.appendobstacle_detection(mpltPath.Path.LINETO)
                 vertices.append((x,y))
 
             #last point is same as first but with CLOSEPOLY code
@@ -90,7 +90,8 @@ class Calculator:
                 rospy.logerr("ROBOT IS UNSTABLE, FALLING!!")
                 #do something else!!
         else:
-            rospy.loginfo("Waiting for valid support polygon")
+            pass:
+            #rospy.loginfo("Waiting for valid support polygon")
 
     def calculateTotalMass(self):
         

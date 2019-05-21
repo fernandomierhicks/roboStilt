@@ -6,7 +6,7 @@ def str_trunc(number): #truncates number to 4 decimal places
 
 def print_ros(message):
     rospy.loginfo(message)
-    #print(message)
+    print(message)
 
 def wait_for_user():
     pass

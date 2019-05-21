@@ -3,12 +3,15 @@ import rospy
 import math
 from sensor_msgs.msg import LaserScan
 import matplotlib.path as mtplPath
-#Determines if there is an obstacle infront of the laser scanner. This induces the robot to move up before stepping forward
+from std_msgs.msg import Bool as bool_msg
+#Determines if there is an obstacle infront of the laser scanner that is whithin the obstacle area.
+# Obstacle area is defined in parameters YAML
+#This induces the robot to move up before stepping forward
 
 
-rospy.init_node('obstacle_detection', anonymous=True)
+rospy.init_node('safety_obstacle', anonymous=True)
 
-#pub = rospy.Publisher('/robostilt/safety/obstacle_in_front', LaserScan, queue_size=1,latch=True) 
+pub = rospy.Publisher('/robostilt/safety/obstacle_in_front', bool_msg, queue_size=1,latch=True) 
 x_lenght=rospy.get_param("robostilt/dimensions/obstacle_area_lenght_x")
 y_lenght=rospy.get_param("robostilt/dimensions/obstacle_area_width_y")
 
@@ -40,7 +43,8 @@ def _laser_callback(scan):
         currentAngle+=angleIncrement 
 
     objectDetected=any(path.contains_points(tuple(xyPoints)))
-    rospy.loginfo(objectDetected)
+    pub.publish(objectDetected)
+    #rospy.loginfo(objectDetected)
 
 
 rospy.Subscriber("robostilt/laser_scan", LaserScan, _laser_callback)

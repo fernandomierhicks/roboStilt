@@ -91,7 +91,7 @@ def _support_polygon_callback(data):
 
     if ( 3 <= len(data.polygon.points) <=6):
 
-        rospy.loginfo("Entering with #legs: " +str(len(data.polygon.points)))
+        #rospy.loginfo("Entering with #legs: " +str(len(data.polygon.points)))
         #initial triangle    
         markers[i].points.append(data.polygon.points[0])
         markers[i].colors.append(color)
@@ -118,8 +118,9 @@ def _support_polygon_callback(data):
         markers[i].points=[]
         
     else:
+        pass
         #Error, to few or too many supporting legs
-        rospy.loginfo("Error, to few or too many supporting legs. Number of supporting legs: " + str(len(data.polygon.points)))
+        #rospy.loginfo("Error, to few or too many supporting legs. Number of supporting legs: " + str(len(data.polygon.points)))
 
 
 

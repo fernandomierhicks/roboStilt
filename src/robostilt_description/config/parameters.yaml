@@ -17,7 +17,7 @@ robostilt:
     leg_6_offset:  0.0
     third_frame_revolute_offset : 0.0
 
-    nominal_walking_height: -1.0  #How much to extend legs from zero position when walking normally.
+    nominal_walking_height: -1.8  #How much to extend legs from zero position when walking normally.
 
     obstacle_area_lenght_x: 0.5 
     obstacle_area_width_y: 1.5
@@ -31,6 +31,9 @@ robostilt:
     leg_max: 50.0
     lowering_leg_min: 0
     lowering_leg_max: 100
+  
+  angles:
+    leveling_max_error: 0.0872665  #triggers alarm if level is ever off by this much.
 
 
   
