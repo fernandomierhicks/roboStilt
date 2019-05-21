@@ -1,2 +1,2 @@
-robostilt_common:robostilt_control:robostilt_description:robostilt_gait:robostilt_gazebo:robostilt_main:robostilt_pkg:robostilt_rqt:robostilt_rviz:robostilt_safety:robostilt_tf
+robostilt_common:robostilt_control:robostilt_description:robostilt_gait:robostilt_gazebo:robostilt_main:robostilt_nav:robostilt_pkg:robostilt_rqt:robostilt_rviz:robostilt_safety:robostilt_tf
 -DCATKIN_DEVEL_PREFIX=/home/fernandomierhicks/robostilt/devel -DCMAKE_INSTALL_PREFIX=/home/fernandomierhicks/robostilt/install -G Unix Makefiles

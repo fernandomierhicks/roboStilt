@@ -3,7 +3,7 @@
  <!--stability polygon check -->
 <node name="safety_stability" pkg="robostilt_safety" type="stability.py" respawn="false" output="screen"/>
 
-<node name="safety_obstacles" pkg="robostilt_safety" type="obstacles.py" respawn="false" output="screen"/>
+<node name="safety_obstacles" pkg="robostilt_safety" type="obstacle.py" respawn="false" output="screen"/>
 
 </launch>
 

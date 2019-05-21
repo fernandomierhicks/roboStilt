@@ -8,8 +8,8 @@ from geometry_msgs.msg import PointStamped
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import PolygonStamped
 from robostilt_common.msg import RoboStiltStateMessage
-import numpy as np
 import matplotlib.path as mpltPath
+from sensor_msgs.msg import JointState
 
 
 
@@ -36,8 +36,9 @@ class Calculator:
     def __init__(self):
         rospy.loginfo("Stability caluclations started")
         #node
-        rospy.init_node('safety_stability', anonymous=True)
+        rospy.init_node('stability_calculations', anonymous=True)
         rospy.Subscriber("robostilt/general_state_topic", RoboStiltStateMessage, self._supporting_legs_callback)
+        
         #publishers
         self.pub_com = rospy.Publisher('/robostilt/safety/center_of_mass', PointStamped, queue_size=1,latch=True)
         self.pub_projected = rospy.Publisher('/robostilt/safety/center_of_mass_projected', PointStamped, queue_size=1,latch=True)
@@ -49,6 +50,11 @@ class Calculator:
         self.tfBuffer = tf2_ros.Buffer()
         self.listener = tf2_ros.TransformListener(self.tfBuffer)
         self.link_origin = geometry_msgs.msg.PointStamped()
+
+        #wait for joint states to be published, to avoid errors
+        rospy.wait_for_message("/robostilt/joint_states", JointState)
+
+
         #get mass     
         self.calculateTotalMass()
         #start continous calculations
@@ -72,7 +78,7 @@ class Calculator:
             for i in range (1,(numberOfPoints)):
                 x=self.support_polygon.points[i].x
                 y=self.support_polygon.points[i].y
-                codes.appendobstacle_detection(mpltPath.Path.LINETO)
+                codes.append(mpltPath.Path.LINETO)
                 vertices.append((x,y))
 
             #last point is same as first but with CLOSEPOLY code
@@ -90,7 +96,7 @@ class Calculator:
                 rospy.logerr("ROBOT IS UNSTABLE, FALLING!!")
                 #do something else!!
         else:
-            pass:
+            pass
             #rospy.loginfo("Waiting for valid support polygon")
 
     def calculateTotalMass(self):

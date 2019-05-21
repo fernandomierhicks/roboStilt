@@ -1,0 +1,8 @@
+prefix=/home/fernandomierhicks/robostilt/devel
+
+Name: robostilt_nav
+Description: Description of robostilt_nav
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/fernandomierhicks/robostilt/devel/lib 
+Requires: 

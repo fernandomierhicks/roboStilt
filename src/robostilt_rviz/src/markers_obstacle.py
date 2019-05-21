@@ -26,7 +26,7 @@ for i in range (0,len(indexes)):
     markers[i].action = Marker.ADD
 
 
-rospy.init_node('markers_obstacles', anonymous=True)
+rospy.init_node('markers_obstacles', anonymous=False)
 pub_markers = rospy.Publisher('/markers/obstacles', Marker, queue_size=1,latch=True)
 
 

@@ -3,4 +3,8 @@
 <!--publish once the state of robot-->
 <node pkg="rostopic" type="rostopic" name="rostopic" args="pub -1 /gazebo/set_model_state gazebo_msgs/ModelState '{model_name: robostilt, pose: { position: { x: 0, y: 0, z: 1 }, orientation: {x: 0, y: 0, z: 0, w: 0 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular: { x: 0, y: 0, z: 0}  }, reference_frame: world }'"/>
 
+<!--<node name="callService" pkg="robostilt_gazebo" type="callService.py" args="/robostilt_state/set_inital_state"/>-->
+
+<node pkg="rosservice" type="rosservice" name="rosservice" args="call /robostilt_state/set_inital_state"/>
+
 </launch>

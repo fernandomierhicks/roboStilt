@@ -126,7 +126,7 @@ def _support_polygon_callback(data):
 
 
 
-rospy.init_node('markers_stability', anonymous=True)
+rospy.init_node('markers_stability', anonymous=False)
 pub_markers = rospy.Publisher('/markers/stability', Marker, queue_size=1)
 
 rospy.Subscriber("/robostilt/safety/center_of_mass", PointStamped, _COM_callback)

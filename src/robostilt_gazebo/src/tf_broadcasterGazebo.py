@@ -39,7 +39,7 @@ def handle_robostilt_pose(msg):
 
 
 if __name__ == '__main__':
-    rospy.init_node('tf_base_link_broadcaster_gazebo_to_rviz')   
+    rospy.init_node('tf_base_link_broadcaster_gazebo_to_rviz', anonymous=False)   
     #Subscribe to link_states coming from Gazebo.
     rospy.Subscriber("/gazebo/model_states",ModelStates,handle_robostilt_pose)
     rospy.spin()

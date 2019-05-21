@@ -55,6 +55,7 @@ include robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/pr
 
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RoboStiltStateMessage.py
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py
 
 
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RoboStiltStateMessage.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
@@ -68,9 +69,15 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernand
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python msg __init__.py for robostilt_common"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg --initpy
 
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RoboStiltStateMessage.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python srv __init__.py for robostilt_common"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv --initpy
+
 robostilt_common_generate_messages_py: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RoboStiltStateMessage.py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py
+robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py
 robostilt_common_generate_messages_py: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/build.make
 
 .PHONY : robostilt_common_generate_messages_py

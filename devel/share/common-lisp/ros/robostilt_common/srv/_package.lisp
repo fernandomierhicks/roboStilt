@@ -1,0 +1,10 @@
+(cl:defpackage robostilt_common-srv
+  (:use )
+  (:export
+   "EMPTY_CALL_BOOL_RESULT"
+   "<EMPTY_CALL_BOOL_RESULT-REQUEST>"
+   "EMPTY_CALL_BOOL_RESULT-REQUEST"
+   "<EMPTY_CALL_BOOL_RESULT-RESPONSE>"
+   "EMPTY_CALL_BOOL_RESULT-RESPONSE"
+  ))
+
