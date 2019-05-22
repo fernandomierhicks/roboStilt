@@ -33,7 +33,8 @@ class Obstacle():
             y = math.sin(current_angle)*msg.ranges[i]
             xy_points.append((x, y))
             current_angle += angle_increment
-
+        if(self.path == None):
+            self.createPath()
         object_detected = any(self.path.contains_points(tuple(xy_points)))
         self.publisher.publish(object_detected)
         # rospy.loginfo(objectDetected)
@@ -52,7 +53,14 @@ class Obstacle():
         # Publishers
         self.publisher = rospy.Publisher(
             '/robostilt/safety/obstacle_in_front', MsgBool, queue_size=1, latch=True)
-    # Subscribers
+
+        # get parameters
+        self.x_length = rospy.get_param(
+            "robostilt/dimensions/obstacle_area_length_x")
+        self.y_length = rospy.get_param(
+            "robostilt/dimensions/obstacle_area_width_y")
+
+        # Subscribers
         rospy.Subscriber("robostilt/laser_scan",
                          LaserScan, self._laser_callback)
         # Services
@@ -62,20 +70,15 @@ class Obstacle():
         rospy.loginfo("Waiting for message on topic " + topic_name + " ...")
         rospy.wait_for_message(topic_name, LaserScan)
 
-        # get parameters
-        self.x_length = rospy.get_param(
-            "robostilt/dimensions/obstacle_area_lenght_x")
-        self.y_length = rospy.get_param(
-            "robostilt/dimensions/obstacle_area_width_y")
     # ---------------------------------------------------------------------------------------------------------  METHODS
 
     def createPath(self):
         path_data = [
             (MtplPath.Path.MOVETO, (0, 0)),
-            (MtplPath.Path.LINETO, (0, self.y_lenght/-2)),
-            (MtplPath.Path.LINETO, (self.x_lenght, self.y_lenght/-2)),
-            (MtplPath.Path.LINETO, (self.x_lenght, self.y_lenght/2)),
-            (MtplPath.Path.LINETO, (0, self.y_lenght/2)),
+            (MtplPath.Path.LINETO, (0, self.y_length/-2)),
+            (MtplPath.Path.LINETO, (self.x_length, self.y_length/-2)),
+            (MtplPath.Path.LINETO, (self.x_length, self.y_length/2)),
+            (MtplPath.Path.LINETO, (0, self.y_length/2)),
             (MtplPath.Path.CLOSEPOLY, (0, 0))
         ]
         codes, verts = zip(*path_data)

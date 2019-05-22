@@ -5,6 +5,7 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs(gtest)
+subdirs(robostilt_actuators)
 subdirs(robostilt_description)
 subdirs(robostilt_gazebo)
 subdirs(robostilt_main)

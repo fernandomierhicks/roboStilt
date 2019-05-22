@@ -19,7 +19,7 @@ robostilt:
 
     nominal_walking_height: -1.8  #How much to extend legs from zero position when walking normally.
 
-    obstacle_area_lenght_x: 0.5 
+    obstacle_area_length_x: 0.5 
     obstacle_area_width_y: 1.5
 
   speeds:

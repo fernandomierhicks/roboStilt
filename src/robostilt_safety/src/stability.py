@@ -7,7 +7,7 @@ from urdf_parser_py.urdf import URDF
 from geometry_msgs.msg import PointStamped
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import PolygonStamped
-from robostilt_common.msg import RoboStiltStateMessage
+from robostilt_common.msg import ActuatorState
 import matplotlib.path as mpltPath
 from sensor_msgs.msg import JointState
 
@@ -35,9 +35,9 @@ class Stability:
 # ---------------------------------------------------------------------------------------------------------  CALLBACKS
 
 
-    def _actuators_state_callback(self, msg):
+    def _actuator_states_callback(self, msg):
         self.joint_names = msg.name
-        self.supporting_legs = msg.is_supporting
+        self.supporting_legs = msg.is_supporting_weight
 
 # ---------------------------------------------------------------------------------------------------------  ROS
     def setup_ros_interface(self):
@@ -58,15 +58,15 @@ class Stability:
         self.pub_suport_polygon = rospy.Publisher(
             '/robostilt/safety/support_polygon', PolygonStamped, queue_size=1, latch=True)
         # Subscribers
-        rospy.Subscriber("robostilt/actuators_state", RoboStiltStateMessage,
-                         self._actuators_state_callback)
+        rospy.Subscriber("robostilt/actuator_states", ActuatorState,
+                         self._actuator_states_callback)
         # Services
 
         # wait for...
         topic_name = "/robostilt/frames_state"
 
         rospy.loginfo("Waiting for message on topic "+topic_name + " ...")
-        rospy.wait_for_message(topic_name, RoboStiltStateMessage)
+        rospy.wait_for_message(topic_name, ActuatorState)
 
 # ---------------------------------------------------------------------------------------------------------  INIT
 

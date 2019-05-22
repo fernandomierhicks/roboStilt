@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/robostilt_common_generate_messages_cpp"
-  "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/RoboStiltStateMessage.h"
+  "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/ActuatorState.h"
+  "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h"
 )
 
 # Per-language clean rules from dependency scanning.

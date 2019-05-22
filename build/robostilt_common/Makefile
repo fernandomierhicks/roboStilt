@@ -99,16 +99,16 @@ install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
 
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
+# Special rule for the target test
+test/fast: test
 
-.PHONY : edit_cache/fast
+.PHONY : test/fast
 
 # Special rule for the target install
 install: preinstall
@@ -122,16 +122,16 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
 
-# Special rule for the target test
-test/fast: test
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
 
-.PHONY : test/fast
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,21 +166,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule
-
-# Convenience name for target.
-robostilt_common_gencpp: robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule
-
-.PHONY : robostilt_common_gencpp
-
-# fast build rule for target.
-robostilt_common_gencpp/fast:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/build
-.PHONY : robostilt_common_gencpp/fast
-
-# Convenience name for target.
 robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule:
 	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule
@@ -211,49 +196,34 @@ robostilt_common_generate_messages_py/fast:
 .PHONY : robostilt_common_generate_messages_py/fast
 
 # Convenience name for target.
-robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage.dir/rule:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage.dir/rule
-.PHONY : robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage.dir/rule
+robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule
 
 # Convenience name for target.
-_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage.dir/rule
+robostilt_common_gennodejs: robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule
 
-.PHONY : _robostilt_common_generate_messages_check_deps_RoboStiltStateMessage
+.PHONY : robostilt_common_gennodejs
 
 # fast build rule for target.
-_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage/fast:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RoboStiltStateMessage.dir/build
-.PHONY : _robostilt_common_generate_messages_check_deps_RoboStiltStateMessage/fast
+robostilt_common_gennodejs/fast:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/build.make robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/build
+.PHONY : robostilt_common_gennodejs/fast
 
 # Convenience name for target.
-robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule
+robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState.dir/rule:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState.dir/rule
+.PHONY : robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState.dir/rule
 
 # Convenience name for target.
-robostilt_common_generate_messages_lisp: robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule
+_robostilt_common_generate_messages_check_deps_ActuatorState: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState.dir/rule
 
-.PHONY : robostilt_common_generate_messages_lisp
+.PHONY : _robostilt_common_generate_messages_check_deps_ActuatorState
 
 # fast build rule for target.
-robostilt_common_generate_messages_lisp/fast:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build
-.PHONY : robostilt_common_generate_messages_lisp/fast
-
-# Convenience name for target.
-robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule
-
-# Convenience name for target.
-robostilt_common_generate_messages: robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule
-
-.PHONY : robostilt_common_generate_messages
-
-# fast build rule for target.
-robostilt_common_generate_messages/fast:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build
-.PHONY : robostilt_common_generate_messages/fast
+_robostilt_common_generate_messages_check_deps_ActuatorState/fast:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_ActuatorState/fast
 
 # Convenience name for target.
 robostilt_common/CMakeFiles/robostilt_common_geneus.dir/rule:
@@ -271,19 +241,49 @@ robostilt_common_geneus/fast:
 .PHONY : robostilt_common_geneus/fast
 
 # Convenience name for target.
-robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule
+robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/rule:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/rule
+.PHONY : robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/rule
 
 # Convenience name for target.
-robostilt_common_generate_messages_eus: robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule
+_robostilt_common_generate_messages_check_deps_SetPosition: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/rule
 
-.PHONY : robostilt_common_generate_messages_eus
+.PHONY : _robostilt_common_generate_messages_check_deps_SetPosition
 
 # fast build rule for target.
-robostilt_common_generate_messages_eus/fast:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build
-.PHONY : robostilt_common_generate_messages_eus/fast
+_robostilt_common_generate_messages_check_deps_SetPosition/fast:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_SetPosition/fast
+
+# Convenience name for target.
+robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule
+
+# Convenience name for target.
+robostilt_common_generate_messages: robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule
+
+.PHONY : robostilt_common_generate_messages
+
+# fast build rule for target.
+robostilt_common_generate_messages/fast:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build
+.PHONY : robostilt_common_generate_messages/fast
+
+# Convenience name for target.
+robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule
+
+# Convenience name for target.
+robostilt_common_gencpp: robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule
+
+.PHONY : robostilt_common_gencpp
+
+# fast build rule for target.
+robostilt_common_gencpp/fast:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/build
+.PHONY : robostilt_common_gencpp/fast
 
 # Convenience name for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/rule:
@@ -299,6 +299,36 @@ robostilt_common_generate_messages_nodejs: robostilt_common/CMakeFiles/robostilt
 robostilt_common_generate_messages_nodejs/fast:
 	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build
 .PHONY : robostilt_common_generate_messages_nodejs/fast
+
+# Convenience name for target.
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+robostilt_common_generate_messages_eus: robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule
+
+.PHONY : robostilt_common_generate_messages_eus
+
+# fast build rule for target.
+robostilt_common_generate_messages_eus/fast:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build
+.PHONY : robostilt_common_generate_messages_eus/fast
+
+# Convenience name for target.
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+robostilt_common_generate_messages_lisp: robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule
+
+.PHONY : robostilt_common_generate_messages_lisp
+
+# fast build rule for target.
+robostilt_common_generate_messages_lisp/fast:
+	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build
+.PHONY : robostilt_common_generate_messages_lisp/fast
 
 # Convenience name for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/rule:
@@ -330,21 +360,6 @@ robostilt_common_genlisp/fast:
 	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genlisp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genlisp.dir/build
 .PHONY : robostilt_common_genlisp/fast
 
-# Convenience name for target.
-robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule
-
-# Convenience name for target.
-robostilt_common_gennodejs: robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule
-
-.PHONY : robostilt_common_gennodejs
-
-# fast build rule for target.
-robostilt_common_gennodejs/fast:
-	cd /home/fernandomierhicks/robostilt/build && $(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/build.make robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/build
-.PHONY : robostilt_common_gennodejs/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -353,23 +368,24 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... install/local"
-	@echo "... list_install_components"
-	@echo "... install/strip"
-	@echo "... edit_cache"
-	@echo "... robostilt_common_gencpp"
 	@echo "... robostilt_common_genpy"
 	@echo "... robostilt_common_generate_messages_py"
-	@echo "... _robostilt_common_generate_messages_check_deps_RoboStiltStateMessage"
-	@echo "... robostilt_common_generate_messages_lisp"
-	@echo "... install"
-	@echo "... robostilt_common_generate_messages"
+	@echo "... robostilt_common_gennodejs"
+	@echo "... list_install_components"
+	@echo "... install/strip"
+	@echo "... _robostilt_common_generate_messages_check_deps_ActuatorState"
 	@echo "... test"
 	@echo "... robostilt_common_geneus"
-	@echo "... robostilt_common_generate_messages_eus"
+	@echo "... _robostilt_common_generate_messages_check_deps_SetPosition"
+	@echo "... install"
+	@echo "... robostilt_common_generate_messages"
+	@echo "... edit_cache"
+	@echo "... robostilt_common_gencpp"
 	@echo "... robostilt_common_generate_messages_nodejs"
+	@echo "... robostilt_common_generate_messages_eus"
+	@echo "... robostilt_common_generate_messages_lisp"
 	@echo "... robostilt_common_generate_messages_cpp"
 	@echo "... robostilt_common_genlisp"
-	@echo "... robostilt_common_gennodejs"
 .PHONY : help
 
 

@@ -117,6 +117,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/fernandomierhicks/robostilt/build/gtest/cmake_install.cmake")
+  include("/home/fernandomierhicks/robostilt/build/robostilt_actuators/cmake_install.cmake")
   include("/home/fernandomierhicks/robostilt/build/robostilt_description/cmake_install.cmake")
   include("/home/fernandomierhicks/robostilt/build/robostilt_gazebo/cmake_install.cmake")
   include("/home/fernandomierhicks/robostilt/build/robostilt_main/cmake_install.cmake")

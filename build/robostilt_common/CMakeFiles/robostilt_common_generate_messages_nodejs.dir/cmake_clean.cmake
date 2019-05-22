@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/robostilt_common_generate_messages_nodejs"
-  "/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/RoboStiltStateMessage.js"
+  "/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/ActuatorState.js"
+  "/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/SetPosition.js"
 )
 
 # Per-language clean rules from dependency scanning.

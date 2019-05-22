@@ -5,6 +5,6 @@
   :depends-on (:roslisp-msg-protocol :roslisp-utils :std_msgs-msg
 )
   :components ((:file "_package")
-    (:file "RoboStiltStateMessage" :depends-on ("_package_RoboStiltStateMessage"))
-    (:file "_package_RoboStiltStateMessage" :depends-on ("_package"))
+    (:file "ActuatorState" :depends-on ("_package_ActuatorState"))
+    (:file "_package_ActuatorState" :depends-on ("_package"))
   ))

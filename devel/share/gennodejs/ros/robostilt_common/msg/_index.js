@@ -1,8 +1,8 @@
 
 "use strict";
 
-let RoboStiltStateMessage = require('./RoboStiltStateMessage.js');
+let ActuatorState = require('./ActuatorState.js');
 
 module.exports = {
-  RoboStiltStateMessage: RoboStiltStateMessage,
+  ActuatorState: ActuatorState,
 };

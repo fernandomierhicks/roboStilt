@@ -384,6 +384,12 @@ pluginlib_DIR:PATH=/opt/ros/kinetic/share/pluginlib/cmake
 realtime_tools_DIR:PATH=/opt/ros/kinetic/share/realtime_tools/cmake
 
 //Value Computed by CMake
+robostilt_actuators_BINARY_DIR:STATIC=/home/fernandomierhicks/robostilt/build/robostilt_actuators
+
+//Value Computed by CMake
+robostilt_actuators_SOURCE_DIR:STATIC=/home/fernandomierhicks/robostilt/src/robostilt_actuators
+
+//Value Computed by CMake
 robostilt_common_BINARY_DIR:STATIC=/home/fernandomierhicks/robostilt/build/robostilt_common
 
 //Value Computed by CMake
@@ -632,7 +638,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=15
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=16
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
