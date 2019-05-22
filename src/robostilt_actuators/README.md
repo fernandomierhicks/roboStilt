@@ -12,7 +12,7 @@ This package takes care of the low level to midlevel abstractions level of the r
 | **Services available** | step_forward(stroke,rotation) <br>step_backward(stroke,rotation) <br />set_fault(FAULT_CODE,SOURCE) clear_fault() |
 |      **Triggers**      |                                                              |
 
-
+  _
 
 |       Node name        | actuator_states                                              |
 | :--------------------: | ------------------------------------------------------------ |
