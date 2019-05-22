@@ -1,0 +1,42 @@
+<launch>
+
+<!-- ARGUMENTS -->
+
+
+<!-- PARAMETERS -->
+
+
+<!-- Launch files -->
+
+
+<!--Load parameters and URDF model into parameter server-->
+<include file="$(find robostilt_description)/launch/init_robot.launch"/> 
+
+<!-- 
+Publish joint states from gazebo into robostilt/joint_states topic
+
+Listen to robostilt/joint_states topic abd publish transforms to /tf
+-->
+<include file="$(find robostilt_control)/launch/control.launch"/> 
+
+
+
+<!--Safety-->
+<include file="$(find robostilt_safety)/launch/safety.launch"/> 
+
+
+<!--Opens rviz and loads config-->
+<include file="$(find robostilt_rviz)/launch/rviz.launch"/> 
+
+<!-- Opens gazebo world and spawns robot-->
+<!-- Updates the base to world TF from gazebo->rviz -->
+<include file="$(find robostilt_gazebo)/launch/gazebo.launch"/>
+
+<!-- PID tuning RQT gui -->
+
+<node name = "rqt" pkg = "rqt_multiplot" type = "rqt_multiplot" respawn = "false" output = "screen" args = ""/> 
+
+
+</launch>
+
+
