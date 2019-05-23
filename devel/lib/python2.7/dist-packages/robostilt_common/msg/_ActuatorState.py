@@ -7,19 +7,25 @@ import struct
 
 
 class ActuatorState(genpy.Message):
-  _md5sum = "b118f895afbdb74c43c844a60fe2697e"
+  _md5sum = "c8adcf30a4a8d2cd998962d19cef108a"
   _type = "robostilt_common/ActuatorState"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """# This is a message that holds extended data for a single actuator
 
 string  name
 int32   index
+
 float64 position
+float64 position_setpoint   #trajectorized setpoint
+float64 position_goal       #long term goal
+
 float64 velocity
+float64 velocity_setpoint   #trajectorized velocity
+
 float64 effort
 float64 effort_limit
 
-float64 position_setpoint
+
 float32 manipulation
 float32 progress
 
@@ -32,8 +38,8 @@ bool is_supporting_weight
 
 
 """
-  __slots__ = ['name','index','position','velocity','effort','effort_limit','position_setpoint','manipulation','progress','is_moving','is_ready','has_been_homed','is_supporting_weight']
-  _slot_types = ['string','int32','float64','float64','float64','float64','float64','float32','float32','bool','bool','bool','bool']
+  __slots__ = ['name','index','position','position_setpoint','position_goal','velocity','velocity_setpoint','effort','effort_limit','manipulation','progress','is_moving','is_ready','has_been_homed','is_supporting_weight']
+  _slot_types = ['string','int32','float64','float64','float64','float64','float64','float64','float64','float32','float32','bool','bool','bool','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -43,7 +49,7 @@ bool is_supporting_weight
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       name,index,position,velocity,effort,effort_limit,position_setpoint,manipulation,progress,is_moving,is_ready,has_been_homed,is_supporting_weight
+       name,index,position,position_setpoint,position_goal,velocity,velocity_setpoint,effort,effort_limit,manipulation,progress,is_moving,is_ready,has_been_homed,is_supporting_weight
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -58,14 +64,18 @@ bool is_supporting_weight
         self.index = 0
       if self.position is None:
         self.position = 0.
+      if self.position_setpoint is None:
+        self.position_setpoint = 0.
+      if self.position_goal is None:
+        self.position_goal = 0.
       if self.velocity is None:
         self.velocity = 0.
+      if self.velocity_setpoint is None:
+        self.velocity_setpoint = 0.
       if self.effort is None:
         self.effort = 0.
       if self.effort_limit is None:
         self.effort_limit = 0.
-      if self.position_setpoint is None:
-        self.position_setpoint = 0.
       if self.manipulation is None:
         self.manipulation = 0.
       if self.progress is None:
@@ -82,10 +92,12 @@ bool is_supporting_weight
       self.name = ''
       self.index = 0
       self.position = 0.
+      self.position_setpoint = 0.
+      self.position_goal = 0.
       self.velocity = 0.
+      self.velocity_setpoint = 0.
       self.effort = 0.
       self.effort_limit = 0.
-      self.position_setpoint = 0.
       self.manipulation = 0.
       self.progress = 0.
       self.is_moving = False
@@ -112,7 +124,7 @@ bool is_supporting_weight
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_i5d2f4B().pack(_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
+      buff.write(_get_struct_i7d2f4B().pack(_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -134,8 +146,8 @@ bool is_supporting_weight
         self.name = str[start:end]
       _x = self
       start = end
-      end += 56
-      (_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i5d2f4B().unpack(str[start:end])
+      end += 72
+      (_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i7d2f4B().unpack(str[start:end])
       self.is_moving = bool(self.is_moving)
       self.is_ready = bool(self.is_ready)
       self.has_been_homed = bool(self.has_been_homed)
@@ -159,7 +171,7 @@ bool is_supporting_weight
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_i5d2f4B().pack(_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
+      buff.write(_get_struct_i7d2f4B().pack(_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -182,8 +194,8 @@ bool is_supporting_weight
         self.name = str[start:end]
       _x = self
       start = end
-      end += 56
-      (_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i5d2f4B().unpack(str[start:end])
+      end += 72
+      (_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i7d2f4B().unpack(str[start:end])
       self.is_moving = bool(self.is_moving)
       self.is_ready = bool(self.is_ready)
       self.has_been_homed = bool(self.has_been_homed)
@@ -196,9 +208,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_i5d2f4B = None
-def _get_struct_i5d2f4B():
-    global _struct_i5d2f4B
-    if _struct_i5d2f4B is None:
-        _struct_i5d2f4B = struct.Struct("<i5d2f4B")
-    return _struct_i5d2f4B
+_struct_i7d2f4B = None
+def _get_struct_i7d2f4B():
+    global _struct_i7d2f4B
+    if _struct_i7d2f4B is None:
+        _struct_i7d2f4B = struct.Struct("<i7d2f4B")
+    return _struct_i7d2f4B

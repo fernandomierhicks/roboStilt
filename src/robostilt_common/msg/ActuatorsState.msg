@@ -13,6 +13,6 @@ uint8 THIRD_FRAME_REVOLUTE = 7
 
 Header header
 
-ActuatorState[] actuators
+SingleActuator[] actuators
 bool have_all_been_homed
 bool all_are_ready

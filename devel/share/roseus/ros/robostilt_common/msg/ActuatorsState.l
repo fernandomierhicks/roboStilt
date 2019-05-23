@@ -49,7 +49,7 @@
   (:init
    (&key
     ((:header __header) (instance std_msgs::Header :init))
-    ((:actuators __actuators) (let (r) (dotimes (i 0) (push (instance robostilt_common::ActuatorState :init) r)) r))
+    ((:actuators __actuators) (let (r) (dotimes (i 0) (push (instance robostilt_common::SingleActuator :init) r)) r))
     ((:have_all_been_homed __have_all_been_homed) nil)
     ((:all_are_ready __all_are_ready) nil)
     )
@@ -84,7 +84,7 @@
    (+
     ;; std_msgs/Header _header
     (send _header :serialization-length)
-    ;; robostilt_common/ActuatorState[] _actuators
+    ;; robostilt_common/SingleActuator[] _actuators
     (apply #'+ (send-all _actuators :serialization-length)) 4
     ;; bool _have_all_been_homed
     1
@@ -97,7 +97,7 @@
               (make-string-output-stream (send self :serialization-length)))))
      ;; std_msgs/Header _header
        (send _header :serialize s)
-     ;; robostilt_common/ActuatorState[] _actuators
+     ;; robostilt_common/SingleActuator[] _actuators
      (write-long (length _actuators) s)
      (dolist (elem _actuators)
        (send elem :serialize s)
@@ -112,10 +112,10 @@
    (buf &optional (ptr- 0))
    ;; std_msgs/Header _header
      (send _header :deserialize buf ptr-) (incf ptr- (send _header :serialization-length))
-   ;; robostilt_common/ActuatorState[] _actuators
+   ;; robostilt_common/SingleActuator[] _actuators
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _actuators (let (r) (dotimes (i n) (push (instance robostilt_common::ActuatorState :init) r)) r))
+     (setq _actuators (let (r) (dotimes (i n) (push (instance robostilt_common::SingleActuator :init) r)) r))
      (dolist (elem- _actuators)
      (send elem- :deserialize buf ptr-) (incf ptr- (send elem- :serialization-length))
      ))
@@ -127,11 +127,12 @@
    self)
   )
 
-(setf (get robostilt_common::ActuatorsState :md5sum-) "b738e1ec17f4222e8b4a3330fc699bb7")
+(setf (get robostilt_common::ActuatorsState :md5sum-) "49208e592a412e2ba9a50e6f208bf8a1")
 (setf (get robostilt_common::ActuatorsState :datatype-) "robostilt_common/ActuatorsState")
 (setf (get robostilt_common::ActuatorsState :definition-)
-      "uint8 COUNT=8
+      "# This is a message that holds the state of all actuators as an array.
 
+uint8 COUNT=8
 uint8 THIRD_FRAME_PRISMATIC = 0
 uint8 LEG_1 = 1
 uint8 LEG_2 = 2
@@ -143,8 +144,8 @@ uint8 THIRD_FRAME_REVOLUTE = 7
 
 
 Header header
-ActuatorState[] actuators
 
+SingleActuator[] actuators
 bool have_all_been_homed
 bool all_are_ready
 ================================================================================
@@ -166,17 +167,23 @@ time stamp
 string frame_id
 
 ================================================================================
-MSG: robostilt_common/ActuatorState
+MSG: robostilt_common/SingleActuator
 # This is a message that holds extended data for a single actuator
 
 string  name
 int32   index
+
 float64 position
+float64 position_setpoint   #trajectorized setpoint TODO
+float64 position_goal       #long term goal
+
 float64 velocity
+float64 velocity_setpoint   #trajectorized velocity TODO
+
 float64 effort
 float64 effort_limit
 
-float64 position_setpoint
+
 float32 manipulation
 float32 progress
 
@@ -193,6 +200,6 @@ bool is_supporting_weight
 
 
 
-(provide :robostilt_common/ActuatorsState "b738e1ec17f4222e8b4a3330fc699bb7")
+(provide :robostilt_common/ActuatorsState "49208e592a412e2ba9a50e6f208bf8a1")
 
 

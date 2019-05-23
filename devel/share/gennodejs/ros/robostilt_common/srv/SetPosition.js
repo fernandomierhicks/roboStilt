@@ -21,49 +21,49 @@ class SetPositionRequest {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.index = null;
-      this.position = null;
-      this.velocity = null;
-      this.effort = null;
+      this.indexes = null;
+      this.positions = null;
+      this.velocities = null;
+      this.efforts = null;
     }
     else {
-      if (initObj.hasOwnProperty('index')) {
-        this.index = initObj.index
+      if (initObj.hasOwnProperty('indexes')) {
+        this.indexes = initObj.indexes
       }
       else {
-        this.index = [];
+        this.indexes = [];
       }
-      if (initObj.hasOwnProperty('position')) {
-        this.position = initObj.position
-      }
-      else {
-        this.position = [];
-      }
-      if (initObj.hasOwnProperty('velocity')) {
-        this.velocity = initObj.velocity
+      if (initObj.hasOwnProperty('positions')) {
+        this.positions = initObj.positions
       }
       else {
-        this.velocity = [];
+        this.positions = [];
       }
-      if (initObj.hasOwnProperty('effort')) {
-        this.effort = initObj.effort
+      if (initObj.hasOwnProperty('velocities')) {
+        this.velocities = initObj.velocities
       }
       else {
-        this.effort = [];
+        this.velocities = [];
+      }
+      if (initObj.hasOwnProperty('efforts')) {
+        this.efforts = initObj.efforts
+      }
+      else {
+        this.efforts = [];
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type SetPositionRequest
-    // Serialize message field [index]
-    bufferOffset = _arraySerializer.int32(obj.index, buffer, bufferOffset, null);
-    // Serialize message field [position]
-    bufferOffset = _arraySerializer.float64(obj.position, buffer, bufferOffset, null);
-    // Serialize message field [velocity]
-    bufferOffset = _arraySerializer.float64(obj.velocity, buffer, bufferOffset, null);
-    // Serialize message field [effort]
-    bufferOffset = _arraySerializer.float64(obj.effort, buffer, bufferOffset, null);
+    // Serialize message field [indexes]
+    bufferOffset = _arraySerializer.int32(obj.indexes, buffer, bufferOffset, null);
+    // Serialize message field [positions]
+    bufferOffset = _arraySerializer.float64(obj.positions, buffer, bufferOffset, null);
+    // Serialize message field [velocities]
+    bufferOffset = _arraySerializer.float64(obj.velocities, buffer, bufferOffset, null);
+    // Serialize message field [efforts]
+    bufferOffset = _arraySerializer.float64(obj.efforts, buffer, bufferOffset, null);
     return bufferOffset;
   }
 
@@ -71,23 +71,23 @@ class SetPositionRequest {
     //deserializes a message object of type SetPositionRequest
     let len;
     let data = new SetPositionRequest(null);
-    // Deserialize message field [index]
-    data.index = _arrayDeserializer.int32(buffer, bufferOffset, null)
-    // Deserialize message field [position]
-    data.position = _arrayDeserializer.float64(buffer, bufferOffset, null)
-    // Deserialize message field [velocity]
-    data.velocity = _arrayDeserializer.float64(buffer, bufferOffset, null)
-    // Deserialize message field [effort]
-    data.effort = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    // Deserialize message field [indexes]
+    data.indexes = _arrayDeserializer.int32(buffer, bufferOffset, null)
+    // Deserialize message field [positions]
+    data.positions = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    // Deserialize message field [velocities]
+    data.velocities = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    // Deserialize message field [efforts]
+    data.efforts = _arrayDeserializer.float64(buffer, bufferOffset, null)
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += 4 * object.index.length;
-    length += 8 * object.position.length;
-    length += 8 * object.velocity.length;
-    length += 8 * object.effort.length;
+    length += 4 * object.indexes.length;
+    length += 8 * object.positions.length;
+    length += 8 * object.velocities.length;
+    length += 8 * object.efforts.length;
     return length + 16;
   }
 
@@ -98,7 +98,7 @@ class SetPositionRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '0ba4e2f6dca879b11eb019699ace2199';
+    return 'ed83d833ecc7a900ed484ec7c6f4b832';
   }
 
   static messageDefinition() {
@@ -107,10 +107,10 @@ class SetPositionRequest {
     
     
     
-    int32[] index
-    float64[] position
-    float64[] velocity
-    float64[] effort
+    int32[] indexes
+    float64[] positions
+    float64[] velocities
+    float64[] efforts
     
     `;
   }
@@ -121,32 +121,32 @@ class SetPositionRequest {
       msg = {};
     }
     const resolved = new SetPositionRequest(null);
-    if (msg.index !== undefined) {
-      resolved.index = msg.index;
+    if (msg.indexes !== undefined) {
+      resolved.indexes = msg.indexes;
     }
     else {
-      resolved.index = []
+      resolved.indexes = []
     }
 
-    if (msg.position !== undefined) {
-      resolved.position = msg.position;
+    if (msg.positions !== undefined) {
+      resolved.positions = msg.positions;
     }
     else {
-      resolved.position = []
+      resolved.positions = []
     }
 
-    if (msg.velocity !== undefined) {
-      resolved.velocity = msg.velocity;
+    if (msg.velocities !== undefined) {
+      resolved.velocities = msg.velocities;
     }
     else {
-      resolved.velocity = []
+      resolved.velocities = []
     }
 
-    if (msg.effort !== undefined) {
-      resolved.effort = msg.effort;
+    if (msg.efforts !== undefined) {
+      resolved.efforts = msg.efforts;
     }
     else {
-      resolved.effort = []
+      resolved.efforts = []
     }
 
     return resolved;
@@ -227,6 +227,6 @@ class SetPositionResponse {
 module.exports = {
   Request: SetPositionRequest,
   Response: SetPositionResponse,
-  md5sum() { return '25c57e8d42c2eb104d5f653217a33687'; },
+  md5sum() { return '7d0c2d81f2531fd032e1874cd31efec8'; },
   datatype() { return 'robostilt_common/SetPosition'; }
 };

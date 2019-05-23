@@ -46,12 +46,14 @@ catkin_python_setup()
 
 ## Generate messages in the 'msg' folder
 add_message_files(FILES
+  FramesState.msg
   ActuatorsState.msg
-  ActuatorState.msg
+  SingleActuator.msg
   )
 
 ## Generate services in the 'srv' folder
 add_service_files(FILES
+  LowerLegsOnFrame.srv
   SetPosition.srv
 )
 

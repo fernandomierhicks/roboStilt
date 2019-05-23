@@ -1,2 +1,2 @@
-set(robostilt_common_MESSAGE_FILES "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg")
-set(robostilt_common_SERVICE_FILES "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv")
+set(robostilt_common_MESSAGE_FILES "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg")
+set(robostilt_common_SERVICE_FILES "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv")

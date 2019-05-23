@@ -21,10 +21,12 @@ class ActuatorState {
       this.name = null;
       this.index = null;
       this.position = null;
+      this.position_setpoint = null;
+      this.position_goal = null;
       this.velocity = null;
+      this.velocity_setpoint = null;
       this.effort = null;
       this.effort_limit = null;
-      this.position_setpoint = null;
       this.manipulation = null;
       this.progress = null;
       this.is_moving = null;
@@ -51,11 +53,29 @@ class ActuatorState {
       else {
         this.position = 0.0;
       }
+      if (initObj.hasOwnProperty('position_setpoint')) {
+        this.position_setpoint = initObj.position_setpoint
+      }
+      else {
+        this.position_setpoint = 0.0;
+      }
+      if (initObj.hasOwnProperty('position_goal')) {
+        this.position_goal = initObj.position_goal
+      }
+      else {
+        this.position_goal = 0.0;
+      }
       if (initObj.hasOwnProperty('velocity')) {
         this.velocity = initObj.velocity
       }
       else {
         this.velocity = 0.0;
+      }
+      if (initObj.hasOwnProperty('velocity_setpoint')) {
+        this.velocity_setpoint = initObj.velocity_setpoint
+      }
+      else {
+        this.velocity_setpoint = 0.0;
       }
       if (initObj.hasOwnProperty('effort')) {
         this.effort = initObj.effort
@@ -68,12 +88,6 @@ class ActuatorState {
       }
       else {
         this.effort_limit = 0.0;
-      }
-      if (initObj.hasOwnProperty('position_setpoint')) {
-        this.position_setpoint = initObj.position_setpoint
-      }
-      else {
-        this.position_setpoint = 0.0;
       }
       if (initObj.hasOwnProperty('manipulation')) {
         this.manipulation = initObj.manipulation
@@ -122,14 +136,18 @@ class ActuatorState {
     bufferOffset = _serializer.int32(obj.index, buffer, bufferOffset);
     // Serialize message field [position]
     bufferOffset = _serializer.float64(obj.position, buffer, bufferOffset);
+    // Serialize message field [position_setpoint]
+    bufferOffset = _serializer.float64(obj.position_setpoint, buffer, bufferOffset);
+    // Serialize message field [position_goal]
+    bufferOffset = _serializer.float64(obj.position_goal, buffer, bufferOffset);
     // Serialize message field [velocity]
     bufferOffset = _serializer.float64(obj.velocity, buffer, bufferOffset);
+    // Serialize message field [velocity_setpoint]
+    bufferOffset = _serializer.float64(obj.velocity_setpoint, buffer, bufferOffset);
     // Serialize message field [effort]
     bufferOffset = _serializer.float64(obj.effort, buffer, bufferOffset);
     // Serialize message field [effort_limit]
     bufferOffset = _serializer.float64(obj.effort_limit, buffer, bufferOffset);
-    // Serialize message field [position_setpoint]
-    bufferOffset = _serializer.float64(obj.position_setpoint, buffer, bufferOffset);
     // Serialize message field [manipulation]
     bufferOffset = _serializer.float32(obj.manipulation, buffer, bufferOffset);
     // Serialize message field [progress]
@@ -155,14 +173,18 @@ class ActuatorState {
     data.index = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [position]
     data.position = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [position_setpoint]
+    data.position_setpoint = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [position_goal]
+    data.position_goal = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [velocity]
     data.velocity = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [velocity_setpoint]
+    data.velocity_setpoint = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [effort]
     data.effort = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [effort_limit]
     data.effort_limit = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [position_setpoint]
-    data.position_setpoint = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [manipulation]
     data.manipulation = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [progress]
@@ -181,7 +203,7 @@ class ActuatorState {
   static getMessageSize(object) {
     let length = 0;
     length += object.name.length;
-    return length + 60;
+    return length + 76;
   }
 
   static datatype() {
@@ -191,7 +213,7 @@ class ActuatorState {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'b118f895afbdb74c43c844a60fe2697e';
+    return 'c8adcf30a4a8d2cd998962d19cef108a';
   }
 
   static messageDefinition() {
@@ -201,12 +223,18 @@ class ActuatorState {
     
     string  name
     int32   index
+    
     float64 position
+    float64 position_setpoint   #trajectorized setpoint
+    float64 position_goal       #long term goal
+    
     float64 velocity
+    float64 velocity_setpoint   #trajectorized velocity
+    
     float64 effort
     float64 effort_limit
     
-    float64 position_setpoint
+    
     float32 manipulation
     float32 progress
     
@@ -249,11 +277,32 @@ class ActuatorState {
       resolved.position = 0.0
     }
 
+    if (msg.position_setpoint !== undefined) {
+      resolved.position_setpoint = msg.position_setpoint;
+    }
+    else {
+      resolved.position_setpoint = 0.0
+    }
+
+    if (msg.position_goal !== undefined) {
+      resolved.position_goal = msg.position_goal;
+    }
+    else {
+      resolved.position_goal = 0.0
+    }
+
     if (msg.velocity !== undefined) {
       resolved.velocity = msg.velocity;
     }
     else {
       resolved.velocity = 0.0
+    }
+
+    if (msg.velocity_setpoint !== undefined) {
+      resolved.velocity_setpoint = msg.velocity_setpoint;
+    }
+    else {
+      resolved.velocity_setpoint = 0.0
     }
 
     if (msg.effort !== undefined) {
@@ -268,13 +317,6 @@ class ActuatorState {
     }
     else {
       resolved.effort_limit = 0.0
-    }
-
-    if (msg.position_setpoint !== undefined) {
-      resolved.position_setpoint = msg.position_setpoint;
-    }
-    else {
-      resolved.position_setpoint = 0.0
     }
 
     if (msg.manipulation !== undefined) {

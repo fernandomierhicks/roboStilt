@@ -14,23 +14,23 @@ This package takes care of the low level to midlevel abstractions level of the r
 
 
 
-|       Node name        | frame_states                                                 |
+|       Node name        | frames_state                                                 |
 | :--------------------: | ------------------------------------------------------------ |
 |    **Description**     | Mid level abstraction layer. Deals with a group of actuators, frames and leveling. Moves frames |
-|  **Published topic**   | robostilt/frame_states                                       |
-| **Published message**  | FrameStates.msg                                              |
+|  **Published topic**   | robostilt/frames_state                                       |
+| **Published message**  | FramesState.msg                                              |
 |  **Published fields**  | supporting_tripod (CONSTANT FRAME.EVEN etc...)<br />pose?<br />raised_frame? |
-|   **Subscriptions**    | robostilt/actuator_states                                    |
+|   **Subscriptions**    | robostilt/actuators_state                                    |
 | **Services available** | raise_frame() <br>lower_frame() <br />lower_legs_on_frame()<br />raise_legs_on frame()<br />move_prismatic()<br />rotate_revolute()<br />set_pose()<br />level_in_place() |
 |      **Triggers**      | robostilt/robostilt_state/fault()                            |
 
  
 
-|       Node name        | actuator_states                                              |
+|       Node name        | actuators_state                                              |
 | :--------------------: | ------------------------------------------------------------ |
 |    **Description**     | Actuator state and command interface. Moves legs             |
-|  **Published topic**   | robostilt/actuator_states                                    |
-| **Published message**  | ActuatorsState.msg *which is an array of ActuatorState.msg*  |
+|  **Published topic**   | robostilt/actuators_state                                    |
+| **Published message**  | ActuatorsState.msg *which is an array of SingleActuator.msg* |
 |  **Published fields**  | position<br />velocity<br />effort<br />etc..                |
 |   **Subscriptions**    | robostilt/joint_states                                       |
 | **Services available** | set_position(indexes,positions,velocities,efforts) <br>set_velocity(indexes,velocity,effort) |

@@ -1,3 +1,6 @@
+#We need one FollowJointTrajectory controller to take advantage of the fully trajectorized motion (quintic splines) 
+#One per actuator so different actuators can finish at different times and not all at the same time. 
+
 robostilt:
   # Publish all joint states -----------------------------------
   joint_state_controller:

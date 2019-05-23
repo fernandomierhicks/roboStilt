@@ -27,10 +27,12 @@ struct ActuatorState_
     : name()
     , index(0)
     , position(0.0)
+    , position_setpoint(0.0)
+    , position_goal(0.0)
     , velocity(0.0)
+    , velocity_setpoint(0.0)
     , effort(0.0)
     , effort_limit(0.0)
-    , position_setpoint(0.0)
     , manipulation(0.0)
     , progress(0.0)
     , is_moving(false)
@@ -42,10 +44,12 @@ struct ActuatorState_
     : name(_alloc)
     , index(0)
     , position(0.0)
+    , position_setpoint(0.0)
+    , position_goal(0.0)
     , velocity(0.0)
+    , velocity_setpoint(0.0)
     , effort(0.0)
     , effort_limit(0.0)
-    , position_setpoint(0.0)
     , manipulation(0.0)
     , progress(0.0)
     , is_moving(false)
@@ -66,17 +70,23 @@ struct ActuatorState_
    typedef double _position_type;
   _position_type position;
 
+   typedef double _position_setpoint_type;
+  _position_setpoint_type position_setpoint;
+
+   typedef double _position_goal_type;
+  _position_goal_type position_goal;
+
    typedef double _velocity_type;
   _velocity_type velocity;
+
+   typedef double _velocity_setpoint_type;
+  _velocity_setpoint_type velocity_setpoint;
 
    typedef double _effort_type;
   _effort_type effort;
 
    typedef double _effort_limit_type;
   _effort_limit_type effort_limit;
-
-   typedef double _position_setpoint_type;
-  _position_setpoint_type position_setpoint;
 
    typedef float _manipulation_type;
   _manipulation_type manipulation;
@@ -174,12 +184,12 @@ struct MD5Sum< ::robostilt_common::ActuatorState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b118f895afbdb74c43c844a60fe2697e";
+    return "c8adcf30a4a8d2cd998962d19cef108a";
   }
 
   static const char* value(const ::robostilt_common::ActuatorState_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb118f895afbdb74cULL;
-  static const uint64_t static_value2 = 0x43c844a60fe2697eULL;
+  static const uint64_t static_value1 = 0xc8adcf30a4a8d2cdULL;
+  static const uint64_t static_value2 = 0x998962d19cef108aULL;
 };
 
 template<class ContainerAllocator>
@@ -202,12 +212,18 @@ struct Definition< ::robostilt_common::ActuatorState_<ContainerAllocator> >
 \n\
 string  name\n\
 int32   index\n\
+\n\
 float64 position\n\
+float64 position_setpoint   #trajectorized setpoint\n\
+float64 position_goal       #long term goal\n\
+\n\
 float64 velocity\n\
+float64 velocity_setpoint   #trajectorized velocity\n\
+\n\
 float64 effort\n\
 float64 effort_limit\n\
 \n\
-float64 position_setpoint\n\
+\n\
 float32 manipulation\n\
 float32 progress\n\
 \n\
@@ -240,10 +256,12 @@ namespace serialization
       stream.next(m.name);
       stream.next(m.index);
       stream.next(m.position);
+      stream.next(m.position_setpoint);
+      stream.next(m.position_goal);
       stream.next(m.velocity);
+      stream.next(m.velocity_setpoint);
       stream.next(m.effort);
       stream.next(m.effort_limit);
-      stream.next(m.position_setpoint);
       stream.next(m.manipulation);
       stream.next(m.progress);
       stream.next(m.is_moving);
@@ -274,14 +292,18 @@ struct Printer< ::robostilt_common::ActuatorState_<ContainerAllocator> >
     Printer<int32_t>::stream(s, indent + "  ", v.index);
     s << indent << "position: ";
     Printer<double>::stream(s, indent + "  ", v.position);
+    s << indent << "position_setpoint: ";
+    Printer<double>::stream(s, indent + "  ", v.position_setpoint);
+    s << indent << "position_goal: ";
+    Printer<double>::stream(s, indent + "  ", v.position_goal);
     s << indent << "velocity: ";
     Printer<double>::stream(s, indent + "  ", v.velocity);
+    s << indent << "velocity_setpoint: ";
+    Printer<double>::stream(s, indent + "  ", v.velocity_setpoint);
     s << indent << "effort: ";
     Printer<double>::stream(s, indent + "  ", v.effort);
     s << indent << "effort_limit: ";
     Printer<double>::stream(s, indent + "  ", v.effort_limit);
-    s << indent << "position_setpoint: ";
-    Printer<double>::stream(s, indent + "  ", v.position_setpoint);
     s << indent << "manipulation: ";
     Printer<float>::stream(s, indent + "  ", v.manipulation);
     s << indent << "progress: ";

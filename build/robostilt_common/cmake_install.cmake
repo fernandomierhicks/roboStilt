@@ -38,13 +38,17 @@ endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_common/msg" TYPE FILE FILES
+    "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg"
     "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg"
-    "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
+    "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_common/srv" TYPE FILE FILES "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_common/srv" TYPE FILE FILES
+    "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv"
+    "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv"
+    )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")

@@ -2,12 +2,18 @@
 
 string  name
 int32   index
+
 float64 position
+float64 position_setpoint   #trajectorized setpoint TODO
+float64 position_goal       #long term goal
+
 float64 velocity
+float64 velocity_setpoint   #trajectorized velocity TODO
+
 float64 effort
 float64 effort_limit
 
-float64 position_setpoint
+
 float32 manipulation
 float32 progress
 

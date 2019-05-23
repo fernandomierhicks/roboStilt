@@ -16,7 +16,7 @@
 #include <ros/message_operations.h>
 
 #include <std_msgs/Header.h>
-#include <robostilt_common/ActuatorState.h>
+#include <robostilt_common/SingleActuator.h>
 
 namespace robostilt_common
 {
@@ -44,7 +44,7 @@ struct ActuatorsState_
    typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
   _header_type header;
 
-   typedef std::vector< ::robostilt_common::ActuatorState_<ContainerAllocator> , typename ContainerAllocator::template rebind< ::robostilt_common::ActuatorState_<ContainerAllocator> >::other >  _actuators_type;
+   typedef std::vector< ::robostilt_common::SingleActuator_<ContainerAllocator> , typename ContainerAllocator::template rebind< ::robostilt_common::SingleActuator_<ContainerAllocator> >::other >  _actuators_type;
   _actuators_type actuators;
 
    typedef uint8_t _have_all_been_homed_type;
@@ -160,12 +160,12 @@ struct MD5Sum< ::robostilt_common::ActuatorsState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "b738e1ec17f4222e8b4a3330fc699bb7";
+    return "49208e592a412e2ba9a50e6f208bf8a1";
   }
 
   static const char* value(const ::robostilt_common::ActuatorsState_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xb738e1ec17f4222eULL;
-  static const uint64_t static_value2 = 0x8b4a3330fc699bb7ULL;
+  static const uint64_t static_value1 = 0x49208e592a412e2bULL;
+  static const uint64_t static_value2 = 0xa9a50e6f208bf8a1ULL;
 };
 
 template<class ContainerAllocator>
@@ -184,8 +184,9 @@ struct Definition< ::robostilt_common::ActuatorsState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "uint8 COUNT=8\n\
+    return "# This is a message that holds the state of all actuators as an array.\n\
 \n\
+uint8 COUNT=8\n\
 uint8 THIRD_FRAME_PRISMATIC = 0\n\
 uint8 LEG_1 = 1\n\
 uint8 LEG_2 = 2\n\
@@ -197,8 +198,8 @@ uint8 THIRD_FRAME_REVOLUTE = 7\n\
 \n\
 \n\
 Header header\n\
-ActuatorState[] actuators\n\
 \n\
+SingleActuator[] actuators\n\
 bool have_all_been_homed\n\
 bool all_are_ready\n\
 ================================================================================\n\
@@ -220,17 +221,23 @@ time stamp\n\
 string frame_id\n\
 \n\
 ================================================================================\n\
-MSG: robostilt_common/ActuatorState\n\
+MSG: robostilt_common/SingleActuator\n\
 # This is a message that holds extended data for a single actuator\n\
 \n\
 string  name\n\
 int32   index\n\
+\n\
 float64 position\n\
+float64 position_setpoint   #trajectorized setpoint TODO\n\
+float64 position_goal       #long term goal\n\
+\n\
 float64 velocity\n\
+float64 velocity_setpoint   #trajectorized velocity TODO\n\
+\n\
 float64 effort\n\
 float64 effort_limit\n\
 \n\
-float64 position_setpoint\n\
+\n\
 float32 manipulation\n\
 float32 progress\n\
 \n\
@@ -291,7 +298,7 @@ struct Printer< ::robostilt_common::ActuatorsState_<ContainerAllocator> >
       s << indent << "  actuators[" << i << "]: ";
       s << std::endl;
       s << indent;
-      Printer< ::robostilt_common::ActuatorState_<ContainerAllocator> >::stream(s, indent + "    ", v.actuators[i]);
+      Printer< ::robostilt_common::SingleActuator_<ContainerAllocator> >::stream(s, indent + "    ", v.actuators[i]);
     }
     s << indent << "have_all_been_homed: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.have_all_been_homed);

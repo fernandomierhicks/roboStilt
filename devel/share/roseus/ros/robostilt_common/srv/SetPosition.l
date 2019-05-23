@@ -20,101 +20,101 @@
 
 (defclass robostilt_common::SetPositionRequest
   :super ros::object
-  :slots (_index _position _velocity _effort ))
+  :slots (_indexes _positions _velocities _efforts ))
 
 (defmethod robostilt_common::SetPositionRequest
   (:init
    (&key
-    ((:index __index) (make-array 0 :initial-element 0 :element-type :integer))
-    ((:position __position) (make-array 0 :initial-element 0.0 :element-type :float))
-    ((:velocity __velocity) (make-array 0 :initial-element 0.0 :element-type :float))
-    ((:effort __effort) (make-array 0 :initial-element 0.0 :element-type :float))
+    ((:indexes __indexes) (make-array 0 :initial-element 0 :element-type :integer))
+    ((:positions __positions) (make-array 0 :initial-element 0.0 :element-type :float))
+    ((:velocities __velocities) (make-array 0 :initial-element 0.0 :element-type :float))
+    ((:efforts __efforts) (make-array 0 :initial-element 0.0 :element-type :float))
     )
    (send-super :init)
-   (setq _index __index)
-   (setq _position __position)
-   (setq _velocity __velocity)
-   (setq _effort __effort)
+   (setq _indexes __indexes)
+   (setq _positions __positions)
+   (setq _velocities __velocities)
+   (setq _efforts __efforts)
    self)
-  (:index
-   (&optional __index)
-   (if __index (setq _index __index)) _index)
-  (:position
-   (&optional __position)
-   (if __position (setq _position __position)) _position)
-  (:velocity
-   (&optional __velocity)
-   (if __velocity (setq _velocity __velocity)) _velocity)
-  (:effort
-   (&optional __effort)
-   (if __effort (setq _effort __effort)) _effort)
+  (:indexes
+   (&optional __indexes)
+   (if __indexes (setq _indexes __indexes)) _indexes)
+  (:positions
+   (&optional __positions)
+   (if __positions (setq _positions __positions)) _positions)
+  (:velocities
+   (&optional __velocities)
+   (if __velocities (setq _velocities __velocities)) _velocities)
+  (:efforts
+   (&optional __efforts)
+   (if __efforts (setq _efforts __efforts)) _efforts)
   (:serialization-length
    ()
    (+
-    ;; int32[] _index
-    (* 4    (length _index)) 4
-    ;; float64[] _position
-    (* 8    (length _position)) 4
-    ;; float64[] _velocity
-    (* 8    (length _velocity)) 4
-    ;; float64[] _effort
-    (* 8    (length _effort)) 4
+    ;; int32[] _indexes
+    (* 4    (length _indexes)) 4
+    ;; float64[] _positions
+    (* 8    (length _positions)) 4
+    ;; float64[] _velocities
+    (* 8    (length _velocities)) 4
+    ;; float64[] _efforts
+    (* 8    (length _efforts)) 4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32[] _index
-     (write-long (length _index) s)
-     (dotimes (i (length _index))
-       (write-long (elt _index i) s)
+     ;; int32[] _indexes
+     (write-long (length _indexes) s)
+     (dotimes (i (length _indexes))
+       (write-long (elt _indexes i) s)
        )
-     ;; float64[] _position
-     (write-long (length _position) s)
-     (dotimes (i (length _position))
-       (sys::poke (elt _position i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64[] _positions
+     (write-long (length _positions) s)
+     (dotimes (i (length _positions))
+       (sys::poke (elt _positions i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
        )
-     ;; float64[] _velocity
-     (write-long (length _velocity) s)
-     (dotimes (i (length _velocity))
-       (sys::poke (elt _velocity i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64[] _velocities
+     (write-long (length _velocities) s)
+     (dotimes (i (length _velocities))
+       (sys::poke (elt _velocities i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
        )
-     ;; float64[] _effort
-     (write-long (length _effort) s)
-     (dotimes (i (length _effort))
-       (sys::poke (elt _effort i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64[] _efforts
+     (write-long (length _efforts) s)
+     (dotimes (i (length _efforts))
+       (sys::poke (elt _efforts i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
        )
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32[] _index
+   ;; int32[] _indexes
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _index (instantiate integer-vector n))
+     (setq _indexes (instantiate integer-vector n))
      (dotimes (i n)
-     (setf (elt _index i) (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setf (elt _indexes i) (sys::peek buf ptr- :integer)) (incf ptr- 4)
      ))
-   ;; float64[] _position
+   ;; float64[] _positions
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _position (instantiate float-vector n))
+     (setq _positions (instantiate float-vector n))
      (dotimes (i n)
-     (setf (elt _position i) (sys::peek buf ptr- :double)) (incf ptr- 8)
+     (setf (elt _positions i) (sys::peek buf ptr- :double)) (incf ptr- 8)
      ))
-   ;; float64[] _velocity
+   ;; float64[] _velocities
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _velocity (instantiate float-vector n))
+     (setq _velocities (instantiate float-vector n))
      (dotimes (i n)
-     (setf (elt _velocity i) (sys::peek buf ptr- :double)) (incf ptr- 8)
+     (setf (elt _velocities i) (sys::peek buf ptr- :double)) (incf ptr- 8)
      ))
-   ;; float64[] _effort
+   ;; float64[] _efforts
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _effort (instantiate float-vector n))
+     (setq _efforts (instantiate float-vector n))
      (dotimes (i n)
-     (setf (elt _effort i) (sys::peek buf ptr- :double)) (incf ptr- 8)
+     (setf (elt _efforts i) (sys::peek buf ptr- :double)) (incf ptr- 8)
      ))
    ;;
    self)
@@ -161,7 +161,7 @@
   :super ros::object
   :slots ())
 
-(setf (get robostilt_common::SetPosition :md5sum-) "25c57e8d42c2eb104d5f653217a33687")
+(setf (get robostilt_common::SetPosition :md5sum-) "7d0c2d81f2531fd032e1874cd31efec8")
 (setf (get robostilt_common::SetPosition :datatype-) "robostilt_common/SetPosition")
 (setf (get robostilt_common::SetPosition :request) robostilt_common::SetPositionRequest)
 (setf (get robostilt_common::SetPosition :response) robostilt_common::SetPositionResponse)
@@ -169,36 +169,36 @@
 (defmethod robostilt_common::SetPositionRequest
   (:response () (instance robostilt_common::SetPositionResponse :init)))
 
-(setf (get robostilt_common::SetPositionRequest :md5sum-) "25c57e8d42c2eb104d5f653217a33687")
+(setf (get robostilt_common::SetPositionRequest :md5sum-) "7d0c2d81f2531fd032e1874cd31efec8")
 (setf (get robostilt_common::SetPositionRequest :datatype-) "robostilt_common/SetPositionRequest")
 (setf (get robostilt_common::SetPositionRequest :definition-)
       "
 
 
-int32[] index
-float64[] position
-float64[] velocity
-float64[] effort
+int32[] indexes
+float64[] positions
+float64[] velocities
+float64[] efforts
 ---
 bool success
 ")
 
-(setf (get robostilt_common::SetPositionResponse :md5sum-) "25c57e8d42c2eb104d5f653217a33687")
+(setf (get robostilt_common::SetPositionResponse :md5sum-) "7d0c2d81f2531fd032e1874cd31efec8")
 (setf (get robostilt_common::SetPositionResponse :datatype-) "robostilt_common/SetPositionResponse")
 (setf (get robostilt_common::SetPositionResponse :definition-)
       "
 
 
-int32[] index
-float64[] position
-float64[] velocity
-float64[] effort
+int32[] indexes
+float64[] positions
+float64[] velocities
+float64[] efforts
 ---
 bool success
 ")
 
 
 
-(provide :robostilt_common/SetPosition "25c57e8d42c2eb104d5f653217a33687")
+(provide :robostilt_common/SetPosition "7d0c2d81f2531fd032e1874cd31efec8")
 
 

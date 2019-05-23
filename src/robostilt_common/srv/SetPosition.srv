@@ -1,9 +1,9 @@
 
 # Can send a list of indexes
 
-int32[] index
-float64[] position
-float64[] velocity
-float64[] effort
+int32[] indexes
+float64[] positions
+float64[] velocities
+float64[] efforts
 ---
 bool success

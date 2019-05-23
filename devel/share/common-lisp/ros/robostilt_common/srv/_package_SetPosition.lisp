@@ -1,12 +1,12 @@
 (cl:in-package robostilt_common-srv)
-(cl:export '(INDEX-VAL
-          INDEX
-          POSITION-VAL
-          POSITION
-          VELOCITY-VAL
-          VELOCITY
-          EFFORT-VAL
-          EFFORT
+(cl:export '(INDEXES-VAL
+          INDEXES
+          POSITIONS-VAL
+          POSITIONS
+          VELOCITIES-VAL
+          VELOCITIES
+          EFFORTS-VAL
+          EFFORTS
           SUCCESS-VAL
           SUCCESS
 ))

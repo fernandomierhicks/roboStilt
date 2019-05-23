@@ -9,11 +9,12 @@ import robostilt_common.msg
 import std_msgs.msg
 
 class ActuatorsState(genpy.Message):
-  _md5sum = "b738e1ec17f4222e8b4a3330fc699bb7"
+  _md5sum = "49208e592a412e2ba9a50e6f208bf8a1"
   _type = "robostilt_common/ActuatorsState"
   _has_header = True #flag to mark the presence of a Header object
-  _full_text = """uint8 COUNT=8
+  _full_text = """# This is a message that holds the state of all actuators as an array.
 
+uint8 COUNT=8
 uint8 THIRD_FRAME_PRISMATIC = 0
 uint8 LEG_1 = 1
 uint8 LEG_2 = 2
@@ -25,8 +26,8 @@ uint8 THIRD_FRAME_REVOLUTE = 7
 
 
 Header header
-ActuatorState[] actuators
 
+SingleActuator[] actuators
 bool have_all_been_homed
 bool all_are_ready
 ================================================================================
@@ -48,17 +49,23 @@ time stamp
 string frame_id
 
 ================================================================================
-MSG: robostilt_common/ActuatorState
+MSG: robostilt_common/SingleActuator
 # This is a message that holds extended data for a single actuator
 
 string  name
 int32   index
+
 float64 position
+float64 position_setpoint   #trajectorized setpoint TODO
+float64 position_goal       #long term goal
+
 float64 velocity
+float64 velocity_setpoint   #trajectorized velocity TODO
+
 float64 effort
 float64 effort_limit
 
-float64 position_setpoint
+
 float32 manipulation
 float32 progress
 
@@ -83,7 +90,7 @@ bool is_supporting_weight
   THIRD_FRAME_REVOLUTE = 7
 
   __slots__ = ['header','actuators','have_all_been_homed','all_are_ready']
-  _slot_types = ['std_msgs/Header','robostilt_common/ActuatorState[]','bool','bool']
+  _slot_types = ['std_msgs/Header','robostilt_common/SingleActuator[]','bool','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -146,7 +153,7 @@ bool is_supporting_weight
           length = len(_x)
         buff.write(struct.pack('<I%ss'%length, length, _x))
         _x = val1
-        buff.write(_get_struct_i5d2f4B().pack(_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
+        buff.write(_get_struct_i7d2f4B().pack(_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
       _x = self
       buff.write(_get_struct_2B().pack(_x.have_all_been_homed, _x.all_are_ready))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
@@ -181,7 +188,7 @@ bool is_supporting_weight
       (length,) = _struct_I.unpack(str[start:end])
       self.actuators = []
       for i in range(0, length):
-        val1 = robostilt_common.msg.ActuatorState()
+        val1 = robostilt_common.msg.SingleActuator()
         start = end
         end += 4
         (length,) = _struct_I.unpack(str[start:end])
@@ -193,8 +200,8 @@ bool is_supporting_weight
           val1.name = str[start:end]
         _x = val1
         start = end
-        end += 56
-        (_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i5d2f4B().unpack(str[start:end])
+        end += 72
+        (_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i7d2f4B().unpack(str[start:end])
         val1.is_moving = bool(val1.is_moving)
         val1.is_ready = bool(val1.is_ready)
         val1.has_been_homed = bool(val1.has_been_homed)
@@ -236,7 +243,7 @@ bool is_supporting_weight
           length = len(_x)
         buff.write(struct.pack('<I%ss'%length, length, _x))
         _x = val1
-        buff.write(_get_struct_i5d2f4B().pack(_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
+        buff.write(_get_struct_i7d2f4B().pack(_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
       _x = self
       buff.write(_get_struct_2B().pack(_x.have_all_been_homed, _x.all_are_ready))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
@@ -272,7 +279,7 @@ bool is_supporting_weight
       (length,) = _struct_I.unpack(str[start:end])
       self.actuators = []
       for i in range(0, length):
-        val1 = robostilt_common.msg.ActuatorState()
+        val1 = robostilt_common.msg.SingleActuator()
         start = end
         end += 4
         (length,) = _struct_I.unpack(str[start:end])
@@ -284,8 +291,8 @@ bool is_supporting_weight
           val1.name = str[start:end]
         _x = val1
         start = end
-        end += 56
-        (_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i5d2f4B().unpack(str[start:end])
+        end += 72
+        (_x.index, _x.position, _x.position_setpoint, _x.position_goal, _x.velocity, _x.velocity_setpoint, _x.effort, _x.effort_limit, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i7d2f4B().unpack(str[start:end])
         val1.is_moving = bool(val1.is_moving)
         val1.is_ready = bool(val1.is_ready)
         val1.has_been_homed = bool(val1.has_been_homed)
@@ -305,6 +312,12 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_i7d2f4B = None
+def _get_struct_i7d2f4B():
+    global _struct_i7d2f4B
+    if _struct_i7d2f4B is None:
+        _struct_i7d2f4B = struct.Struct("<i7d2f4B")
+    return _struct_i7d2f4B
 _struct_3I = None
 def _get_struct_3I():
     global _struct_3I
@@ -317,9 +330,3 @@ def _get_struct_2B():
     if _struct_2B is None:
         _struct_2B = struct.Struct("<2B")
     return _struct_2B
-_struct_i5d2f4B = None
-def _get_struct_i5d2f4B():
-    global _struct_i5d2f4B
-    if _struct_i5d2f4B is None:
-        _struct_i5d2f4B = struct.Struct("<i5d2f4B")
-    return _struct_i5d2f4B

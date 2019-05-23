@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::robostilt_common::SetPosition > {
   static const char* value()
   {
-    return "25c57e8d42c2eb104d5f653217a33687";
+    return "7d0c2d81f2531fd032e1874cd31efec8";
   }
 
   static const char* value(const ::robostilt_common::SetPosition&) { return value(); }

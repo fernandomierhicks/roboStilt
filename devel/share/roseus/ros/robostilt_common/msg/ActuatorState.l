@@ -14,7 +14,7 @@
 
 (defclass robostilt_common::ActuatorState
   :super ros::object
-  :slots (_name _index _position _velocity _effort _effort_limit _position_setpoint _manipulation _progress _is_moving _is_ready _has_been_homed _is_supporting_weight ))
+  :slots (_name _index _position _position_setpoint _position_goal _velocity _velocity_setpoint _effort _effort_limit _manipulation _progress _is_moving _is_ready _has_been_homed _is_supporting_weight ))
 
 (defmethod robostilt_common::ActuatorState
   (:init
@@ -22,10 +22,12 @@
     ((:name __name) "")
     ((:index __index) 0)
     ((:position __position) 0.0)
+    ((:position_setpoint __position_setpoint) 0.0)
+    ((:position_goal __position_goal) 0.0)
     ((:velocity __velocity) 0.0)
+    ((:velocity_setpoint __velocity_setpoint) 0.0)
     ((:effort __effort) 0.0)
     ((:effort_limit __effort_limit) 0.0)
-    ((:position_setpoint __position_setpoint) 0.0)
     ((:manipulation __manipulation) 0.0)
     ((:progress __progress) 0.0)
     ((:is_moving __is_moving) nil)
@@ -37,10 +39,12 @@
    (setq _name (string __name))
    (setq _index (round __index))
    (setq _position (float __position))
+   (setq _position_setpoint (float __position_setpoint))
+   (setq _position_goal (float __position_goal))
    (setq _velocity (float __velocity))
+   (setq _velocity_setpoint (float __velocity_setpoint))
    (setq _effort (float __effort))
    (setq _effort_limit (float __effort_limit))
-   (setq _position_setpoint (float __position_setpoint))
    (setq _manipulation (float __manipulation))
    (setq _progress (float __progress))
    (setq _is_moving __is_moving)
@@ -57,18 +61,24 @@
   (:position
    (&optional __position)
    (if __position (setq _position __position)) _position)
+  (:position_setpoint
+   (&optional __position_setpoint)
+   (if __position_setpoint (setq _position_setpoint __position_setpoint)) _position_setpoint)
+  (:position_goal
+   (&optional __position_goal)
+   (if __position_goal (setq _position_goal __position_goal)) _position_goal)
   (:velocity
    (&optional __velocity)
    (if __velocity (setq _velocity __velocity)) _velocity)
+  (:velocity_setpoint
+   (&optional __velocity_setpoint)
+   (if __velocity_setpoint (setq _velocity_setpoint __velocity_setpoint)) _velocity_setpoint)
   (:effort
    (&optional __effort)
    (if __effort (setq _effort __effort)) _effort)
   (:effort_limit
    (&optional __effort_limit)
    (if __effort_limit (setq _effort_limit __effort_limit)) _effort_limit)
-  (:position_setpoint
-   (&optional __position_setpoint)
-   (if __position_setpoint (setq _position_setpoint __position_setpoint)) _position_setpoint)
   (:manipulation
    (&optional __manipulation)
    (if __manipulation (setq _manipulation __manipulation)) _manipulation)
@@ -96,13 +106,17 @@
     4
     ;; float64 _position
     8
+    ;; float64 _position_setpoint
+    8
+    ;; float64 _position_goal
+    8
     ;; float64 _velocity
+    8
+    ;; float64 _velocity_setpoint
     8
     ;; float64 _effort
     8
     ;; float64 _effort_limit
-    8
-    ;; float64 _position_setpoint
     8
     ;; float32 _manipulation
     4
@@ -127,14 +141,18 @@
        (write-long _index s)
      ;; float64 _position
        (sys::poke _position (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _position_setpoint
+       (sys::poke _position_setpoint (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _position_goal
+       (sys::poke _position_goal (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float64 _velocity
        (sys::poke _velocity (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _velocity_setpoint
+       (sys::poke _velocity_setpoint (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float64 _effort
        (sys::poke _effort (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float64 _effort_limit
        (sys::poke _effort_limit (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _position_setpoint
-       (sys::poke _position_setpoint (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float32 _manipulation
        (sys::poke _manipulation (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _progress
@@ -157,14 +175,18 @@
      (setq _index (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; float64 _position
      (setq _position (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _position_setpoint
+     (setq _position_setpoint (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _position_goal
+     (setq _position_goal (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float64 _velocity
      (setq _velocity (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _velocity_setpoint
+     (setq _velocity_setpoint (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float64 _effort
      (setq _effort (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float64 _effort_limit
      (setq _effort_limit (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _position_setpoint
-     (setq _position_setpoint (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float32 _manipulation
      (setq _manipulation (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _progress
@@ -181,19 +203,25 @@
    self)
   )
 
-(setf (get robostilt_common::ActuatorState :md5sum-) "b118f895afbdb74c43c844a60fe2697e")
+(setf (get robostilt_common::ActuatorState :md5sum-) "c8adcf30a4a8d2cd998962d19cef108a")
 (setf (get robostilt_common::ActuatorState :datatype-) "robostilt_common/ActuatorState")
 (setf (get robostilt_common::ActuatorState :definition-)
       "# This is a message that holds extended data for a single actuator
 
 string  name
 int32   index
+
 float64 position
+float64 position_setpoint   #trajectorized setpoint
+float64 position_goal       #long term goal
+
 float64 velocity
+float64 velocity_setpoint   #trajectorized velocity
+
 float64 effort
 float64 effort_limit
 
-float64 position_setpoint
+
 float32 manipulation
 float32 progress
 
@@ -210,6 +238,6 @@ bool is_supporting_weight
 
 
 
-(provide :robostilt_common/ActuatorState "b118f895afbdb74c43c844a60fe2697e")
+(provide :robostilt_common/ActuatorState "c8adcf30a4a8d2cd998962d19cef108a")
 
 

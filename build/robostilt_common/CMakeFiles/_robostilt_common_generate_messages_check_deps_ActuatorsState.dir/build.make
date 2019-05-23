@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/fernandomierhicks/robostilt/build
 include robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/progress.make
 
 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState:
-	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py robostilt_common /home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg robostilt_common/ActuatorState:std_msgs/Header
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py robostilt_common /home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg robostilt_common/SingleActuator:std_msgs/Header
 
 _robostilt_common_generate_messages_check_deps_ActuatorsState: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState
 _robostilt_common_generate_messages_check_deps_ActuatorsState: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/build.make

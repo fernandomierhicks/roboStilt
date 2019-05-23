@@ -22,9 +22,24 @@
     :initarg :position
     :type cl:float
     :initform 0.0)
+   (position_setpoint
+    :reader position_setpoint
+    :initarg :position_setpoint
+    :type cl:float
+    :initform 0.0)
+   (position_goal
+    :reader position_goal
+    :initarg :position_goal
+    :type cl:float
+    :initform 0.0)
    (velocity
     :reader velocity
     :initarg :velocity
+    :type cl:float
+    :initform 0.0)
+   (velocity_setpoint
+    :reader velocity_setpoint
+    :initarg :velocity_setpoint
     :type cl:float
     :initform 0.0)
    (effort
@@ -35,11 +50,6 @@
    (effort_limit
     :reader effort_limit
     :initarg :effort_limit
-    :type cl:float
-    :initform 0.0)
-   (position_setpoint
-    :reader position_setpoint
-    :initarg :position_setpoint
     :type cl:float
     :initform 0.0)
    (manipulation
@@ -97,10 +107,25 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:position-val is deprecated.  Use robostilt_common-msg:position instead.")
   (position m))
 
+(cl:ensure-generic-function 'position_setpoint-val :lambda-list '(m))
+(cl:defmethod position_setpoint-val ((m <ActuatorState>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:position_setpoint-val is deprecated.  Use robostilt_common-msg:position_setpoint instead.")
+  (position_setpoint m))
+
+(cl:ensure-generic-function 'position_goal-val :lambda-list '(m))
+(cl:defmethod position_goal-val ((m <ActuatorState>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:position_goal-val is deprecated.  Use robostilt_common-msg:position_goal instead.")
+  (position_goal m))
+
 (cl:ensure-generic-function 'velocity-val :lambda-list '(m))
 (cl:defmethod velocity-val ((m <ActuatorState>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:velocity-val is deprecated.  Use robostilt_common-msg:velocity instead.")
   (velocity m))
+
+(cl:ensure-generic-function 'velocity_setpoint-val :lambda-list '(m))
+(cl:defmethod velocity_setpoint-val ((m <ActuatorState>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:velocity_setpoint-val is deprecated.  Use robostilt_common-msg:velocity_setpoint instead.")
+  (velocity_setpoint m))
 
 (cl:ensure-generic-function 'effort-val :lambda-list '(m))
 (cl:defmethod effort-val ((m <ActuatorState>))
@@ -111,11 +136,6 @@
 (cl:defmethod effort_limit-val ((m <ActuatorState>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:effort_limit-val is deprecated.  Use robostilt_common-msg:effort_limit instead.")
   (effort_limit m))
-
-(cl:ensure-generic-function 'position_setpoint-val :lambda-list '(m))
-(cl:defmethod position_setpoint-val ((m <ActuatorState>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:position_setpoint-val is deprecated.  Use robostilt_common-msg:position_setpoint instead.")
-  (position_setpoint m))
 
 (cl:ensure-generic-function 'manipulation-val :lambda-list '(m))
 (cl:defmethod manipulation-val ((m <ActuatorState>))
@@ -169,7 +189,34 @@
     (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'position_setpoint))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'position_goal))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
   (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'velocity))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'velocity_setpoint))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -188,15 +235,6 @@
     (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
   (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'effort_limit))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'position_setpoint))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -255,7 +293,37 @@
       (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'position_setpoint) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'position_goal) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'velocity) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'velocity_setpoint) (roslisp-utils:decode-double-float-bits bits)))
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -276,16 +344,6 @@
       (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'effort_limit) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'position_setpoint) (roslisp-utils:decode-double-float-bits bits)))
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -312,20 +370,22 @@
   "robostilt_common/ActuatorState")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ActuatorState>)))
   "Returns md5sum for a message object of type '<ActuatorState>"
-  "b118f895afbdb74c43c844a60fe2697e")
+  "c8adcf30a4a8d2cd998962d19cef108a")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ActuatorState)))
   "Returns md5sum for a message object of type 'ActuatorState"
-  "b118f895afbdb74c43c844a60fe2697e")
+  "c8adcf30a4a8d2cd998962d19cef108a")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ActuatorState>)))
   "Returns full string definition for message of type '<ActuatorState>"
-  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%float64 position~%float64 velocity~%float64 effort~%float64 effort_limit~%~%float64 position_setpoint~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
+  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity~%~%float64 effort~%float64 effort_limit~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'ActuatorState)))
   "Returns full string definition for message of type 'ActuatorState"
-  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%float64 position~%float64 velocity~%float64 effort~%float64 effort_limit~%~%float64 position_setpoint~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
+  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity~%~%float64 effort~%float64 effort_limit~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <ActuatorState>))
   (cl:+ 0
      4 (cl:length (cl:slot-value msg 'name))
      4
+     8
+     8
      8
      8
      8
@@ -344,10 +404,12 @@
     (cl:cons ':name (name msg))
     (cl:cons ':index (index msg))
     (cl:cons ':position (position msg))
+    (cl:cons ':position_setpoint (position_setpoint msg))
+    (cl:cons ':position_goal (position_goal msg))
     (cl:cons ':velocity (velocity msg))
+    (cl:cons ':velocity_setpoint (velocity_setpoint msg))
     (cl:cons ':effort (effort msg))
     (cl:cons ':effort_limit (effort_limit msg))
-    (cl:cons ':position_setpoint (position_setpoint msg))
     (cl:cons ':manipulation (manipulation msg))
     (cl:cons ':progress (progress msg))
     (cl:cons ':is_moving (is_moving msg))

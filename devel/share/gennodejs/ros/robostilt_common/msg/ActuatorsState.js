@@ -11,7 +11,7 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
-let ActuatorState = require('./ActuatorState.js');
+let SingleActuator = require('./SingleActuator.js');
 let std_msgs = _finder('std_msgs');
 
 //-----------------------------------------------------------
@@ -61,7 +61,7 @@ class ActuatorsState {
     // Serialize the length for message field [actuators]
     bufferOffset = _serializer.uint32(obj.actuators.length, buffer, bufferOffset);
     obj.actuators.forEach((val) => {
-      bufferOffset = ActuatorState.serialize(val, buffer, bufferOffset);
+      bufferOffset = SingleActuator.serialize(val, buffer, bufferOffset);
     });
     // Serialize message field [have_all_been_homed]
     bufferOffset = _serializer.bool(obj.have_all_been_homed, buffer, bufferOffset);
@@ -81,7 +81,7 @@ class ActuatorsState {
     len = _deserializer.uint32(buffer, bufferOffset);
     data.actuators = new Array(len);
     for (let i = 0; i < len; ++i) {
-      data.actuators[i] = ActuatorState.deserialize(buffer, bufferOffset)
+      data.actuators[i] = SingleActuator.deserialize(buffer, bufferOffset)
     }
     // Deserialize message field [have_all_been_homed]
     data.have_all_been_homed = _deserializer.bool(buffer, bufferOffset);
@@ -94,7 +94,7 @@ class ActuatorsState {
     let length = 0;
     length += std_msgs.msg.Header.getMessageSize(object.header);
     object.actuators.forEach((val) => {
-      length += ActuatorState.getMessageSize(val);
+      length += SingleActuator.getMessageSize(val);
     });
     return length + 6;
   }
@@ -106,14 +106,15 @@ class ActuatorsState {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'b738e1ec17f4222e8b4a3330fc699bb7';
+    return '49208e592a412e2ba9a50e6f208bf8a1';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    uint8 COUNT=8
+    # This is a message that holds the state of all actuators as an array.
     
+    uint8 COUNT=8
     uint8 THIRD_FRAME_PRISMATIC = 0
     uint8 LEG_1 = 1
     uint8 LEG_2 = 2
@@ -125,8 +126,8 @@ class ActuatorsState {
     
     
     Header header
-    ActuatorState[] actuators
     
+    SingleActuator[] actuators
     bool have_all_been_homed
     bool all_are_ready
     ================================================================================
@@ -148,17 +149,23 @@ class ActuatorsState {
     string frame_id
     
     ================================================================================
-    MSG: robostilt_common/ActuatorState
+    MSG: robostilt_common/SingleActuator
     # This is a message that holds extended data for a single actuator
     
     string  name
     int32   index
+    
     float64 position
+    float64 position_setpoint   #trajectorized setpoint TODO
+    float64 position_goal       #long term goal
+    
     float64 velocity
+    float64 velocity_setpoint   #trajectorized velocity TODO
+    
     float64 effort
     float64 effort_limit
     
-    float64 position_setpoint
+    
     float32 manipulation
     float32 progress
     
@@ -190,7 +197,7 @@ class ActuatorsState {
     if (msg.actuators !== undefined) {
       resolved.actuators = new Array(msg.actuators.length);
       for (let i = 0; i < resolved.actuators.length; ++i) {
-        resolved.actuators[i] = ActuatorState.Resolve(msg.actuators[i]);
+        resolved.actuators[i] = SingleActuator.Resolve(msg.actuators[i]);
       }
     }
     else {

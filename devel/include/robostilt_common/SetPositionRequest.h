@@ -24,32 +24,32 @@ struct SetPositionRequest_
   typedef SetPositionRequest_<ContainerAllocator> Type;
 
   SetPositionRequest_()
-    : index()
-    , position()
-    , velocity()
-    , effort()  {
+    : indexes()
+    , positions()
+    , velocities()
+    , efforts()  {
     }
   SetPositionRequest_(const ContainerAllocator& _alloc)
-    : index(_alloc)
-    , position(_alloc)
-    , velocity(_alloc)
-    , effort(_alloc)  {
+    : indexes(_alloc)
+    , positions(_alloc)
+    , velocities(_alloc)
+    , efforts(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _index_type;
-  _index_type index;
+   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _indexes_type;
+  _indexes_type indexes;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _position_type;
-  _position_type position;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _positions_type;
+  _positions_type positions;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _velocity_type;
-  _velocity_type velocity;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _velocities_type;
+  _velocities_type velocities;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _effort_type;
-  _effort_type effort;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _efforts_type;
+  _efforts_type efforts;
 
 
 
@@ -129,12 +129,12 @@ struct MD5Sum< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "0ba4e2f6dca879b11eb019699ace2199";
+    return "ed83d833ecc7a900ed484ec7c6f4b832";
   }
 
   static const char* value(const ::robostilt_common::SetPositionRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x0ba4e2f6dca879b1ULL;
-  static const uint64_t static_value2 = 0x1eb019699ace2199ULL;
+  static const uint64_t static_value1 = 0xed83d833ecc7a900ULL;
+  static const uint64_t static_value2 = 0xed484ec7c6f4b832ULL;
 };
 
 template<class ContainerAllocator>
@@ -156,10 +156,10 @@ struct Definition< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
     return "\n\
 \n\
 \n\
-int32[] index\n\
-float64[] position\n\
-float64[] velocity\n\
-float64[] effort\n\
+int32[] indexes\n\
+float64[] positions\n\
+float64[] velocities\n\
+float64[] efforts\n\
 ";
   }
 
@@ -178,10 +178,10 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.index);
-      stream.next(m.position);
-      stream.next(m.velocity);
-      stream.next(m.effort);
+      stream.next(m.indexes);
+      stream.next(m.positions);
+      stream.next(m.velocities);
+      stream.next(m.efforts);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -200,29 +200,29 @@ struct Printer< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::robostilt_common::SetPositionRequest_<ContainerAllocator>& v)
   {
-    s << indent << "index[]" << std::endl;
-    for (size_t i = 0; i < v.index.size(); ++i)
+    s << indent << "indexes[]" << std::endl;
+    for (size_t i = 0; i < v.indexes.size(); ++i)
     {
-      s << indent << "  index[" << i << "]: ";
-      Printer<int32_t>::stream(s, indent + "  ", v.index[i]);
+      s << indent << "  indexes[" << i << "]: ";
+      Printer<int32_t>::stream(s, indent + "  ", v.indexes[i]);
     }
-    s << indent << "position[]" << std::endl;
-    for (size_t i = 0; i < v.position.size(); ++i)
+    s << indent << "positions[]" << std::endl;
+    for (size_t i = 0; i < v.positions.size(); ++i)
     {
-      s << indent << "  position[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.position[i]);
+      s << indent << "  positions[" << i << "]: ";
+      Printer<double>::stream(s, indent + "  ", v.positions[i]);
     }
-    s << indent << "velocity[]" << std::endl;
-    for (size_t i = 0; i < v.velocity.size(); ++i)
+    s << indent << "velocities[]" << std::endl;
+    for (size_t i = 0; i < v.velocities.size(); ++i)
     {
-      s << indent << "  velocity[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.velocity[i]);
+      s << indent << "  velocities[" << i << "]: ";
+      Printer<double>::stream(s, indent + "  ", v.velocities[i]);
     }
-    s << indent << "effort[]" << std::endl;
-    for (size_t i = 0; i < v.effort.size(); ++i)
+    s << indent << "efforts[]" << std::endl;
+    for (size_t i = 0; i < v.efforts.size(); ++i)
     {
-      s << indent << "  effort[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.effort[i]);
+      s << indent << "  efforts[" << i << "]: ";
+      Printer<double>::stream(s, indent + "  ", v.efforts[i]);
     }
   }
 };

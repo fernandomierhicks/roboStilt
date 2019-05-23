@@ -1,10 +1,12 @@
 
 "use strict";
 
-let ActuatorState = require('./ActuatorState.js');
+let SingleActuator = require('./SingleActuator.js');
 let ActuatorsState = require('./ActuatorsState.js');
+let FramesState = require('./FramesState.js');
 
 module.exports = {
-  ActuatorState: ActuatorState,
+  SingleActuator: SingleActuator,
   ActuatorsState: ActuatorsState,
+  FramesState: FramesState,
 };
