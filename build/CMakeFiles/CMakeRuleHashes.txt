@@ -1,5 +1,6 @@
 # Hashes of file build rules.
 dda03718a27c35601ead9d3d489891e9 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/ActuatorState.h
+1ce7bfc00a1d5784a5a8e39f6778249e /home/fernandomierhicks/robostilt/devel/include/robostilt_common/ActuatorsState.h
 2b90bbef32277eb0ca3dcff167723319 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RoboStiltStateMessage.h
 69762b669565faeed4d51283fc7d9a3a /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h
 d653d8b910c15cc1144a46028244206f /home/fernandomierhicks/robostilt/devel/include/robostilt_common/empty_call_bool_Result.h
@@ -7,6 +8,7 @@ d653d8b910c15cc1144a46028244206f /home/fernandomierhicks/robostilt/devel/include
 ca86727b16ea08ea3172e501377892c0 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/robostilt.h
 78cf7e598ccc6d8ec1b13fb5552850da /home/fernandomierhicks/robostilt/devel/include/robostilt_common/robostilt_state_message.h
 b7c72648857c3ca27f7c0ece9a5ce288 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_ActuatorState.py
+d8fd1d96dc121a70e0f2ac849f760606 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_ActuatorsState.py
 b11f4875bc8c447bf730ac4179736e7a /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RoboStiltStateMessage.py
 3829fc950b59bf178fd8f65aa883e974 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py
 0c9e0c8244b91d14bef69da704dc4b02 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py
@@ -14,6 +16,7 @@ b11f4875bc8c447bf730ac4179736e7a /home/fernandomierhicks/robostilt/devel/lib/pyt
 03e0d5e914394863df655304e252b4d1 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_empty_call_bool_Result.py
 3987dd34f09c1f341162607e6943ba02 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_empty_call_bool_result.py
 ce9e5039d300157dd611aa81b9fa3b07 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/ActuatorState.lisp
+a03efd35a184c950529443d3509f30d7 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/ActuatorsState.lisp
 a137277d50e4e308d716c0413758ce71 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/RoboStiltStateMessage.lisp
 a3573ad86b625e6d558cfe55e2d23d6c /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/robostilt.lisp
 426c945c5cfeadd2dd7117d419917d96 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/robostilt_state_message.lisp
@@ -21,6 +24,7 @@ a3573ad86b625e6d558cfe55e2d23d6c /home/fernandomierhicks/robostilt/devel/share/c
 c336c247aa0ce8d0387b34a51386ba2c /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/empty_call_bool_Result.lisp
 70fef413927c9c18b6c25157774db9c4 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/empty_call_bool_result.lisp
 5deae346071004037782e4c57f57a0c7 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/ActuatorState.js
+f7f584a69f9df69463b27fd97817e84d /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/ActuatorsState.js
 0ae3f6ab5663153f1c8d0543debc4099 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/RoboStiltStateMessage.js
 e863e319103767fd1ac9366c6d7d60c7 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/robostilt.js
 23aea9bb4f522690b96e8f708f49b3a0 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/robostilt_state_message.js
@@ -29,6 +33,7 @@ ae431d2bd4f4383ce1854376038ed8ef /home/fernandomierhicks/robostilt/devel/share/g
 f1b8869cbf5875b28ade8235bc2a2a43 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/empty_call_bool_result.js
 bd753c0568041bfd778829401a79556a /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/manifest.l
 70dc9b4a508ee54495f223f6eb784131 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/ActuatorState.l
+73d1ac8f090ecf8d7e250e06d4f65b74 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/ActuatorsState.l
 41de63f141b53d9f8d5715e6f701e067 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/RoboStiltStateMessage.l
 48238441c475360e141c02414ef657c8 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/robostilt.l
 6e90b91da7482fe31ed5423c34d643b0 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/robostilt_state_message.l
@@ -36,7 +41,8 @@ bd753c0568041bfd778829401a79556a /home/fernandomierhicks/robostilt/devel/share/r
 84184ce09f662b10114da160f471c2ef /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/empty_call_bool_Result.l
 4f4c734ae9fa5d83af10811622b90721 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/empty_call_bool_result.l
 75e1a9ed8412596615f5c93a9c8c3b65 CMakeFiles/clean_test_results
-c6cba1d401bcc4a2ada11a2a48b31a65 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState
+39236ec4772f1c032cbf9db921413fda robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorState
+130ca7f33b63e235b5b4916c97da1d25 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState
 49afd8b838c4ce4d9f6b5dc839e28bf0 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition
 3e672da7732693ff34b2085cab741cf5 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp
 3e672da7732693ff34b2085cab741cf5 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus

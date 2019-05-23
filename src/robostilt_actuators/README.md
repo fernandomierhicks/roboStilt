@@ -30,8 +30,8 @@ This package takes care of the low level to midlevel abstractions level of the r
 | :--------------------: | ------------------------------------------------------------ |
 |    **Description**     | Actuator state and command interface. Moves legs             |
 |  **Published topic**   | robostilt/actuator_states                                    |
-| **Published message**  | ActuatorStates.msg                                           |
+| **Published message**  | ActuatorsState.msg *which is an array of ActuatorState.msg*  |
 |  **Published fields**  | position<br />velocity<br />effort<br />etc..                |
 |   **Subscriptions**    | robostilt/joint_states                                       |
-| **Services available** | set_position(indexes,position,velocity,effort) <br>set_velocity(indexes,velocity,effort) |
+| **Services available** | set_position(indexes,positions,velocities,efforts) <br>set_velocity(indexes,velocity,effort) |
 |      **Triggers**      | robostilt/robot_state/set_fault()                            |

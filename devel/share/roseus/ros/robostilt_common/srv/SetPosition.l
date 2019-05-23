@@ -25,7 +25,7 @@
 (defmethod robostilt_common::SetPositionRequest
   (:init
    (&key
-    ((:index __index) (make-array 0 :initial-element 0 :element-type :char))
+    ((:index __index) (make-array 0 :initial-element 0 :element-type :integer))
     ((:position __position) (make-array 0 :initial-element 0.0 :element-type :float))
     ((:velocity __velocity) (make-array 0 :initial-element 0.0 :element-type :float))
     ((:effort __effort) (make-array 0 :initial-element 0.0 :element-type :float))
@@ -51,8 +51,8 @@
   (:serialization-length
    ()
    (+
-    ;; uint8[] _index
-    (* 1    (length _index)) 4
+    ;; int32[] _index
+    (* 4    (length _index)) 4
     ;; float64[] _position
     (* 8    (length _position)) 4
     ;; float64[] _velocity
@@ -64,9 +64,11 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; uint8[] _index
+     ;; int32[] _index
      (write-long (length _index) s)
-     (princ _index s)
+     (dotimes (i (length _index))
+       (write-long (elt _index i) s)
+       )
      ;; float64[] _position
      (write-long (length _position) s)
      (dotimes (i (length _position))
@@ -86,10 +88,13 @@
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; uint8[] _index
-   (let ((n (sys::peek buf ptr- :integer))) (incf ptr- 4)
-     (setq _index (make-array n :element-type :char))
-     (replace _index buf :start2 ptr-) (incf ptr- n))
+   ;; int32[] _index
+   (let (n)
+     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setq _index (instantiate integer-vector n))
+     (dotimes (i n)
+     (setf (elt _index i) (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     ))
    ;; float64[] _position
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
@@ -156,7 +161,7 @@
   :super ros::object
   :slots ())
 
-(setf (get robostilt_common::SetPosition :md5sum-) "78b457453a86de6904be5157c5065d56")
+(setf (get robostilt_common::SetPosition :md5sum-) "25c57e8d42c2eb104d5f653217a33687")
 (setf (get robostilt_common::SetPosition :datatype-) "robostilt_common/SetPosition")
 (setf (get robostilt_common::SetPosition :request) robostilt_common::SetPositionRequest)
 (setf (get robostilt_common::SetPosition :response) robostilt_common::SetPositionResponse)
@@ -164,13 +169,13 @@
 (defmethod robostilt_common::SetPositionRequest
   (:response () (instance robostilt_common::SetPositionResponse :init)))
 
-(setf (get robostilt_common::SetPositionRequest :md5sum-) "78b457453a86de6904be5157c5065d56")
+(setf (get robostilt_common::SetPositionRequest :md5sum-) "25c57e8d42c2eb104d5f653217a33687")
 (setf (get robostilt_common::SetPositionRequest :datatype-) "robostilt_common/SetPositionRequest")
 (setf (get robostilt_common::SetPositionRequest :definition-)
       "
 
 
-uint8[] index
+int32[] index
 float64[] position
 float64[] velocity
 float64[] effort
@@ -178,13 +183,13 @@ float64[] effort
 bool success
 ")
 
-(setf (get robostilt_common::SetPositionResponse :md5sum-) "78b457453a86de6904be5157c5065d56")
+(setf (get robostilt_common::SetPositionResponse :md5sum-) "25c57e8d42c2eb104d5f653217a33687")
 (setf (get robostilt_common::SetPositionResponse :datatype-) "robostilt_common/SetPositionResponse")
 (setf (get robostilt_common::SetPositionResponse :definition-)
       "
 
 
-uint8[] index
+int32[] index
 float64[] position
 float64[] velocity
 float64[] effort
@@ -194,6 +199,6 @@ bool success
 
 
 
-(provide :robostilt_common/SetPosition "78b457453a86de6904be5157c5065d56")
+(provide :robostilt_common/SetPosition "25c57e8d42c2eb104d5f653217a33687")
 
 

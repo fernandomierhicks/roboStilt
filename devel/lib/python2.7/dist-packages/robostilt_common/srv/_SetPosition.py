@@ -7,19 +7,19 @@ import struct
 
 
 class SetPositionRequest(genpy.Message):
-  _md5sum = "8d181cc1dd672bd766278d86dc755a54"
+  _md5sum = "0ba4e2f6dca879b11eb019699ace2199"
   _type = "robostilt_common/SetPositionRequest"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """
 
 
-uint8[] index
+int32[] index
 float64[] position
 float64[] velocity
 float64[] effort
 """
   __slots__ = ['index','position','velocity','effort']
-  _slot_types = ['uint8[]','float64[]','float64[]','float64[]']
+  _slot_types = ['int32[]','float64[]','float64[]','float64[]']
 
   def __init__(self, *args, **kwds):
     """
@@ -39,7 +39,7 @@ float64[] effort
       super(SetPositionRequest, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.index is None:
-        self.index = b''
+        self.index = []
       if self.position is None:
         self.position = []
       if self.velocity is None:
@@ -47,7 +47,7 @@ float64[] effort
       if self.effort is None:
         self.effort = []
     else:
-      self.index = b''
+      self.index = []
       self.position = []
       self.velocity = []
       self.effort = []
@@ -64,13 +64,10 @@ float64[] effort
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.index
-      length = len(_x)
-      # - if encoded as a list instead, serialize as bytes instead of string
-      if type(_x) in [list, tuple]:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      length = len(self.index)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%si'%length
+      buff.write(struct.pack(pattern, *self.index))
       length = len(self.position)
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
@@ -96,9 +93,10 @@ float64[] effort
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%si'%length
       start = end
-      end += length
-      self.index = str[start:end]
+      end += struct.calcsize(pattern)
+      self.index = struct.unpack(pattern, str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -132,13 +130,10 @@ float64[] effort
     :param numpy: numpy python module
     """
     try:
-      _x = self.index
-      length = len(_x)
-      # - if encoded as a list instead, serialize as bytes instead of string
-      if type(_x) in [list, tuple]:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      length = len(self.index)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%si'%length
+      buff.write(self.index.tostring())
       length = len(self.position)
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
@@ -165,9 +160,10 @@ float64[] effort
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%si'%length
       start = end
-      end += length
-      self.index = str[start:end]
+      end += struct.calcsize(pattern)
+      self.index = numpy.frombuffer(str[start:end], dtype=numpy.int32, count=length)
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -307,6 +303,6 @@ def _get_struct_B():
     return _struct_B
 class SetPosition(object):
   _type          = 'robostilt_common/SetPosition'
-  _md5sum = '78b457453a86de6904be5157c5065d56'
+  _md5sum = '25c57e8d42c2eb104d5f653217a33687'
   _request_class  = SetPositionRequest
   _response_class = SetPositionResponse

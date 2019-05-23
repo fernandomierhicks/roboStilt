@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/robostilt_common_generate_messages_eus"
+  "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/ActuatorsState.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/ActuatorState.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetPosition.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/manifest.l"

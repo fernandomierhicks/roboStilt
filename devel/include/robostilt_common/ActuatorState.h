@@ -15,7 +15,6 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
-#include <std_msgs/Header.h>
 
 namespace robostilt_common
 {
@@ -25,101 +24,80 @@ struct ActuatorState_
   typedef ActuatorState_<ContainerAllocator> Type;
 
   ActuatorState_()
-    : header()
-    , name()
-    , position()
-    , velocity()
-    , effort()
-    , effort_limit()
-    , position_setpoint()
-    , manipulation()
-    , progress()
-    , is_moving()
-    , is_ready()
-    , has_been_homed()
-    , is_supporting_weight()
-    , have_all_been_homed(false)
-    , all_are_ready(false)  {
+    : name()
+    , index(0)
+    , position(0.0)
+    , velocity(0.0)
+    , effort(0.0)
+    , effort_limit(0.0)
+    , position_setpoint(0.0)
+    , manipulation(0.0)
+    , progress(0.0)
+    , is_moving(false)
+    , is_ready(false)
+    , has_been_homed(false)
+    , is_supporting_weight(false)  {
     }
   ActuatorState_(const ContainerAllocator& _alloc)
-    : header(_alloc)
-    , name(_alloc)
-    , position(_alloc)
-    , velocity(_alloc)
-    , effort(_alloc)
-    , effort_limit(_alloc)
-    , position_setpoint(_alloc)
-    , manipulation(_alloc)
-    , progress(_alloc)
-    , is_moving(_alloc)
-    , is_ready(_alloc)
-    , has_been_homed(_alloc)
-    , is_supporting_weight(_alloc)
-    , have_all_been_homed(false)
-    , all_are_ready(false)  {
+    : name(_alloc)
+    , index(0)
+    , position(0.0)
+    , velocity(0.0)
+    , effort(0.0)
+    , effort_limit(0.0)
+    , position_setpoint(0.0)
+    , manipulation(0.0)
+    , progress(0.0)
+    , is_moving(false)
+    , is_ready(false)
+    , has_been_homed(false)
+    , is_supporting_weight(false)  {
   (void)_alloc;
     }
 
 
 
-   typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
-  _header_type header;
-
-   typedef std::vector<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > , typename ContainerAllocator::template rebind<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::other >  _name_type;
+   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _name_type;
   _name_type name;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _position_type;
+   typedef int32_t _index_type;
+  _index_type index;
+
+   typedef double _position_type;
   _position_type position;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _velocity_type;
+   typedef double _velocity_type;
   _velocity_type velocity;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _effort_type;
+   typedef double _effort_type;
   _effort_type effort;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _effort_limit_type;
+   typedef double _effort_limit_type;
   _effort_limit_type effort_limit;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _position_setpoint_type;
+   typedef double _position_setpoint_type;
   _position_setpoint_type position_setpoint;
 
-   typedef std::vector<float, typename ContainerAllocator::template rebind<float>::other >  _manipulation_type;
+   typedef float _manipulation_type;
   _manipulation_type manipulation;
 
-   typedef std::vector<float, typename ContainerAllocator::template rebind<float>::other >  _progress_type;
+   typedef float _progress_type;
   _progress_type progress;
 
-   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _is_moving_type;
+   typedef uint8_t _is_moving_type;
   _is_moving_type is_moving;
 
-   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _is_ready_type;
+   typedef uint8_t _is_ready_type;
   _is_ready_type is_ready;
 
-   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _has_been_homed_type;
+   typedef uint8_t _has_been_homed_type;
   _has_been_homed_type has_been_homed;
 
-   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _is_supporting_weight_type;
+   typedef uint8_t _is_supporting_weight_type;
   _is_supporting_weight_type is_supporting_weight;
 
-   typedef uint8_t _have_all_been_homed_type;
-  _have_all_been_homed_type have_all_been_homed;
-
-   typedef uint8_t _all_are_ready_type;
-  _all_are_ready_type all_are_ready;
 
 
-
-  enum {
-    COUNT = 8u,
-    PRISMATIC = 0u,
-    LEG_1 = 1u,
-    LEG_2 = 2u,
-    LEG_3 = 3u,
-    LEG_4 = 4u,
-    LEG_5 = 5u,
-    LEG_6 = 6u,
-    REVOLUTE = 7u,
-  };
 
 
   typedef boost::shared_ptr< ::robostilt_common::ActuatorState_<ContainerAllocator> > Ptr;
@@ -133,24 +111,6 @@ typedef boost::shared_ptr< ::robostilt_common::ActuatorState > ActuatorStatePtr;
 typedef boost::shared_ptr< ::robostilt_common::ActuatorState const> ActuatorStateConstPtr;
 
 // constants requiring out of line definition
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
-
-   
 
 
 
@@ -170,7 +130,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': True}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'robostilt_common': ['/home/fernandomierhicks/robostilt/src/robostilt_common/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -200,12 +160,12 @@ struct IsMessage< ::robostilt_common::ActuatorState_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct HasHeader< ::robostilt_common::ActuatorState_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::robostilt_common::ActuatorState_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 
@@ -214,12 +174,12 @@ struct MD5Sum< ::robostilt_common::ActuatorState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "acf4b6d30f12ebcdcb467bbc886f86be";
+    return "b118f895afbdb74c43c844a60fe2697e";
   }
 
   static const char* value(const ::robostilt_common::ActuatorState_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xacf4b6d30f12ebcdULL;
-  static const uint64_t static_value2 = 0xcb467bbc886f86beULL;
+  static const uint64_t static_value1 = 0xb118f895afbdb74cULL;
+  static const uint64_t static_value2 = 0x43c844a60fe2697eULL;
 };
 
 template<class ContainerAllocator>
@@ -238,60 +198,27 @@ struct Definition< ::robostilt_common::ActuatorState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# This is a message that holds extended data of all actuators\n\
+    return "# This is a message that holds extended data for a single actuator\n\
 \n\
+string  name\n\
+int32   index\n\
+float64 position\n\
+float64 velocity\n\
+float64 effort\n\
+float64 effort_limit\n\
 \n\
-# Power supply status constants\n\
-uint8 COUNT=8\n\
+float64 position_setpoint\n\
+float32 manipulation\n\
+float32 progress\n\
 \n\
-uint8 PRISMATIC = 0\n\
-uint8 LEG_1 = 1\n\
-uint8 LEG_2 = 2\n\
-uint8 LEG_3 = 3\n\
-uint8 LEG_4 = 4\n\
-uint8 LEG_5 = 5\n\
-uint8 LEG_6 = 6\n\
-uint8 REVOLUTE = 7\n\
-\n\
-Header header\n\
-\n\
-string[] name\n\
-float64[] position\n\
-float64[] velocity\n\
-float64[] effort\n\
-float64[] effort_limit\n\
-\n\
-float64[] position_setpoint\n\
-float32[] manipulation\n\
-float32[] progress\n\
-\n\
-bool[] is_moving\n\
-bool[] is_ready\n\
-bool[] has_been_homed\n\
-bool[] is_supporting_weight\n\
-\n\
-bool have_all_been_homed\n\
-bool all_are_ready\n\
+bool is_moving\n\
+bool is_ready\n\
+bool has_been_homed\n\
+bool is_supporting_weight\n\
 \n\
 \n\
 \n\
-================================================================================\n\
-MSG: std_msgs/Header\n\
-# Standard metadata for higher-level stamped data types.\n\
-# This is generally used to communicate timestamped data \n\
-# in a particular coordinate frame.\n\
-# \n\
-# sequence ID: consecutively increasing ID \n\
-uint32 seq\n\
-#Two-integer timestamp that is expressed as:\n\
-# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n\
-# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n\
-# time-handling sugar is provided by the client library\n\
-time stamp\n\
-#Frame this data is associated with\n\
-# 0: no frame\n\
-# 1: global frame\n\
-string frame_id\n\
+\n\
 ";
   }
 
@@ -310,8 +237,8 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.header);
       stream.next(m.name);
+      stream.next(m.index);
       stream.next(m.position);
       stream.next(m.velocity);
       stream.next(m.effort);
@@ -323,8 +250,6 @@ namespace serialization
       stream.next(m.is_ready);
       stream.next(m.has_been_homed);
       stream.next(m.is_supporting_weight);
-      stream.next(m.have_all_been_homed);
-      stream.next(m.all_are_ready);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -343,85 +268,32 @@ struct Printer< ::robostilt_common::ActuatorState_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::robostilt_common::ActuatorState_<ContainerAllocator>& v)
   {
-    s << indent << "header: ";
-    s << std::endl;
-    Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
-    s << indent << "name[]" << std::endl;
-    for (size_t i = 0; i < v.name.size(); ++i)
-    {
-      s << indent << "  name[" << i << "]: ";
-      Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.name[i]);
-    }
-    s << indent << "position[]" << std::endl;
-    for (size_t i = 0; i < v.position.size(); ++i)
-    {
-      s << indent << "  position[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.position[i]);
-    }
-    s << indent << "velocity[]" << std::endl;
-    for (size_t i = 0; i < v.velocity.size(); ++i)
-    {
-      s << indent << "  velocity[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.velocity[i]);
-    }
-    s << indent << "effort[]" << std::endl;
-    for (size_t i = 0; i < v.effort.size(); ++i)
-    {
-      s << indent << "  effort[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.effort[i]);
-    }
-    s << indent << "effort_limit[]" << std::endl;
-    for (size_t i = 0; i < v.effort_limit.size(); ++i)
-    {
-      s << indent << "  effort_limit[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.effort_limit[i]);
-    }
-    s << indent << "position_setpoint[]" << std::endl;
-    for (size_t i = 0; i < v.position_setpoint.size(); ++i)
-    {
-      s << indent << "  position_setpoint[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.position_setpoint[i]);
-    }
-    s << indent << "manipulation[]" << std::endl;
-    for (size_t i = 0; i < v.manipulation.size(); ++i)
-    {
-      s << indent << "  manipulation[" << i << "]: ";
-      Printer<float>::stream(s, indent + "  ", v.manipulation[i]);
-    }
-    s << indent << "progress[]" << std::endl;
-    for (size_t i = 0; i < v.progress.size(); ++i)
-    {
-      s << indent << "  progress[" << i << "]: ";
-      Printer<float>::stream(s, indent + "  ", v.progress[i]);
-    }
-    s << indent << "is_moving[]" << std::endl;
-    for (size_t i = 0; i < v.is_moving.size(); ++i)
-    {
-      s << indent << "  is_moving[" << i << "]: ";
-      Printer<uint8_t>::stream(s, indent + "  ", v.is_moving[i]);
-    }
-    s << indent << "is_ready[]" << std::endl;
-    for (size_t i = 0; i < v.is_ready.size(); ++i)
-    {
-      s << indent << "  is_ready[" << i << "]: ";
-      Printer<uint8_t>::stream(s, indent + "  ", v.is_ready[i]);
-    }
-    s << indent << "has_been_homed[]" << std::endl;
-    for (size_t i = 0; i < v.has_been_homed.size(); ++i)
-    {
-      s << indent << "  has_been_homed[" << i << "]: ";
-      Printer<uint8_t>::stream(s, indent + "  ", v.has_been_homed[i]);
-    }
-    s << indent << "is_supporting_weight[]" << std::endl;
-    for (size_t i = 0; i < v.is_supporting_weight.size(); ++i)
-    {
-      s << indent << "  is_supporting_weight[" << i << "]: ";
-      Printer<uint8_t>::stream(s, indent + "  ", v.is_supporting_weight[i]);
-    }
-    s << indent << "have_all_been_homed: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.have_all_been_homed);
-    s << indent << "all_are_ready: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.all_are_ready);
+    s << indent << "name: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.name);
+    s << indent << "index: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.index);
+    s << indent << "position: ";
+    Printer<double>::stream(s, indent + "  ", v.position);
+    s << indent << "velocity: ";
+    Printer<double>::stream(s, indent + "  ", v.velocity);
+    s << indent << "effort: ";
+    Printer<double>::stream(s, indent + "  ", v.effort);
+    s << indent << "effort_limit: ";
+    Printer<double>::stream(s, indent + "  ", v.effort_limit);
+    s << indent << "position_setpoint: ";
+    Printer<double>::stream(s, indent + "  ", v.position_setpoint);
+    s << indent << "manipulation: ";
+    Printer<float>::stream(s, indent + "  ", v.manipulation);
+    s << indent << "progress: ";
+    Printer<float>::stream(s, indent + "  ", v.progress);
+    s << indent << "is_moving: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.is_moving);
+    s << indent << "is_ready: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.is_ready);
+    s << indent << "has_been_homed: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.has_been_homed);
+    s << indent << "is_supporting_weight: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.is_supporting_weight);
   }
 };
 

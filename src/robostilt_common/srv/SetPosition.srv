@@ -1,7 +1,7 @@
 
 # Can send a list of indexes
 
-uint8[] index
+int32[] index
 float64[] position
 float64[] velocity
 float64[] effort

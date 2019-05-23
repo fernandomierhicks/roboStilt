@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "robostilt_common: 1 messages, 1 services")
+message(STATUS "robostilt_common: 2 messages, 1 services")
 
 set(MSG_I_FLAGS "-Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
@@ -17,6 +17,11 @@ add_custom_target(robostilt_common_generate_messages ALL)
 
 
 
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg" NAME_WE)
+add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg" "robostilt_common/ActuatorState:std_msgs/Header"
+)
+
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" ""
@@ -24,7 +29,7 @@ add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" NAME_WE)
 add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" "std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" ""
 )
 
 #
@@ -34,9 +39,15 @@ add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg"
+  "${MSG_I_FLAGS}"
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/robostilt_common
+)
+_generate_msg_cpp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/robostilt_common
 )
 
@@ -60,6 +71,8 @@ add_custom_target(robostilt_common_generate_messages_cpp
 add_dependencies(robostilt_common_generate_messages robostilt_common_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_cpp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_cpp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" NAME_WE)
@@ -75,9 +88,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS robostilt_common_generate_messages_
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg"
+  "${MSG_I_FLAGS}"
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/robostilt_common
+)
+_generate_msg_eus(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/robostilt_common
 )
 
@@ -101,6 +120,8 @@ add_custom_target(robostilt_common_generate_messages_eus
 add_dependencies(robostilt_common_generate_messages robostilt_common_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_eus _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_eus _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" NAME_WE)
@@ -116,9 +137,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS robostilt_common_generate_messages_
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg"
+  "${MSG_I_FLAGS}"
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/robostilt_common
+)
+_generate_msg_lisp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/robostilt_common
 )
 
@@ -142,6 +169,8 @@ add_custom_target(robostilt_common_generate_messages_lisp
 add_dependencies(robostilt_common_generate_messages robostilt_common_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_lisp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_lisp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" NAME_WE)
@@ -157,9 +186,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS robostilt_common_generate_messages_
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg"
+  "${MSG_I_FLAGS}"
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/robostilt_common
+)
+_generate_msg_nodejs(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/robostilt_common
 )
 
@@ -183,6 +218,8 @@ add_custom_target(robostilt_common_generate_messages_nodejs
 add_dependencies(robostilt_common_generate_messages robostilt_common_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_nodejs _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_nodejs _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" NAME_WE)
@@ -198,9 +235,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS robostilt_common_generate_messages_
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg"
+  "${MSG_I_FLAGS}"
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/robostilt_common
+)
+_generate_msg_py(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
+  ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/robostilt_common
 )
 
@@ -224,6 +267,8 @@ add_custom_target(robostilt_common_generate_messages_py
 add_dependencies(robostilt_common_generate_messages robostilt_common_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_py _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_py _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg" NAME_WE)

@@ -1,8 +1,8 @@
 (cl:in-package robostilt_common-msg)
-(cl:export '(HEADER-VAL
-          HEADER
-          NAME-VAL
+(cl:export '(NAME-VAL
           NAME
+          INDEX-VAL
+          INDEX
           POSITION-VAL
           POSITION
           VELOCITY-VAL
@@ -25,8 +25,4 @@
           HAS_BEEN_HOMED
           IS_SUPPORTING_WEIGHT-VAL
           IS_SUPPORTING_WEIGHT
-          HAVE_ALL_BEEN_HOMED-VAL
-          HAVE_ALL_BEEN_HOMED
-          ALL_ARE_READY-VAL
-          ALL_ARE_READY
 ))

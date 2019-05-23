@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
+messages_str = "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorState.msg"
 services_str = "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv"
 pkg_name = "robostilt_common"
 dependencies_str = "std_msgs"

@@ -5,80 +5,35 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import std_msgs.msg
 
 class ActuatorState(genpy.Message):
-  _md5sum = "acf4b6d30f12ebcdcb467bbc886f86be"
+  _md5sum = "b118f895afbdb74c43c844a60fe2697e"
   _type = "robostilt_common/ActuatorState"
-  _has_header = True #flag to mark the presence of a Header object
-  _full_text = """# This is a message that holds extended data of all actuators
+  _has_header = False #flag to mark the presence of a Header object
+  _full_text = """# This is a message that holds extended data for a single actuator
 
+string  name
+int32   index
+float64 position
+float64 velocity
+float64 effort
+float64 effort_limit
 
-# Power supply status constants
-uint8 COUNT=8
+float64 position_setpoint
+float32 manipulation
+float32 progress
 
-uint8 PRISMATIC = 0
-uint8 LEG_1 = 1
-uint8 LEG_2 = 2
-uint8 LEG_3 = 3
-uint8 LEG_4 = 4
-uint8 LEG_5 = 5
-uint8 LEG_6 = 6
-uint8 REVOLUTE = 7
-
-Header header
-
-string[] name
-float64[] position
-float64[] velocity
-float64[] effort
-float64[] effort_limit
-
-float64[] position_setpoint
-float32[] manipulation
-float32[] progress
-
-bool[] is_moving
-bool[] is_ready
-bool[] has_been_homed
-bool[] is_supporting_weight
-
-bool have_all_been_homed
-bool all_are_ready
+bool is_moving
+bool is_ready
+bool has_been_homed
+bool is_supporting_weight
 
 
 
-================================================================================
-MSG: std_msgs/Header
-# Standard metadata for higher-level stamped data types.
-# This is generally used to communicate timestamped data 
-# in a particular coordinate frame.
-# 
-# sequence ID: consecutively increasing ID 
-uint32 seq
-#Two-integer timestamp that is expressed as:
-# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
-# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
-# time-handling sugar is provided by the client library
-time stamp
-#Frame this data is associated with
-# 0: no frame
-# 1: global frame
-string frame_id
+
 """
-  # Pseudo-constants
-  COUNT = 8
-  PRISMATIC = 0
-  LEG_1 = 1
-  LEG_2 = 2
-  LEG_3 = 3
-  LEG_4 = 4
-  LEG_5 = 5
-  LEG_6 = 6
-  REVOLUTE = 7
-
-  __slots__ = ['header','name','position','velocity','effort','effort_limit','position_setpoint','manipulation','progress','is_moving','is_ready','has_been_homed','is_supporting_weight','have_all_been_homed','all_are_ready']
-  _slot_types = ['std_msgs/Header','string[]','float64[]','float64[]','float64[]','float64[]','float64[]','float32[]','float32[]','bool[]','bool[]','bool[]','bool[]','bool','bool']
+  __slots__ = ['name','index','position','velocity','effort','effort_limit','position_setpoint','manipulation','progress','is_moving','is_ready','has_been_homed','is_supporting_weight']
+  _slot_types = ['string','int32','float64','float64','float64','float64','float64','float32','float32','bool','bool','bool','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -88,7 +43,7 @@ string frame_id
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       header,name,position,velocity,effort,effort_limit,position_setpoint,manipulation,progress,is_moving,is_ready,has_been_homed,is_supporting_weight,have_all_been_homed,all_are_ready
+       name,index,position,velocity,effort,effort_limit,position_setpoint,manipulation,progress,is_moving,is_ready,has_been_homed,is_supporting_weight
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -97,52 +52,46 @@ string frame_id
     if args or kwds:
       super(ActuatorState, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.header is None:
-        self.header = std_msgs.msg.Header()
       if self.name is None:
-        self.name = []
+        self.name = ''
+      if self.index is None:
+        self.index = 0
       if self.position is None:
-        self.position = []
+        self.position = 0.
       if self.velocity is None:
-        self.velocity = []
+        self.velocity = 0.
       if self.effort is None:
-        self.effort = []
+        self.effort = 0.
       if self.effort_limit is None:
-        self.effort_limit = []
+        self.effort_limit = 0.
       if self.position_setpoint is None:
-        self.position_setpoint = []
+        self.position_setpoint = 0.
       if self.manipulation is None:
-        self.manipulation = []
+        self.manipulation = 0.
       if self.progress is None:
-        self.progress = []
+        self.progress = 0.
       if self.is_moving is None:
-        self.is_moving = []
+        self.is_moving = False
       if self.is_ready is None:
-        self.is_ready = []
+        self.is_ready = False
       if self.has_been_homed is None:
-        self.has_been_homed = []
+        self.has_been_homed = False
       if self.is_supporting_weight is None:
-        self.is_supporting_weight = []
-      if self.have_all_been_homed is None:
-        self.have_all_been_homed = False
-      if self.all_are_ready is None:
-        self.all_are_ready = False
+        self.is_supporting_weight = False
     else:
-      self.header = std_msgs.msg.Header()
-      self.name = []
-      self.position = []
-      self.velocity = []
-      self.effort = []
-      self.effort_limit = []
-      self.position_setpoint = []
-      self.manipulation = []
-      self.progress = []
-      self.is_moving = []
-      self.is_ready = []
-      self.has_been_homed = []
-      self.is_supporting_weight = []
-      self.have_all_been_homed = False
-      self.all_are_ready = False
+      self.name = ''
+      self.index = 0
+      self.position = 0.
+      self.velocity = 0.
+      self.effort = 0.
+      self.effort_limit = 0.
+      self.position_setpoint = 0.
+      self.manipulation = 0.
+      self.progress = 0.
+      self.is_moving = False
+      self.is_ready = False
+      self.has_been_homed = False
+      self.is_supporting_weight = False
 
   def _get_types(self):
     """
@@ -156,68 +105,14 @@ string frame_id
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self
-      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
-      _x = self.header.frame_id
+      _x = self.name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      length = len(self.name)
-      buff.write(_struct_I.pack(length))
-      for val1 in self.name:
-        length = len(val1)
-        if python3 or type(val1) == unicode:
-          val1 = val1.encode('utf-8')
-          length = len(val1)
-        buff.write(struct.pack('<I%ss'%length, length, val1))
-      length = len(self.position)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(struct.pack(pattern, *self.position))
-      length = len(self.velocity)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(struct.pack(pattern, *self.velocity))
-      length = len(self.effort)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(struct.pack(pattern, *self.effort))
-      length = len(self.effort_limit)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(struct.pack(pattern, *self.effort_limit))
-      length = len(self.position_setpoint)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(struct.pack(pattern, *self.position_setpoint))
-      length = len(self.manipulation)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(struct.pack(pattern, *self.manipulation))
-      length = len(self.progress)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(struct.pack(pattern, *self.progress))
-      length = len(self.is_moving)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(struct.pack(pattern, *self.is_moving))
-      length = len(self.is_ready)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(struct.pack(pattern, *self.is_ready))
-      length = len(self.has_been_homed)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(struct.pack(pattern, *self.has_been_homed))
-      length = len(self.is_supporting_weight)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(struct.pack(pattern, *self.is_supporting_weight))
       _x = self
-      buff.write(_get_struct_2B().pack(_x.have_all_been_homed, _x.all_are_ready))
+      buff.write(_get_struct_i5d2f4B().pack(_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -227,124 +122,24 @@ string frame_id
     :param str: byte array of serialized message, ``str``
     """
     try:
-      if self.header is None:
-        self.header = std_msgs.msg.Header()
       end = 0
-      _x = self
-      start = end
-      end += 12
-      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.header.frame_id = str[start:end].decode('utf-8')
+        self.name = str[start:end].decode('utf-8')
       else:
-        self.header.frame_id = str[start:end]
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      self.name = []
-      for i in range(0, length):
-        start = end
-        end += 4
-        (length,) = _struct_I.unpack(str[start:end])
-        start = end
-        end += length
-        if python3:
-          val1 = str[start:end].decode('utf-8')
-        else:
-          val1 = str[start:end]
-        self.name.append(val1)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.position = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.velocity = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.effort = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.effort_limit = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.position_setpoint = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.manipulation = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.progress = struct.unpack(pattern, str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.is_moving = struct.unpack(pattern, str[start:end])
-      self.is_moving = map(bool, self.is_moving)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.is_ready = struct.unpack(pattern, str[start:end])
-      self.is_ready = map(bool, self.is_ready)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.has_been_homed = struct.unpack(pattern, str[start:end])
-      self.has_been_homed = map(bool, self.has_been_homed)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.is_supporting_weight = struct.unpack(pattern, str[start:end])
-      self.is_supporting_weight = map(bool, self.is_supporting_weight)
+        self.name = str[start:end]
       _x = self
       start = end
-      end += 2
-      (_x.have_all_been_homed, _x.all_are_ready,) = _get_struct_2B().unpack(str[start:end])
-      self.have_all_been_homed = bool(self.have_all_been_homed)
-      self.all_are_ready = bool(self.all_are_ready)
+      end += 56
+      (_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i5d2f4B().unpack(str[start:end])
+      self.is_moving = bool(self.is_moving)
+      self.is_ready = bool(self.is_ready)
+      self.has_been_homed = bool(self.has_been_homed)
+      self.is_supporting_weight = bool(self.is_supporting_weight)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -357,68 +152,14 @@ string frame_id
     :param numpy: numpy python module
     """
     try:
-      _x = self
-      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
-      _x = self.header.frame_id
+      _x = self.name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
-      length = len(self.name)
-      buff.write(_struct_I.pack(length))
-      for val1 in self.name:
-        length = len(val1)
-        if python3 or type(val1) == unicode:
-          val1 = val1.encode('utf-8')
-          length = len(val1)
-        buff.write(struct.pack('<I%ss'%length, length, val1))
-      length = len(self.position)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(self.position.tostring())
-      length = len(self.velocity)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(self.velocity.tostring())
-      length = len(self.effort)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(self.effort.tostring())
-      length = len(self.effort_limit)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(self.effort_limit.tostring())
-      length = len(self.position_setpoint)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sd'%length
-      buff.write(self.position_setpoint.tostring())
-      length = len(self.manipulation)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(self.manipulation.tostring())
-      length = len(self.progress)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sf'%length
-      buff.write(self.progress.tostring())
-      length = len(self.is_moving)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(self.is_moving.tostring())
-      length = len(self.is_ready)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(self.is_ready.tostring())
-      length = len(self.has_been_homed)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(self.has_been_homed.tostring())
-      length = len(self.is_supporting_weight)
-      buff.write(_struct_I.pack(length))
-      pattern = '<%sB'%length
-      buff.write(self.is_supporting_weight.tostring())
       _x = self
-      buff.write(_get_struct_2B().pack(_x.have_all_been_homed, _x.all_are_ready))
+      buff.write(_get_struct_i5d2f4B().pack(_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -429,124 +170,24 @@ string frame_id
     :param numpy: numpy python module
     """
     try:
-      if self.header is None:
-        self.header = std_msgs.msg.Header()
       end = 0
-      _x = self
-      start = end
-      end += 12
-      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       start = end
       end += length
       if python3:
-        self.header.frame_id = str[start:end].decode('utf-8')
+        self.name = str[start:end].decode('utf-8')
       else:
-        self.header.frame_id = str[start:end]
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      self.name = []
-      for i in range(0, length):
-        start = end
-        end += 4
-        (length,) = _struct_I.unpack(str[start:end])
-        start = end
-        end += length
-        if python3:
-          val1 = str[start:end].decode('utf-8')
-        else:
-          val1 = str[start:end]
-        self.name.append(val1)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.position = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.velocity = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.effort = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.effort_limit = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sd'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.position_setpoint = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.manipulation = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sf'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.progress = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.is_moving = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
-      self.is_moving = map(bool, self.is_moving)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.is_ready = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
-      self.is_ready = map(bool, self.is_ready)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.has_been_homed = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
-      self.has_been_homed = map(bool, self.has_been_homed)
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      pattern = '<%sB'%length
-      start = end
-      end += struct.calcsize(pattern)
-      self.is_supporting_weight = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
-      self.is_supporting_weight = map(bool, self.is_supporting_weight)
+        self.name = str[start:end]
       _x = self
       start = end
-      end += 2
-      (_x.have_all_been_homed, _x.all_are_ready,) = _get_struct_2B().unpack(str[start:end])
-      self.have_all_been_homed = bool(self.have_all_been_homed)
-      self.all_are_ready = bool(self.all_are_ready)
+      end += 56
+      (_x.index, _x.position, _x.velocity, _x.effort, _x.effort_limit, _x.position_setpoint, _x.manipulation, _x.progress, _x.is_moving, _x.is_ready, _x.has_been_homed, _x.is_supporting_weight,) = _get_struct_i5d2f4B().unpack(str[start:end])
+      self.is_moving = bool(self.is_moving)
+      self.is_ready = bool(self.is_ready)
+      self.has_been_homed = bool(self.has_been_homed)
+      self.is_supporting_weight = bool(self.is_supporting_weight)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -555,15 +196,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_3I = None
-def _get_struct_3I():
-    global _struct_3I
-    if _struct_3I is None:
-        _struct_3I = struct.Struct("<3I")
-    return _struct_3I
-_struct_2B = None
-def _get_struct_2B():
-    global _struct_2B
-    if _struct_2B is None:
-        _struct_2B = struct.Struct("<2B")
-    return _struct_2B
+_struct_i5d2f4B = None
+def _get_struct_i5d2f4B():
+    global _struct_i5d2f4B
+    if _struct_i5d2f4B is None:
+        _struct_i5d2f4B = struct.Struct("<i5d2f4B")
+    return _struct_i5d2f4B

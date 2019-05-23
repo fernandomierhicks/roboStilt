@@ -57,7 +57,7 @@ class SetPositionRequest {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type SetPositionRequest
     // Serialize message field [index]
-    bufferOffset = _arraySerializer.uint8(obj.index, buffer, bufferOffset, null);
+    bufferOffset = _arraySerializer.int32(obj.index, buffer, bufferOffset, null);
     // Serialize message field [position]
     bufferOffset = _arraySerializer.float64(obj.position, buffer, bufferOffset, null);
     // Serialize message field [velocity]
@@ -72,7 +72,7 @@ class SetPositionRequest {
     let len;
     let data = new SetPositionRequest(null);
     // Deserialize message field [index]
-    data.index = _arrayDeserializer.uint8(buffer, bufferOffset, null)
+    data.index = _arrayDeserializer.int32(buffer, bufferOffset, null)
     // Deserialize message field [position]
     data.position = _arrayDeserializer.float64(buffer, bufferOffset, null)
     // Deserialize message field [velocity]
@@ -84,7 +84,7 @@ class SetPositionRequest {
 
   static getMessageSize(object) {
     let length = 0;
-    length += object.index.length;
+    length += 4 * object.index.length;
     length += 8 * object.position.length;
     length += 8 * object.velocity.length;
     length += 8 * object.effort.length;
@@ -98,7 +98,7 @@ class SetPositionRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '8d181cc1dd672bd766278d86dc755a54';
+    return '0ba4e2f6dca879b11eb019699ace2199';
   }
 
   static messageDefinition() {
@@ -107,7 +107,7 @@ class SetPositionRequest {
     
     
     
-    uint8[] index
+    int32[] index
     float64[] position
     float64[] velocity
     float64[] effort
@@ -227,6 +227,6 @@ class SetPositionResponse {
 module.exports = {
   Request: SetPositionRequest,
   Response: SetPositionResponse,
-  md5sum() { return '78b457453a86de6904be5157c5065d56'; },
+  md5sum() { return '25c57e8d42c2eb104d5f653217a33687'; },
   datatype() { return 'robostilt_common/SetPosition'; }
 };

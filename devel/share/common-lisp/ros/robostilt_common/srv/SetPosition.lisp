@@ -10,8 +10,8 @@
   ((index
     :reader index
     :initarg :index
-    :type (cl:vector cl:fixnum)
-   :initform (cl:make-array 0 :element-type 'cl:fixnum :initial-element 0))
+    :type (cl:vector cl:integer)
+   :initform (cl:make-array 0 :element-type 'cl:integer :initial-element 0))
    (position
     :reader position
     :initarg :position
@@ -63,7 +63,12 @@
     (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
-  (cl:map cl:nil #'(cl:lambda (ele) (cl:write-byte (cl:ldb (cl:byte 8 0) ele) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:let* ((signed ele) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    ))
    (cl:slot-value msg 'index))
   (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'position))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
@@ -121,7 +126,12 @@
   (cl:setf (cl:slot-value msg 'index) (cl:make-array __ros_arr_len))
   (cl:let ((vals (cl:slot-value msg 'index)))
     (cl:dotimes (i __ros_arr_len)
-    (cl:setf (cl:ldb (cl:byte 8 0) (cl:aref vals i)) (cl:read-byte istream)))))
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:aref vals i) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296)))))))
   (cl:let ((__ros_arr_len 0))
     (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
     (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
@@ -186,19 +196,19 @@
   "robostilt_common/SetPositionRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<SetPosition-request>)))
   "Returns md5sum for a message object of type '<SetPosition-request>"
-  "78b457453a86de6904be5157c5065d56")
+  "25c57e8d42c2eb104d5f653217a33687")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'SetPosition-request)))
   "Returns md5sum for a message object of type 'SetPosition-request"
-  "78b457453a86de6904be5157c5065d56")
+  "25c57e8d42c2eb104d5f653217a33687")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<SetPosition-request>)))
   "Returns full string definition for message of type '<SetPosition-request>"
-  (cl:format cl:nil "~%~%~%uint8[] index~%float64[] position~%float64[] velocity~%float64[] effort~%~%~%"))
+  (cl:format cl:nil "~%~%~%int32[] index~%float64[] position~%float64[] velocity~%float64[] effort~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'SetPosition-request)))
   "Returns full string definition for message of type 'SetPosition-request"
-  (cl:format cl:nil "~%~%~%uint8[] index~%float64[] position~%float64[] velocity~%float64[] effort~%~%~%"))
+  (cl:format cl:nil "~%~%~%int32[] index~%float64[] position~%float64[] velocity~%float64[] effort~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <SetPosition-request>))
   (cl:+ 0
-     4 (cl:reduce #'cl:+ (cl:slot-value msg 'index) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 1)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'index) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'position) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'velocity) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'effort) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
@@ -250,10 +260,10 @@
   "robostilt_common/SetPositionResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<SetPosition-response>)))
   "Returns md5sum for a message object of type '<SetPosition-response>"
-  "78b457453a86de6904be5157c5065d56")
+  "25c57e8d42c2eb104d5f653217a33687")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'SetPosition-response)))
   "Returns md5sum for a message object of type 'SetPosition-response"
-  "78b457453a86de6904be5157c5065d56")
+  "25c57e8d42c2eb104d5f653217a33687")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<SetPosition-response>)))
   "Returns full string definition for message of type '<SetPosition-response>"
   (cl:format cl:nil "bool success~%~%~%"))

@@ -5,7 +5,7 @@
 
 <include file="$(find robostilt_control)/launch/control.launch"/> 
 
-<include file="$(find robostilt_safety)/launch/safety.launch"/> 
+<!--<include file="$(find robostilt_safety)/launch/safety.launch"/> -->
 
 <!--<include file="$(find robostilt_rviz)/launch/rviz.launch"/> -->
 

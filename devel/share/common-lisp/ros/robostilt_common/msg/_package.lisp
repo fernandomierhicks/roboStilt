@@ -3,5 +3,7 @@
   (:export
    "<ACTUATORSTATE>"
    "ACTUATORSTATE"
+   "<ACTUATORSSTATE>"
+   "ACTUATORSSTATE"
   ))
 

@@ -39,7 +39,7 @@ struct SetPositionRequest_
 
 
 
-   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _index_type;
+   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _index_type;
   _index_type index;
 
    typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _position_type;
@@ -129,12 +129,12 @@ struct MD5Sum< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "8d181cc1dd672bd766278d86dc755a54";
+    return "0ba4e2f6dca879b11eb019699ace2199";
   }
 
   static const char* value(const ::robostilt_common::SetPositionRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x8d181cc1dd672bd7ULL;
-  static const uint64_t static_value2 = 0x66278d86dc755a54ULL;
+  static const uint64_t static_value1 = 0x0ba4e2f6dca879b1ULL;
+  static const uint64_t static_value2 = 0x1eb019699ace2199ULL;
 };
 
 template<class ContainerAllocator>
@@ -156,7 +156,7 @@ struct Definition< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
     return "\n\
 \n\
 \n\
-uint8[] index\n\
+int32[] index\n\
 float64[] position\n\
 float64[] velocity\n\
 float64[] effort\n\
@@ -204,7 +204,7 @@ struct Printer< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
     for (size_t i = 0; i < v.index.size(); ++i)
     {
       s << indent << "  index[" << i << "]: ";
-      Printer<uint8_t>::stream(s, indent + "  ", v.index[i]);
+      Printer<int32_t>::stream(s, indent + "  ", v.index[i]);
     }
     s << indent << "position[]" << std::endl;
     for (size_t i = 0; i < v.position.size(); ++i)

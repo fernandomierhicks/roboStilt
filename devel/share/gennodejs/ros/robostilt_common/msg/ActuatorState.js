@@ -11,7 +11,6 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
-let std_msgs = _finder('std_msgs');
 
 //-----------------------------------------------------------
 
@@ -19,8 +18,8 @@ class ActuatorState {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.header = null;
       this.name = null;
+      this.index = null;
       this.position = null;
       this.velocity = null;
       this.effort = null;
@@ -32,135 +31,117 @@ class ActuatorState {
       this.is_ready = null;
       this.has_been_homed = null;
       this.is_supporting_weight = null;
-      this.have_all_been_homed = null;
-      this.all_are_ready = null;
     }
     else {
-      if (initObj.hasOwnProperty('header')) {
-        this.header = initObj.header
-      }
-      else {
-        this.header = new std_msgs.msg.Header();
-      }
       if (initObj.hasOwnProperty('name')) {
         this.name = initObj.name
       }
       else {
-        this.name = [];
+        this.name = '';
+      }
+      if (initObj.hasOwnProperty('index')) {
+        this.index = initObj.index
+      }
+      else {
+        this.index = 0;
       }
       if (initObj.hasOwnProperty('position')) {
         this.position = initObj.position
       }
       else {
-        this.position = [];
+        this.position = 0.0;
       }
       if (initObj.hasOwnProperty('velocity')) {
         this.velocity = initObj.velocity
       }
       else {
-        this.velocity = [];
+        this.velocity = 0.0;
       }
       if (initObj.hasOwnProperty('effort')) {
         this.effort = initObj.effort
       }
       else {
-        this.effort = [];
+        this.effort = 0.0;
       }
       if (initObj.hasOwnProperty('effort_limit')) {
         this.effort_limit = initObj.effort_limit
       }
       else {
-        this.effort_limit = [];
+        this.effort_limit = 0.0;
       }
       if (initObj.hasOwnProperty('position_setpoint')) {
         this.position_setpoint = initObj.position_setpoint
       }
       else {
-        this.position_setpoint = [];
+        this.position_setpoint = 0.0;
       }
       if (initObj.hasOwnProperty('manipulation')) {
         this.manipulation = initObj.manipulation
       }
       else {
-        this.manipulation = [];
+        this.manipulation = 0.0;
       }
       if (initObj.hasOwnProperty('progress')) {
         this.progress = initObj.progress
       }
       else {
-        this.progress = [];
+        this.progress = 0.0;
       }
       if (initObj.hasOwnProperty('is_moving')) {
         this.is_moving = initObj.is_moving
       }
       else {
-        this.is_moving = [];
+        this.is_moving = false;
       }
       if (initObj.hasOwnProperty('is_ready')) {
         this.is_ready = initObj.is_ready
       }
       else {
-        this.is_ready = [];
+        this.is_ready = false;
       }
       if (initObj.hasOwnProperty('has_been_homed')) {
         this.has_been_homed = initObj.has_been_homed
       }
       else {
-        this.has_been_homed = [];
+        this.has_been_homed = false;
       }
       if (initObj.hasOwnProperty('is_supporting_weight')) {
         this.is_supporting_weight = initObj.is_supporting_weight
       }
       else {
-        this.is_supporting_weight = [];
-      }
-      if (initObj.hasOwnProperty('have_all_been_homed')) {
-        this.have_all_been_homed = initObj.have_all_been_homed
-      }
-      else {
-        this.have_all_been_homed = false;
-      }
-      if (initObj.hasOwnProperty('all_are_ready')) {
-        this.all_are_ready = initObj.all_are_ready
-      }
-      else {
-        this.all_are_ready = false;
+        this.is_supporting_weight = false;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type ActuatorState
-    // Serialize message field [header]
-    bufferOffset = std_msgs.msg.Header.serialize(obj.header, buffer, bufferOffset);
     // Serialize message field [name]
-    bufferOffset = _arraySerializer.string(obj.name, buffer, bufferOffset, null);
+    bufferOffset = _serializer.string(obj.name, buffer, bufferOffset);
+    // Serialize message field [index]
+    bufferOffset = _serializer.int32(obj.index, buffer, bufferOffset);
     // Serialize message field [position]
-    bufferOffset = _arraySerializer.float64(obj.position, buffer, bufferOffset, null);
+    bufferOffset = _serializer.float64(obj.position, buffer, bufferOffset);
     // Serialize message field [velocity]
-    bufferOffset = _arraySerializer.float64(obj.velocity, buffer, bufferOffset, null);
+    bufferOffset = _serializer.float64(obj.velocity, buffer, bufferOffset);
     // Serialize message field [effort]
-    bufferOffset = _arraySerializer.float64(obj.effort, buffer, bufferOffset, null);
+    bufferOffset = _serializer.float64(obj.effort, buffer, bufferOffset);
     // Serialize message field [effort_limit]
-    bufferOffset = _arraySerializer.float64(obj.effort_limit, buffer, bufferOffset, null);
+    bufferOffset = _serializer.float64(obj.effort_limit, buffer, bufferOffset);
     // Serialize message field [position_setpoint]
-    bufferOffset = _arraySerializer.float64(obj.position_setpoint, buffer, bufferOffset, null);
+    bufferOffset = _serializer.float64(obj.position_setpoint, buffer, bufferOffset);
     // Serialize message field [manipulation]
-    bufferOffset = _arraySerializer.float32(obj.manipulation, buffer, bufferOffset, null);
+    bufferOffset = _serializer.float32(obj.manipulation, buffer, bufferOffset);
     // Serialize message field [progress]
-    bufferOffset = _arraySerializer.float32(obj.progress, buffer, bufferOffset, null);
+    bufferOffset = _serializer.float32(obj.progress, buffer, bufferOffset);
     // Serialize message field [is_moving]
-    bufferOffset = _arraySerializer.bool(obj.is_moving, buffer, bufferOffset, null);
+    bufferOffset = _serializer.bool(obj.is_moving, buffer, bufferOffset);
     // Serialize message field [is_ready]
-    bufferOffset = _arraySerializer.bool(obj.is_ready, buffer, bufferOffset, null);
+    bufferOffset = _serializer.bool(obj.is_ready, buffer, bufferOffset);
     // Serialize message field [has_been_homed]
-    bufferOffset = _arraySerializer.bool(obj.has_been_homed, buffer, bufferOffset, null);
+    bufferOffset = _serializer.bool(obj.has_been_homed, buffer, bufferOffset);
     // Serialize message field [is_supporting_weight]
-    bufferOffset = _arraySerializer.bool(obj.is_supporting_weight, buffer, bufferOffset, null);
-    // Serialize message field [have_all_been_homed]
-    bufferOffset = _serializer.bool(obj.have_all_been_homed, buffer, bufferOffset);
-    // Serialize message field [all_are_ready]
-    bufferOffset = _serializer.bool(obj.all_are_ready, buffer, bufferOffset);
+    bufferOffset = _serializer.bool(obj.is_supporting_weight, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -168,57 +149,39 @@ class ActuatorState {
     //deserializes a message object of type ActuatorState
     let len;
     let data = new ActuatorState(null);
-    // Deserialize message field [header]
-    data.header = std_msgs.msg.Header.deserialize(buffer, bufferOffset);
     // Deserialize message field [name]
-    data.name = _arrayDeserializer.string(buffer, bufferOffset, null)
+    data.name = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [index]
+    data.index = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [position]
-    data.position = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    data.position = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [velocity]
-    data.velocity = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    data.velocity = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [effort]
-    data.effort = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    data.effort = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [effort_limit]
-    data.effort_limit = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    data.effort_limit = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [position_setpoint]
-    data.position_setpoint = _arrayDeserializer.float64(buffer, bufferOffset, null)
+    data.position_setpoint = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [manipulation]
-    data.manipulation = _arrayDeserializer.float32(buffer, bufferOffset, null)
+    data.manipulation = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [progress]
-    data.progress = _arrayDeserializer.float32(buffer, bufferOffset, null)
+    data.progress = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [is_moving]
-    data.is_moving = _arrayDeserializer.bool(buffer, bufferOffset, null)
+    data.is_moving = _deserializer.bool(buffer, bufferOffset);
     // Deserialize message field [is_ready]
-    data.is_ready = _arrayDeserializer.bool(buffer, bufferOffset, null)
+    data.is_ready = _deserializer.bool(buffer, bufferOffset);
     // Deserialize message field [has_been_homed]
-    data.has_been_homed = _arrayDeserializer.bool(buffer, bufferOffset, null)
+    data.has_been_homed = _deserializer.bool(buffer, bufferOffset);
     // Deserialize message field [is_supporting_weight]
-    data.is_supporting_weight = _arrayDeserializer.bool(buffer, bufferOffset, null)
-    // Deserialize message field [have_all_been_homed]
-    data.have_all_been_homed = _deserializer.bool(buffer, bufferOffset);
-    // Deserialize message field [all_are_ready]
-    data.all_are_ready = _deserializer.bool(buffer, bufferOffset);
+    data.is_supporting_weight = _deserializer.bool(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += std_msgs.msg.Header.getMessageSize(object.header);
-    object.name.forEach((val) => {
-      length += 4 + val.length;
-    });
-    length += 8 * object.position.length;
-    length += 8 * object.velocity.length;
-    length += 8 * object.effort.length;
-    length += 8 * object.effort_limit.length;
-    length += 8 * object.position_setpoint.length;
-    length += 4 * object.manipulation.length;
-    length += 4 * object.progress.length;
-    length += object.is_moving.length;
-    length += object.is_ready.length;
-    length += object.has_been_homed.length;
-    length += object.is_supporting_weight.length;
-    return length + 50;
+    length += object.name.length;
+    return length + 60;
   }
 
   static datatype() {
@@ -228,66 +191,33 @@ class ActuatorState {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'acf4b6d30f12ebcdcb467bbc886f86be';
+    return 'b118f895afbdb74c43c844a60fe2697e';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    # This is a message that holds extended data of all actuators
+    # This is a message that holds extended data for a single actuator
     
+    string  name
+    int32   index
+    float64 position
+    float64 velocity
+    float64 effort
+    float64 effort_limit
     
-    # Power supply status constants
-    uint8 COUNT=8
+    float64 position_setpoint
+    float32 manipulation
+    float32 progress
     
-    uint8 PRISMATIC = 0
-    uint8 LEG_1 = 1
-    uint8 LEG_2 = 2
-    uint8 LEG_3 = 3
-    uint8 LEG_4 = 4
-    uint8 LEG_5 = 5
-    uint8 LEG_6 = 6
-    uint8 REVOLUTE = 7
-    
-    Header header
-    
-    string[] name
-    float64[] position
-    float64[] velocity
-    float64[] effort
-    float64[] effort_limit
-    
-    float64[] position_setpoint
-    float32[] manipulation
-    float32[] progress
-    
-    bool[] is_moving
-    bool[] is_ready
-    bool[] has_been_homed
-    bool[] is_supporting_weight
-    
-    bool have_all_been_homed
-    bool all_are_ready
+    bool is_moving
+    bool is_ready
+    bool has_been_homed
+    bool is_supporting_weight
     
     
     
-    ================================================================================
-    MSG: std_msgs/Header
-    # Standard metadata for higher-level stamped data types.
-    # This is generally used to communicate timestamped data 
-    # in a particular coordinate frame.
-    # 
-    # sequence ID: consecutively increasing ID 
-    uint32 seq
-    #Two-integer timestamp that is expressed as:
-    # * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
-    # * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
-    # time-handling sugar is provided by the client library
-    time stamp
-    #Frame this data is associated with
-    # 0: no frame
-    # 1: global frame
-    string frame_id
+    
     
     `;
   }
@@ -298,126 +228,99 @@ class ActuatorState {
       msg = {};
     }
     const resolved = new ActuatorState(null);
-    if (msg.header !== undefined) {
-      resolved.header = std_msgs.msg.Header.Resolve(msg.header)
-    }
-    else {
-      resolved.header = new std_msgs.msg.Header()
-    }
-
     if (msg.name !== undefined) {
       resolved.name = msg.name;
     }
     else {
-      resolved.name = []
+      resolved.name = ''
+    }
+
+    if (msg.index !== undefined) {
+      resolved.index = msg.index;
+    }
+    else {
+      resolved.index = 0
     }
 
     if (msg.position !== undefined) {
       resolved.position = msg.position;
     }
     else {
-      resolved.position = []
+      resolved.position = 0.0
     }
 
     if (msg.velocity !== undefined) {
       resolved.velocity = msg.velocity;
     }
     else {
-      resolved.velocity = []
+      resolved.velocity = 0.0
     }
 
     if (msg.effort !== undefined) {
       resolved.effort = msg.effort;
     }
     else {
-      resolved.effort = []
+      resolved.effort = 0.0
     }
 
     if (msg.effort_limit !== undefined) {
       resolved.effort_limit = msg.effort_limit;
     }
     else {
-      resolved.effort_limit = []
+      resolved.effort_limit = 0.0
     }
 
     if (msg.position_setpoint !== undefined) {
       resolved.position_setpoint = msg.position_setpoint;
     }
     else {
-      resolved.position_setpoint = []
+      resolved.position_setpoint = 0.0
     }
 
     if (msg.manipulation !== undefined) {
       resolved.manipulation = msg.manipulation;
     }
     else {
-      resolved.manipulation = []
+      resolved.manipulation = 0.0
     }
 
     if (msg.progress !== undefined) {
       resolved.progress = msg.progress;
     }
     else {
-      resolved.progress = []
+      resolved.progress = 0.0
     }
 
     if (msg.is_moving !== undefined) {
       resolved.is_moving = msg.is_moving;
     }
     else {
-      resolved.is_moving = []
+      resolved.is_moving = false
     }
 
     if (msg.is_ready !== undefined) {
       resolved.is_ready = msg.is_ready;
     }
     else {
-      resolved.is_ready = []
+      resolved.is_ready = false
     }
 
     if (msg.has_been_homed !== undefined) {
       resolved.has_been_homed = msg.has_been_homed;
     }
     else {
-      resolved.has_been_homed = []
+      resolved.has_been_homed = false
     }
 
     if (msg.is_supporting_weight !== undefined) {
       resolved.is_supporting_weight = msg.is_supporting_weight;
     }
     else {
-      resolved.is_supporting_weight = []
-    }
-
-    if (msg.have_all_been_homed !== undefined) {
-      resolved.have_all_been_homed = msg.have_all_been_homed;
-    }
-    else {
-      resolved.have_all_been_homed = false
-    }
-
-    if (msg.all_are_ready !== undefined) {
-      resolved.all_are_ready = msg.all_are_ready;
-    }
-    else {
-      resolved.all_are_ready = false
+      resolved.is_supporting_weight = false
     }
 
     return resolved;
     }
 };
-
-// Constants for message
-ActuatorState.Constants = {
-  COUNT: 8,
-  PRISMATIC: 0,
-  LEG_1: 1,
-  LEG_2: 2,
-  LEG_3: 3,
-  LEG_4: 4,
-  LEG_5: 5,
-  LEG_6: 6,
-  REVOLUTE: 7,
-}
 
 module.exports = ActuatorState;
