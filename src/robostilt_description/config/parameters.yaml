@@ -22,15 +22,39 @@ robostilt:
     obstacle_area_length_x: 0.5 
     obstacle_area_width_y: 1.5
 
-  speeds:
-    lowering_legs: 0.1
-    raising_legs: 0.5
-    prismatic: 0.1
+  raising_frame:
+    velocity: 0.2
+    efforts:
+      upper: 10
+      lower: -35
+  
+  lowering_legs:
+    velocity: 0.1
+    efforts:
+      upper: 30
+      lower: 0
+
+  raising_legs:
+    velocity: 0.5
+    efforts:
+      upper: 75
+      lower: -75
+
+  moving_prismatic:
+    velocity: 0.1
+    efforts:
+      upper: 50
+      lower: -50
+
+
   
   efforts:
-    leg_max: 50.0
-    lowering_leg_min: 0
-    lowering_leg_max: 100
+    boost_level: # at beginning of motion effort limit is increased to this for boost_duration, then it falls to a predetermined level
+      upper: 100
+      lower: -100
+
+  durations:
+    boost_duration: 1.0
   
   angles:
     leveling_max_error: 0.0872665  #triggers alarm if level is ever off by this much.

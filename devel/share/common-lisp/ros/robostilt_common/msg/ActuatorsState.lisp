@@ -66,7 +66,9 @@
     (:LEG_4 . 4)
     (:LEG_5 . 5)
     (:LEG_6 . 6)
-    (:THIRD_FRAME_REVOLUTE . 7))
+    (:THIRD_FRAME_REVOLUTE . 7)
+    (:ABS . True)
+    (:REL . False))
 )
 (cl:defmethod roslisp-msg-protocol:symbol-codes ((msg-type (cl:eql 'ActuatorsState)))
     "Constants for message type 'ActuatorsState"
@@ -78,7 +80,9 @@
     (:LEG_4 . 4)
     (:LEG_5 . 5)
     (:LEG_6 . 6)
-    (:THIRD_FRAME_REVOLUTE . 7))
+    (:THIRD_FRAME_REVOLUTE . 7)
+    (:ABS . True)
+    (:REL . False))
 )
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <ActuatorsState>) ostream)
   "Serializes a message object of type '<ActuatorsState>"
@@ -118,16 +122,16 @@
   "robostilt_common/ActuatorsState")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ActuatorsState>)))
   "Returns md5sum for a message object of type '<ActuatorsState>"
-  "49208e592a412e2ba9a50e6f208bf8a1")
+  "7026e9a150e20fe0ee17ebe9f4258d15")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ActuatorsState)))
   "Returns md5sum for a message object of type 'ActuatorsState"
-  "49208e592a412e2ba9a50e6f208bf8a1")
+  "7026e9a150e20fe0ee17ebe9f4258d15")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ActuatorsState>)))
   "Returns full string definition for message of type '<ActuatorsState>"
-  (cl:format cl:nil "# This is a message that holds the state of all actuators as an array.~%~%uint8 COUNT=8~%uint8 THIRD_FRAME_PRISMATIC = 0~%uint8 LEG_1 = 1~%uint8 LEG_2 = 2~%uint8 LEG_3 = 3~%uint8 LEG_4 = 4~%uint8 LEG_5 = 5~%uint8 LEG_6 = 6~%uint8 THIRD_FRAME_REVOLUTE = 7~%~%~%Header header~%~%SingleActuator[] actuators~%bool have_all_been_homed~%bool all_are_ready~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%================================================================================~%MSG: robostilt_common/SingleActuator~%# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
+  (cl:format cl:nil "# This is a message that holds the state of all actuators as an array.~%~%uint8 COUNT=8~%uint8 THIRD_FRAME_PRISMATIC = 0~%uint8 LEG_1 = 1~%uint8 LEG_2 = 2~%uint8 LEG_3 = 3~%uint8 LEG_4 = 4~%uint8 LEG_5 = 5~%uint8 LEG_6 = 6~%uint8 THIRD_FRAME_REVOLUTE = 7~%~%bool ABS=True~%bool REL=False~%~%~%Header header~%~%SingleActuator[] actuators~%bool have_all_been_homed~%bool all_are_ready~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%================================================================================~%MSG: robostilt_common/SingleActuator~%# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit_upper~%float64 effort_limit_lower~%float64 effort_fault_expected~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'ActuatorsState)))
   "Returns full string definition for message of type 'ActuatorsState"
-  (cl:format cl:nil "# This is a message that holds the state of all actuators as an array.~%~%uint8 COUNT=8~%uint8 THIRD_FRAME_PRISMATIC = 0~%uint8 LEG_1 = 1~%uint8 LEG_2 = 2~%uint8 LEG_3 = 3~%uint8 LEG_4 = 4~%uint8 LEG_5 = 5~%uint8 LEG_6 = 6~%uint8 THIRD_FRAME_REVOLUTE = 7~%~%~%Header header~%~%SingleActuator[] actuators~%bool have_all_been_homed~%bool all_are_ready~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%================================================================================~%MSG: robostilt_common/SingleActuator~%# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
+  (cl:format cl:nil "# This is a message that holds the state of all actuators as an array.~%~%uint8 COUNT=8~%uint8 THIRD_FRAME_PRISMATIC = 0~%uint8 LEG_1 = 1~%uint8 LEG_2 = 2~%uint8 LEG_3 = 3~%uint8 LEG_4 = 4~%uint8 LEG_5 = 5~%uint8 LEG_6 = 6~%uint8 THIRD_FRAME_REVOLUTE = 7~%~%bool ABS=True~%bool REL=False~%~%~%Header header~%~%SingleActuator[] actuators~%bool have_all_been_homed~%bool all_are_ready~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%================================================================================~%MSG: robostilt_common/SingleActuator~%# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit_upper~%float64 effort_limit_lower~%float64 effort_fault_expected~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <ActuatorsState>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'header))

@@ -14,7 +14,7 @@
 
 (defclass robostilt_common::SingleActuator
   :super ros::object
-  :slots (_name _index _position _position_setpoint _position_goal _velocity _velocity_setpoint _effort _effort_limit _manipulation _progress _is_moving _is_ready _has_been_homed _is_supporting_weight ))
+  :slots (_name _index _position _position_setpoint _position_goal _velocity _velocity_setpoint _effort _effort_limit_upper _effort_limit_lower _effort_fault_expected _manipulation _progress _is_moving _is_ready _has_been_homed _is_supporting_weight ))
 
 (defmethod robostilt_common::SingleActuator
   (:init
@@ -27,7 +27,9 @@
     ((:velocity __velocity) 0.0)
     ((:velocity_setpoint __velocity_setpoint) 0.0)
     ((:effort __effort) 0.0)
-    ((:effort_limit __effort_limit) 0.0)
+    ((:effort_limit_upper __effort_limit_upper) 0.0)
+    ((:effort_limit_lower __effort_limit_lower) 0.0)
+    ((:effort_fault_expected __effort_fault_expected) 0.0)
     ((:manipulation __manipulation) 0.0)
     ((:progress __progress) 0.0)
     ((:is_moving __is_moving) nil)
@@ -44,7 +46,9 @@
    (setq _velocity (float __velocity))
    (setq _velocity_setpoint (float __velocity_setpoint))
    (setq _effort (float __effort))
-   (setq _effort_limit (float __effort_limit))
+   (setq _effort_limit_upper (float __effort_limit_upper))
+   (setq _effort_limit_lower (float __effort_limit_lower))
+   (setq _effort_fault_expected (float __effort_fault_expected))
    (setq _manipulation (float __manipulation))
    (setq _progress (float __progress))
    (setq _is_moving __is_moving)
@@ -76,9 +80,15 @@
   (:effort
    (&optional __effort)
    (if __effort (setq _effort __effort)) _effort)
-  (:effort_limit
-   (&optional __effort_limit)
-   (if __effort_limit (setq _effort_limit __effort_limit)) _effort_limit)
+  (:effort_limit_upper
+   (&optional __effort_limit_upper)
+   (if __effort_limit_upper (setq _effort_limit_upper __effort_limit_upper)) _effort_limit_upper)
+  (:effort_limit_lower
+   (&optional __effort_limit_lower)
+   (if __effort_limit_lower (setq _effort_limit_lower __effort_limit_lower)) _effort_limit_lower)
+  (:effort_fault_expected
+   (&optional __effort_fault_expected)
+   (if __effort_fault_expected (setq _effort_fault_expected __effort_fault_expected)) _effort_fault_expected)
   (:manipulation
    (&optional __manipulation)
    (if __manipulation (setq _manipulation __manipulation)) _manipulation)
@@ -116,7 +126,11 @@
     8
     ;; float64 _effort
     8
-    ;; float64 _effort_limit
+    ;; float64 _effort_limit_upper
+    8
+    ;; float64 _effort_limit_lower
+    8
+    ;; float64 _effort_fault_expected
     8
     ;; float32 _manipulation
     4
@@ -151,8 +165,12 @@
        (sys::poke _velocity_setpoint (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float64 _effort
        (sys::poke _effort (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
-     ;; float64 _effort_limit
-       (sys::poke _effort_limit (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _effort_limit_upper
+       (sys::poke _effort_limit_upper (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _effort_limit_lower
+       (sys::poke _effort_limit_lower (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _effort_fault_expected
+       (sys::poke _effort_fault_expected (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float32 _manipulation
        (sys::poke _manipulation (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _progress
@@ -185,8 +203,12 @@
      (setq _velocity_setpoint (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float64 _effort
      (setq _effort (sys::peek buf ptr- :double)) (incf ptr- 8)
-   ;; float64 _effort_limit
-     (setq _effort_limit (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _effort_limit_upper
+     (setq _effort_limit_upper (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _effort_limit_lower
+     (setq _effort_limit_lower (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _effort_fault_expected
+     (setq _effort_fault_expected (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float32 _manipulation
      (setq _manipulation (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _progress
@@ -203,7 +225,7 @@
    self)
   )
 
-(setf (get robostilt_common::SingleActuator :md5sum-) "c8adcf30a4a8d2cd998962d19cef108a")
+(setf (get robostilt_common::SingleActuator :md5sum-) "e6916bddab2de3c4943df05029f6f5bc")
 (setf (get robostilt_common::SingleActuator :datatype-) "robostilt_common/SingleActuator")
 (setf (get robostilt_common::SingleActuator :definition-)
       "# This is a message that holds extended data for a single actuator
@@ -219,7 +241,9 @@ float64 velocity
 float64 velocity_setpoint   #trajectorized velocity TODO
 
 float64 effort
-float64 effort_limit
+float64 effort_limit_upper
+float64 effort_limit_lower
+float64 effort_fault_expected
 
 
 float32 manipulation
@@ -238,6 +262,6 @@ bool is_supporting_weight
 
 
 
-(provide :robostilt_common/SingleActuator "c8adcf30a4a8d2cd998962d19cef108a")
+(provide :robostilt_common/SingleActuator "e6916bddab2de3c4943df05029f6f5bc")
 
 

@@ -26,7 +26,9 @@ class SingleActuator {
       this.velocity = null;
       this.velocity_setpoint = null;
       this.effort = null;
-      this.effort_limit = null;
+      this.effort_limit_upper = null;
+      this.effort_limit_lower = null;
+      this.effort_fault_expected = null;
       this.manipulation = null;
       this.progress = null;
       this.is_moving = null;
@@ -83,11 +85,23 @@ class SingleActuator {
       else {
         this.effort = 0.0;
       }
-      if (initObj.hasOwnProperty('effort_limit')) {
-        this.effort_limit = initObj.effort_limit
+      if (initObj.hasOwnProperty('effort_limit_upper')) {
+        this.effort_limit_upper = initObj.effort_limit_upper
       }
       else {
-        this.effort_limit = 0.0;
+        this.effort_limit_upper = 0.0;
+      }
+      if (initObj.hasOwnProperty('effort_limit_lower')) {
+        this.effort_limit_lower = initObj.effort_limit_lower
+      }
+      else {
+        this.effort_limit_lower = 0.0;
+      }
+      if (initObj.hasOwnProperty('effort_fault_expected')) {
+        this.effort_fault_expected = initObj.effort_fault_expected
+      }
+      else {
+        this.effort_fault_expected = 0.0;
       }
       if (initObj.hasOwnProperty('manipulation')) {
         this.manipulation = initObj.manipulation
@@ -146,8 +160,12 @@ class SingleActuator {
     bufferOffset = _serializer.float64(obj.velocity_setpoint, buffer, bufferOffset);
     // Serialize message field [effort]
     bufferOffset = _serializer.float64(obj.effort, buffer, bufferOffset);
-    // Serialize message field [effort_limit]
-    bufferOffset = _serializer.float64(obj.effort_limit, buffer, bufferOffset);
+    // Serialize message field [effort_limit_upper]
+    bufferOffset = _serializer.float64(obj.effort_limit_upper, buffer, bufferOffset);
+    // Serialize message field [effort_limit_lower]
+    bufferOffset = _serializer.float64(obj.effort_limit_lower, buffer, bufferOffset);
+    // Serialize message field [effort_fault_expected]
+    bufferOffset = _serializer.float64(obj.effort_fault_expected, buffer, bufferOffset);
     // Serialize message field [manipulation]
     bufferOffset = _serializer.float32(obj.manipulation, buffer, bufferOffset);
     // Serialize message field [progress]
@@ -183,8 +201,12 @@ class SingleActuator {
     data.velocity_setpoint = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [effort]
     data.effort = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [effort_limit]
-    data.effort_limit = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [effort_limit_upper]
+    data.effort_limit_upper = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [effort_limit_lower]
+    data.effort_limit_lower = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [effort_fault_expected]
+    data.effort_fault_expected = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [manipulation]
     data.manipulation = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [progress]
@@ -203,7 +225,7 @@ class SingleActuator {
   static getMessageSize(object) {
     let length = 0;
     length += object.name.length;
-    return length + 76;
+    return length + 92;
   }
 
   static datatype() {
@@ -213,7 +235,7 @@ class SingleActuator {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'c8adcf30a4a8d2cd998962d19cef108a';
+    return 'e6916bddab2de3c4943df05029f6f5bc';
   }
 
   static messageDefinition() {
@@ -232,7 +254,9 @@ class SingleActuator {
     float64 velocity_setpoint   #trajectorized velocity TODO
     
     float64 effort
-    float64 effort_limit
+    float64 effort_limit_upper
+    float64 effort_limit_lower
+    float64 effort_fault_expected
     
     
     float32 manipulation
@@ -312,11 +336,25 @@ class SingleActuator {
       resolved.effort = 0.0
     }
 
-    if (msg.effort_limit !== undefined) {
-      resolved.effort_limit = msg.effort_limit;
+    if (msg.effort_limit_upper !== undefined) {
+      resolved.effort_limit_upper = msg.effort_limit_upper;
     }
     else {
-      resolved.effort_limit = 0.0
+      resolved.effort_limit_upper = 0.0
+    }
+
+    if (msg.effort_limit_lower !== undefined) {
+      resolved.effort_limit_lower = msg.effort_limit_lower;
+    }
+    else {
+      resolved.effort_limit_lower = 0.0
+    }
+
+    if (msg.effort_fault_expected !== undefined) {
+      resolved.effort_fault_expected = msg.effort_fault_expected;
+    }
+    else {
+      resolved.effort_fault_expected = 0.0
     }
 
     if (msg.manipulation !== undefined) {

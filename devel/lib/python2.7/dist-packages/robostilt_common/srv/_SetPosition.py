@@ -7,19 +7,22 @@ import struct
 
 
 class SetPositionRequest(genpy.Message):
-  _md5sum = "ed83d833ecc7a900ed484ec7c6f4b832"
+  _md5sum = "224669325a0559e10f29c0d0db91a535"
   _type = "robostilt_common/SetPositionRequest"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """
 
 
 int32[] indexes
+bool[] absolute
 float64[] positions
 float64[] velocities
-float64[] efforts
+float64[] efforts_limit_upper
+float64[] efforts_limit_lower
+bool[] effort_fault_expected
 """
-  __slots__ = ['indexes','positions','velocities','efforts']
-  _slot_types = ['int32[]','float64[]','float64[]','float64[]']
+  __slots__ = ['indexes','absolute','positions','velocities','efforts_limit_upper','efforts_limit_lower','effort_fault_expected']
+  _slot_types = ['int32[]','bool[]','float64[]','float64[]','float64[]','float64[]','bool[]']
 
   def __init__(self, *args, **kwds):
     """
@@ -29,7 +32,7 @@ float64[] efforts
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       indexes,positions,velocities,efforts
+       indexes,absolute,positions,velocities,efforts_limit_upper,efforts_limit_lower,effort_fault_expected
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -40,17 +43,26 @@ float64[] efforts
       #message fields cannot be None, assign default values for those that are
       if self.indexes is None:
         self.indexes = []
+      if self.absolute is None:
+        self.absolute = []
       if self.positions is None:
         self.positions = []
       if self.velocities is None:
         self.velocities = []
-      if self.efforts is None:
-        self.efforts = []
+      if self.efforts_limit_upper is None:
+        self.efforts_limit_upper = []
+      if self.efforts_limit_lower is None:
+        self.efforts_limit_lower = []
+      if self.effort_fault_expected is None:
+        self.effort_fault_expected = []
     else:
       self.indexes = []
+      self.absolute = []
       self.positions = []
       self.velocities = []
-      self.efforts = []
+      self.efforts_limit_upper = []
+      self.efforts_limit_lower = []
+      self.effort_fault_expected = []
 
   def _get_types(self):
     """
@@ -68,6 +80,10 @@ float64[] efforts
       buff.write(_struct_I.pack(length))
       pattern = '<%si'%length
       buff.write(struct.pack(pattern, *self.indexes))
+      length = len(self.absolute)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(struct.pack(pattern, *self.absolute))
       length = len(self.positions)
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
@@ -76,10 +92,18 @@ float64[] efforts
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
       buff.write(struct.pack(pattern, *self.velocities))
-      length = len(self.efforts)
+      length = len(self.efforts_limit_upper)
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
-      buff.write(struct.pack(pattern, *self.efforts))
+      buff.write(struct.pack(pattern, *self.efforts_limit_upper))
+      length = len(self.efforts_limit_lower)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(struct.pack(pattern, *self.efforts_limit_lower))
+      length = len(self.effort_fault_expected)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(struct.pack(pattern, *self.effort_fault_expected))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -100,6 +124,14 @@ float64[] efforts
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.absolute = struct.unpack(pattern, str[start:end])
+      self.absolute = map(bool, self.absolute)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
       pattern = '<%sd'%length
       start = end
       end += struct.calcsize(pattern)
@@ -117,7 +149,22 @@ float64[] efforts
       pattern = '<%sd'%length
       start = end
       end += struct.calcsize(pattern)
-      self.efforts = struct.unpack(pattern, str[start:end])
+      self.efforts_limit_upper = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.efforts_limit_lower = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.effort_fault_expected = struct.unpack(pattern, str[start:end])
+      self.effort_fault_expected = map(bool, self.effort_fault_expected)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -134,6 +181,10 @@ float64[] efforts
       buff.write(_struct_I.pack(length))
       pattern = '<%si'%length
       buff.write(self.indexes.tostring())
+      length = len(self.absolute)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(self.absolute.tostring())
       length = len(self.positions)
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
@@ -142,10 +193,18 @@ float64[] efforts
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
       buff.write(self.velocities.tostring())
-      length = len(self.efforts)
+      length = len(self.efforts_limit_upper)
       buff.write(_struct_I.pack(length))
       pattern = '<%sd'%length
-      buff.write(self.efforts.tostring())
+      buff.write(self.efforts_limit_upper.tostring())
+      length = len(self.efforts_limit_lower)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sd'%length
+      buff.write(self.efforts_limit_lower.tostring())
+      length = len(self.effort_fault_expected)
+      buff.write(_struct_I.pack(length))
+      pattern = '<%sB'%length
+      buff.write(self.effort_fault_expected.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -167,6 +226,14 @@ float64[] efforts
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.absolute = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
+      self.absolute = map(bool, self.absolute)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
       pattern = '<%sd'%length
       start = end
       end += struct.calcsize(pattern)
@@ -184,7 +251,22 @@ float64[] efforts
       pattern = '<%sd'%length
       start = end
       end += struct.calcsize(pattern)
-      self.efforts = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
+      self.efforts_limit_upper = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sd'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.efforts_limit_lower = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      pattern = '<%sB'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.effort_fault_expected = numpy.frombuffer(str[start:end], dtype=numpy.bool, count=length)
+      self.effort_fault_expected = map(bool, self.effort_fault_expected)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -303,6 +385,6 @@ def _get_struct_B():
     return _struct_B
 class SetPosition(object):
   _type          = 'robostilt_common/SetPosition'
-  _md5sum = '7d0c2d81f2531fd032e1874cd31efec8'
+  _md5sum = '331dfe0c104d55f905f2f4def3f15ac5'
   _request_class  = SetPositionRequest
   _response_class = SetPositionResponse

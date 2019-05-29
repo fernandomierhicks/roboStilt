@@ -56,8 +56,14 @@ include robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/SingleActuator.lisp
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/ActuatorsState.lisp
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/FramesState.lisp
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/RobotState.lisp
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseFrame.lisp
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/TriggerFault.lisp
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/LowerLegsOnFrame.lisp
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetPosition.lisp
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseLegsOnFrame.lisp
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/StopAll.lisp
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/MovePrismatic.lisp
 
 
 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/SingleActuator.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
@@ -77,22 +83,58 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp: /home/ferna
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from robostilt_common/FramesState.msg"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg
 
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/RobotState.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/RobotState.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from robostilt_common/RobotState.msg"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg
+
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseFrame.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseFrame.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Lisp code from robostilt_common/RaiseFrame.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/TriggerFault.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/TriggerFault.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Lisp code from robostilt_common/TriggerFault.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv
+
 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/LowerLegsOnFrame.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/LowerLegsOnFrame.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from robostilt_common/LowerLegsOnFrame.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Lisp code from robostilt_common/LowerLegsOnFrame.srv"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv
 
 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetPosition.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetPosition.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Lisp code from robostilt_common/SetPosition.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Lisp code from robostilt_common/SetPosition.srv"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseLegsOnFrame.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseLegsOnFrame.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Lisp code from robostilt_common/RaiseLegsOnFrame.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/StopAll.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/StopAll.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating Lisp code from robostilt_common/StopAll.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/MovePrismatic.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/MovePrismatic.lisp: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Lisp code from robostilt_common/MovePrismatic.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv
 
 robostilt_common_generate_messages_lisp: robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp
 robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/SingleActuator.lisp
 robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/ActuatorsState.lisp
 robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/FramesState.lisp
+robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/msg/RobotState.lisp
+robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseFrame.lisp
+robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/TriggerFault.lisp
 robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/LowerLegsOnFrame.lisp
 robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetPosition.lisp
+robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseLegsOnFrame.lisp
+robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/StopAll.lisp
+robostilt_common_generate_messages_lisp: /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/MovePrismatic.lisp
 robostilt_common_generate_messages_lisp: robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build.make
 
 .PHONY : robostilt_common_generate_messages_lisp

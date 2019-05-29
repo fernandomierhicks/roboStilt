@@ -491,19 +491,6 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named robostilt_common_geneus
-
-# Build rule for target.
-robostilt_common_geneus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_geneus
-.PHONY : robostilt_common_geneus
-
-# fast build rule for target.
-robostilt_common_geneus/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_geneus.dir/build.make robostilt_common/CMakeFiles/robostilt_common_geneus.dir/build
-.PHONY : robostilt_common_geneus/fast
-
-#=============================================================================
 # Target rules for targets named robostilt_common_generate_messages_eus
 
 # Build rule for target.
@@ -528,6 +515,136 @@ robostilt_common_generate_messages_nodejs: cmake_check_build_system
 robostilt_common_generate_messages_nodejs/fast:
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build
 .PHONY : robostilt_common_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_SetPosition
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_SetPosition: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_SetPosition
+.PHONY : _robostilt_common_generate_messages_check_deps_SetPosition
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_SetPosition/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_SetPosition/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_ActuatorsState
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_ActuatorsState: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_ActuatorsState
+.PHONY : _robostilt_common_generate_messages_check_deps_ActuatorsState
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_ActuatorsState/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_ActuatorsState/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame
+.PHONY : _robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame
+.PHONY : _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_RaiseFrame
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_RaiseFrame: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_RaiseFrame
+.PHONY : _robostilt_common_generate_messages_check_deps_RaiseFrame
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_RaiseFrame/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseFrame.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseFrame.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_RaiseFrame/fast
+
+#=============================================================================
+# Target rules for targets named robostilt_common_geneus
+
+# Build rule for target.
+robostilt_common_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_geneus
+.PHONY : robostilt_common_geneus
+
+# fast build rule for target.
+robostilt_common_geneus/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_geneus.dir/build.make robostilt_common/CMakeFiles/robostilt_common_geneus.dir/build
+.PHONY : robostilt_common_geneus/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_SingleActuator
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_SingleActuator: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_SingleActuator
+.PHONY : _robostilt_common_generate_messages_check_deps_SingleActuator
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_SingleActuator/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SingleActuator.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SingleActuator.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_SingleActuator/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_RobotState
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_RobotState: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_RobotState
+.PHONY : _robostilt_common_generate_messages_check_deps_RobotState
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_RobotState/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RobotState.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RobotState.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_RobotState/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_MovePrismatic
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_MovePrismatic: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_MovePrismatic
+.PHONY : _robostilt_common_generate_messages_check_deps_MovePrismatic
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_MovePrismatic/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_MovePrismatic.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_MovePrismatic.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_MovePrismatic/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_StopAll
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_StopAll: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_StopAll
+.PHONY : _robostilt_common_generate_messages_check_deps_StopAll
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_StopAll/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_StopAll.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_StopAll.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_StopAll/fast
 
 #=============================================================================
 # Target rules for targets named robostilt_common_generate_messages_cpp
@@ -556,43 +673,17 @@ robostilt_common_genlisp/fast:
 .PHONY : robostilt_common_genlisp/fast
 
 #=============================================================================
-# Target rules for targets named _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame
+# Target rules for targets named robostilt_common_generate_messages
 
 # Build rule for target.
-_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame
-.PHONY : _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame
+robostilt_common_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_generate_messages
+.PHONY : robostilt_common_generate_messages
 
 # fast build rule for target.
-_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_LowerLegsOnFrame.dir/build
-.PHONY : _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame/fast
-
-#=============================================================================
-# Target rules for targets named _robostilt_common_generate_messages_check_deps_SingleActuator
-
-# Build rule for target.
-_robostilt_common_generate_messages_check_deps_SingleActuator: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_SingleActuator
-.PHONY : _robostilt_common_generate_messages_check_deps_SingleActuator
-
-# fast build rule for target.
-_robostilt_common_generate_messages_check_deps_SingleActuator/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SingleActuator.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SingleActuator.dir/build
-.PHONY : _robostilt_common_generate_messages_check_deps_SingleActuator/fast
-
-#=============================================================================
-# Target rules for targets named _robostilt_common_generate_messages_check_deps_ActuatorsState
-
-# Build rule for target.
-_robostilt_common_generate_messages_check_deps_ActuatorsState: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_ActuatorsState
-.PHONY : _robostilt_common_generate_messages_check_deps_ActuatorsState
-
-# fast build rule for target.
-_robostilt_common_generate_messages_check_deps_ActuatorsState/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/build
-.PHONY : _robostilt_common_generate_messages_check_deps_ActuatorsState/fast
+robostilt_common_generate_messages/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build
+.PHONY : robostilt_common_generate_messages/fast
 
 #=============================================================================
 # Target rules for targets named robostilt_common_gencpp
@@ -608,17 +699,17 @@ robostilt_common_gencpp/fast:
 .PHONY : robostilt_common_gencpp/fast
 
 #=============================================================================
-# Target rules for targets named robostilt_common_generate_messages
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_TriggerFault
 
 # Build rule for target.
-robostilt_common_generate_messages: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_generate_messages
-.PHONY : robostilt_common_generate_messages
+_robostilt_common_generate_messages_check_deps_TriggerFault: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_TriggerFault
+.PHONY : _robostilt_common_generate_messages_check_deps_TriggerFault
 
 # fast build rule for target.
-robostilt_common_generate_messages/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/build
-.PHONY : robostilt_common_generate_messages/fast
+_robostilt_common_generate_messages_check_deps_TriggerFault/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_TriggerFault.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_TriggerFault.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_TriggerFault/fast
 
 #=============================================================================
 # Target rules for targets named robostilt_common_generate_messages_lisp
@@ -647,19 +738,6 @@ robostilt_common_gennodejs/fast:
 .PHONY : robostilt_common_gennodejs/fast
 
 #=============================================================================
-# Target rules for targets named robostilt_common_genpy
-
-# Build rule for target.
-robostilt_common_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_genpy
-.PHONY : robostilt_common_genpy
-
-# fast build rule for target.
-robostilt_common_genpy/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build
-.PHONY : robostilt_common_genpy/fast
-
-#=============================================================================
 # Target rules for targets named _robostilt_common_generate_messages_check_deps_FramesState
 
 # Build rule for target.
@@ -686,17 +764,17 @@ robostilt_common_generate_messages_py/fast:
 .PHONY : robostilt_common_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named _robostilt_common_generate_messages_check_deps_SetPosition
+# Target rules for targets named robostilt_common_genpy
 
 # Build rule for target.
-_robostilt_common_generate_messages_check_deps_SetPosition: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_SetPosition
-.PHONY : _robostilt_common_generate_messages_check_deps_SetPosition
+robostilt_common_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_genpy
+.PHONY : robostilt_common_genpy
 
 # fast build rule for target.
-_robostilt_common_generate_messages_check_deps_SetPosition/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/build
-.PHONY : _robostilt_common_generate_messages_check_deps_SetPosition/fast
+robostilt_common_genpy/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build
+.PHONY : robostilt_common_genpy/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_generate_messages_py
@@ -1321,22 +1399,28 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... robostilt_common_geneus"
 	@echo "... robostilt_common_generate_messages_eus"
 	@echo "... robostilt_common_generate_messages_nodejs"
+	@echo "... _robostilt_common_generate_messages_check_deps_SetPosition"
+	@echo "... _robostilt_common_generate_messages_check_deps_ActuatorsState"
+	@echo "... _robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame"
+	@echo "... _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame"
+	@echo "... _robostilt_common_generate_messages_check_deps_RaiseFrame"
+	@echo "... robostilt_common_geneus"
+	@echo "... _robostilt_common_generate_messages_check_deps_SingleActuator"
+	@echo "... _robostilt_common_generate_messages_check_deps_RobotState"
+	@echo "... _robostilt_common_generate_messages_check_deps_MovePrismatic"
+	@echo "... _robostilt_common_generate_messages_check_deps_StopAll"
 	@echo "... robostilt_common_generate_messages_cpp"
 	@echo "... robostilt_common_genlisp"
-	@echo "... _robostilt_common_generate_messages_check_deps_LowerLegsOnFrame"
-	@echo "... _robostilt_common_generate_messages_check_deps_SingleActuator"
-	@echo "... _robostilt_common_generate_messages_check_deps_ActuatorsState"
-	@echo "... robostilt_common_gencpp"
 	@echo "... robostilt_common_generate_messages"
+	@echo "... robostilt_common_gencpp"
+	@echo "... _robostilt_common_generate_messages_check_deps_TriggerFault"
 	@echo "... robostilt_common_generate_messages_lisp"
 	@echo "... robostilt_common_gennodejs"
-	@echo "... robostilt_common_genpy"
 	@echo "... _robostilt_common_generate_messages_check_deps_FramesState"
 	@echo "... robostilt_common_generate_messages_py"
-	@echo "... _robostilt_common_generate_messages_check_deps_SetPosition"
+	@echo "... robostilt_common_genpy"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... sensor_msgs_generate_messages_lisp"

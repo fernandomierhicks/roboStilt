@@ -25,15 +25,21 @@ struct SetPositionRequest_
 
   SetPositionRequest_()
     : indexes()
+    , absolute()
     , positions()
     , velocities()
-    , efforts()  {
+    , efforts_limit_upper()
+    , efforts_limit_lower()
+    , effort_fault_expected()  {
     }
   SetPositionRequest_(const ContainerAllocator& _alloc)
     : indexes(_alloc)
+    , absolute(_alloc)
     , positions(_alloc)
     , velocities(_alloc)
-    , efforts(_alloc)  {
+    , efforts_limit_upper(_alloc)
+    , efforts_limit_lower(_alloc)
+    , effort_fault_expected(_alloc)  {
   (void)_alloc;
     }
 
@@ -42,14 +48,23 @@ struct SetPositionRequest_
    typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _indexes_type;
   _indexes_type indexes;
 
+   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _absolute_type;
+  _absolute_type absolute;
+
    typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _positions_type;
   _positions_type positions;
 
    typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _velocities_type;
   _velocities_type velocities;
 
-   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _efforts_type;
-  _efforts_type efforts;
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _efforts_limit_upper_type;
+  _efforts_limit_upper_type efforts_limit_upper;
+
+   typedef std::vector<double, typename ContainerAllocator::template rebind<double>::other >  _efforts_limit_lower_type;
+  _efforts_limit_lower_type efforts_limit_lower;
+
+   typedef std::vector<uint8_t, typename ContainerAllocator::template rebind<uint8_t>::other >  _effort_fault_expected_type;
+  _effort_fault_expected_type effort_fault_expected;
 
 
 
@@ -129,12 +144,12 @@ struct MD5Sum< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "ed83d833ecc7a900ed484ec7c6f4b832";
+    return "224669325a0559e10f29c0d0db91a535";
   }
 
   static const char* value(const ::robostilt_common::SetPositionRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xed83d833ecc7a900ULL;
-  static const uint64_t static_value2 = 0xed484ec7c6f4b832ULL;
+  static const uint64_t static_value1 = 0x224669325a0559e1ULL;
+  static const uint64_t static_value2 = 0x0f29c0d0db91a535ULL;
 };
 
 template<class ContainerAllocator>
@@ -157,9 +172,12 @@ struct Definition< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
 \n\
 \n\
 int32[] indexes\n\
+bool[] absolute\n\
 float64[] positions\n\
 float64[] velocities\n\
-float64[] efforts\n\
+float64[] efforts_limit_upper\n\
+float64[] efforts_limit_lower\n\
+bool[] effort_fault_expected\n\
 ";
   }
 
@@ -179,9 +197,12 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.indexes);
+      stream.next(m.absolute);
       stream.next(m.positions);
       stream.next(m.velocities);
-      stream.next(m.efforts);
+      stream.next(m.efforts_limit_upper);
+      stream.next(m.efforts_limit_lower);
+      stream.next(m.effort_fault_expected);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -206,6 +227,12 @@ struct Printer< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
       s << indent << "  indexes[" << i << "]: ";
       Printer<int32_t>::stream(s, indent + "  ", v.indexes[i]);
     }
+    s << indent << "absolute[]" << std::endl;
+    for (size_t i = 0; i < v.absolute.size(); ++i)
+    {
+      s << indent << "  absolute[" << i << "]: ";
+      Printer<uint8_t>::stream(s, indent + "  ", v.absolute[i]);
+    }
     s << indent << "positions[]" << std::endl;
     for (size_t i = 0; i < v.positions.size(); ++i)
     {
@@ -218,11 +245,23 @@ struct Printer< ::robostilt_common::SetPositionRequest_<ContainerAllocator> >
       s << indent << "  velocities[" << i << "]: ";
       Printer<double>::stream(s, indent + "  ", v.velocities[i]);
     }
-    s << indent << "efforts[]" << std::endl;
-    for (size_t i = 0; i < v.efforts.size(); ++i)
+    s << indent << "efforts_limit_upper[]" << std::endl;
+    for (size_t i = 0; i < v.efforts_limit_upper.size(); ++i)
     {
-      s << indent << "  efforts[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.efforts[i]);
+      s << indent << "  efforts_limit_upper[" << i << "]: ";
+      Printer<double>::stream(s, indent + "  ", v.efforts_limit_upper[i]);
+    }
+    s << indent << "efforts_limit_lower[]" << std::endl;
+    for (size_t i = 0; i < v.efforts_limit_lower.size(); ++i)
+    {
+      s << indent << "  efforts_limit_lower[" << i << "]: ";
+      Printer<double>::stream(s, indent + "  ", v.efforts_limit_lower[i]);
+    }
+    s << indent << "effort_fault_expected[]" << std::endl;
+    for (size_t i = 0; i < v.effort_fault_expected.size(); ++i)
+    {
+      s << indent << "  effort_fault_expected[" << i << "]: ";
+      Printer<uint8_t>::stream(s, indent + "  ", v.effort_fault_expected[i]);
     }
   }
 };

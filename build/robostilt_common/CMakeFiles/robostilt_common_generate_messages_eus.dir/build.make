@@ -56,8 +56,14 @@ include robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/p
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/SingleActuator.l
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/ActuatorsState.l
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/FramesState.l
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/RobotState.l
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseFrame.l
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/TriggerFault.l
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/LowerLegsOnFrame.l
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetPosition.l
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseLegsOnFrame.l
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/StopAll.l
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/MovePrismatic.l
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/manifest.l
 
 
@@ -78,26 +84,62 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus: /home/fernan
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from robostilt_common/FramesState.msg"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg
 
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/RobotState.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/RobotState.l: /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from robostilt_common/RobotState.msg"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg
+
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseFrame.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseFrame.l: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from robostilt_common/RaiseFrame.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/TriggerFault.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/TriggerFault.l: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp code from robostilt_common/TriggerFault.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv
+
 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/LowerLegsOnFrame.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/LowerLegsOnFrame.l: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from robostilt_common/LowerLegsOnFrame.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating EusLisp code from robostilt_common/LowerLegsOnFrame.srv"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv
 
 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetPosition.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetPosition.l: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from robostilt_common/SetPosition.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating EusLisp code from robostilt_common/SetPosition.srv"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv
 
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseLegsOnFrame.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseLegsOnFrame.l: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating EusLisp code from robostilt_common/RaiseLegsOnFrame.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/StopAll.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/StopAll.l: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating EusLisp code from robostilt_common/StopAll.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/MovePrismatic.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/MovePrismatic.l: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating EusLisp code from robostilt_common/MovePrismatic.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv
+
 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/manifest.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp manifest code for robostilt_common"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating EusLisp manifest code for robostilt_common"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common robostilt_common std_msgs
 
 robostilt_common_generate_messages_eus: robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus
 robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/SingleActuator.l
 robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/ActuatorsState.l
 robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/FramesState.l
+robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/msg/RobotState.l
+robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseFrame.l
+robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/TriggerFault.l
 robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/LowerLegsOnFrame.l
 robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetPosition.l
+robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseLegsOnFrame.l
+robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/StopAll.l
+robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/MovePrismatic.l
 robostilt_common_generate_messages_eus: /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/manifest.l
 robostilt_common_generate_messages_eus: robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build.make
 

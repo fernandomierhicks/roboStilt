@@ -25,15 +25,11 @@ struct LowerLegsOnFrameRequest_
 
   LowerLegsOnFrameRequest_()
     : frame(0)
-    , position(0.0)
-    , velocity(0.0)
-    , effort(0.0)  {
+    , position(0.0)  {
     }
   LowerLegsOnFrameRequest_(const ContainerAllocator& _alloc)
     : frame(0)
-    , position(0.0)
-    , velocity(0.0)
-    , effort(0.0)  {
+    , position(0.0)  {
   (void)_alloc;
     }
 
@@ -44,12 +40,6 @@ struct LowerLegsOnFrameRequest_
 
    typedef double _position_type;
   _position_type position;
-
-   typedef double _velocity_type;
-  _velocity_type velocity;
-
-   typedef double _effort_type;
-  _effort_type effort;
 
 
 
@@ -129,12 +119,12 @@ struct MD5Sum< ::robostilt_common::LowerLegsOnFrameRequest_<ContainerAllocator> 
 {
   static const char* value()
   {
-    return "fd4f38832c71d9c02f9cd37fa8b01d72";
+    return "7d0e0ad310bb7aef9c9a49e66c7e845c";
   }
 
   static const char* value(const ::robostilt_common::LowerLegsOnFrameRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xfd4f38832c71d9c0ULL;
-  static const uint64_t static_value2 = 0x2f9cd37fa8b01d72ULL;
+  static const uint64_t static_value1 = 0x7d0e0ad310bb7aefULL;
+  static const uint64_t static_value2 = 0x9c9a49e66c7e845cULL;
 };
 
 template<class ContainerAllocator>
@@ -156,8 +146,6 @@ struct Definition< ::robostilt_common::LowerLegsOnFrameRequest_<ContainerAllocat
     return "\n\
 int32 frame\n\
 float64 position\n\
-float64 velocity\n\
-float64 effort\n\
 ";
   }
 
@@ -178,8 +166,6 @@ namespace serialization
     {
       stream.next(m.frame);
       stream.next(m.position);
-      stream.next(m.velocity);
-      stream.next(m.effort);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -202,10 +188,6 @@ struct Printer< ::robostilt_common::LowerLegsOnFrameRequest_<ContainerAllocator>
     Printer<int32_t>::stream(s, indent + "  ", v.frame);
     s << indent << "position: ";
     Printer<double>::stream(s, indent + "  ", v.position);
-    s << indent << "velocity: ";
-    Printer<double>::stream(s, indent + "  ", v.velocity);
-    s << indent << "effort: ";
-    Printer<double>::stream(s, indent + "  ", v.effort);
   }
 };
 

@@ -32,7 +32,9 @@ struct SingleActuator_
     , velocity(0.0)
     , velocity_setpoint(0.0)
     , effort(0.0)
-    , effort_limit(0.0)
+    , effort_limit_upper(0.0)
+    , effort_limit_lower(0.0)
+    , effort_fault_expected(0.0)
     , manipulation(0.0)
     , progress(0.0)
     , is_moving(false)
@@ -49,7 +51,9 @@ struct SingleActuator_
     , velocity(0.0)
     , velocity_setpoint(0.0)
     , effort(0.0)
-    , effort_limit(0.0)
+    , effort_limit_upper(0.0)
+    , effort_limit_lower(0.0)
+    , effort_fault_expected(0.0)
     , manipulation(0.0)
     , progress(0.0)
     , is_moving(false)
@@ -85,8 +89,14 @@ struct SingleActuator_
    typedef double _effort_type;
   _effort_type effort;
 
-   typedef double _effort_limit_type;
-  _effort_limit_type effort_limit;
+   typedef double _effort_limit_upper_type;
+  _effort_limit_upper_type effort_limit_upper;
+
+   typedef double _effort_limit_lower_type;
+  _effort_limit_lower_type effort_limit_lower;
+
+   typedef double _effort_fault_expected_type;
+  _effort_fault_expected_type effort_fault_expected;
 
    typedef float _manipulation_type;
   _manipulation_type manipulation;
@@ -184,12 +194,12 @@ struct MD5Sum< ::robostilt_common::SingleActuator_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "c8adcf30a4a8d2cd998962d19cef108a";
+    return "e6916bddab2de3c4943df05029f6f5bc";
   }
 
   static const char* value(const ::robostilt_common::SingleActuator_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xc8adcf30a4a8d2cdULL;
-  static const uint64_t static_value2 = 0x998962d19cef108aULL;
+  static const uint64_t static_value1 = 0xe6916bddab2de3c4ULL;
+  static const uint64_t static_value2 = 0x943df05029f6f5bcULL;
 };
 
 template<class ContainerAllocator>
@@ -221,7 +231,9 @@ float64 velocity\n\
 float64 velocity_setpoint   #trajectorized velocity TODO\n\
 \n\
 float64 effort\n\
-float64 effort_limit\n\
+float64 effort_limit_upper\n\
+float64 effort_limit_lower\n\
+float64 effort_fault_expected\n\
 \n\
 \n\
 float32 manipulation\n\
@@ -261,7 +273,9 @@ namespace serialization
       stream.next(m.velocity);
       stream.next(m.velocity_setpoint);
       stream.next(m.effort);
-      stream.next(m.effort_limit);
+      stream.next(m.effort_limit_upper);
+      stream.next(m.effort_limit_lower);
+      stream.next(m.effort_fault_expected);
       stream.next(m.manipulation);
       stream.next(m.progress);
       stream.next(m.is_moving);
@@ -302,8 +316,12 @@ struct Printer< ::robostilt_common::SingleActuator_<ContainerAllocator> >
     Printer<double>::stream(s, indent + "  ", v.velocity_setpoint);
     s << indent << "effort: ";
     Printer<double>::stream(s, indent + "  ", v.effort);
-    s << indent << "effort_limit: ";
-    Printer<double>::stream(s, indent + "  ", v.effort_limit);
+    s << indent << "effort_limit_upper: ";
+    Printer<double>::stream(s, indent + "  ", v.effort_limit_upper);
+    s << indent << "effort_limit_lower: ";
+    Printer<double>::stream(s, indent + "  ", v.effort_limit_lower);
+    s << indent << "effort_fault_expected: ";
+    Printer<double>::stream(s, indent + "  ", v.effort_fault_expected);
     s << indent << "manipulation: ";
     Printer<float>::stream(s, indent + "  ", v.manipulation);
     s << indent << "progress: ";

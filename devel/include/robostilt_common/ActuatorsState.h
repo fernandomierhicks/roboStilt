@@ -67,6 +67,8 @@ struct ActuatorsState_
     THIRD_FRAME_REVOLUTE = 7u,
   };
 
+  static const uint8_t ABS;
+  static const uint8_t REL;
 
   typedef boost::shared_ptr< ::robostilt_common::ActuatorsState_<ContainerAllocator> > Ptr;
   typedef boost::shared_ptr< ::robostilt_common::ActuatorsState_<ContainerAllocator> const> ConstPtr;
@@ -96,6 +98,24 @@ typedef boost::shared_ptr< ::robostilt_common::ActuatorsState const> ActuatorsSt
 
    
 
+   
+
+   
+   template<typename ContainerAllocator> const uint8_t
+      ActuatorsState_<ContainerAllocator>::ABS =
+        
+           1
+        
+        ;
+   
+
+   
+   template<typename ContainerAllocator> const uint8_t
+      ActuatorsState_<ContainerAllocator>::REL =
+        
+           0
+        
+        ;
    
 
 
@@ -160,12 +180,12 @@ struct MD5Sum< ::robostilt_common::ActuatorsState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "49208e592a412e2ba9a50e6f208bf8a1";
+    return "7026e9a150e20fe0ee17ebe9f4258d15";
   }
 
   static const char* value(const ::robostilt_common::ActuatorsState_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x49208e592a412e2bULL;
-  static const uint64_t static_value2 = 0xa9a50e6f208bf8a1ULL;
+  static const uint64_t static_value1 = 0x7026e9a150e20fe0ULL;
+  static const uint64_t static_value2 = 0xee17ebe9f4258d15ULL;
 };
 
 template<class ContainerAllocator>
@@ -195,6 +215,9 @@ uint8 LEG_4 = 4\n\
 uint8 LEG_5 = 5\n\
 uint8 LEG_6 = 6\n\
 uint8 THIRD_FRAME_REVOLUTE = 7\n\
+\n\
+bool ABS=True\n\
+bool REL=False\n\
 \n\
 \n\
 Header header\n\
@@ -235,7 +258,9 @@ float64 velocity\n\
 float64 velocity_setpoint   #trajectorized velocity TODO\n\
 \n\
 float64 effort\n\
-float64 effort_limit\n\
+float64 effort_limit_upper\n\
+float64 effort_limit_lower\n\
+float64 effort_fault_expected\n\
 \n\
 \n\
 float32 manipulation\n\

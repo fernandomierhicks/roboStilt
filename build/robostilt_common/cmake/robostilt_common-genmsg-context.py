@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg"
-services_str = "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv"
+messages_str = "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/ActuatorsState.msg;/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg"
+services_str = "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv;/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv"
 pkg_name = "robostilt_common"
 dependencies_str = "std_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

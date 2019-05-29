@@ -56,8 +56,14 @@ include robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/pr
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_SingleActuator.py
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_ActuatorsState.py
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_FramesState.py
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RobotState.py
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseFrame.py
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_LowerLegsOnFrame.py
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_MovePrismatic.py
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py
 
@@ -79,40 +85,88 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_py: /home/fernand
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG robostilt_common/FramesState"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg
 
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RobotState.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RobotState.py: /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG robostilt_common/RobotState"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg
+
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseFrame.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseFrame.py: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python code from SRV robostilt_common/RaiseFrame"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python code from SRV robostilt_common/TriggerFault"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv
+
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_LowerLegsOnFrame.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_LowerLegsOnFrame.py: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python code from SRV robostilt_common/LowerLegsOnFrame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python code from SRV robostilt_common/LowerLegsOnFrame"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv
 
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python code from SRV robostilt_common/SetPosition"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Python code from SRV robostilt_common/SetPosition"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Python code from SRV robostilt_common/RaiseLegsOnFrame"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating Python code from SRV robostilt_common/StopAll"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_MovePrismatic.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_MovePrismatic.py: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Python code from SRV robostilt_common/MovePrismatic"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv
 
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_SingleActuator.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_ActuatorsState.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_FramesState.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RobotState.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseFrame.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_LowerLegsOnFrame.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python msg __init__.py for robostilt_common"
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_MovePrismatic.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating Python msg __init__.py for robostilt_common"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg --initpy
 
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_SingleActuator.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_ActuatorsState.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_FramesState.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RobotState.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseFrame.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_LowerLegsOnFrame.py
 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Python srv __init__.py for robostilt_common"
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py
+/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_MovePrismatic.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating Python srv __init__.py for robostilt_common"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv --initpy
 
 robostilt_common_generate_messages_py: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_SingleActuator.py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_ActuatorsState.py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_FramesState.py
+robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/_RobotState.py
+robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseFrame.py
+robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_LowerLegsOnFrame.py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py
+robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py
+robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py
+robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_MovePrismatic.py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/msg/__init__.py
 robostilt_common_generate_messages_py: /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py
 robostilt_common_generate_messages_py: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/build.make

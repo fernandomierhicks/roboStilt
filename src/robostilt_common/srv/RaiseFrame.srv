@@ -1,0 +1,7 @@
+int32 frame
+float64 position  #delta from the current position, always relative.
+
+#velocities and efforts during move are pulled from parameter server
+
+---
+bool success

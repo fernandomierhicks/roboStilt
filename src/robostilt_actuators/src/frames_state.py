@@ -1,20 +1,47 @@
 #! /usr/bin/env python
 import rospy
 from robostilt_common.msg import ActuatorsState
-from robostilt_common.msg import FramesState
-from robostilt_common.srv import LowerLegsOnFrame
-from robostilt_common.srv import SetPositionRequest
+from robostilt_common.msg import *
+from robostilt_common.srv import *
 
 # Manages a group of actuators, frames, and populates FramesState
+
+
+class EffortLimit():
+    upper = None
+    lower = None
+    name = None
+
+    def __init__(self, name):
+        self.upper = rospy.get_param("robostilt/"+name+"/efforts/upper")
+        self.lower = rospy.get_param("robostilt/"+name+"/efforts/lower")
+        self.name = name
+
+        if(self.upper < self.lower):
+            self.lower, self.upper = self.upper, self.lower
+            rospy.loginfo(
+                name + " effort limits are swapped, automatically correcting.")
 
 
 class Frames:
     # -------------------------------------------------------------------------------------------------------  GLOBALS
     actuators_state = None
+    publisher = None
+    frames_state = None
+    ready_to_move = None
     # ---------------------------------------------------------------------------------------------------------  CALLBACKS
 
     def _actuator_states_callback(self, msg):
         self.actuators_state = msg
+        self.frames_state.supporting_frame = FramesState.NONE
+        self.publisher.publish(self.frames_state)
+
+    def _robot_state_callback(self, msg):
+        # only allow to move if we are not faulted
+        if(msg.state != RobotState.STATE_FAULTED):
+            self.ready_to_move = True
+        else:
+            self.ready_to_move = False
         # ---------------------------------------------------------------------------------------------------------  ROS
 
     def setup_ros_interface(self):
@@ -27,27 +54,49 @@ class Frames:
         self.ros_rate = rospy.Rate(rate)
         rospy.loginfo("Node robostilt/" + node_name + " started.")
         # Publishers
-        # self.pub_com = rospy.Publisher(
-        #    '/robostilt/'+node_name, FramesState, queue_size=1, latch=True)
+        self.publisher = rospy.Publisher(
+            '/robostilt/'+node_name, FramesState, queue_size=1, latch=True)
 
-        # Subscribers
+        # Subscribers       
+        topic_name = "/robostilt/robot_state"
+        rospy.Subscriber(topic_name,
+                         RobotState, self._robot_state_callback)
+
         topic_name = "/robostilt/actuators_state"
         rospy.Subscriber(topic_name, ActuatorsState,
                          self._actuator_states_callback)
         # Services
-        # rospy.Service('robostilt/'+node_name +
-        #              '/lower_legs_on_frame',
-        #              LowerLegsOnFrame,
-        #              self.lower_legs_on_frame)
+        self.setup_services(node_name)
 
         # wait for...
         rospy.loginfo("Waiting for message on topic "+topic_name + " ...")
         rospy.wait_for_message(topic_name, ActuatorsState)
         rospy.loginfo("Ready...")
 
+    def setup_services(self, node_name):
+        prefix = "robostilt/"+node_name
+
+        rospy.Service(prefix+'/lower_legs_on_frame',
+                      LowerLegsOnFrame,
+                      self.lower_legs_on_frame)
+
+        rospy.Service(prefix+'/raise_frame',
+                      RaiseFrame,
+                      self.raise_frame)
+
+        rospy.Service(prefix+'/move_prismatic',
+                      MovePrismatic,
+                      self.move_prismatic)
+
+        rospy.Service(prefix+'/raise_legs_on_frame',
+                      RaiseLegsOnFrame,
+                      self.raise_legs_on_frame)
+
 # ---------------------------------------------------------------------------------------------------------  INIT
     def __init__(self):
+
         self.actuators_state = ActuatorsState()
+        self.frames_state = FramesState()
         self.setup_ros_interface()
 
 # ---------------------------------------------------------------------------------------------------------  METHODS
@@ -69,67 +118,114 @@ class Frames:
         else:
             return []
 
-    def call_service(self, service_name, request):
+    def call_service(self, service_name, service_type, request):
         rospy.wait_for_service(service_name)
         try:
-            service_type = type(request)
             service = rospy.ServiceProxy(service_name, service_type)
-            result = service_type(request)
+            result = service(request)
             return result
         except rospy.ServiceException, e:
             print "Service call failed: %s" % e
 
-    def lower_legs_on_frame(self, request):
+    def create_position_request_from_parameter_name(self, name, frame, absolute, position, effort_fault_expected):
         position_request = SetPositionRequest()
-        position_request.indexes = self.get_indexes_from_frame(request.frame)
+        position_request.indexes = self.get_indexes_from_frame(frame)
+        effort_limits = EffortLimit(name)
+        velocity = rospy.get_param("robostilt/"+name+"/velocity")
+
         for i in range(0, len(position_request.indexes)):
-            position_request.positions.append(request.position)
-            position_request.velocities.append(request.velocity)
-            position_request.efforts.append(request.effort)
+            position_request.absolute.append(absolute)
+            position_request.positions.append(position)
+            position_request.velocities.append(velocity)        
+            position_request.efforts_limit_upper.append(effort_limits.upper)
+            position_request.efforts_limit_lower.append(effort_limits.lower)
+            position_request.effort_fault_expected.append(
+                effort_fault_expected)
 
-        self.call_service(
-            "robostilt/actuators_state/set_position", position_request)
+        return position_request
+    def are_we_are_ready_to_move(self,string_message):
+        if(self.ready_to_move is True):
+            return True
+        else:
+            rospy.logerr("Attempted to move while faulted: " +string_message)
+        return False
 
-        # indexes = self.get_indexes_from_frame(request.frame)
+    def move_prismatic(self, request):
+        name = "moving_prismatic"
+        if(self.are_we_are_ready_to_move(name) is True):
+            effort_fault_expected = False
+            absolute=ActuatorsState.ABS
+            position_request = self.create_position_request_from_parameter_name(
+                name, request.frame, absolute, request.position, effort_fault_expected)
 
-        # for i in indexes:
-        #     self.actuators.actuator[i].motor.set_effort_limits(
-        #         p.effort.lowering_leg_min, p.effort.lowering_leg_max)
-        # indexes = frame.actuatorIndexes
-        # for i in indexes:
-        #     self.actuators.actuator[i].motor.set_position(
-        #         p.dimension.nominal_walking_height, p.speed.lowering_legs)
-        # self.actuators.wait_for_all_actuators_to_finish()
+            position_result = self.call_service(
+                "robostilt/actuators_state/set_position", SetPosition, position_request)
 
-        # # We are now supported by this frame
-        # self.supportingFrame = frame
-        # for i in indexes:
-        #     self.actuators.actuator[i].is_supporting = True
+            if (position_result.success == True):
+                return MovePrismaticResponse(True)
+            else:
+                rospy.logerr(
+                    "Service call to set_position failed while processing "+name)
 
-        # # update supporting legs topic
-        # # We are now supported by this frame
-        # self.supportingFrame = frame
-        # f.print_ros("Lowering legs on frame " + frame.name + " to position " + str(
-        #     p.dimension.nominal_walking_height) + " with effort_limit= " + str(limited_effort) + " COMPLETED")
-        # # update supporting legs topic
-        # self.update_robot_state_topic()
-        # f.print_ros("Raising legs on frame " + frame.name +
-        #             " to position 0.0 with effort_limit=max...")
-        # indexes = frame.actuatorIndexes
-        # for i in indexes:
-        #     self.actuators.actuator[i].motor.set_effort_limits_to_max()
-        #     self.actuators.actuator[i].motor.set_position(
-        #         0.0, p.speed.raising_legs)
-        #     self.actuators.actuator[i].is_supporting = False
+        return MovePrismaticResponse(False)     
 
-        # # We are NOT supported by this frame at this time
-        # # update supporting legs topic
-        #     self.actuators.actuator[i].motor.set_effort_limits_to_max()
-        #     self.actuators.actuator[i].motor.set_position(
-        #         0.0, p.speed.raising_legs)
-        # f.print_ros("Raising legs on frame " + frame.name +
-        #             " to position 0 with effort_limit=max COMPLETED")
+    def raise_legs_on_frame(self, request):
+        
+        name = "raising_legs"
+        if(self.are_we_are_ready_to_move(name) is True):
+            effort_fault_expected = False
+            absolute = ActuatorsState.ABS
+            position_request = self.create_position_request_from_parameter_name(
+                name, request.frame, absolute, request.position, effort_fault_expected)
 
+            position_result = self.call_service(
+                "robostilt/actuators_state/set_position", SetPosition, position_request)
+
+            if (position_result.success == True):
+                return RaiseLegsOnFrameResponse(True)
+            else:
+                rospy.logerr(
+                    "Service call to set_position failed while processing "+name)   
+        return RaiseLegsOnFrameResponse(False)
+
+    def lower_legs_on_frame(self, request):
+        name = "lowering_legs"
+        if(self.are_we_are_ready_to_move(name) is True):
+            effort_fault_expected = True
+            absolute = ActuatorsState.ABS
+            position_request = self.create_position_request_from_parameter_name(
+                name, request.frame,absolute, request.position, effort_fault_expected)
+
+            position_result = self.call_service(
+                "robostilt/actuators_state/set_position", SetPosition, position_request)
+
+            if (position_result.success == True):
+                return LowerLegsOnFrameResponse(True)
+            else:
+                rospy.logerr(
+                    "Service call to set_position failed while processing "+name)                
+        
+        return LowerLegsOnFrameResponse(False)
+
+        
+
+    def raise_frame(self, request):        
+        name = "raising_frame"
+        if(self.are_we_are_ready_to_move(name) is True):
+            effort_fault_expected = False
+            relative = ActuatorsState.REL
+            position_request = self.create_position_request_from_parameter_name(
+                name, request.frame, relative, request.position, effort_fault_expected)
+
+            position_result = self.call_service(
+                "robostilt/actuators_state/set_position", SetPosition, position_request)
+
+            if (position_result.success == True):
+                return RaiseFrameResponse(True)
+            else:
+                rospy.logerr(
+                    "Service call to set_position failed while processing " + name)       
+        return RaiseFrameResponse(False)
  # ---------------------------------------------------------------------------------------------------------  MAIN
 
 

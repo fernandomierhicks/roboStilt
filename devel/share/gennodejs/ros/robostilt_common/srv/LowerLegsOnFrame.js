@@ -23,8 +23,6 @@ class LowerLegsOnFrameRequest {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.frame = null;
       this.position = null;
-      this.velocity = null;
-      this.effort = null;
     }
     else {
       if (initObj.hasOwnProperty('frame')) {
@@ -39,18 +37,6 @@ class LowerLegsOnFrameRequest {
       else {
         this.position = 0.0;
       }
-      if (initObj.hasOwnProperty('velocity')) {
-        this.velocity = initObj.velocity
-      }
-      else {
-        this.velocity = 0.0;
-      }
-      if (initObj.hasOwnProperty('effort')) {
-        this.effort = initObj.effort
-      }
-      else {
-        this.effort = 0.0;
-      }
     }
   }
 
@@ -60,10 +46,6 @@ class LowerLegsOnFrameRequest {
     bufferOffset = _serializer.int32(obj.frame, buffer, bufferOffset);
     // Serialize message field [position]
     bufferOffset = _serializer.float64(obj.position, buffer, bufferOffset);
-    // Serialize message field [velocity]
-    bufferOffset = _serializer.float64(obj.velocity, buffer, bufferOffset);
-    // Serialize message field [effort]
-    bufferOffset = _serializer.float64(obj.effort, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -75,15 +57,11 @@ class LowerLegsOnFrameRequest {
     data.frame = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [position]
     data.position = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [velocity]
-    data.velocity = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [effort]
-    data.effort = _deserializer.float64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 28;
+    return 12;
   }
 
   static datatype() {
@@ -93,7 +71,7 @@ class LowerLegsOnFrameRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'fd4f38832c71d9c02f9cd37fa8b01d72';
+    return '7d0e0ad310bb7aef9c9a49e66c7e845c';
   }
 
   static messageDefinition() {
@@ -102,8 +80,6 @@ class LowerLegsOnFrameRequest {
     
     int32 frame
     float64 position
-    float64 velocity
-    float64 effort
     
     `;
   }
@@ -126,20 +102,6 @@ class LowerLegsOnFrameRequest {
     }
     else {
       resolved.position = 0.0
-    }
-
-    if (msg.velocity !== undefined) {
-      resolved.velocity = msg.velocity;
-    }
-    else {
-      resolved.velocity = 0.0
-    }
-
-    if (msg.effort !== undefined) {
-      resolved.effort = msg.effort;
-    }
-    else {
-      resolved.effort = 0.0
     }
 
     return resolved;
@@ -220,6 +182,6 @@ class LowerLegsOnFrameResponse {
 module.exports = {
   Request: LowerLegsOnFrameRequest,
   Response: LowerLegsOnFrameResponse,
-  md5sum() { return '62c1b1b14c2ae58036a5a019416e2f57'; },
+  md5sum() { return 'b8d63a087f5948862a72cd21437ca0f9'; },
   datatype() { return 'robostilt_common/LowerLegsOnFrame'; }
 };

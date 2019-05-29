@@ -62,7 +62,7 @@ class Stability:
         self.pub_suport_polygon = rospy.Publisher(
             '/robostilt/safety/support_polygon', PolygonStamped, queue_size=1, latch=True)
         # Subscribers
-        topic_name = "/robostilt/frames_state"
+        topic_name = "/robostilt/actuator_states"
         rospy.Subscriber(topic_name, ActuatorsState,
                          self._actuator_states_callback)
         # Services

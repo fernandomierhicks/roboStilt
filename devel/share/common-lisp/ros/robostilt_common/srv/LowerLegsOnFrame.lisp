@@ -16,16 +16,6 @@
     :reader position
     :initarg :position
     :type cl:float
-    :initform 0.0)
-   (velocity
-    :reader velocity
-    :initarg :velocity
-    :type cl:float
-    :initform 0.0)
-   (effort
-    :reader effort
-    :initarg :effort
-    :type cl:float
     :initform 0.0))
 )
 
@@ -46,16 +36,6 @@
 (cl:defmethod position-val ((m <LowerLegsOnFrame-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:position-val is deprecated.  Use robostilt_common-srv:position instead.")
   (position m))
-
-(cl:ensure-generic-function 'velocity-val :lambda-list '(m))
-(cl:defmethod velocity-val ((m <LowerLegsOnFrame-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:velocity-val is deprecated.  Use robostilt_common-srv:velocity instead.")
-  (velocity m))
-
-(cl:ensure-generic-function 'effort-val :lambda-list '(m))
-(cl:defmethod effort-val ((m <LowerLegsOnFrame-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:effort-val is deprecated.  Use robostilt_common-srv:effort instead.")
-  (effort m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <LowerLegsOnFrame-request>) ostream)
   "Serializes a message object of type '<LowerLegsOnFrame-request>"
   (cl:let* ((signed (cl:slot-value msg 'frame)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
@@ -65,24 +45,6 @@
     (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
     )
   (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'position))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'velocity))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'effort))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -110,26 +72,6 @@
       (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'position) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'velocity) (roslisp-utils:decode-double-float-bits bits)))
-    (cl:let ((bits 0))
-      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
-      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'effort) (roslisp-utils:decode-double-float-bits bits)))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<LowerLegsOnFrame-request>)))
@@ -140,21 +82,19 @@
   "robostilt_common/LowerLegsOnFrameRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<LowerLegsOnFrame-request>)))
   "Returns md5sum for a message object of type '<LowerLegsOnFrame-request>"
-  "62c1b1b14c2ae58036a5a019416e2f57")
+  "b8d63a087f5948862a72cd21437ca0f9")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'LowerLegsOnFrame-request)))
   "Returns md5sum for a message object of type 'LowerLegsOnFrame-request"
-  "62c1b1b14c2ae58036a5a019416e2f57")
+  "b8d63a087f5948862a72cd21437ca0f9")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<LowerLegsOnFrame-request>)))
   "Returns full string definition for message of type '<LowerLegsOnFrame-request>"
-  (cl:format cl:nil "~%int32 frame~%float64 position~%float64 velocity~%float64 effort~%~%~%"))
+  (cl:format cl:nil "~%int32 frame~%float64 position~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'LowerLegsOnFrame-request)))
   "Returns full string definition for message of type 'LowerLegsOnFrame-request"
-  (cl:format cl:nil "~%int32 frame~%float64 position~%float64 velocity~%float64 effort~%~%~%"))
+  (cl:format cl:nil "~%int32 frame~%float64 position~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <LowerLegsOnFrame-request>))
   (cl:+ 0
      4
-     8
-     8
      8
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <LowerLegsOnFrame-request>))
@@ -162,8 +102,6 @@
   (cl:list 'LowerLegsOnFrame-request
     (cl:cons ':frame (frame msg))
     (cl:cons ':position (position msg))
-    (cl:cons ':velocity (velocity msg))
-    (cl:cons ':effort (effort msg))
 ))
 ;//! \htmlinclude LowerLegsOnFrame-response.msg.html
 
@@ -204,10 +142,10 @@
   "robostilt_common/LowerLegsOnFrameResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<LowerLegsOnFrame-response>)))
   "Returns md5sum for a message object of type '<LowerLegsOnFrame-response>"
-  "62c1b1b14c2ae58036a5a019416e2f57")
+  "b8d63a087f5948862a72cd21437ca0f9")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'LowerLegsOnFrame-response)))
   "Returns md5sum for a message object of type 'LowerLegsOnFrame-response"
-  "62c1b1b14c2ae58036a5a019416e2f57")
+  "b8d63a087f5948862a72cd21437ca0f9")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<LowerLegsOnFrame-response>)))
   "Returns full string definition for message of type '<LowerLegsOnFrame-response>"
   (cl:format cl:nil "bool success~%~%~%"))

@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::robostilt_common::LowerLegsOnFrame > {
   static const char* value()
   {
-    return "62c1b1b14c2ae58036a5a019416e2f57";
+    return "b8d63a087f5948862a72cd21437ca0f9";
   }
 
   static const char* value(const ::robostilt_common::LowerLegsOnFrame&) { return value(); }

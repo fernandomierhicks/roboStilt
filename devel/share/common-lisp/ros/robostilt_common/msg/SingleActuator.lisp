@@ -47,9 +47,19 @@
     :initarg :effort
     :type cl:float
     :initform 0.0)
-   (effort_limit
-    :reader effort_limit
-    :initarg :effort_limit
+   (effort_limit_upper
+    :reader effort_limit_upper
+    :initarg :effort_limit_upper
+    :type cl:float
+    :initform 0.0)
+   (effort_limit_lower
+    :reader effort_limit_lower
+    :initarg :effort_limit_lower
+    :type cl:float
+    :initform 0.0)
+   (effort_fault_expected
+    :reader effort_fault_expected
+    :initarg :effort_fault_expected
     :type cl:float
     :initform 0.0)
    (manipulation
@@ -132,10 +142,20 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:effort-val is deprecated.  Use robostilt_common-msg:effort instead.")
   (effort m))
 
-(cl:ensure-generic-function 'effort_limit-val :lambda-list '(m))
-(cl:defmethod effort_limit-val ((m <SingleActuator>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:effort_limit-val is deprecated.  Use robostilt_common-msg:effort_limit instead.")
-  (effort_limit m))
+(cl:ensure-generic-function 'effort_limit_upper-val :lambda-list '(m))
+(cl:defmethod effort_limit_upper-val ((m <SingleActuator>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:effort_limit_upper-val is deprecated.  Use robostilt_common-msg:effort_limit_upper instead.")
+  (effort_limit_upper m))
+
+(cl:ensure-generic-function 'effort_limit_lower-val :lambda-list '(m))
+(cl:defmethod effort_limit_lower-val ((m <SingleActuator>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:effort_limit_lower-val is deprecated.  Use robostilt_common-msg:effort_limit_lower instead.")
+  (effort_limit_lower m))
+
+(cl:ensure-generic-function 'effort_fault_expected-val :lambda-list '(m))
+(cl:defmethod effort_fault_expected-val ((m <SingleActuator>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:effort_fault_expected-val is deprecated.  Use robostilt_common-msg:effort_fault_expected instead.")
+  (effort_fault_expected m))
 
 (cl:ensure-generic-function 'manipulation-val :lambda-list '(m))
 (cl:defmethod manipulation-val ((m <SingleActuator>))
@@ -234,7 +254,25 @@
     (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
-  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'effort_limit))))
+  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'effort_limit_upper))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'effort_limit_lower))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'effort_fault_expected))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -343,7 +381,27 @@
       (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
-    (cl:setf (cl:slot-value msg 'effort_limit) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:setf (cl:slot-value msg 'effort_limit_upper) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'effort_limit_lower) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'effort_fault_expected) (roslisp-utils:decode-double-float-bits bits)))
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -370,20 +428,22 @@
   "robostilt_common/SingleActuator")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<SingleActuator>)))
   "Returns md5sum for a message object of type '<SingleActuator>"
-  "c8adcf30a4a8d2cd998962d19cef108a")
+  "e6916bddab2de3c4943df05029f6f5bc")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'SingleActuator)))
   "Returns md5sum for a message object of type 'SingleActuator"
-  "c8adcf30a4a8d2cd998962d19cef108a")
+  "e6916bddab2de3c4943df05029f6f5bc")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<SingleActuator>)))
   "Returns full string definition for message of type '<SingleActuator>"
-  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
+  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit_upper~%float64 effort_limit_lower~%float64 effort_fault_expected~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'SingleActuator)))
   "Returns full string definition for message of type 'SingleActuator"
-  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
+  (cl:format cl:nil "# This is a message that holds extended data for a single actuator~%~%string  name~%int32   index~%~%float64 position~%float64 position_setpoint   #trajectorized setpoint TODO~%float64 position_goal       #long term goal~%~%float64 velocity~%float64 velocity_setpoint   #trajectorized velocity TODO~%~%float64 effort~%float64 effort_limit_upper~%float64 effort_limit_lower~%float64 effort_fault_expected~%~%~%float32 manipulation~%float32 progress~%~%bool is_moving~%bool is_ready~%bool has_been_homed~%bool is_supporting_weight~%~%~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <SingleActuator>))
   (cl:+ 0
      4 (cl:length (cl:slot-value msg 'name))
      4
+     8
+     8
      8
      8
      8
@@ -409,7 +469,9 @@
     (cl:cons ':velocity (velocity msg))
     (cl:cons ':velocity_setpoint (velocity_setpoint msg))
     (cl:cons ':effort (effort msg))
-    (cl:cons ':effort_limit (effort_limit msg))
+    (cl:cons ':effort_limit_upper (effort_limit_upper msg))
+    (cl:cons ':effort_limit_lower (effort_limit_lower msg))
+    (cl:cons ':effort_fault_expected (effort_fault_expected msg))
     (cl:cons ':manipulation (manipulation msg))
     (cl:cons ':progress (progress msg))
     (cl:cons ':is_moving (is_moving msg))

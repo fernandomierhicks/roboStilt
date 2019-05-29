@@ -1,0 +1,15 @@
+int32 STATE_READY=0
+int32 STATE_FAULTED=1
+int32 STATE_BUSY_MOVING=2
+int32 STATE_BUSY_COMPUTING=3
+
+int32 FAULT_CLEAR=0
+int32 FAULT_ESTOP=1
+int32 FAULT_EFFORT=2
+int32 FAULT_TRAJECTORY=3
+
+int32 state
+string state_string
+
+int32 fault
+string fault_string

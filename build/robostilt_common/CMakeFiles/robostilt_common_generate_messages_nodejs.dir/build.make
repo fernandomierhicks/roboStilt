@@ -56,8 +56,14 @@ include robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.di
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/SingleActuator.js
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/ActuatorsState.js
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/FramesState.js
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/RobotState.js
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseFrame.js
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/TriggerFault.js
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/LowerLegsOnFrame.js
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/SetPosition.js
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseLegsOnFrame.js
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/StopAll.js
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/MovePrismatic.js
 
 
 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/SingleActuator.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
@@ -77,22 +83,58 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs: /home/fer
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from robostilt_common/FramesState.msg"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg
 
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/RobotState.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/RobotState.js: /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from robostilt_common/RobotState.msg"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg
+
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseFrame.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseFrame.js: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from robostilt_common/RaiseFrame.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/TriggerFault.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/TriggerFault.js: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Javascript code from robostilt_common/TriggerFault.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv
+
 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/LowerLegsOnFrame.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/LowerLegsOnFrame.js: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from robostilt_common/LowerLegsOnFrame.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating Javascript code from robostilt_common/LowerLegsOnFrame.srv"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv
 
 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/SetPosition.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/SetPosition.js: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Javascript code from robostilt_common/SetPosition.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating Javascript code from robostilt_common/SetPosition.srv"
 	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseLegsOnFrame.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseLegsOnFrame.js: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating Javascript code from robostilt_common/RaiseLegsOnFrame.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/StopAll.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/StopAll.js: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating Javascript code from robostilt_common/StopAll.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv
+
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/MovePrismatic.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/MovePrismatic.js: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating Javascript code from robostilt_common/MovePrismatic.srv"
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv
 
 robostilt_common_generate_messages_nodejs: robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs
 robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/SingleActuator.js
 robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/ActuatorsState.js
 robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/FramesState.js
+robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/msg/RobotState.js
+robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseFrame.js
+robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/TriggerFault.js
 robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/LowerLegsOnFrame.js
 robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/SetPosition.js
+robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseLegsOnFrame.js
+robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/StopAll.js
+robostilt_common_generate_messages_nodejs: /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/MovePrismatic.js
 robostilt_common_generate_messages_nodejs: robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build.make
 
 .PHONY : robostilt_common_generate_messages_nodejs

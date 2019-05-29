@@ -106,7 +106,7 @@ class ActuatorsState {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '49208e592a412e2ba9a50e6f208bf8a1';
+    return '7026e9a150e20fe0ee17ebe9f4258d15';
   }
 
   static messageDefinition() {
@@ -123,6 +123,9 @@ class ActuatorsState {
     uint8 LEG_5 = 5
     uint8 LEG_6 = 6
     uint8 THIRD_FRAME_REVOLUTE = 7
+    
+    bool ABS=True
+    bool REL=False
     
     
     Header header
@@ -163,7 +166,9 @@ class ActuatorsState {
     float64 velocity_setpoint   #trajectorized velocity TODO
     
     float64 effort
-    float64 effort_limit
+    float64 effort_limit_upper
+    float64 effort_limit_lower
+    float64 effort_fault_expected
     
     
     float32 manipulation
@@ -233,6 +238,8 @@ ActuatorsState.Constants = {
   LEG_5: 5,
   LEG_6: 6,
   THIRD_FRAME_REVOLUTE: 7,
+  ABS: true,
+  REL: false,
 }
 
 module.exports = ActuatorsState;

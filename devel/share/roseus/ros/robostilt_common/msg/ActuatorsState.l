@@ -41,6 +41,12 @@
 (intern "*THIRD_FRAME_REVOLUTE*" (find-package "ROBOSTILT_COMMON::ACTUATORSSTATE"))
 (shadow '*THIRD_FRAME_REVOLUTE* (find-package "ROBOSTILT_COMMON::ACTUATORSSTATE"))
 (defconstant robostilt_common::ActuatorsState::*THIRD_FRAME_REVOLUTE* 7)
+(intern "*ABS*" (find-package "ROBOSTILT_COMMON::ACTUATORSSTATE"))
+(shadow '*ABS* (find-package "ROBOSTILT_COMMON::ACTUATORSSTATE"))
+(defconstant robostilt_common::ActuatorsState::*ABS* nil)
+(intern "*REL*" (find-package "ROBOSTILT_COMMON::ACTUATORSSTATE"))
+(shadow '*REL* (find-package "ROBOSTILT_COMMON::ACTUATORSSTATE"))
+(defconstant robostilt_common::ActuatorsState::*REL* nil)
 (defclass robostilt_common::ActuatorsState
   :super ros::object
   :slots (_header _actuators _have_all_been_homed _all_are_ready ))
@@ -127,7 +133,7 @@
    self)
   )
 
-(setf (get robostilt_common::ActuatorsState :md5sum-) "49208e592a412e2ba9a50e6f208bf8a1")
+(setf (get robostilt_common::ActuatorsState :md5sum-) "7026e9a150e20fe0ee17ebe9f4258d15")
 (setf (get robostilt_common::ActuatorsState :datatype-) "robostilt_common/ActuatorsState")
 (setf (get robostilt_common::ActuatorsState :definition-)
       "# This is a message that holds the state of all actuators as an array.
@@ -141,6 +147,9 @@ uint8 LEG_4 = 4
 uint8 LEG_5 = 5
 uint8 LEG_6 = 6
 uint8 THIRD_FRAME_REVOLUTE = 7
+
+bool ABS=True
+bool REL=False
 
 
 Header header
@@ -181,7 +190,9 @@ float64 velocity
 float64 velocity_setpoint   #trajectorized velocity TODO
 
 float64 effort
-float64 effort_limit
+float64 effort_limit_upper
+float64 effort_limit_lower
+float64 effort_fault_expected
 
 
 float32 manipulation
@@ -200,6 +211,6 @@ bool is_supporting_weight
 
 
 
-(provide :robostilt_common/ActuatorsState "49208e592a412e2ba9a50e6f208bf8a1")
+(provide :robostilt_common/ActuatorsState "7026e9a150e20fe0ee17ebe9f4258d15")
 
 

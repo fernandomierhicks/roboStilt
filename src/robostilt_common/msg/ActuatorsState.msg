@@ -10,6 +10,9 @@ uint8 LEG_5 = 5
 uint8 LEG_6 = 6
 uint8 THIRD_FRAME_REVOLUTE = 7
 
+bool ABS=True
+bool REL=False
+
 
 Header header
 

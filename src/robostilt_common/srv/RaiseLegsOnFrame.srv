@@ -1,0 +1,4 @@
+int32 frame
+float64 position
+---
+bool success

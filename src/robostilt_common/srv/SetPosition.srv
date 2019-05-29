@@ -2,8 +2,11 @@
 # Can send a list of indexes
 
 int32[] indexes
+bool[] absolute  #true=absolute, false=Relative. Get from ActuatorState.msg
 float64[] positions
 float64[] velocities
-float64[] efforts
+float64[] efforts_limit_upper
+float64[] efforts_limit_lower
+bool[] effort_fault_expected
 ---
 bool success

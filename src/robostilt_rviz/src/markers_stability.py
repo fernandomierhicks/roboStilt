@@ -37,14 +37,33 @@ for i in range(0, len(indexes)):
     markers[i].scale.y = 0.2
     markers[i].scale.z = 0.2
 
+    markers[i].pose.position.x = 0
+    markers[i].pose.position.y = 0
+    markers[i].pose.position.z = 0
+
+rospy.init_node('markers_stability', anonymous=False)
+pub_markers = rospy.Publisher(
+    '/markers/stability', Marker, queue_size=1, latch=True)
+
+
+def _COM_callback(data):
+    i = indexes.index("com")
+    markers[i].header.frame_id = data.header.frame_id    
+    markers[i].pose.orientation.w = 1.0
+    markers[i].type = Marker.SPHERE
+
+    markers[i].color.a = 1.0    
+    markers[i].color.r = 0.5
+    markers[i].color.g = 0.5
+    markers[i].color.b = 0.5
+    markers[i].scale.x = 0.2
+    markers[i].scale.y = 0.2
+    markers[i].scale.z = 0.2
+
     markers[i].pose.position.x = data.point.x
-    markers[i].pose.position.y = data.point.y
+    markers[i].pose.position.y = data.point.y    
     markers[i].pose.position.z = data.point.z
-    pub_markers.publish(markers[i])
-
-
-def _COM_projected_callback(data):
-    markers[i].header.frame_id = data.header.frame_id
+    pub_markers.publish(markers[i])   
 
 
 def _COM_projected_callback(data):
@@ -128,9 +147,6 @@ rospy.Subscriber("/robostilt/safety/center_of_mass",
 rospy.Subscriber("/robostilt/safety/center_of_mass_projected",
                  PointStamped, _COM_projected_callback)
 rospy.Subscriber("/robostilt/safety/support_polygon",
-rospy.Subscriber("/robostilt/safety/center_of_mass",
-                 PointStamped, _COM_callback)
-rospy.Subscriber("/robostilt/safety/center_of_mass_projected",
-                 PointStamped, _COM_projected_callback)
-rospy.Subscriber("/robostilt/safety/support_polygon",
                  PolygonStamped, _support_polygon_callback)
+
+rospy.spin()

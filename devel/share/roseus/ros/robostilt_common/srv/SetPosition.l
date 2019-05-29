@@ -20,45 +20,66 @@
 
 (defclass robostilt_common::SetPositionRequest
   :super ros::object
-  :slots (_indexes _positions _velocities _efforts ))
+  :slots (_indexes _absolute _positions _velocities _efforts_limit_upper _efforts_limit_lower _effort_fault_expected ))
 
 (defmethod robostilt_common::SetPositionRequest
   (:init
    (&key
     ((:indexes __indexes) (make-array 0 :initial-element 0 :element-type :integer))
+    ((:absolute __absolute) (let (r) (dotimes (i 0) (push nil r)) r))
     ((:positions __positions) (make-array 0 :initial-element 0.0 :element-type :float))
     ((:velocities __velocities) (make-array 0 :initial-element 0.0 :element-type :float))
-    ((:efforts __efforts) (make-array 0 :initial-element 0.0 :element-type :float))
+    ((:efforts_limit_upper __efforts_limit_upper) (make-array 0 :initial-element 0.0 :element-type :float))
+    ((:efforts_limit_lower __efforts_limit_lower) (make-array 0 :initial-element 0.0 :element-type :float))
+    ((:effort_fault_expected __effort_fault_expected) (let (r) (dotimes (i 0) (push nil r)) r))
     )
    (send-super :init)
    (setq _indexes __indexes)
+   (setq _absolute __absolute)
    (setq _positions __positions)
    (setq _velocities __velocities)
-   (setq _efforts __efforts)
+   (setq _efforts_limit_upper __efforts_limit_upper)
+   (setq _efforts_limit_lower __efforts_limit_lower)
+   (setq _effort_fault_expected __effort_fault_expected)
    self)
   (:indexes
    (&optional __indexes)
    (if __indexes (setq _indexes __indexes)) _indexes)
+  (:absolute
+   (&optional __absolute)
+   (if __absolute (setq _absolute __absolute)) _absolute)
   (:positions
    (&optional __positions)
    (if __positions (setq _positions __positions)) _positions)
   (:velocities
    (&optional __velocities)
    (if __velocities (setq _velocities __velocities)) _velocities)
-  (:efforts
-   (&optional __efforts)
-   (if __efforts (setq _efforts __efforts)) _efforts)
+  (:efforts_limit_upper
+   (&optional __efforts_limit_upper)
+   (if __efforts_limit_upper (setq _efforts_limit_upper __efforts_limit_upper)) _efforts_limit_upper)
+  (:efforts_limit_lower
+   (&optional __efforts_limit_lower)
+   (if __efforts_limit_lower (setq _efforts_limit_lower __efforts_limit_lower)) _efforts_limit_lower)
+  (:effort_fault_expected
+   (&optional __effort_fault_expected)
+   (if __effort_fault_expected (setq _effort_fault_expected __effort_fault_expected)) _effort_fault_expected)
   (:serialization-length
    ()
    (+
     ;; int32[] _indexes
     (* 4    (length _indexes)) 4
+    ;; bool[] _absolute
+    (* 1    (length _absolute)) 4
     ;; float64[] _positions
     (* 8    (length _positions)) 4
     ;; float64[] _velocities
     (* 8    (length _velocities)) 4
-    ;; float64[] _efforts
-    (* 8    (length _efforts)) 4
+    ;; float64[] _efforts_limit_upper
+    (* 8    (length _efforts_limit_upper)) 4
+    ;; float64[] _efforts_limit_lower
+    (* 8    (length _efforts_limit_lower)) 4
+    ;; bool[] _effort_fault_expected
+    (* 1    (length _effort_fault_expected)) 4
     ))
   (:serialize
    (&optional strm)
@@ -68,6 +89,11 @@
      (write-long (length _indexes) s)
      (dotimes (i (length _indexes))
        (write-long (elt _indexes i) s)
+       )
+     ;; bool[] _absolute
+     (write-long (length _absolute) s)
+     (dotimes (i (length _absolute))
+       (if (elt _absolute i) (write-byte -1 s) (write-byte 0 s))
        )
      ;; float64[] _positions
      (write-long (length _positions) s)
@@ -79,10 +105,20 @@
      (dotimes (i (length _velocities))
        (sys::poke (elt _velocities i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
        )
-     ;; float64[] _efforts
-     (write-long (length _efforts) s)
-     (dotimes (i (length _efforts))
-       (sys::poke (elt _efforts i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64[] _efforts_limit_upper
+     (write-long (length _efforts_limit_upper) s)
+     (dotimes (i (length _efforts_limit_upper))
+       (sys::poke (elt _efforts_limit_upper i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+       )
+     ;; float64[] _efforts_limit_lower
+     (write-long (length _efforts_limit_lower) s)
+     (dotimes (i (length _efforts_limit_lower))
+       (sys::poke (elt _efforts_limit_lower i) (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+       )
+     ;; bool[] _effort_fault_expected
+     (write-long (length _effort_fault_expected) s)
+     (dotimes (i (length _effort_fault_expected))
+       (if (elt _effort_fault_expected i) (write-byte -1 s) (write-byte 0 s))
        )
      ;;
      (if (null strm) (get-output-stream-string s))))
@@ -94,6 +130,13 @@
      (setq _indexes (instantiate integer-vector n))
      (dotimes (i n)
      (setf (elt _indexes i) (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     ))
+   ;; bool[] _absolute
+   (let (n)
+     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setq _absolute (make-list n))
+     (dotimes (i n)
+     (setf (elt _absolute i) (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
      ))
    ;; float64[] _positions
    (let (n)
@@ -109,12 +152,26 @@
      (dotimes (i n)
      (setf (elt _velocities i) (sys::peek buf ptr- :double)) (incf ptr- 8)
      ))
-   ;; float64[] _efforts
+   ;; float64[] _efforts_limit_upper
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _efforts (instantiate float-vector n))
+     (setq _efforts_limit_upper (instantiate float-vector n))
      (dotimes (i n)
-     (setf (elt _efforts i) (sys::peek buf ptr- :double)) (incf ptr- 8)
+     (setf (elt _efforts_limit_upper i) (sys::peek buf ptr- :double)) (incf ptr- 8)
+     ))
+   ;; float64[] _efforts_limit_lower
+   (let (n)
+     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setq _efforts_limit_lower (instantiate float-vector n))
+     (dotimes (i n)
+     (setf (elt _efforts_limit_lower i) (sys::peek buf ptr- :double)) (incf ptr- 8)
+     ))
+   ;; bool[] _effort_fault_expected
+   (let (n)
+     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setq _effort_fault_expected (make-list n))
+     (dotimes (i n)
+     (setf (elt _effort_fault_expected i) (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
      ))
    ;;
    self)
@@ -161,7 +218,7 @@
   :super ros::object
   :slots ())
 
-(setf (get robostilt_common::SetPosition :md5sum-) "7d0c2d81f2531fd032e1874cd31efec8")
+(setf (get robostilt_common::SetPosition :md5sum-) "331dfe0c104d55f905f2f4def3f15ac5")
 (setf (get robostilt_common::SetPosition :datatype-) "robostilt_common/SetPosition")
 (setf (get robostilt_common::SetPosition :request) robostilt_common::SetPositionRequest)
 (setf (get robostilt_common::SetPosition :response) robostilt_common::SetPositionResponse)
@@ -169,36 +226,42 @@
 (defmethod robostilt_common::SetPositionRequest
   (:response () (instance robostilt_common::SetPositionResponse :init)))
 
-(setf (get robostilt_common::SetPositionRequest :md5sum-) "7d0c2d81f2531fd032e1874cd31efec8")
+(setf (get robostilt_common::SetPositionRequest :md5sum-) "331dfe0c104d55f905f2f4def3f15ac5")
 (setf (get robostilt_common::SetPositionRequest :datatype-) "robostilt_common/SetPositionRequest")
 (setf (get robostilt_common::SetPositionRequest :definition-)
       "
 
 
 int32[] indexes
+bool[] absolute
 float64[] positions
 float64[] velocities
-float64[] efforts
+float64[] efforts_limit_upper
+float64[] efforts_limit_lower
+bool[] effort_fault_expected
 ---
 bool success
 ")
 
-(setf (get robostilt_common::SetPositionResponse :md5sum-) "7d0c2d81f2531fd032e1874cd31efec8")
+(setf (get robostilt_common::SetPositionResponse :md5sum-) "331dfe0c104d55f905f2f4def3f15ac5")
 (setf (get robostilt_common::SetPositionResponse :datatype-) "robostilt_common/SetPositionResponse")
 (setf (get robostilt_common::SetPositionResponse :definition-)
       "
 
 
 int32[] indexes
+bool[] absolute
 float64[] positions
 float64[] velocities
-float64[] efforts
+float64[] efforts_limit_upper
+float64[] efforts_limit_lower
+bool[] effort_fault_expected
 ---
 bool success
 ")
 
 
 
-(provide :robostilt_common/SetPosition "7d0c2d81f2531fd032e1874cd31efec8")
+(provide :robostilt_common/SetPosition "331dfe0c104d55f905f2f4def3f15ac5")
 
 

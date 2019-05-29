@@ -10,8 +10,8 @@ from std_msgs.msg import ColorRGBA
 # Shows Center of mass and support polygon in rviz
 
 
-x_lenght = rospy.get_param("robostilt/dimensions/obstacle_area_lenght_x")
-y_lenght = rospy.get_param("robostilt/dimensions/obstacle_area_width_y")
+x_lenght = rospy.get_param("/robostilt/dimensions/obstacle_area_length_x")
+y_lenght = rospy.get_param("/robostilt/dimensions/obstacle_area_width_y")
 
 namespace = "obstacles"
 indexes = ("obstacles_area")

@@ -12,6 +12,11 @@
     :initarg :indexes
     :type (cl:vector cl:integer)
    :initform (cl:make-array 0 :element-type 'cl:integer :initial-element 0))
+   (absolute
+    :reader absolute
+    :initarg :absolute
+    :type (cl:vector cl:boolean)
+   :initform (cl:make-array 0 :element-type 'cl:boolean :initial-element cl:nil))
    (positions
     :reader positions
     :initarg :positions
@@ -22,11 +27,21 @@
     :initarg :velocities
     :type (cl:vector cl:float)
    :initform (cl:make-array 0 :element-type 'cl:float :initial-element 0.0))
-   (efforts
-    :reader efforts
-    :initarg :efforts
+   (efforts_limit_upper
+    :reader efforts_limit_upper
+    :initarg :efforts_limit_upper
     :type (cl:vector cl:float)
-   :initform (cl:make-array 0 :element-type 'cl:float :initial-element 0.0)))
+   :initform (cl:make-array 0 :element-type 'cl:float :initial-element 0.0))
+   (efforts_limit_lower
+    :reader efforts_limit_lower
+    :initarg :efforts_limit_lower
+    :type (cl:vector cl:float)
+   :initform (cl:make-array 0 :element-type 'cl:float :initial-element 0.0))
+   (effort_fault_expected
+    :reader effort_fault_expected
+    :initarg :effort_fault_expected
+    :type (cl:vector cl:boolean)
+   :initform (cl:make-array 0 :element-type 'cl:boolean :initial-element cl:nil)))
 )
 
 (cl:defclass SetPosition-request (<SetPosition-request>)
@@ -42,6 +57,11 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:indexes-val is deprecated.  Use robostilt_common-srv:indexes instead.")
   (indexes m))
 
+(cl:ensure-generic-function 'absolute-val :lambda-list '(m))
+(cl:defmethod absolute-val ((m <SetPosition-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:absolute-val is deprecated.  Use robostilt_common-srv:absolute instead.")
+  (absolute m))
+
 (cl:ensure-generic-function 'positions-val :lambda-list '(m))
 (cl:defmethod positions-val ((m <SetPosition-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:positions-val is deprecated.  Use robostilt_common-srv:positions instead.")
@@ -52,10 +72,20 @@
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:velocities-val is deprecated.  Use robostilt_common-srv:velocities instead.")
   (velocities m))
 
-(cl:ensure-generic-function 'efforts-val :lambda-list '(m))
-(cl:defmethod efforts-val ((m <SetPosition-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:efforts-val is deprecated.  Use robostilt_common-srv:efforts instead.")
-  (efforts m))
+(cl:ensure-generic-function 'efforts_limit_upper-val :lambda-list '(m))
+(cl:defmethod efforts_limit_upper-val ((m <SetPosition-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:efforts_limit_upper-val is deprecated.  Use robostilt_common-srv:efforts_limit_upper instead.")
+  (efforts_limit_upper m))
+
+(cl:ensure-generic-function 'efforts_limit_lower-val :lambda-list '(m))
+(cl:defmethod efforts_limit_lower-val ((m <SetPosition-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:efforts_limit_lower-val is deprecated.  Use robostilt_common-srv:efforts_limit_lower instead.")
+  (efforts_limit_lower m))
+
+(cl:ensure-generic-function 'effort_fault_expected-val :lambda-list '(m))
+(cl:defmethod effort_fault_expected-val ((m <SetPosition-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-srv:effort_fault_expected-val is deprecated.  Use robostilt_common-srv:effort_fault_expected instead.")
+  (effort_fault_expected m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <SetPosition-request>) ostream)
   "Serializes a message object of type '<SetPosition-request>"
   (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'indexes))))
@@ -70,6 +100,13 @@
     (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
     ))
    (cl:slot-value msg 'indexes))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'absolute))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if ele 1 0)) ostream))
+   (cl:slot-value msg 'absolute))
   (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'positions))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
@@ -100,7 +137,7 @@
     (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream)))
    (cl:slot-value msg 'velocities))
-  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'efforts))))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'efforts_limit_upper))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
@@ -114,7 +151,29 @@
     (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream)))
-   (cl:slot-value msg 'efforts))
+   (cl:slot-value msg 'efforts_limit_upper))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'efforts_limit_lower))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:let ((bits (roslisp-utils:encode-double-float-bits ele)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream)))
+   (cl:slot-value msg 'efforts_limit_lower))
+  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'effort_fault_expected))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
+  (cl:map cl:nil #'(cl:lambda (ele) (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if ele 1 0)) ostream))
+   (cl:slot-value msg 'effort_fault_expected))
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <SetPosition-request>) istream)
   "Deserializes a message object of type '<SetPosition-request>"
@@ -132,6 +191,15 @@
       (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
       (cl:setf (cl:aref vals i) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296)))))))
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'absolute) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'absolute)))
+    (cl:dotimes (i __ros_arr_len)
+    (cl:setf (cl:aref vals i) (cl:not (cl:zerop (cl:read-byte istream)))))))
   (cl:let ((__ros_arr_len 0))
     (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
     (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
@@ -173,8 +241,8 @@
     (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
     (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
     (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
-  (cl:setf (cl:slot-value msg 'efforts) (cl:make-array __ros_arr_len))
-  (cl:let ((vals (cl:slot-value msg 'efforts)))
+  (cl:setf (cl:slot-value msg 'efforts_limit_upper) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'efforts_limit_upper)))
     (cl:dotimes (i __ros_arr_len)
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
@@ -186,6 +254,33 @@
       (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
     (cl:setf (cl:aref vals i) (roslisp-utils:decode-double-float-bits bits))))))
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'efforts_limit_lower) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'efforts_limit_lower)))
+    (cl:dotimes (i __ros_arr_len)
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:aref vals i) (roslisp-utils:decode-double-float-bits bits))))))
+  (cl:let ((__ros_arr_len 0))
+    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
+    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
+  (cl:setf (cl:slot-value msg 'effort_fault_expected) (cl:make-array __ros_arr_len))
+  (cl:let ((vals (cl:slot-value msg 'effort_fault_expected)))
+    (cl:dotimes (i __ros_arr_len)
+    (cl:setf (cl:aref vals i) (cl:not (cl:zerop (cl:read-byte istream)))))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<SetPosition-request>)))
@@ -196,30 +291,36 @@
   "robostilt_common/SetPositionRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<SetPosition-request>)))
   "Returns md5sum for a message object of type '<SetPosition-request>"
-  "7d0c2d81f2531fd032e1874cd31efec8")
+  "331dfe0c104d55f905f2f4def3f15ac5")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'SetPosition-request)))
   "Returns md5sum for a message object of type 'SetPosition-request"
-  "7d0c2d81f2531fd032e1874cd31efec8")
+  "331dfe0c104d55f905f2f4def3f15ac5")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<SetPosition-request>)))
   "Returns full string definition for message of type '<SetPosition-request>"
-  (cl:format cl:nil "~%~%~%int32[] indexes~%float64[] positions~%float64[] velocities~%float64[] efforts~%~%~%"))
+  (cl:format cl:nil "~%~%~%int32[] indexes~%bool[] absolute~%float64[] positions~%float64[] velocities~%float64[] efforts_limit_upper~%float64[] efforts_limit_lower~%bool[] effort_fault_expected~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'SetPosition-request)))
   "Returns full string definition for message of type 'SetPosition-request"
-  (cl:format cl:nil "~%~%~%int32[] indexes~%float64[] positions~%float64[] velocities~%float64[] efforts~%~%~%"))
+  (cl:format cl:nil "~%~%~%int32[] indexes~%bool[] absolute~%float64[] positions~%float64[] velocities~%float64[] efforts_limit_upper~%float64[] efforts_limit_lower~%bool[] effort_fault_expected~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <SetPosition-request>))
   (cl:+ 0
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'indexes) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'absolute) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 1)))
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'positions) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'velocities) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
-     4 (cl:reduce #'cl:+ (cl:slot-value msg 'efforts) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'efforts_limit_upper) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'efforts_limit_lower) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 8)))
+     4 (cl:reduce #'cl:+ (cl:slot-value msg 'effort_fault_expected) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 1)))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <SetPosition-request>))
   "Converts a ROS message object to a list"
   (cl:list 'SetPosition-request
     (cl:cons ':indexes (indexes msg))
+    (cl:cons ':absolute (absolute msg))
     (cl:cons ':positions (positions msg))
     (cl:cons ':velocities (velocities msg))
-    (cl:cons ':efforts (efforts msg))
+    (cl:cons ':efforts_limit_upper (efforts_limit_upper msg))
+    (cl:cons ':efforts_limit_lower (efforts_limit_lower msg))
+    (cl:cons ':effort_fault_expected (effort_fault_expected msg))
 ))
 ;//! \htmlinclude SetPosition-response.msg.html
 
@@ -260,10 +361,10 @@
   "robostilt_common/SetPositionResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<SetPosition-response>)))
   "Returns md5sum for a message object of type '<SetPosition-response>"
-  "7d0c2d81f2531fd032e1874cd31efec8")
+  "331dfe0c104d55f905f2f4def3f15ac5")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'SetPosition-response)))
   "Returns md5sum for a message object of type 'SetPosition-response"
-  "7d0c2d81f2531fd032e1874cd31efec8")
+  "331dfe0c104d55f905f2f4def3f15ac5")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<SetPosition-response>)))
   "Returns full string definition for message of type '<SetPosition-response>"
   (cl:format cl:nil "bool success~%~%~%"))

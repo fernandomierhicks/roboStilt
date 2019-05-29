@@ -11,7 +11,9 @@ float64 velocity
 float64 velocity_setpoint   #trajectorized velocity TODO
 
 float64 effort
-float64 effort_limit
+float64 effort_limit_upper
+float64 effort_limit_lower
+float64 effort_fault_expected
 
 
 float32 manipulation
