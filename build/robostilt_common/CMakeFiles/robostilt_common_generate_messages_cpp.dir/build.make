@@ -60,6 +60,7 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernan
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseFrame.h
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/TriggerFault.h
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/LowerLegsOnFrame.h
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseLegsOnFrame.h
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h
@@ -82,12 +83,14 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernan
 
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/FramesState.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/FramesState.h: /home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg
+/home/fernandomierhicks/robostilt/devel/include/robostilt_common/FramesState.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/FramesState.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from robostilt_common/FramesState.msg"
 	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RobotState.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RobotState.h: /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg
+/home/fernandomierhicks/robostilt/devel/include/robostilt_common/RobotState.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RobotState.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from robostilt_common/RobotState.msg"
 	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
@@ -113,32 +116,39 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp: /home/fernan
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating C++ code from robostilt_common/LowerLegsOnFrame.srv"
 	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
 
+/home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv
+/home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+/home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h: /opt/ros/kinetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating C++ code from robostilt_common/SetSupportingLegs.srv"
+	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
+
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h: /opt/ros/kinetic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating C++ code from robostilt_common/SetPosition.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating C++ code from robostilt_common/SetPosition.srv"
 	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseLegsOnFrame.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseLegsOnFrame.h: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseLegsOnFrame.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseLegsOnFrame.h: /opt/ros/kinetic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating C++ code from robostilt_common/RaiseLegsOnFrame.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating C++ code from robostilt_common/RaiseLegsOnFrame.srv"
 	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h: /opt/ros/kinetic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating C++ code from robostilt_common/StopAll.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating C++ code from robostilt_common/StopAll.srv"
 	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/MovePrismatic.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/MovePrismatic.h: /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/MovePrismatic.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/MovePrismatic.h: /opt/ros/kinetic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating C++ code from robostilt_common/MovePrismatic.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating C++ code from robostilt_common/MovePrismatic.srv"
 	cd /home/fernandomierhicks/robostilt/src/robostilt_common && /home/fernandomierhicks/robostilt/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv -Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p robostilt_common -o /home/fernandomierhicks/robostilt/devel/include/robostilt_common -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 robostilt_common_generate_messages_cpp: robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp
@@ -149,6 +159,7 @@ robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/
 robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseFrame.h
 robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/TriggerFault.h
 robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/LowerLegsOnFrame.h
+robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h
 robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h
 robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseLegsOnFrame.h
 robostilt_common_generate_messages_cpp: /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h

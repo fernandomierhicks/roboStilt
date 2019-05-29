@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseFrame.lisp"
   "/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/TriggerFault.lisp"
   "/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/LowerLegsOnFrame.lisp"
+  "/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetSupportingLegs.lisp"
   "/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetPosition.lisp"
   "/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseLegsOnFrame.lisp"
   "/home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/StopAll.lisp"

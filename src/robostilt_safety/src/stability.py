@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 import geometry_msgs.msg
-import tf2_ros
+import tf2_ros as tf2_ros
 import tf2_geometry_msgs as tf_msg
 from urdf_parser_py.urdf import URDF
 from geometry_msgs.msg import PointStamped
@@ -30,23 +30,22 @@ class Stability:
     mass = None
     links = None
     ros_rate = None
+    center_of_mass_radius=None
 
 
 # ---------------------------------------------------------------------------------------------------------  CALLBACKS
 
-
     def _actuator_states_callback(self, msg):
         self.supporting_legs = []
-        self.joint_names = []
-        # indexes 1-6 are legs
-        for i in range(1, ActuatorsState.COUNT-1):
+        self.joint_names = []        
+        for i in range(0, ActuatorsState.COUNT):
             self.joint_names.append(msg.actuators[i].name)
             self.supporting_legs.append(msg.actuators[i].is_supporting_weight)
 
 # ---------------------------------------------------------------------------------------------------------  ROS
     def setup_ros_interface(self):
         # Variables
-        rate = 50
+        rate = rospy.get_param("/robostilt/rate")
         package_name = "safety"
         node_name = "stability"
         # Node
@@ -62,20 +61,54 @@ class Stability:
         self.pub_suport_polygon = rospy.Publisher(
             '/robostilt/safety/support_polygon', PolygonStamped, queue_size=1, latch=True)
         # Subscribers
-        topic_name = "/robostilt/actuator_states"
+        topic_name = "/robostilt/actuators_state"
         rospy.Subscriber(topic_name, ActuatorsState,
                          self._actuator_states_callback)
-        # Services
+        # Parameters
+        rospy.loginfo("Waiting for COM radius parameter...")
+        param_name = "/robostilt/safety/center_of_mass_radius"
+        while(rospy.has_param(param_name) is False):
+            rospy.sleep(1.0)
+        self.center_of_mass_radius = rospy.get_param(param_name)
 
         # wait for...
         rospy.loginfo("Waiting for message on topic "+topic_name + " ...")
         rospy.wait_for_message(topic_name, ActuatorsState)
+        rospy.sleep(0.1)
+        rospy.loginfo(node_name + " ready...")
 
 # ---------------------------------------------------------------------------------------------------------  INIT
 
     def __init__(self):
         self.setup_ros_interface()
         self.start_calculations()
+
+    def start_calculations(self):
+         # initialize calculation variables
+        self.center_of_mass = PointStamped()
+        self.center_of_mass_projected = PointStamped()
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
+        self.link_origin = geometry_msgs.msg.PointStamped()
+
+        self.calculate_total_mass()
+        rospy.loginfo("Safety_stability publishing...")
+        while not rospy.is_shutdown():
+
+            self.calculate_center_of_mass()
+
+            self.calculate_support_polygon()
+
+            self.check_com_is_inside_support_polygon()
+
+            self.ros_rate.sleep()
+
+            try:
+                # catch exeption of moving backwarts in time, when restarting simulator
+                self.ros_rate.sleep()
+            except rospy.exceptions.ROSTimeMovedBackwardsException:
+                rospy.logwarn(
+                    "We moved backwards in time. I hope you just resetted the simulation. If not there is something wrong")
 
     def calculate_total_mass(self):
 
@@ -99,36 +132,12 @@ class Stability:
 
         rospy.loginfo("Mass of robot is %f", self.mass)
 
-    def start_calculations(self):
-         # initialize calculation variables
-        self.center_of_mass = PointStamped()
-        self.center_of_mass_projected = PointStamped()
-        self.tfBuffer = tf2_ros.Buffer()
-        self.tf_listener = tf2_ros.TransformListener(self.tfBuffer)
-        self.link_origin = geometry_msgs.msg.PointStamped()
-
-        self.calculate_total_mass()
-
-        while not rospy.is_shutdown():
-
-            self.calculate_center_of_mass()
-            self.calculate_support_polygon()
-
-            self.check_com_is_inside_support_polygon()
-
-            try:
-                # catch exeption of moving backwarts in time, when restarting simulator
-                self.ros_rate.sleep()
-            except rospy.exceptions.ROSTimeMovedBackwardsException:
-                rospy.logwarn(
-                    "We moved backwards in time. I hope you just resetted the simulation. If not there is something wrong")
-
     def calculate_support_polygon(self):
         point = []
         support_area = PolygonStamped()
         j = 0
-        for i in range(0, 8):
-
+        #legs are on indexes 1-6
+        for i in range(1, 7):
             if(self.supporting_legs[4] == True and self.supporting_legs[6] == True):
                 # to publish polygon with correct order on vertices, need to swap legs 4 and 6 in case both are present
                 if(i == 4):
@@ -141,15 +150,16 @@ class Stability:
                 try:
                     # get transform of each link with respect to base link
                     self.tf_world_to_link = self.tf_buffer.lookup_transform(
-                        "world", self.joint_names[i], rospy.Time())
+                        "world", self.joint_names[i], rospy.Time(), rospy.Duration(1.0))  # 1 second timeout, blocks until it finds it
                     point.append(Point())
                     point[j].x = self.tf_world_to_link.transform.translation.x
                     point[j].y = self.tf_world_to_link.transform.translation.y
                     point[j].z = 0
                     support_area.polygon.points.append(point[j])
                     j += 1
-                except:
-                    rospy.logerr("TF error in COM computation")
+                except tf2_ros.TransformException as err:
+                    rospy.logerr(
+                        "Calculate support polygon. TF error in COM computation %s", err)
         support_area.header.stamp = rospy.Time.now()
         support_area.header.frame_id = "world"
         self.pub_suport_polygon.publish(support_area)
@@ -159,15 +169,13 @@ class Stability:
         x = 0
         y = 0
         z = 0
+
         for link in self.links:
-
+            # print (self.links[link])  # get structure of link
             try:
-                # print (self.links[link])   #get structure of link
-
                 # get transform of each link with respect to base link
                 self.tf_base_to_link = self.tf_buffer.lookup_transform(
-                    "base_link", link, rospy.Time())
-
+                    "base_link", link, rospy.Time(), rospy.Duration(1.0))  # 1 second timeout, blocks until it finds it
                 self.link_origin.point.x = self.links[link].inertial.origin.xyz[0]
                 self.link_origin.point.y = self.links[link].inertial.origin.xyz[1]
                 self.link_origin.point.z = self.links[link].inertial.origin.xyz[2]
@@ -183,11 +191,13 @@ class Stability:
                 y += self.links[link].inertial.mass * \
                     tf_base_to_link_origin.point.y
                 z += self.links[link].inertial.mass * \
-                    tf_base_to_link_origin.point.z
-            except:
-                rospy.logerr("TF error in COM computation")
+                    tf_base_to_link_origin.point.z               
 
-        # finish CoM calculation
+            except tf2_ros.TransformException as err:
+                rospy.logerr(
+                    "Calculate center of mass. TF error in COM computation %s", err)
+
+         # finish CoM calculation
         self.center_of_mass.header.stamp = rospy.Time.now()
         self.center_of_mass.header.frame_id = "base_link"
         self.center_of_mass.point.x = x/self.mass
@@ -196,9 +206,11 @@ class Stability:
 
         self.pub_com.publish(self.center_of_mass)
 
-        # project COM into ground, z=0
-        self.tf_base_to_world = self.tfBuffer.lookup_transform(
-            "world", "base_link", rospy.Time())
+        
+        #project COM into ground, z=0
+
+        self.tf_base_to_world = self.tf_buffer.lookup_transform(
+            "world", "base_link", rospy.Time(), rospy.Duration(1.0))  # 1 second timeout, blocks until it finds it
         self.tf_com_location_to_world = tf_msg.do_transform_point(
             self.center_of_mass, self.tf_base_to_world)
 
@@ -242,13 +254,15 @@ class Stability:
 
             x = self.center_of_mass_projected.point.x
             y = self.center_of_mass_projected.point.y
+            COM_circle_path = mpltPath.Path.circle(center=(x,y,0),radius=self.center_of_mass_radius)
 
-            if(path.contains_point((x, y)) == False):
+            if(path.contains_path(COM_circle_path) == False):
                 rospy.logerr("ROBOT IS UNSTABLE, FALLING!!")
                 # do something else!!
-        else:
-            rospy.loginfo(
-                "Waiting for valid support polygon, this shouldnt happen as we should be waiting. FIX ME")
+        # else:
+            # dont p
+            # rospy.loginfo(
+            #    "Waiting for valid support polygon, this shouldnt happen as we should be waiting. FIX ME")
 
 
 # ---------------------------------------------------------------------------------------------------------  MAIN

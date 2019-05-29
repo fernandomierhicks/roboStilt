@@ -1,5 +1,6 @@
-#example
+
 robostilt:
+  rate: 50 # General rate for robostilt_actuators, robostilt_safety. Sho
   dimensions:
     #Offsets ensure that commanding a zero position puts the joint in the expected position:
     #Foot at the same level as bottom frame
@@ -59,6 +60,8 @@ robostilt:
   angles:
     leveling_max_error: 0.0872665  #triggers alarm if level is ever off by this much.
 
+  safety:
+    center_of_mass_radius: 0.1 #used for stability alarm, if center of mass point is within this radius to support polygon, we trigger fault
 
   
 

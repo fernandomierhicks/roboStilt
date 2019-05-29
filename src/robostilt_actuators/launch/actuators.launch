@@ -1,0 +1,7 @@
+<launch>
+
+<node name="actuators_state" pkg="robostilt_actuators" type="actuators_state.py" respawn="false" output="screen"/>
+
+<node name="frames_state" pkg="robostilt_actuators" type="frames_state.py" respawn="false" output="screen"/>
+
+</launch>

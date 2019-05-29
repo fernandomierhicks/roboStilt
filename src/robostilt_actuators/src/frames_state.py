@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 import rospy
-from robostilt_common.msg import ActuatorsState
 from robostilt_common.msg import *
 from robostilt_common.srv import *
 
@@ -28,12 +27,14 @@ class Frames:
     actuators_state = None
     publisher = None
     frames_state = None
+    supporting_frame = None
     ready_to_move = None
     # ---------------------------------------------------------------------------------------------------------  CALLBACKS
 
     def _actuator_states_callback(self, msg):
         self.actuators_state = msg
-        self.frames_state.supporting_frame = FramesState.NONE
+        self.frames_state.header.stamp = rospy.Time.now()
+        self.frames_state.supporting_frame = self.supporting_frame
         self.publisher.publish(self.frames_state)
 
     def _robot_state_callback(self, msg):
@@ -46,7 +47,7 @@ class Frames:
 
     def setup_ros_interface(self):
         # Variables
-        rate = 50
+        rate = rospy.get_param("/robostilt/rate")
         package_name = "actuators"
         node_name = "frames_state"
         # Node
@@ -57,7 +58,7 @@ class Frames:
         self.publisher = rospy.Publisher(
             '/robostilt/'+node_name, FramesState, queue_size=1, latch=True)
 
-        # Subscribers       
+        # Subscribers
         topic_name = "/robostilt/robot_state"
         rospy.Subscriber(topic_name,
                          RobotState, self._robot_state_callback)
@@ -71,7 +72,7 @@ class Frames:
         # wait for...
         rospy.loginfo("Waiting for message on topic "+topic_name + " ...")
         rospy.wait_for_message(topic_name, ActuatorsState)
-        rospy.loginfo("Ready...")
+        rospy.loginfo(node_name + " ready...")
 
     def setup_services(self, node_name):
         prefix = "robostilt/"+node_name
@@ -127,6 +128,14 @@ class Frames:
         except rospy.ServiceException, e:
             print "Service call failed: %s" % e
 
+    def set_supporting_legs(self, indexes, is_supporting):
+
+        for i in indexes:
+            self.frames_state.supporting_legs
+
+        # order list
+        self.supporting_legs.sort()
+
     def create_position_request_from_parameter_name(self, name, frame, absolute, position, effort_fault_expected):
         position_request = SetPositionRequest()
         position_request.indexes = self.get_indexes_from_frame(frame)
@@ -136,25 +145,26 @@ class Frames:
         for i in range(0, len(position_request.indexes)):
             position_request.absolute.append(absolute)
             position_request.positions.append(position)
-            position_request.velocities.append(velocity)        
+            position_request.velocities.append(velocity)
             position_request.efforts_limit_upper.append(effort_limits.upper)
             position_request.efforts_limit_lower.append(effort_limits.lower)
             position_request.effort_fault_expected.append(
                 effort_fault_expected)
 
         return position_request
-    def are_we_are_ready_to_move(self,string_message):
+
+    def are_we_are_ready_to_move(self, string_message):
         if(self.ready_to_move is True):
             return True
         else:
-            rospy.logerr("Attempted to move while faulted: " +string_message)
+            rospy.logerr("Attempted to move while faulted: " + string_message)
         return False
 
     def move_prismatic(self, request):
         name = "moving_prismatic"
         if(self.are_we_are_ready_to_move(name) is True):
             effort_fault_expected = False
-            absolute=ActuatorsState.ABS
+            absolute = ActuatorsState.ABS
             position_request = self.create_position_request_from_parameter_name(
                 name, request.frame, absolute, request.position, effort_fault_expected)
 
@@ -167,10 +177,10 @@ class Frames:
                 rospy.logerr(
                     "Service call to set_position failed while processing "+name)
 
-        return MovePrismaticResponse(False)     
+        return MovePrismaticResponse(False)
 
     def raise_legs_on_frame(self, request):
-        
+
         name = "raising_legs"
         if(self.are_we_are_ready_to_move(name) is True):
             effort_fault_expected = False
@@ -185,7 +195,7 @@ class Frames:
                 return RaiseLegsOnFrameResponse(True)
             else:
                 rospy.logerr(
-                    "Service call to set_position failed while processing "+name)   
+                    "Service call to set_position failed while processing "+name)
         return RaiseLegsOnFrameResponse(False)
 
     def lower_legs_on_frame(self, request):
@@ -194,7 +204,7 @@ class Frames:
             effort_fault_expected = True
             absolute = ActuatorsState.ABS
             position_request = self.create_position_request_from_parameter_name(
-                name, request.frame,absolute, request.position, effort_fault_expected)
+                name, request.frame, absolute, request.position, effort_fault_expected)
 
             position_result = self.call_service(
                 "robostilt/actuators_state/set_position", SetPosition, position_request)
@@ -203,13 +213,11 @@ class Frames:
                 return LowerLegsOnFrameResponse(True)
             else:
                 rospy.logerr(
-                    "Service call to set_position failed while processing "+name)                
-        
+                    "Service call to set_position failed while processing "+name)
+
         return LowerLegsOnFrameResponse(False)
 
-        
-
-    def raise_frame(self, request):        
+    def raise_frame(self, request):
         name = "raising_frame"
         if(self.are_we_are_ready_to_move(name) is True):
             effort_fault_expected = False
@@ -224,7 +232,7 @@ class Frames:
                 return RaiseFrameResponse(True)
             else:
                 rospy.logerr(
-                    "Service call to set_position failed while processing " + name)       
+                    "Service call to set_position failed while processing " + name)
         return RaiseFrameResponse(False)
  # ---------------------------------------------------------------------------------------------------------  MAIN
 

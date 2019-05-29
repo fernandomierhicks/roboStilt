@@ -491,6 +491,19 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named robostilt_common_genpy
+
+# Build rule for target.
+robostilt_common_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_genpy
+.PHONY : robostilt_common_genpy
+
+# fast build rule for target.
+robostilt_common_genpy/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build
+.PHONY : robostilt_common_genpy/fast
+
+#=============================================================================
 # Target rules for targets named robostilt_common_generate_messages_eus
 
 # Build rule for target.
@@ -515,6 +528,19 @@ robostilt_common_generate_messages_nodejs: cmake_check_build_system
 robostilt_common_generate_messages_nodejs/fast:
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build
 .PHONY : robostilt_common_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named _robostilt_common_generate_messages_check_deps_SetSupportingLegs
+
+# Build rule for target.
+_robostilt_common_generate_messages_check_deps_SetSupportingLegs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _robostilt_common_generate_messages_check_deps_SetSupportingLegs
+.PHONY : _robostilt_common_generate_messages_check_deps_SetSupportingLegs
+
+# fast build rule for target.
+_robostilt_common_generate_messages_check_deps_SetSupportingLegs/fast:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/build
+.PHONY : _robostilt_common_generate_messages_check_deps_SetSupportingLegs/fast
 
 #=============================================================================
 # Target rules for targets named _robostilt_common_generate_messages_check_deps_SetPosition
@@ -762,19 +788,6 @@ robostilt_common_generate_messages_py: cmake_check_build_system
 robostilt_common_generate_messages_py/fast:
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/build
 .PHONY : robostilt_common_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named robostilt_common_genpy
-
-# Build rule for target.
-robostilt_common_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common_genpy
-.PHONY : robostilt_common_genpy
-
-# fast build rule for target.
-robostilt_common_genpy/fast:
-	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build
-.PHONY : robostilt_common_genpy/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_generate_messages_py
@@ -1399,8 +1412,10 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... robostilt_common_genpy"
 	@echo "... robostilt_common_generate_messages_eus"
 	@echo "... robostilt_common_generate_messages_nodejs"
+	@echo "... _robostilt_common_generate_messages_check_deps_SetSupportingLegs"
 	@echo "... _robostilt_common_generate_messages_check_deps_SetPosition"
 	@echo "... _robostilt_common_generate_messages_check_deps_ActuatorsState"
 	@echo "... _robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame"
@@ -1420,7 +1435,6 @@ help:
 	@echo "... robostilt_common_gennodejs"
 	@echo "... _robostilt_common_generate_messages_check_deps_FramesState"
 	@echo "... robostilt_common_generate_messages_py"
-	@echo "... robostilt_common_genpy"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... sensor_msgs_generate_messages_nodejs"
 	@echo "... sensor_msgs_generate_messages_lisp"

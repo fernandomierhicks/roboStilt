@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseFrame.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/TriggerFault.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/LowerLegsOnFrame.l"
+  "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetSupportingLegs.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetPosition.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseLegsOnFrame.l"
   "/home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/StopAll.l"

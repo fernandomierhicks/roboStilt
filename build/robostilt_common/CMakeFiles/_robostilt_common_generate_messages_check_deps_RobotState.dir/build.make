@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/fernandomierhicks/robostilt/build
 include robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RobotState.dir/progress.make
 
 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RobotState:
-	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py robostilt_common /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg 
+	cd /home/fernandomierhicks/robostilt/build/robostilt_common && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py robostilt_common /home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg std_msgs/Header
 
 _robostilt_common_generate_messages_check_deps_RobotState: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RobotState
 _robostilt_common_generate_messages_check_deps_RobotState: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RobotState.dir/build.make

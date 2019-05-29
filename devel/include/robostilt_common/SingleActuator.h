@@ -247,6 +247,7 @@ bool is_supporting_weight\n\
 \n\
 \n\
 \n\
+\n\
 ";
   }
 

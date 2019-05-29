@@ -39,6 +39,7 @@ bool is_supporting_weight
 
 
 
+
 """
   __slots__ = ['name','index','position','position_setpoint','position_goal','velocity','velocity_setpoint','effort','effort_limit_upper','effort_limit_lower','effort_fault_expected','manipulation','progress','is_moving','is_ready','has_been_homed','is_supporting_weight']
   _slot_types = ['string','int32','float64','float64','float64','float64','float64','float64','float64','float64','float64','float32','float32','bool','bool','bool','bool']

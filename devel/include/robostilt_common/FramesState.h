@@ -15,6 +15,7 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
+#include <std_msgs/Header.h>
 
 namespace robostilt_common
 {
@@ -24,14 +25,19 @@ struct FramesState_
   typedef FramesState_<ContainerAllocator> Type;
 
   FramesState_()
-    : supporting_frame(0)  {
+    : header()
+    , supporting_frame(0)  {
     }
   FramesState_(const ContainerAllocator& _alloc)
-    : supporting_frame(0)  {
+    : header(_alloc)
+    , supporting_frame(0)  {
   (void)_alloc;
     }
 
 
+
+   typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
+  _header_type header;
 
    typedef uint8_t _supporting_frame_type;
   _supporting_frame_type supporting_frame;
@@ -93,7 +99,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': True}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'robostilt_common': ['/home/fernandomierhicks/robostilt/src/robostilt_common/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -103,12 +109,12 @@ namespace message_traits
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::robostilt_common::FramesState_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::robostilt_common::FramesState_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -123,12 +129,12 @@ struct IsMessage< ::robostilt_common::FramesState_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct HasHeader< ::robostilt_common::FramesState_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::robostilt_common::FramesState_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 
@@ -137,12 +143,12 @@ struct MD5Sum< ::robostilt_common::FramesState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "6960690b13db489543fcbbdcab8fcd47";
+    return "99027c087e70afd82e291601a344b52e";
   }
 
   static const char* value(const ::robostilt_common::FramesState_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x6960690b13db4895ULL;
-  static const uint64_t static_value2 = 0x43fcbbdcab8fcd47ULL;
+  static const uint64_t static_value1 = 0x99027c087e70afd8ULL;
+  static const uint64_t static_value2 = 0x2e291601a344b52eULL;
 };
 
 template<class ContainerAllocator>
@@ -169,7 +175,29 @@ uint8 REVOLUTE = 4\n\
 uint8 ODD_AND_EVEN = 5\n\
 uint8 PRISMATIC_AND_REVOLUTE = 6\n\
 \n\
+\n\
+Header header\n\
 uint8 supporting_frame\n\
+\n\
+\n\
+\n\
+================================================================================\n\
+MSG: std_msgs/Header\n\
+# Standard metadata for higher-level stamped data types.\n\
+# This is generally used to communicate timestamped data \n\
+# in a particular coordinate frame.\n\
+# \n\
+# sequence ID: consecutively increasing ID \n\
+uint32 seq\n\
+#Two-integer timestamp that is expressed as:\n\
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n\
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n\
+# time-handling sugar is provided by the client library\n\
+time stamp\n\
+#Frame this data is associated with\n\
+# 0: no frame\n\
+# 1: global frame\n\
+string frame_id\n\
 ";
   }
 
@@ -188,6 +216,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.header);
       stream.next(m.supporting_frame);
     }
 
@@ -207,6 +236,9 @@ struct Printer< ::robostilt_common::FramesState_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::robostilt_common::FramesState_<ContainerAllocator>& v)
   {
+    s << indent << "header: ";
+    s << std::endl;
+    Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
     s << indent << "supporting_frame: ";
     Printer<uint8_t>::stream(s, indent + "  ", v.supporting_frame);
   }

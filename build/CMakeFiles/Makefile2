@@ -1101,8 +1101,10 @@ robostilt_common/all: robostilt_common/CMakeFiles/robostilt_common_generate_mess
 .PHONY : robostilt_common/all
 
 # Convenience name for "clean" pass in the directory.
+robostilt_common/clean: robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
 robostilt_common/clean: robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/clean
 robostilt_common/clean: robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/clean
+robostilt_common/clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/clean
 robostilt_common/clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/clean
 robostilt_common/clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/clean
 robostilt_common/clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/clean
@@ -1122,7 +1124,6 @@ robostilt_common/clean: robostilt_common/CMakeFiles/robostilt_common_generate_me
 robostilt_common/clean: robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/clean
 robostilt_common/clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_FramesState.dir/clean
 robostilt_common/clean: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/clean
-robostilt_common/clean: robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
 
 .PHONY : robostilt_common/clean
 
@@ -1132,10 +1133,43 @@ robostilt_common/preinstall:
 .PHONY : robostilt_common/preinstall
 
 #=============================================================================
+# Target rules for target robostilt_common/CMakeFiles/robostilt_common_genpy.dir
+
+# All Build rule for target.
+robostilt_common/CMakeFiles/robostilt_common_genpy.dir/all: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all
+	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/depend
+	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num= "Built target robostilt_common_genpy"
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_genpy.dir/all
+
+# Build rule for subdir invocation for target.
+robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 14
+	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_genpy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule
+
+# Convenience name for target.
+robostilt_common_genpy: robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule
+
+.PHONY : robostilt_common_genpy
+
+# clean rule for target.
+robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean:
+	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
+.PHONY : robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
+
+# clean rule for target.
+clean: robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir
 
 # All Build rule for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all: robostilt_gait/CMakeFiles/std_msgs_generate_messages_eus.dir/all
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/all
@@ -1149,12 +1183,12 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all: robo
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_FramesState.dir/all
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/depend
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33,34 "Built target robostilt_common_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=24,25,26,27,28,29,30,31,32,33,34,35,36 "Built target robostilt_common_generate_messages_eus"
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 13
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/rule
@@ -1179,6 +1213,7 @@ clean: robostilt_common/CMakeFiles/robostilt_common_generate_messages_eus.dir/cl
 
 # All Build rule for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all: robostilt_gait/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/all
@@ -1192,12 +1227,12 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all: r
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_FramesState.dir/all
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/depend
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=46,47,48,49,50,51,52,53,54,55,56 "Built target robostilt_common_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=49,50,51,52,53,54,55,56,57,58,59,60 "Built target robostilt_common_generate_messages_nodejs"
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/rule
@@ -1214,6 +1249,38 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/clean:
 
 # clean rule for target.
 clean: robostilt_common/CMakeFiles/robostilt_common_generate_messages_nodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir
+
+# All Build rule for target.
+robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/depend
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num= "Built target _robostilt_common_generate_messages_check_deps_SetSupportingLegs"
+.PHONY : robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all
+
+# Build rule for subdir invocation for target.
+robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
+.PHONY : robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/rule
+
+# Convenience name for target.
+_robostilt_common_generate_messages_check_deps_SetSupportingLegs: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/rule
+
+.PHONY : _robostilt_common_generate_messages_check_deps_SetSupportingLegs
+
+# clean rule for target.
+robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/clean:
+	$(MAKE) -f robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/build.make robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/clean
+.PHONY : robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/clean
+
+# clean rule for target.
+clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/clean
 
 .PHONY : clean
 
@@ -1389,7 +1456,7 @@ robostilt_common/CMakeFiles/robostilt_common_geneus.dir/all: robostilt_common/CM
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 13
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_geneus.dir/rule
@@ -1542,6 +1609,7 @@ clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_dep
 
 # All Build rule for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all: robostilt_gait/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/all
@@ -1555,12 +1623,12 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all: robo
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_FramesState.dir/all
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/depend
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22 "Built target robostilt_common_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23 "Built target robostilt_common_generate_messages_cpp"
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_cpp.dir/rule
@@ -1592,7 +1660,7 @@ robostilt_common/CMakeFiles/robostilt_common_genlisp.dir/all: robostilt_common/C
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_genlisp.dir/rule
@@ -1633,7 +1701,7 @@ all: robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/all
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 63
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages.dir/rule
@@ -1665,7 +1733,7 @@ robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/all: robostilt_common/CM
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_gencpp.dir/rule
@@ -1722,6 +1790,7 @@ clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_dep
 
 # All Build rule for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all: robostilt_gait/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/all
@@ -1735,12 +1804,12 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all: rob
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_FramesState.dir/all
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/depend
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=35,36,37,38,39,40,41,42,43,44,45 "Built target robostilt_common_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=37,38,39,40,41,42,43,44,45,46,47,48 "Built target robostilt_common_generate_messages_lisp"
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_lisp.dir/rule
@@ -1772,7 +1841,7 @@ robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/all: robostilt_common
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_gennodejs.dir/rule
@@ -1829,6 +1898,7 @@ clean: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_dep
 
 # All Build rule for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all: robostilt_gait/CMakeFiles/std_msgs_generate_messages_py.dir/all
+robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetSupportingLegs.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_SetPosition.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_ActuatorsState.dir/all
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_RaiseLegsOnFrame.dir/all
@@ -1842,12 +1912,12 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all: robos
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all: robostilt_common/CMakeFiles/_robostilt_common_generate_messages_check_deps_FramesState.dir/all
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/depend
 	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/build.make robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=57,58,59,60,61,62,63,64,65,66,67,68,69 "Built target robostilt_common_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num=61,62,63,64,65,66,67,68,69,70,71,72,73,74 "Built target robostilt_common_generate_messages_py"
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
 .PHONY : robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/rule
@@ -1864,38 +1934,6 @@ robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/clean:
 
 # clean rule for target.
 clean: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target robostilt_common/CMakeFiles/robostilt_common_genpy.dir
-
-# All Build rule for target.
-robostilt_common/CMakeFiles/robostilt_common_genpy.dir/all: robostilt_common/CMakeFiles/robostilt_common_generate_messages_py.dir/all
-	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/depend
-	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fernandomierhicks/robostilt/build/CMakeFiles --progress-num= "Built target robostilt_common_genpy"
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_genpy.dir/all
-
-# Build rule for subdir invocation for target.
-robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 13
-	$(MAKE) -f CMakeFiles/Makefile2 robostilt_common/CMakeFiles/robostilt_common_genpy.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fernandomierhicks/robostilt/build/CMakeFiles 0
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule
-
-# Convenience name for target.
-robostilt_common_genpy: robostilt_common/CMakeFiles/robostilt_common_genpy.dir/rule
-
-.PHONY : robostilt_common_genpy
-
-# clean rule for target.
-robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean:
-	$(MAKE) -f robostilt_common/CMakeFiles/robostilt_common_genpy.dir/build.make robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
-.PHONY : robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
-
-# clean rule for target.
-clean: robostilt_common/CMakeFiles/robostilt_common_genpy.dir/clean
 
 .PHONY : clean
 

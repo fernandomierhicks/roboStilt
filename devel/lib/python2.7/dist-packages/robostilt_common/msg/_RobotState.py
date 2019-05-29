@@ -5,11 +5,12 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
+import std_msgs.msg
 
 class RobotState(genpy.Message):
-  _md5sum = "df8799c1ffe4dea4788499b5ad10d0fa"
+  _md5sum = "8d7a63dca06bfd67e6e09bd329a9cf32"
   _type = "robostilt_common/RobotState"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = True #flag to mark the presence of a Header object
   _full_text = """int32 STATE_READY=0
 int32 STATE_FAULTED=1
 int32 STATE_BUSY_MOVING=2
@@ -20,11 +21,32 @@ int32 FAULT_ESTOP=1
 int32 FAULT_EFFORT=2
 int32 FAULT_TRAJECTORY=3
 
+
+Header header
+
 int32 state
 string state_string
 
 int32 fault
-string fault_string"""
+string fault_string
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
   # Pseudo-constants
   STATE_READY = 0
   STATE_FAULTED = 1
@@ -35,8 +57,8 @@ string fault_string"""
   FAULT_EFFORT = 2
   FAULT_TRAJECTORY = 3
 
-  __slots__ = ['state','state_string','fault','fault_string']
-  _slot_types = ['int32','string','int32','string']
+  __slots__ = ['header','state','state_string','fault','fault_string']
+  _slot_types = ['std_msgs/Header','int32','string','int32','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -46,7 +68,7 @@ string fault_string"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       state,state_string,fault,fault_string
+       header,state,state_string,fault,fault_string
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -55,6 +77,8 @@ string fault_string"""
     if args or kwds:
       super(RobotState, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       if self.state is None:
         self.state = 0
       if self.state_string is None:
@@ -64,6 +88,7 @@ string fault_string"""
       if self.fault_string is None:
         self.fault_string = ''
     else:
+      self.header = std_msgs.msg.Header()
       self.state = 0
       self.state_string = ''
       self.fault = 0
@@ -81,6 +106,14 @@ string fault_string"""
     :param buff: buffer, ``StringIO``
     """
     try:
+      _x = self
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       buff.write(_get_struct_i().pack(self.state))
       _x = self.state_string
       length = len(_x)
@@ -104,7 +137,22 @@ string fault_string"""
     :param str: byte array of serialized message, ``str``
     """
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       end = 0
+      _x = self
+      start = end
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8')
+      else:
+        self.header.frame_id = str[start:end]
       start = end
       end += 4
       (self.state,) = _get_struct_i().unpack(str[start:end])
@@ -141,6 +189,14 @@ string fault_string"""
     :param numpy: numpy python module
     """
     try:
+      _x = self
+      buff.write(_get_struct_3I().pack(_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs))
+      _x = self.header.frame_id
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       buff.write(_get_struct_i().pack(self.state))
       _x = self.state_string
       length = len(_x)
@@ -165,7 +221,22 @@ string fault_string"""
     :param numpy: numpy python module
     """
     try:
+      if self.header is None:
+        self.header = std_msgs.msg.Header()
       end = 0
+      _x = self
+      start = end
+      end += 12
+      (_x.header.seq, _x.header.stamp.secs, _x.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.header.frame_id = str[start:end].decode('utf-8')
+      else:
+        self.header.frame_id = str[start:end]
       start = end
       end += 4
       (self.state,) = _get_struct_i().unpack(str[start:end])
@@ -204,3 +275,9 @@ def _get_struct_i():
     if _struct_i is None:
         _struct_i = struct.Struct("<i")
     return _struct_i
+_struct_3I = None
+def _get_struct_3I():
+    global _struct_3I
+    if _struct_3I is None:
+        _struct_3I = struct.Struct("<3I")
+    return _struct_3I

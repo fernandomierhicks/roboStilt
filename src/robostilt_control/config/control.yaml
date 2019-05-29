@@ -5,7 +5,7 @@ robostilt:
   # Publish all joint states -----------------------------------
   joint_state_controller:
     type: joint_state_controller/JointStateController
-    publish_rate: &publish_rate 50  
+    publish_rate: &publish_rate 66  
 
   # GAINS-------------------------------------------------------
   # i_clamp should be close to the maximum effort possible by the joint, to avoid windup.

@@ -8,6 +8,9 @@ int32 FAULT_ESTOP=1
 int32 FAULT_EFFORT=2
 int32 FAULT_TRAJECTORY=3
 
+
+Header header
+
 int32 state
 string state_string
 

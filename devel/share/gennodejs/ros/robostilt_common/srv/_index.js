@@ -8,6 +8,7 @@ let SetPosition = require('./SetPosition.js')
 let TriggerFault = require('./TriggerFault.js')
 let RaiseFrame = require('./RaiseFrame.js')
 let MovePrismatic = require('./MovePrismatic.js')
+let SetSupportingLegs = require('./SetSupportingLegs.js')
 
 module.exports = {
   LowerLegsOnFrame: LowerLegsOnFrame,
@@ -17,4 +18,5 @@ module.exports = {
   TriggerFault: TriggerFault,
   RaiseFrame: RaiseFrame,
   MovePrismatic: MovePrismatic,
+  SetSupportingLegs: SetSupportingLegs,
 };

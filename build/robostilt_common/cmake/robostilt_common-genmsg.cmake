@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "robostilt_common: 4 messages, 7 services")
+message(STATUS "robostilt_common: 4 messages, 8 services")
 
 set(MSG_I_FLAGS "-Irobostilt_common:/home/fernandomierhicks/robostilt/src/robostilt_common/msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
@@ -42,6 +42,11 @@ add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv" ""
 )
 
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv" NAME_WE)
+add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv" ""
+)
+
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" ""
@@ -54,7 +59,7 @@ add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg" NAME_WE)
 add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg" "std_msgs/Header"
 )
 
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv" NAME_WE)
@@ -64,7 +69,7 @@ add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg" NAME_WE)
 add_custom_target(_robostilt_common_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "robostilt_common" "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg" "std_msgs/Header"
 )
 
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/MovePrismatic.srv" NAME_WE)
@@ -93,13 +98,13 @@ _generate_msg_cpp(robostilt_common
 _generate_msg_cpp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/robostilt_common
 )
 _generate_msg_cpp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/robostilt_common
 )
 
@@ -118,6 +123,12 @@ _generate_srv_cpp(robostilt_common
 )
 _generate_srv_cpp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/robostilt_common
+)
+_generate_srv_cpp(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/robostilt_common
@@ -169,6 +180,8 @@ get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostil
 add_dependencies(robostilt_common_generate_messages_cpp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_cpp _robostilt_common_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_cpp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_cpp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg" NAME_WE)
@@ -206,13 +219,13 @@ _generate_msg_eus(robostilt_common
 _generate_msg_eus(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/robostilt_common
 )
 _generate_msg_eus(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/robostilt_common
 )
 
@@ -231,6 +244,12 @@ _generate_srv_eus(robostilt_common
 )
 _generate_srv_eus(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/robostilt_common
+)
+_generate_srv_eus(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/robostilt_common
@@ -282,6 +301,8 @@ get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostil
 add_dependencies(robostilt_common_generate_messages_eus _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_eus _robostilt_common_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_eus _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_eus _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg" NAME_WE)
@@ -319,13 +340,13 @@ _generate_msg_lisp(robostilt_common
 _generate_msg_lisp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/robostilt_common
 )
 _generate_msg_lisp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/robostilt_common
 )
 
@@ -344,6 +365,12 @@ _generate_srv_lisp(robostilt_common
 )
 _generate_srv_lisp(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/robostilt_common
+)
+_generate_srv_lisp(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/robostilt_common
@@ -395,6 +422,8 @@ get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostil
 add_dependencies(robostilt_common_generate_messages_lisp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_lisp _robostilt_common_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_lisp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_lisp _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg" NAME_WE)
@@ -432,13 +461,13 @@ _generate_msg_nodejs(robostilt_common
 _generate_msg_nodejs(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/robostilt_common
 )
 _generate_msg_nodejs(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/robostilt_common
 )
 
@@ -457,6 +486,12 @@ _generate_srv_nodejs(robostilt_common
 )
 _generate_srv_nodejs(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/robostilt_common
+)
+_generate_srv_nodejs(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/robostilt_common
@@ -508,6 +543,8 @@ get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostil
 add_dependencies(robostilt_common_generate_messages_nodejs _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_nodejs _robostilt_common_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_nodejs _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_nodejs _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/SingleActuator.msg" NAME_WE)
@@ -545,13 +582,13 @@ _generate_msg_py(robostilt_common
 _generate_msg_py(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/FramesState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/robostilt_common
 )
 _generate_msg_py(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/msg/RobotState.msg"
   "${MSG_I_FLAGS}"
-  ""
+  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/robostilt_common
 )
 
@@ -570,6 +607,12 @@ _generate_srv_py(robostilt_common
 )
 _generate_srv_py(robostilt_common
   "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/robostilt_common
+)
+_generate_srv_py(robostilt_common
+  "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/robostilt_common
@@ -620,6 +663,8 @@ add_dependencies(robostilt_common_generate_messages_py _robostilt_common_generat
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_py _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/LowerLegsOnFrame.srv" NAME_WE)
+add_dependencies(robostilt_common_generate_messages_py _robostilt_common_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_py _robostilt_common_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetPosition.srv" NAME_WE)
 add_dependencies(robostilt_common_generate_messages_py _robostilt_common_generate_messages_check_deps_${_filename})

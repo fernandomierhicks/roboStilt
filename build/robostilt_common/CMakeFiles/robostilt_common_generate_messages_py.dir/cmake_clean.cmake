@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseFrame.py"
   "/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py"
   "/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_LowerLegsOnFrame.py"
+  "/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetSupportingLegs.py"
   "/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py"
   "/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py"
   "/home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py"

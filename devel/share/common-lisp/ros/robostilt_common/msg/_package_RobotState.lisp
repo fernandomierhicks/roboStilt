@@ -1,5 +1,7 @@
 (cl:in-package robostilt_common-msg)
-(cl:export '(STATE-VAL
+(cl:export '(HEADER-VAL
+          HEADER
+          STATE-VAL
           STATE
           STATE_STRING-VAL
           STATE_STRING

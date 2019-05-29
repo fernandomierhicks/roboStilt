@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseFrame.h"
   "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/TriggerFault.h"
   "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/LowerLegsOnFrame.h"
+  "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h"
   "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h"
   "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/RaiseLegsOnFrame.h"
   "/home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h"

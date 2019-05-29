@@ -18,7 +18,7 @@ class Robot:
 
     def setup_ros_interface(self):
         # Variables
-        rate = 50
+        rate = rospy.get_param("/robostilt/rate")
         package_name = "actuators"
         node_name = "robot_state"
         # Node
@@ -41,22 +41,23 @@ class Robot:
         # wait for...
         rospy.loginfo("Waiting for message on topic "+topic_name + " ...")
         rospy.wait_for_message(topic_name, ActuatorsState)
-        rospy.loginfo("Ready...")
-    
-    def publish_robot_state(self, state,fault):
-            message = RobotState()
-            message.fault = fault
-            message.state = state
-            message.state_string=self.get_state_string(state)
-            message.fault_string=self.get_state_string(fault) 
-            self.publisher.publish(message)
+        rospy.loginfo(node_name + " ready...")
+
+    def publish_robot_state(self, state, fault):
+        message = RobotState()
+        message.fault = fault
+        message.state = state
+        message.state_string = self.get_state_string(state)
+        message.fault_string = self.get_state_string(fault)
+        self.publisher.publish(message)
 
 # ---------------------------------------------------------------------------------------------------------  INIT
     def __init__(self):
         self.setup_ros_interface()
-        # publish initial state as ready        
-        self.publish_robot_state(RobotState.STATE_READY,RobotState.FAULT_CLEAR)
-        self.ready_to_move=True
+        # publish initial state as ready
+        self.publish_robot_state(
+            RobotState.STATE_READY, RobotState.FAULT_CLEAR)
+        self.ready_to_move = True
         rospy.sleep(1.0)
 
 # ---------------------------------------------------------------------------------------------------------  METHODS
@@ -77,6 +78,24 @@ class Robot:
             return "PRISMATIC AND REVOLUTE"
         else:
             return "UNKNOWN"
+
+    def get_indexes_from_frame(self, frame):
+        if(frame == FramesState.NONE):
+            return []
+        elif(frame == FramesState.ODD):
+            return [1, 3, 5]
+        elif(frame == FramesState.EVEN):
+            return [2, 4, 6]
+        elif(frame == FramesState.PRISMATIC):
+            return [0]
+        elif(frame == FramesState.REVOLUTE):
+            return [7]
+        elif(frame == FramesState.ODD_AND_EVEN):
+            return [1, 2, 3, 4, 5, 6]
+        elif(frame == FramesState.PRISMATIC_AND_REVOLUTE):
+            return [0, 7]
+        else:
+            return []
 
     def get_fault_code_string(self, fault):
         if(fault == RobotState.FAULT_CLEAR):
@@ -111,52 +130,65 @@ class Robot:
         except rospy.ServiceException, e:
             print "Service call failed: %s" % e
 
+    def set_supporting_legs(self, frame, is_supporting):
+        service_name = "/robostilt/actuators_state/set_supporting_legs"
+        service_type = SetSupportingLegs
+        request = SetSupportingLegsRequest()
+        request.indexes = self.get_indexes_from_frame(frame)
+        for i in range(0, len(request.indexes)):
+            request.is_supporting_weight.append(is_supporting)
+        self.call_service(service_name, service_type, request)
+
     def trigger_fault(self, request):
         if(request.fault_code == RobotState.FAULT_CLEAR):
             rospy.loginfo("Faults cleared")
-            #Do clearing            
-            self.publish_robot_state(RobotState.STATE_READY, RobotState.FAULT_CLEAR)
-            self.ready_to_move=True
+            # Do clearing
+            self.publish_robot_state(
+                RobotState.STATE_READY, RobotState.FAULT_CLEAR)
+            self.ready_to_move = True
             return TriggerFaultResponse(True)
         else:
-            rospy.logerr("Fault triggered: " + self.get_fault_code_string(request.fault_code))
+            rospy.logerr("Fault triggered: " +
+                         self.get_fault_code_string(request.fault_code))
             service_name = "robostilt/actuators_state/stop_all"
-            stop_all_request = StopAllRequest()            
-            response=self.call_service(service_name, StopAll, stop_all_request)
-            self.publish_robot_state(RobotState.STATE_FAULTED,request.fault_code)
-            self.ready_to_move=False
+            stop_all_request = StopAllRequest()
+            response = self.call_service(
+                service_name, StopAll, stop_all_request)
+            self.publish_robot_state(
+                RobotState.STATE_FAULTED, request.fault_code)
+            self.ready_to_move = False
             return TriggerFaultResponse(response.success)
-    
-    def are_we_are_ready_to_move(self,string_message):
+
+    def are_we_are_ready_to_move(self, string_message):
         if(self.ready_to_move is True):
             return True
         else:
-            rospy.logerr("Attempted to move while faulted: " +string_message)
+            rospy.logerr("Attempted to move while faulted: " + string_message)
         return False
 
-
     def raise_frame(self, frame, position):
-        name="Raising frame "
+        name = "Raising frame "
         if(self.are_we_are_ready_to_move(name) is True):
             rospy.loginfo(name +
-                        self.get_frame_name(frame) + " started...")
+                          self.get_frame_name(frame) + " started...")
             request = RaiseFrameRequest()
             request.frame = frame
             request.position = position
             result = self.call_service(
                 "robostilt/frames_state/raise_frame", RaiseFrame, request)
-
+            if (result.success is True):
+                self.set_supporting_legs(frame, True)
             wait_result = self.wait_for_all_actuators_to_be_ready()
-
             if (result.success is True and wait_result is True):
+
                 rospy.loginfo("Raising frame " +
-                            self.get_frame_name(frame) + " completed.")
+                              self.get_frame_name(frame) + " completed.")
 
     def lower_legs_on_frame(self, frame, position):
-        name="Lowering legs on frame "
+        name = "Lowering legs on frame "
         if(self.are_we_are_ready_to_move(name) is True):
             rospy.loginfo(name +
-                        self.get_frame_name(frame) + " started...")
+                          self.get_frame_name(frame) + " started...")
 
             request = LowerLegsOnFrameRequest()
             request.frame = frame
@@ -167,32 +199,36 @@ class Robot:
             wait_result = self.wait_for_all_actuators_to_be_ready()
 
             if (result.success is True and wait_result is True):
+                self.set_supporting_legs(frame, True)
                 rospy.loginfo("Lowering legs on frame " +
-                            self.get_frame_name(frame) + " completed.")
+                              self.get_frame_name(frame) + " completed.")
 
     def raise_legs_on_frame(self, frame, position):
-        name="Raising legs on frame "
+        name = "Raising legs on frame "
         if(self.are_we_are_ready_to_move(name) is True):
             rospy.loginfo(name +
-                        self.get_frame_name(frame) + " started...")
+                          self.get_frame_name(frame) + " started...")
 
             request = RaiseLegsOnFrameRequest()
             request.frame = frame
             request.position = position
             result = self.call_service(
                 "robostilt/frames_state/raise_legs_on_frame", RaiseLegsOnFrame, request)
+            if (result.success is True):
+                self.set_supporting_legs(frame, False)
 
             wait_result = self.wait_for_all_actuators_to_be_ready()
 
             if (result.success is True and wait_result is True):
+
                 rospy.loginfo("Raising legs on frame " +
-                            self.get_frame_name(frame) + " completed.")
+                              self.get_frame_name(frame) + " completed.")
 
     def move_prismatic(self, frame, position):
         name = "Moving frame "
         if(self.are_we_are_ready_to_move(name) is True):
             rospy.loginfo(name +
-                        self.get_frame_name(frame) + " started...")
+                          self.get_frame_name(frame) + " started...")
             request = MovePrismaticRequest()
             request.frame = frame
             request.position = position
@@ -203,7 +239,7 @@ class Robot:
 
             if (result.success is True and wait_result is True):
                 rospy.loginfo("Moving frame " +
-                            self.get_frame_name(frame) + " completed.")
+                              self.get_frame_name(frame) + " completed.")
 
     def wait_for_all_actuators_to_be_ready(self):
         # flag hasnt been updated by other nodes, give a little bit of time
@@ -225,7 +261,6 @@ class Robot:
         self.lower_legs_on_frame(FramesState.EVEN, -1.5)
         self.raise_legs_on_frame(FramesState.ODD, 0.0)
 
-
     # ---------------------------------------------------------------------------------------------------------  MAIN
 
 
@@ -235,12 +270,11 @@ if __name__ == '__main__':
 
         # raise Frame Even.
         robot_state.raise_frame(FramesState.EVEN, -1.0)
-        
-
+        raw_input("Press Enter to continue...")
         while(True):
             robot_state.step_forward()
-        
-        rospy.loginfo("Done")
+            rospy.loginfo("Done")
+            raw_input("Press Enter to continue...")
         while not rospy.is_shutdown():
             rospy.spin()
     except rospy.ROSInterruptException:

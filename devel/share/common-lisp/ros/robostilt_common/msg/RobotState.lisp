@@ -7,7 +7,12 @@
 ;//! \htmlinclude RobotState.msg.html
 
 (cl:defclass <RobotState> (roslisp-msg-protocol:ros-message)
-  ((state
+  ((header
+    :reader header
+    :initarg :header
+    :type std_msgs-msg:Header
+    :initform (cl:make-instance 'std_msgs-msg:Header))
+   (state
     :reader state
     :initarg :state
     :type cl:integer
@@ -36,6 +41,11 @@
   (cl:declare (cl:ignorable args))
   (cl:unless (cl:typep m 'RobotState)
     (roslisp-msg-protocol:msg-deprecation-warning "using old message class name robostilt_common-msg:<RobotState> is deprecated: use robostilt_common-msg:RobotState instead.")))
+
+(cl:ensure-generic-function 'header-val :lambda-list '(m))
+(cl:defmethod header-val ((m <RobotState>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader robostilt_common-msg:header-val is deprecated.  Use robostilt_common-msg:header instead.")
+  (header m))
 
 (cl:ensure-generic-function 'state-val :lambda-list '(m))
 (cl:defmethod state-val ((m <RobotState>))
@@ -80,6 +90,7 @@
 )
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <RobotState>) ostream)
   "Serializes a message object of type '<RobotState>"
+  (roslisp-msg-protocol:serialize (cl:slot-value msg 'header) ostream)
   (cl:let* ((signed (cl:slot-value msg 'state)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
     (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
@@ -107,6 +118,7 @@
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <RobotState>) istream)
   "Deserializes a message object of type '<RobotState>"
+  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'header) istream)
     (cl:let ((unsigned 0))
       (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
@@ -145,18 +157,19 @@
   "robostilt_common/RobotState")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<RobotState>)))
   "Returns md5sum for a message object of type '<RobotState>"
-  "df8799c1ffe4dea4788499b5ad10d0fa")
+  "8d7a63dca06bfd67e6e09bd329a9cf32")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'RobotState)))
   "Returns md5sum for a message object of type 'RobotState"
-  "df8799c1ffe4dea4788499b5ad10d0fa")
+  "8d7a63dca06bfd67e6e09bd329a9cf32")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<RobotState>)))
   "Returns full string definition for message of type '<RobotState>"
-  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%~%"))
+  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%~%~%Header header~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'RobotState)))
   "Returns full string definition for message of type 'RobotState"
-  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%~%"))
+  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%~%~%Header header~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <RobotState>))
   (cl:+ 0
+     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'header))
      4
      4 (cl:length (cl:slot-value msg 'state_string))
      4
@@ -165,6 +178,7 @@
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <RobotState>))
   "Converts a ROS message object to a list"
   (cl:list 'RobotState
+    (cl:cons ':header (header msg))
     (cl:cons ':state (state msg))
     (cl:cons ':state_string (state_string msg))
     (cl:cons ':fault (fault msg))

@@ -37,6 +37,7 @@ class ActuatorClass():
         self.message = SingleActuator()
         self.message.is_moving = False
         self.message.is_ready = True
+        self.message.is_supporting_weight = False
         self.update_limits_from_parameters()
         self.message.effort_fault_expected = False
 
@@ -65,8 +66,8 @@ class ActuatorClass():
         self.message.is_moving = False
         self.message.is_ready = True
         self.message.effort_fault_expected = False
-        self.message.effort_limit_upper=self.boost_level.upper
-        self.message.effort_limit_lower=self.boost_level.lower
+        self.message.effort_limit_upper = self.boost_level.upper
+        self.message.effort_limit_lower = self.boost_level.lower
 
     def initialize_actuator(self, joint_name):
         self.message.name = joint_name
@@ -132,7 +133,7 @@ class ActuatorClass():
         # return limits to nominal values
         self.message.effort_limit_upper = self.nominal_effort_limit.upper
         self.message.effort_limit_lower = self.nominal_effort_limit.lower
-    
+
     def call_service(self, service_name, service_type, request):
         rospy.wait_for_service(service_name)
         try:
@@ -142,39 +143,37 @@ class ActuatorClass():
         except rospy.ServiceException, e:
             print "Service call failed: %s" % e
 
-
-    def trigger_effort_fault(self):       
+    def trigger_effort_fault(self):
 
         if(self.message.effort_fault_expected is False):
             rospy.loginfo(self.message.name + " tripped UNEXPECTED effort limit with "+str(self.message.effort) +
                           " Limits are: " + str(self.message.effort_limit_upper) + " and "+str(self.message.effort_limit_lower))
 
-            request=TriggerFaultRequest()
-            request.fault_code=RobotState.FAULT_EFFORT            
-            self.call_service("/robostilt/robot_state/trigger_fault",TriggerFault,request)
+            request = TriggerFaultRequest()
+            request.fault_code = RobotState.FAULT_EFFORT
+            self.call_service(
+                "/robostilt/robot_state/trigger_fault", TriggerFault, request)
         else:
             rospy.loginfo(self.message.name + " tripped EXPECTED effort limit with "+str(self.message.effort) +
                           " Limits are: " + str(self.message.effort_limit_upper) + " and "+str(self.message.effort_limit_lower))
-        
 
         self.stop_and_cancel_goals()
-        
 
-    def create_position_goal(self, absolute,position_setpoint, velocity):
+    def create_position_goal(self, absolute, position_setpoint, velocity):
         current_position = self.message.position
         # set up variables
         trajectory = JointTrajectory()
         point = JointTrajectoryPoint()
         # Final position
         if(absolute == ActuatorsState.ABS):
-            #absolute move
+            # absolute move
             point.positions = [position_setpoint]
         else:
-            #Relative move
+            # Relative move
             point.positions = [current_position+position_setpoint]
 
         point.velocities = [0]  # cubic spline in position, smooth moves
-        #point.accelerations = [0]  # cubic spline in position, smooth moves
+        # point.accelerations = [0]  # cubic spline in position, smooth moves
         trajectory.points.append(point)
         # How long to get there
         if(velocity != 0):
@@ -253,7 +252,7 @@ class ActuatorsClass():
 
     def setup_ros_interface(self):
         # Variables
-        rate = 100
+        rate = rospy.get_param("/robostilt/rate")
         package_name = "actuators"
         node_name = "actuators_state"
         # Node
@@ -279,13 +278,16 @@ class ActuatorsClass():
         rospy.Service('robostilt/'+node_name+'/set_position',
                       SetPosition, self.set_position)
 
-        # Services
         rospy.Service('robostilt/'+node_name+'/stop_all',
                       StopAll, self.stop_all)
+
+        rospy.Service('robostilt/'+node_name+'/set_supporting_legs',
+                      SetSupportingLegs, self.set_supporting_legs)
+
         # wait for...
         rospy.loginfo("Waiting for message on topic " + topic_name + " ...")
         rospy.wait_for_message(topic_name, JointState)
-        rospy.loginfo("Ready...")
+        rospy.loginfo(node_name + " ready...")
 
     # ---------------------------------------------------------------------------------------------------------  METHODS
     def initialize_actuators(self):
@@ -305,8 +307,8 @@ class ActuatorsClass():
                 effort_fault_expected = request.effort_fault_expected[i]
                 absolute = request.absolute[i]
 
-                self.actuators[actuator_index].set_position(absolute, 
-                    position, velocity, effort_limit_upper, effort_limit_lower, effort_fault_expected)
+                self.actuators[actuator_index].set_position(absolute,
+                                                            position, velocity, effort_limit_upper, effort_limit_lower, effort_fault_expected)
             return SetPositionResponse(True)
         else:
             rospy.logerr("Attempted to move while faulted. Aborting command.")
@@ -317,6 +319,12 @@ class ActuatorsClass():
             self.actuators[i].stop_and_cancel_goals()
         rospy.logerr("STOPPING ALL ACTUATORS.")
         return StopAllResponse(True)
+
+    def set_supporting_legs(self, request):
+        for i in range(0, len(request.indexes)):
+            actuator_index = request.indexes[i]
+            self.actuators[actuator_index].message.is_supporting_weight = request.is_supporting_weight[i]
+        return SetSupportingLegsResponse(True)
 
     def publish_state(self):
         # header

@@ -82,6 +82,7 @@ bool is_supporting_weight
 
 
 
+
 """
   # Pseudo-constants
   COUNT = 8

@@ -1,0 +1,4 @@
+int32[] indexes
+bool[] is_supporting_weight 
+---
+bool success

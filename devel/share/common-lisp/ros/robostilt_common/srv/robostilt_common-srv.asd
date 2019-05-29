@@ -14,6 +14,8 @@
     (:file "_package_RaiseLegsOnFrame" :depends-on ("_package"))
     (:file "SetPosition" :depends-on ("_package_SetPosition"))
     (:file "_package_SetPosition" :depends-on ("_package"))
+    (:file "SetSupportingLegs" :depends-on ("_package_SetSupportingLegs"))
+    (:file "_package_SetSupportingLegs" :depends-on ("_package"))
     (:file "StopAll" :depends-on ("_package_StopAll"))
     (:file "_package_StopAll" :depends-on ("_package"))
     (:file "TriggerFault" :depends-on ("_package_TriggerFault"))

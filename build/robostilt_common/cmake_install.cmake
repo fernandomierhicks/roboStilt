@@ -47,6 +47,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/robostilt_common/srv" TYPE FILE FILES
+    "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/SetSupportingLegs.srv"
     "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/StopAll.srv"
     "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/TriggerFault.srv"
     "/home/fernandomierhicks/robostilt/src/robostilt_common/srv/RaiseLegsOnFrame.srv"

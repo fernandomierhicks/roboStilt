@@ -54,6 +54,7 @@ add_message_files(FILES
 
 ## Generate services in the 'srv' folder
 add_service_files(FILES
+  SetSupportingLegs.srv
   StopAll.srv
   TriggerFault.srv
   RaiseLegsOnFrame.srv
