@@ -10,6 +10,7 @@ class Robot:
     all_actuators_ready = False
     publisher = None
     ready_to_move = None
+    current_state = None
     # ---------------------------------------------------------------------------------------------------------  CALLBACKS
 
     def _actuator_states_callback(self, msg):
@@ -47,6 +48,7 @@ class Robot:
         message = RobotState()
         message.fault = fault
         message.state = state
+        current_state = state  # for internal use
         message.state_string = self.get_state_string(state)
         message.fault_string = self.get_state_string(fault)
         self.publisher.publish(message)
@@ -140,24 +142,36 @@ class Robot:
         self.call_service(service_name, service_type, request)
 
     def trigger_fault(self, request):
-        if(request.fault_code == RobotState.FAULT_CLEAR):
-            rospy.loginfo("Faults cleared")
-            # Do clearing
-            self.publish_robot_state(
-                RobotState.STATE_READY, RobotState.FAULT_CLEAR)
-            self.ready_to_move = True
-            return TriggerFaultResponse(True)
+        if(self.current_state == RobotState.STATE_FAULTED):
+            if(request.fault_code == RobotState.FAULT_CLEAR):
+                rospy.loginfo("Faults cleared")
+                # Do clearing
+                self.publish_robot_state(
+                    RobotState.STATE_READY, RobotState.FAULT_CLEAR)
+                self.ready_to_move = True
+                return TriggerFaultResponse(True)
+            else:
+                rospy.logerr("Fault triggered: " +
+                             self.get_fault_code_string(request.fault_code))
+                service_name = "robostilt/actuators_state/stop_all"
+                stop_all_request = StopAllRequest()
+                response = self.call_service(
+                    service_name, StopAll, stop_all_request)
+                self.publish_robot_state(
+                    RobotState.STATE_FAULTED, request.fault_code)
+                self.ready_to_move = False
+                return TriggerFaultResponse(response.success)
         else:
-            rospy.logerr("Fault triggered: " +
-                         self.get_fault_code_string(request.fault_code))
-            service_name = "robostilt/actuators_state/stop_all"
-            stop_all_request = StopAllRequest()
-            response = self.call_service(
-                service_name, StopAll, stop_all_request)
-            self.publish_robot_state(
-                RobotState.STATE_FAULTED, request.fault_code)
-            self.ready_to_move = False
-            return TriggerFaultResponse(response.success)
+            if(request.fault_code == RobotState.FAULT_CLEAR):
+                rospy.loginfo("Not faulted.Clearing faults anyways...")
+                # Do clearing
+                self.publish_robot_state(
+                    RobotState.STATE_READY, RobotState.FAULT_CLEAR)
+                self.ready_to_move = True
+                return TriggerFaultResponse(True)
+            else:
+                rospy.logerr("Already faulted not sending command again. Incoming fault is: " +
+                             self.get_fault_code_string(request.fault_code))
 
     def are_we_are_ready_to_move(self, string_message):
         if(self.ready_to_move is True):

@@ -8,7 +8,7 @@ import struct
 import std_msgs.msg
 
 class RobotState(genpy.Message):
-  _md5sum = "8d7a63dca06bfd67e6e09bd329a9cf32"
+  _md5sum = "ea7c2299644417198ffdc91fa298b902"
   _type = "robostilt_common/RobotState"
   _has_header = True #flag to mark the presence of a Header object
   _full_text = """int32 STATE_READY=0
@@ -20,6 +20,7 @@ int32 FAULT_CLEAR=0
 int32 FAULT_ESTOP=1
 int32 FAULT_EFFORT=2
 int32 FAULT_TRAJECTORY=3
+int32 FAULT_STABILITY_COM_OUTSIDE=4
 
 
 Header header
@@ -56,6 +57,7 @@ string frame_id
   FAULT_ESTOP = 1
   FAULT_EFFORT = 2
   FAULT_TRAJECTORY = 3
+  FAULT_STABILITY_COM_OUTSIDE = 4
 
   __slots__ = ['header','state','state_string','fault','fault_string']
   _slot_types = ['std_msgs/Header','int32','string','int32','string']

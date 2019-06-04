@@ -7,12 +7,14 @@ from urdf_parser_py.urdf import URDF
 from geometry_msgs.msg import PointStamped
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import PolygonStamped
-from robostilt_common.msg import ActuatorsState
 import matplotlib.path as mpltPath
 from sensor_msgs.msg import JointState
 
+from robostilt_common.msg import *
+from robostilt_common.srv import *
 
-# Calculates robots center of mass and supporting polygon and publishes to topic
+
+# Calculates robots center of mass and supporting polygon and publishes to topic. Triggers fault if CG is outside polygon withina  radius
 
 class Stability:
     # -------------------------------------------------------------------------------------------------------  GLOBALS
@@ -30,14 +32,15 @@ class Stability:
     mass = None
     links = None
     ros_rate = None
-    center_of_mass_radius=None
+    center_of_mass_radius = None
 
 
 # ---------------------------------------------------------------------------------------------------------  CALLBACKS
 
+
     def _actuator_states_callback(self, msg):
         self.supporting_legs = []
-        self.joint_names = []        
+        self.joint_names = []
         for i in range(0, ActuatorsState.COUNT):
             self.joint_names.append(msg.actuators[i].name)
             self.supporting_legs.append(msg.actuators[i].is_supporting_weight)
@@ -136,7 +139,7 @@ class Stability:
         point = []
         support_area = PolygonStamped()
         j = 0
-        #legs are on indexes 1-6
+        # legs are on indexes 1-6
         for i in range(1, 7):
             if(self.supporting_legs[4] == True and self.supporting_legs[6] == True):
                 # to publish polygon with correct order on vertices, need to swap legs 4 and 6 in case both are present
@@ -191,7 +194,7 @@ class Stability:
                 y += self.links[link].inertial.mass * \
                     tf_base_to_link_origin.point.y
                 z += self.links[link].inertial.mass * \
-                    tf_base_to_link_origin.point.z               
+                    tf_base_to_link_origin.point.z
 
             except tf2_ros.TransformException as err:
                 rospy.logerr(
@@ -206,8 +209,7 @@ class Stability:
 
         self.pub_com.publish(self.center_of_mass)
 
-        
-        #project COM into ground, z=0
+        # project COM into ground, z=0
 
         self.tf_base_to_world = self.tf_buffer.lookup_transform(
             "world", "base_link", rospy.Time(), rospy.Duration(1.0))  # 1 second timeout, blocks until it finds it
@@ -219,8 +221,23 @@ class Stability:
         self.center_of_mass_projected.point.x = self.tf_com_location_to_world.point.x
         self.center_of_mass_projected.point.y = self.tf_com_location_to_world.point.y
         self.center_of_mass_projected.point.z = 0  # zero height
-
         self.pub_projected.publish(self.center_of_mass_projected)
+
+    def trigger_fault(self):
+        service_name = "/robostilt/robot_state/trigger_fault"
+        service_type = TriggerFault()
+        request = TriggerFaultRequest()
+        request.fault_code = RobotState.FAULT_STABILITY_COM_OUTSIDE
+        self.call_service(service_name, service_type, request)
+
+    def call_service(self, service_name, service_type, request):
+        rospy.wait_for_service(service_name)
+        try:
+            service = rospy.ServiceProxy(service_name, service_type)
+            result = service(request)
+            return result
+        except rospy.ServiceException, e:
+            print "Service call failed: %s" % e
 
     def check_com_is_inside_support_polygon(self):
         # Generate a matplotlib path and use its path.contains function
@@ -254,10 +271,11 @@ class Stability:
 
             x = self.center_of_mass_projected.point.x
             y = self.center_of_mass_projected.point.y
-            COM_circle_path = mpltPath.Path.circle(center=(x,y,0),radius=self.center_of_mass_radius)
+            COM_circle_path = mpltPath.Path.circle(
+                center=(x, y), radius=self.center_of_mass_radius)
 
             if(path.contains_path(COM_circle_path) == False):
-                rospy.logerr("ROBOT IS UNSTABLE, FALLING!!")
+                self.trigger_fault()
                 # do something else!!
         # else:
             # dont p

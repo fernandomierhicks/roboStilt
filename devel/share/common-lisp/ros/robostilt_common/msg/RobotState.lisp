@@ -75,7 +75,8 @@
     (:FAULT_CLEAR . 0)
     (:FAULT_ESTOP . 1)
     (:FAULT_EFFORT . 2)
-    (:FAULT_TRAJECTORY . 3))
+    (:FAULT_TRAJECTORY . 3)
+    (:FAULT_STABILITY_COM_OUTSIDE . 4))
 )
 (cl:defmethod roslisp-msg-protocol:symbol-codes ((msg-type (cl:eql 'RobotState)))
     "Constants for message type 'RobotState"
@@ -86,7 +87,8 @@
     (:FAULT_CLEAR . 0)
     (:FAULT_ESTOP . 1)
     (:FAULT_EFFORT . 2)
-    (:FAULT_TRAJECTORY . 3))
+    (:FAULT_TRAJECTORY . 3)
+    (:FAULT_STABILITY_COM_OUTSIDE . 4))
 )
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <RobotState>) ostream)
   "Serializes a message object of type '<RobotState>"
@@ -157,16 +159,16 @@
   "robostilt_common/RobotState")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<RobotState>)))
   "Returns md5sum for a message object of type '<RobotState>"
-  "8d7a63dca06bfd67e6e09bd329a9cf32")
+  "ea7c2299644417198ffdc91fa298b902")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'RobotState)))
   "Returns md5sum for a message object of type 'RobotState"
-  "8d7a63dca06bfd67e6e09bd329a9cf32")
+  "ea7c2299644417198ffdc91fa298b902")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<RobotState>)))
   "Returns full string definition for message of type '<RobotState>"
-  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%~%~%Header header~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
+  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%int32 FAULT_STABILITY_COM_OUTSIDE=4~%~%~%Header header~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'RobotState)))
   "Returns full string definition for message of type 'RobotState"
-  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%~%~%Header header~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
+  (cl:format cl:nil "int32 STATE_READY=0~%int32 STATE_FAULTED=1~%int32 STATE_BUSY_MOVING=2~%int32 STATE_BUSY_COMPUTING=3~%~%int32 FAULT_CLEAR=0~%int32 FAULT_ESTOP=1~%int32 FAULT_EFFORT=2~%int32 FAULT_TRAJECTORY=3~%int32 FAULT_STABILITY_COM_OUTSIDE=4~%~%~%Header header~%~%int32 state~%string state_string~%~%int32 fault~%string fault_string~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <RobotState>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'header))

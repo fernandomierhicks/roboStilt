@@ -106,7 +106,7 @@ class RobotState {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '8d7a63dca06bfd67e6e09bd329a9cf32';
+    return 'ea7c2299644417198ffdc91fa298b902';
   }
 
   static messageDefinition() {
@@ -121,6 +121,7 @@ class RobotState {
     int32 FAULT_ESTOP=1
     int32 FAULT_EFFORT=2
     int32 FAULT_TRAJECTORY=3
+    int32 FAULT_STABILITY_COM_OUTSIDE=4
     
     
     Header header
@@ -206,6 +207,7 @@ RobotState.Constants = {
   FAULT_ESTOP: 1,
   FAULT_EFFORT: 2,
   FAULT_TRAJECTORY: 3,
+  FAULT_STABILITY_COM_OUTSIDE: 4,
 }
 
 module.exports = RobotState;

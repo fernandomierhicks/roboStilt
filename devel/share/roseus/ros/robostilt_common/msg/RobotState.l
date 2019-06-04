@@ -38,6 +38,9 @@
 (intern "*FAULT_TRAJECTORY*" (find-package "ROBOSTILT_COMMON::ROBOTSTATE"))
 (shadow '*FAULT_TRAJECTORY* (find-package "ROBOSTILT_COMMON::ROBOTSTATE"))
 (defconstant robostilt_common::RobotState::*FAULT_TRAJECTORY* 3)
+(intern "*FAULT_STABILITY_COM_OUTSIDE*" (find-package "ROBOSTILT_COMMON::ROBOTSTATE"))
+(shadow '*FAULT_STABILITY_COM_OUTSIDE* (find-package "ROBOSTILT_COMMON::ROBOTSTATE"))
+(defconstant robostilt_common::RobotState::*FAULT_STABILITY_COM_OUTSIDE* 4)
 (defclass robostilt_common::RobotState
   :super ros::object
   :slots (_header _state _state_string _fault _fault_string ))
@@ -123,7 +126,7 @@
    self)
   )
 
-(setf (get robostilt_common::RobotState :md5sum-) "8d7a63dca06bfd67e6e09bd329a9cf32")
+(setf (get robostilt_common::RobotState :md5sum-) "ea7c2299644417198ffdc91fa298b902")
 (setf (get robostilt_common::RobotState :datatype-) "robostilt_common/RobotState")
 (setf (get robostilt_common::RobotState :definition-)
       "int32 STATE_READY=0
@@ -135,6 +138,7 @@ int32 FAULT_CLEAR=0
 int32 FAULT_ESTOP=1
 int32 FAULT_EFFORT=2
 int32 FAULT_TRAJECTORY=3
+int32 FAULT_STABILITY_COM_OUTSIDE=4
 
 
 Header header
@@ -166,6 +170,6 @@ string frame_id
 
 
 
-(provide :robostilt_common/RobotState "8d7a63dca06bfd67e6e09bd329a9cf32")
+(provide :robostilt_common/RobotState "ea7c2299644417198ffdc91fa298b902")
 
 

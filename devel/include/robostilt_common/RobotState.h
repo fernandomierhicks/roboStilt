@@ -68,6 +68,7 @@ struct RobotState_
     FAULT_ESTOP = 1,
     FAULT_EFFORT = 2,
     FAULT_TRAJECTORY = 3,
+    FAULT_STABILITY_COM_OUTSIDE = 4,
   };
 
 
@@ -82,6 +83,8 @@ typedef boost::shared_ptr< ::robostilt_common::RobotState > RobotStatePtr;
 typedef boost::shared_ptr< ::robostilt_common::RobotState const> RobotStateConstPtr;
 
 // constants requiring out of line definition
+
+   
 
    
 
@@ -161,12 +164,12 @@ struct MD5Sum< ::robostilt_common::RobotState_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "8d7a63dca06bfd67e6e09bd329a9cf32";
+    return "ea7c2299644417198ffdc91fa298b902";
   }
 
   static const char* value(const ::robostilt_common::RobotState_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x8d7a63dca06bfd67ULL;
-  static const uint64_t static_value2 = 0xe6e09bd329a9cf32ULL;
+  static const uint64_t static_value1 = 0xea7c229964441719ULL;
+  static const uint64_t static_value2 = 0x8ffdc91fa298b902ULL;
 };
 
 template<class ContainerAllocator>
@@ -194,6 +197,7 @@ int32 FAULT_CLEAR=0\n\
 int32 FAULT_ESTOP=1\n\
 int32 FAULT_EFFORT=2\n\
 int32 FAULT_TRAJECTORY=3\n\
+int32 FAULT_STABILITY_COM_OUTSIDE=4\n\
 \n\
 \n\
 Header header\n\

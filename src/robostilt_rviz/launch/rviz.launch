@@ -13,7 +13,7 @@
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robostilt_rviz)/config/urdf.rviz" /> 
 
  <!--COM Markers node -->
-<!--<node name="markers_stability" pkg="robostilt_rviz" type="markers_stability.py" respawn="false" output="screen"/>-->
+<node name="markers_stability" pkg="robostilt_rviz" type="markers_stability.py" respawn="false" output="screen"/>
 
 <node name="markers_obstacles" pkg="robostilt_rviz" type="markers_obstacle.py" respawn="false" output="screen"/>
 
