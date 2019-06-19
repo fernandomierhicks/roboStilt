@@ -159,7 +159,7 @@
           <cylinder length="${frame_thickness}" radius="${frame_thickness/2.0}"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-        <material name="Yellow"/>
+        <material name="Blue"/>
       </visual>
       <collision>
         <geometry>
@@ -175,7 +175,7 @@
   </link>
   <gazebo reference="third_frame">
          <xacro:friction/>
-        <xacro:gazebo_color material="Yellow"/>
+        <xacro:gazebo_color material="Blue"/>
   </gazebo> 
 
   <joint name="third_frame_prismatic" type="prismatic">
