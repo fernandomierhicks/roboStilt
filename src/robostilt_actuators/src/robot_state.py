@@ -48,7 +48,7 @@ class Robot:
         message = RobotState()
         message.fault = fault
         message.state = state
-        current_state = state  # for internal use
+        self.current_state = state  # for internal use
         message.state_string = self.get_state_string(state)
         message.fault_string = self.get_state_string(fault)
         self.publisher.publish(message)
@@ -108,6 +108,8 @@ class Robot:
             return "EFFORT"
         elif(fault == RobotState.FAULT_TRAJECTORY):
             return "TRAJECTORY"
+        elif(fault == RobotState.FAULT_STABILITY_COM_OUTSIDE):
+            return "STABILITY_COM"
         else:
             return "UNKNOWN"
 
@@ -141,43 +143,37 @@ class Robot:
             request.is_supporting_weight.append(is_supporting)
         self.call_service(service_name, service_type, request)
 
+    def clear_faults(self):
+        rospy.loginfo("All Faults cleared")
+        self.publish_robot_state(
+            RobotState.STATE_READY, RobotState.FAULT_CLEAR)
+        self.ready_to_move = True
+
     def trigger_fault(self, request):
-        if(self.current_state == RobotState.STATE_FAULTED):
-            if(request.fault_code == RobotState.FAULT_CLEAR):
-                rospy.loginfo("Faults cleared")
-                # Do clearing
-                self.publish_robot_state(
-                    RobotState.STATE_READY, RobotState.FAULT_CLEAR)
-                self.ready_to_move = True
-                return TriggerFaultResponse(True)
-            else:
-                rospy.logerr("Fault triggered: " +
-                             self.get_fault_code_string(request.fault_code))
-                service_name = "robostilt/actuators_state/stop_all"
-                stop_all_request = StopAllRequest()
-                response = self.call_service(
-                    service_name, StopAll, stop_all_request)
-                self.publish_robot_state(
-                    RobotState.STATE_FAULTED, request.fault_code)
-                self.ready_to_move = False
-                return TriggerFaultResponse(response.success)
+        if(request.fault_code == RobotState.FAULT_CLEAR):
+            self.clear_faults()
+            return TriggerFaultResponse(True)
+
+        if(self.current_state != RobotState.STATE_FAULTED):
+            rospy.logerr("Fault triggered: " +
+                         self.get_fault_code_string(request.fault_code))
+            service_name = "robostilt/actuators_state/stop_all"
+            stop_all_request = StopAllRequest()
+            response = self.call_service(
+                service_name, StopAll, stop_all_request)
+            self.publish_robot_state(
+                RobotState.STATE_FAULTED, request.fault_code)
+            self.ready_to_move = False
+            return TriggerFaultResponse(response.success)
         else:
-            if(request.fault_code == RobotState.FAULT_CLEAR):
-                rospy.loginfo("Not faulted.Clearing faults anyways...")
-                # Do clearing
-                self.publish_robot_state(
-                    RobotState.STATE_READY, RobotState.FAULT_CLEAR)
-                self.ready_to_move = True
-                return TriggerFaultResponse(True)
-            else:
-                rospy.logerr("Already faulted not sending command again. Incoming fault is: " +
-                             self.get_fault_code_string(request.fault_code))
+            # we are already faulted but received another request, respond with ok
+            return TriggerFaultResponse(True)
 
     def are_we_are_ready_to_move(self, string_message):
         if(self.ready_to_move is True):
             return True
         else:
-            rospy.logerr("Attempted to move while faulted: " + string_message)
+            rospy.loginfo("Attempted to move while faulted: " + string_message)
         return False
 
     def raise_frame(self, frame, position):
@@ -194,7 +190,6 @@ class Robot:
                 self.set_supporting_legs(frame, True)
             wait_result = self.wait_for_all_actuators_to_be_ready()
             if (result.success is True and wait_result is True):
-
                 rospy.loginfo("Raising frame " +
                               self.get_frame_name(frame) + " completed.")
 
@@ -284,11 +279,11 @@ if __name__ == '__main__':
 
         # raise Frame Even.
         robot_state.raise_frame(FramesState.EVEN, -1.0)
-        raw_input("Press Enter to continue...")
+        #raw_input("Press Enter to continue...")
         while(True):
             robot_state.step_forward()
             rospy.loginfo("Done")
-            raw_input("Press Enter to continue...")
+         #   raw_input("Press Enter to continue...")
         while not rospy.is_shutdown():
             rospy.spin()
     except rospy.ROSInterruptException:

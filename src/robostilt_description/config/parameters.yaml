@@ -44,8 +44,8 @@ robostilt:
   moving_prismatic:
     velocity: 0.1
     efforts:
-      upper: 50
-      lower: -50
+      upper: 100
+      lower: -100
 
 
   
@@ -61,7 +61,7 @@ robostilt:
     leveling_max_error: 0.0872665  #triggers alarm if level is ever off by this much.
 
   safety:
-    center_of_mass_radius: 0.28 #used for stability alarm, if center of mass point is within this radius to support polygon, we trigger fault
+    center_of_mass_radius: 0.1 #used for stability alarm, if center of mass point is within this radius to support polygon, we trigger fault
 
   
 

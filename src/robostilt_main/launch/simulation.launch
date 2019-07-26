@@ -13,7 +13,7 @@
 
 <include file="$(find robostilt_actuators)/launch/actuators.launch"/>
 
-<!--<node name = "rqt" pkg = "rqt_multiplot" type = "rqt_multiplot" respawn = "false" output = "screen" args = ""/> -->
+<node name = "rqt" pkg = "rqt_multiplot" type = "rqt_multiplot" respawn = "false" output = "screen" args = ""/> 
 
 
 </launch>
