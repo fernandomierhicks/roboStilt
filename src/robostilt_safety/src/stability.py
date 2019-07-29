@@ -77,7 +77,7 @@ class Stability:
         # wait for...
         rospy.loginfo("Waiting for message on topic "+topic_name + " ...")
         rospy.wait_for_message(topic_name, ActuatorsState)
-        rospy.sleep(0.1)
+        rospy.sleep(0.2)
         rospy.loginfo(node_name + " ready...")
 
 # ---------------------------------------------------------------------------------------------------------  INIT
@@ -136,37 +136,41 @@ class Stability:
         rospy.loginfo("Mass of robot is %f", self.mass)
 
     def calculate_support_polygon(self):
+        # avoids callback modification while in this function
+        supporting_legs_temp = self.supporting_legs
+
         point = []
         support_area = PolygonStamped()
         j = 0
         # legs are on indexes 1-6
-        for i in range(1, 7):
-            if(self.supporting_legs[4] == True and self.supporting_legs[6] == True):
-                # to publish polygon with correct order on vertices, need to swap legs 4 and 6 in case both are present
-                if(i == 4):
-                    i = 6
-                elif(i == 6):
-                    i = 4
+        if(supporting_legs_temp.count == 7):  # make sure supporting_legs has a valid format, see issue #18
+            for i in range(1, 7):
+                if(supporting_legs_temp[4] == True and supporting_legs_temp[6] == True):
+                    # to publish polygon with correct order on vertices, need to swap legs 4 and 6 in case both are present, issue #18
+                    if(i == 4):
+                        i = 6
+                    elif(i == 6):
+                        i = 4
 
-            if(self.supporting_legs[i] == True):
-                # processing a leg that is currently supporting robot
-                try:
-                    # get transform of each link with respect to base link
-                    self.tf_world_to_link = self.tf_buffer.lookup_transform(
-                        "world", self.joint_names[i], rospy.Time(), rospy.Duration(1.0))  # 1 second timeout, blocks until it finds it
-                    point.append(Point())
-                    point[j].x = self.tf_world_to_link.transform.translation.x
-                    point[j].y = self.tf_world_to_link.transform.translation.y
-                    point[j].z = 0
-                    support_area.polygon.points.append(point[j])
-                    j += 1
-                except tf2_ros.TransformException as err:
-                    rospy.logerr(
-                        "Calculate support polygon. TF error in COM computation %s", err)
-        support_area.header.stamp = rospy.Time.now()
-        support_area.header.frame_id = "world"
-        self.pub_suport_polygon.publish(support_area)
-        self.support_polygon = support_area.polygon
+                if(supporting_legs_temp[i] == True):
+                    # processing a leg that is currently supporting robot
+                    try:
+                        # get transform of each link with respect to base link
+                        self.tf_world_to_link = self.tf_buffer.lookup_transform(
+                            "world", self.joint_names[i], rospy.Time(), rospy.Duration(1.0))  # 1 second timeout, blocks until it finds it
+                        point.append(Point())
+                        point[j].x = self.tf_world_to_link.transform.translation.x
+                        point[j].y = self.tf_world_to_link.transform.translation.y
+                        point[j].z = 0
+                        support_area.polygon.points.append(point[j])
+                        j += 1
+                    except tf2_ros.TransformException as err:
+                        rospy.logerr(
+                            "Calculate support polygon. TF error in COM computation %s", err)
+            support_area.header.stamp = rospy.Time.now()
+            support_area.header.frame_id = "world"
+            self.pub_suport_polygon.publish(support_area)
+            self.support_polygon = support_area.polygon
 
     def calculate_center_of_mass(self):
         x = 0
