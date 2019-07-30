@@ -5,6 +5,7 @@ from ._RaiseFrame import *
 from ._RaiseLegsOnFrame import *
 from ._SetPosition import *
 from ._SetSupportingLegs import *
+from ._StepForward import *
 from ._StopAll import *
 from ._TriggerFault import *
 from ._empty_call_bool_Result import *

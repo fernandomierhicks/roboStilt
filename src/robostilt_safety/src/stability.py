@@ -52,7 +52,7 @@ class Stability:
         package_name = "safety"
         node_name = "stability"
         # Node
-        rospy.init_node(node_name, anonymous=False)
+        rospy.init_node("robostilt/" + node_name, anonymous=False)
         self.ros_rate = rospy.Rate(rate)
         rospy.loginfo("Node robostilt/"+package_name +
                       " " + node_name + " started.")

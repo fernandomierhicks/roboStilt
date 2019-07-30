@@ -3,6 +3,9 @@
 import rospy
 from robostilt_common.srv import *
 from robostilt_common.msg import *
+from std_srvs.srv import Trigger
+from std_srvs.srv import TriggerRequest
+from std_srvs.srv import TriggerResponse
 
 
 class Robot:
@@ -39,6 +42,12 @@ class Robot:
         rospy.Service(prefix+'/trigger_fault',
                       TriggerFault,
                       self.trigger_fault)
+
+        prefix = "robostilt/"+node_name
+        rospy.Service(prefix+'/step_forward',
+                      Trigger,
+                      self.step_forward_service)
+
         # wait for...
         rospy.loginfo("Waiting for message on topic "+topic_name + " ...")
         rospy.wait_for_message(topic_name, ActuatorsState)
@@ -148,6 +157,15 @@ class Robot:
         self.publish_robot_state(
             RobotState.STATE_READY, RobotState.FAULT_CLEAR)
         self.ready_to_move = True
+
+    def step_forward_service(self, request):
+        # This should be an action becaucse it takes a while...
+        self.step_forward()
+        rospy.loginfo("Done")
+        response = TriggerResponse()
+        response.message = "Steped forward complete. "
+        response.success = "True"
+        return TriggerResponse()
 
     def trigger_fault(self, request):
         if(request.fault_code == RobotState.FAULT_CLEAR):
@@ -280,10 +298,7 @@ if __name__ == '__main__':
         # raise Frame Even.
         robot_state.raise_frame(FramesState.EVEN, -1.0)
         #raw_input("Press Enter to continue...")
-        while(True):
-            robot_state.step_forward()
-            rospy.loginfo("Done")
-         #   raw_input("Press Enter to continue...")
+
         while not rospy.is_shutdown():
             rospy.spin()
     except rospy.ROSInterruptException:

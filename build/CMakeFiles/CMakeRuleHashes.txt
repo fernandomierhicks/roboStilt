@@ -12,6 +12,7 @@ bde7bd9e6bc5af1cd494b6c81ce5fc6b /home/fernandomierhicks/robostilt/devel/include
 69762b669565faeed4d51283fc7d9a3a /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetPosition.h
 e1fb36d7b7177c8e3f9769be5e1c771f /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SetSupportingLegs.h
 aa221713939fe6eaea3bcea1e89c4461 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/SingleActuator.h
+c0b25a3b752eb01a466634a53b8e7a94 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StepForward.h
 8ea37f9bf06194ac91facb7ee6a0ac91 /home/fernandomierhicks/robostilt/devel/include/robostilt_common/StopAll.h
 c54cd9a7226838f60b8e5906827ef7df /home/fernandomierhicks/robostilt/devel/include/robostilt_common/TriggerFault.h
 d653d8b910c15cc1144a46028244206f /home/fernandomierhicks/robostilt/devel/include/robostilt_common/empty_call_bool_Result.h
@@ -32,6 +33,7 @@ b11f4875bc8c447bf730ac4179736e7a /home/fernandomierhicks/robostilt/devel/lib/pyt
 5ba62c9018114d2116481632ec3096f3 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_RaiseLegsOnFrame.py
 0c9e0c8244b91d14bef69da704dc4b02 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetPosition.py
 a6d93329a2728fac5c9b318d85793151 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_SetSupportingLegs.py
+01057de704ccc831c9a78f246218a4bf /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StepForward.py
 8d7cff0614750526ddc0d3017765ac90 /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_StopAll.py
 67c8a5b8f0acbb19f85f9aa50622cf0e /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/_TriggerFault.py
 3c240b8ad0a1bd30a881f02519e62b6e /home/fernandomierhicks/robostilt/devel/lib/python2.7/dist-packages/robostilt_common/srv/__init__.py
@@ -52,6 +54,7 @@ b3f1d7ea6447841deaee9d3c57e299b1 /home/fernandomierhicks/robostilt/devel/share/c
 188e15433f02044a92da22cfc419fff3 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/RaiseLegsOnFrame.lisp
 6f0f1f23934560f45229eb592850b4c9 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetPosition.lisp
 3d8a298ada4d5b6be3e14a45cc1885e6 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/SetSupportingLegs.lisp
+755bdfa16f3786b594d82cdf92a31913 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/StepForward.lisp
 48c068e99b482b0721f99c564c2acde5 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/StopAll.lisp
 3d54ce26f66ae4a5b0a68dfbdf48bc84 /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/TriggerFault.lisp
 c336c247aa0ce8d0387b34a51386ba2c /home/fernandomierhicks/robostilt/devel/share/common-lisp/ros/robostilt_common/srv/empty_call_bool_Result.lisp
@@ -71,6 +74,7 @@ bc1a04b5dcfe08731877095fef8cb0ca /home/fernandomierhicks/robostilt/devel/share/g
 a7d6507d185c8c6418b10a38619e2582 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/RaiseLegsOnFrame.js
 f230adb9a8b42e7a3ce82bca8bf73ccb /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/SetPosition.js
 f940cc7d425e982f2a5d69cf7c997b09 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/SetSupportingLegs.js
+73893987c0dcf08e0777be8ccbe206e3 /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/StepForward.js
 29dfb3681c486748baa1f4b871098d8b /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/StopAll.js
 27aa656e35aafb603fd5c8f8960a7faa /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/TriggerFault.js
 ae431d2bd4f4383ce1854376038ed8ef /home/fernandomierhicks/robostilt/devel/share/gennodejs/ros/robostilt_common/srv/empty_call_bool_Result.js
@@ -91,6 +95,7 @@ a05ac89a6e46dd2209c8bad14523ebf8 /home/fernandomierhicks/robostilt/devel/share/r
 d6baeba5ddd98b5186da6c4e7b86c763 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/RaiseLegsOnFrame.l
 5544cb9f698319835f4fb72b3275c251 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetPosition.l
 c1c83e1f4fcbfa87994c4259d5418064 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/SetSupportingLegs.l
+a2c4aa4f15a96ff737f755472dab4e30 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/StepForward.l
 36ce35de8dda2975954bb8d2896df239 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/StopAll.l
 158ab725d06136c45b60c8372e0d40a8 /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/TriggerFault.l
 84184ce09f662b10114da160f471c2ef /home/fernandomierhicks/robostilt/devel/share/roseus/ros/robostilt_common/srv/empty_call_bool_Result.l
